@@ -1,0 +1,1136 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 01 - Introduction to HTML | Kubika</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --rubik-red: #dc2626;
+            --rubik-orange: #f97316;
+            --rubik-yellow: #facc15;
+            --rubik-green: #16a34a;
+            --rubik-gradient: linear-gradient(90deg, #dc2626, #f97316, #facc15, #16a34a, #2563eb, #ffffff);
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text: #172033;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --code: #111827;
+            --green: #15803d;
+            --shadow-card: 0 12px 32px rgba(16, 33, 61, .055);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        :focus-visible {
+            outline: 3px solid rgba(37, 99, 235, .55);
+            outline-offset: 3px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .lucide {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2;
+            vertical-align: -4px;
+        }
+
+        .inline-icon {
+            width: 15px;
+            height: 15px;
+            margin-right: 4px;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,.96);
+            border-bottom: 1px solid var(--border);
+            padding: 14px max(6%, calc((100% - 1200px) / 2));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(14px);
+        }
+
+        .navbar::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: -1px;
+            left: 0;
+            height: 3px;
+            background: var(--rubik-gradient);
+        }
+
+        .logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 23px;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            background: var(--rubik-gradient);
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-label {
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        /* LAYOUT */
+
+        .container {
+            max-width: 1280px;
+            margin: auto;
+            padding: 38px 28px 52px;
+            display: grid;
+            grid-template-columns: 250px minmax(0, 1fr);
+            gap: 32px;
+            align-items: start;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: sticky;
+            top: 98px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px 14px;
+            box-shadow: 0 8px 24px rgba(16, 33, 61, .04);
+        }
+
+        .sidebar h3 {
+            font-size: 14px;
+            margin: 2px 8px 14px;
+            color: var(--text);
+            letter-spacing: .04em;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 9px 12px;
+            border-radius: 9px;
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 3px;
+            transition: background .2s ease, color .2s ease;
+        }
+
+        .sidebar a:hover {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        /* CONTENT */
+
+        .content {
+            min-width: 0;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            background:
+                radial-gradient(circle at 95% 0, rgba(56,189,248,.22), transparent 34%),
+                linear-gradient(125deg, #10213d, #174c91);
+            padding: 42px;
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 28px;
+            box-shadow: 0 20px 45px rgba(16, 33, 61, .14);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0;
+            height: 4px;
+            background: var(--rubik-gradient);
+            z-index: -1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.18);
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            margin-bottom: 15px;
+            letter-spacing: .06em;
+        }
+
+        .hero h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(28px, 4vw, 42px);
+            margin-bottom: 12px;
+            line-height: 1.15;
+            letter-spacing: -.04em;
+        }
+
+        .hero p {
+            color: #dbeafe;
+            max-width: 600px;
+        }
+
+        .meta {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #dbeafe;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+        }
+
+        .meta span {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .meta .inline-icon {
+            margin-right: 7px;
+        }
+
+        /* CARDS */
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            scroll-margin-top: 100px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .card > h2:first-child {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -.025em;
+        }
+
+        .card h2 {
+            font-size: clamp(20px, 2.5vw, 24px);
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            margin: 20px 0 8px;
+        }
+
+        .card p {
+            color: #475569;
+            margin-bottom: 14px;
+        }
+
+        .card ul, .card ol {
+            padding-left: 23px;
+            margin: 12px 0;
+            color: #475569;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: linear-gradient(110deg, #eff6ff, #f8fbff);
+            border-left: 4px solid var(--primary);
+            padding: 16px 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+            color: #1e40af;
+        }
+
+        /* TABLE */
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 18px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 480px;
+        }
+
+        th, td {
+            padding: 13px;
+            border: 1px solid var(--border);
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f1f6ff;
+            color: #1e40af;
+            font-weight: 700;
+        }
+
+        /* CODE */
+
+        pre {
+            background: var(--code);
+            color: #e5e7eb;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,.06);
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-size: 13px;
+            line-height: 1.8;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+        }
+
+        code {
+            font-family: Consolas, monospace;
+        }
+
+        .inline-code {
+            background: #f1f5f9;
+            color: #db2777;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .copy-btn {
+            border: none;
+            background: var(--primary);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: background .2s ease, transform .2s ease;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .copy-btn .lucide {
+            width: 15px;
+            height: 15px;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* QUIZ */
+
+        .question {
+            padding: 18px 14px;
+            border-bottom: 1px solid var(--border);
+            border-radius: 10px;
+            transition: background .2s ease;
+        }
+
+        .question:focus-within {
+            background: #f8fbff;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .question label {
+            display: block;
+            margin: 8px 0;
+            padding: 8px 10px;
+            border-radius: 8px;
+            color: var(--muted);
+            cursor: pointer;
+            transition: background .2s ease, color .2s ease;
+        }
+
+        .question label:hover {
+            background: #f1f6ff;
+            color: var(--text);
+        }
+
+        .question input {
+            margin-right: 9px;
+            accent-color: var(--primary);
+        }
+
+        .submit-btn {
+            margin-top: 20px;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 9px;
+            background: var(--primary);
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: background .2s ease, transform .2s ease;
+        }
+
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .result {
+            margin-top: 18px;
+            font-weight: bold;
+        }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary);
+            padding: 2px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 28px 20px 34px;
+            color: var(--muted);
+            font-size: 13px;
+            border-top: 1px solid var(--border);
+            background: white;
+        }
+
+        footer strong {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text);
+            font-size: 16px;
+        }
+
+        footer strong + p {
+            margin-top: 4px;
+        }
+
+        footer p:last-child {
+            margin-top: 12px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer a {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: var(--rubik-red);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px 20px 40px;
+            }
+
+            .sidebar {
+                position: static;
+                padding: 16px;
+            }
+
+            .sidebar nav {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 4px;
+            }
+
+            .hero {
+                padding: 32px 26px;
+            }
+
+            .card {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .navbar {
+                padding: 14px 16px;
+            }
+
+            .nav-label {
+                font-size: 11px;
+            }
+
+            .sidebar nav {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 2px 6px;
+            }
+
+            .sidebar a {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .container {
+                padding: 16px 14px 32px;
+            }
+
+            .hero {
+                padding: 27px 21px;
+            }
+
+            .meta {
+                gap: 7px 12px;
+                font-size: 12px;
+            }
+
+            .card {
+                padding: 20px 17px;
+            }
+
+            .question {
+                padding: 14px 8px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <a href="../../index.html" class="logo">Kub<span>ika.</span></a>
+        <div class="nav-label">Jalur Belajar HTML / Modul 01</div>
+    </header>
+
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h3>DAFTAR MATERI</h3>
+
+            <nav>
+                <a href="#overview">Overview</a>
+                <a href="#html">1. Apa itu HTML?</a>
+                <a href="#comparison">2. HTML, CSS & JS</a>
+                <a href="#browser">3. Browser</a>
+                <a href="#tools">4. Tools</a>
+                <a href="#practice">5. Praktik Pertama</a>
+                <a href="#quiz">6. Kuis</a>
+                <a href="#challenge">7. Tantangan</a>
+                <a href="#reflection">8. Evaluasi</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="content">
+
+            <!-- HERO -->
+            <section class="hero" id="overview">
+                <span class="badge">BEGINNER LEVEL</span>
+
+                <h1>Introduction to HTML</h1>
+
+                <p>
+                    Selamat datang di perjalanan pertama kamu
+                    dalam dunia web development. Mari belajar
+                    bagaimana sebuah website dibangun dari dasar.
+                </p>
+
+                <div class="meta">
+                    <span><i data-lucide="book-open" class="inline-icon" aria-hidden="true"></i>Modul 01</span>
+                    <span><i data-lucide="clock-3" class="inline-icon" aria-hidden="true"></i>60–90 Menit</span>
+                    <span><i data-lucide="target" class="inline-icon" aria-hidden="true"></i>Pemula</span>
+                </div>
+            </section>
+
+            <!-- LEARNING OBJECTIVES -->
+            <section class="card">
+                <h2><i data-lucide="target" class="inline-icon" aria-hidden="true"></i>Tujuan Pembelajaran</h2>
+
+                <p>Setelah menyelesaikan modul ini, kamu diharapkan mampu:</p>
+
+                <ul>
+                    <li>Memahami pengertian dan fungsi HTML.</li>
+                    <li>Mengetahui perbedaan HTML, CSS, dan JavaScript.</li>
+                    <li>Memahami fungsi browser.</li>
+                    <li>Mengenal tools untuk menulis kode HTML.</li>
+                    <li>Membuat halaman HTML sederhana.</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Catatan:</strong> Tidak perlu langsung
+                    menghafal semuanya. Fokuslah memahami konsep
+                    dan mencoba contoh kodenya.
+                </div>
+            </section>
+
+            <!-- CHAPTER 1 -->
+            <section class="card" id="html">
+                <h2>01. Apa Itu HTML?</h2>
+
+                <p>
+                    HTML merupakan singkatan dari
+                    <strong>HyperText Markup Language</strong>.
+                    HTML adalah bahasa markup yang digunakan untuk
+                    menyusun struktur dan konten sebuah halaman web.
+                </p>
+
+                <p>
+                    Sederhananya, HTML memberi tahu browser bagian
+                    mana yang merupakan judul, paragraf, gambar,
+                    tautan, tabel, dan elemen lainnya.
+                </p>
+
+                <h3>Analogi Sederhana</h3>
+
+                <p>Bayangkan kita sedang membangun sebuah rumah:</p>
+
+                <ul>
+                    <li><strong>HTML:</strong> Struktur rumah seperti dinding, pintu, dan jendela.</li>
+                    <li><strong>CSS:</strong> Cat, dekorasi, dan desain rumah.</li>
+                    <li><strong>JavaScript:</strong> Fitur interaktif seperti pintu otomatis.</li>
+                </ul>
+
+                <div class="highlight">
+                    HTML bukan bahasa pemrograman umum seperti
+                    JavaScript atau Python. HTML adalah bahasa markup
+                    yang berfungsi menyusun konten.
+                </div>
+
+                <h3>Apa yang Bisa Dibuat dengan HTML?</h3>
+
+                <ul>
+                    <li>Website pribadi.</li>
+                    <li>Halaman profil.</li>
+                    <li>Artikel dan blog.</li>
+                    <li>Formulir pendaftaran.</li>
+                    <li>Tabel informasi.</li>
+                    <li>Halaman portofolio.</li>
+                </ul>
+            </section>
+
+            <!-- CHAPTER 2 -->
+            <section class="card" id="comparison">
+                <h2>02. Perbedaan HTML, CSS, dan JavaScript</h2>
+
+                <p>
+                    Ketiga teknologi ini sering digunakan bersama
+                    untuk membangun sebuah website.
+                </p>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Teknologi</th>
+                                <th>Fungsi</th>
+                                <th>Contoh</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>HTML</td>
+                                <td>Menyusun struktur konten</td>
+                                <td>Judul, paragraf, gambar</td>
+                            </tr>
+
+                            <tr>
+                                <td>CSS</td>
+                                <td>Mengatur tampilan</td>
+                                <td>Warna, ukuran, layout</td>
+                            </tr>
+
+                            <tr>
+                                <td>JavaScript</td>
+                                <td>Menambahkan interaksi</td>
+                                <td>Tombol, validasi, menu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Contoh HTML</h3>
+
+                <pre><code>&lt;h1&gt;Halo, Dunia!&lt;/h1&gt;
+&lt;p&gt;Saya sedang belajar HTML.&lt;/p&gt;</code></pre>
+
+                <h3>Contoh CSS</h3>
+
+                <pre><code>h1 {
+    color: blue;
+    font-size: 30px;
+}</code></pre>
+
+                <h3>Contoh JavaScript</h3>
+
+                <pre><code>alert("Selamat belajar!");</code></pre>
+
+                <div class="highlight">
+                    Ingat: HTML menyusun, CSS mempercantik,
+                    JavaScript membuat website menjadi interaktif.
+                </div>
+            </section>
+
+            <!-- CHAPTER 3 -->
+            <section class="card" id="browser">
+                <h2>03. Apa Itu Browser?</h2>
+
+                <p>
+                    Browser adalah aplikasi yang digunakan untuk
+                    membuka dan menampilkan halaman website.
+                </p>
+
+                <p>Contoh browser:</p>
+
+                <ul>
+                    <li>Google Chrome.</li>
+                    <li>Mozilla Firefox.</li>
+                    <li>Microsoft Edge.</li>
+                    <li>Safari.</li>
+                </ul>
+
+                <h3>Bagaimana Browser Bekerja?</h3>
+
+                <ol>
+                    <li>Kita menulis kode HTML.</li>
+                    <li>File disimpan dengan ekstensi .html.</li>
+                    <li>File dibuka menggunakan browser.</li>
+                    <li>Browser membaca dan memproses HTML.</li>
+                    <li>Halaman ditampilkan kepada pengguna.</li>
+                </ol>
+
+                <div class="highlight">
+                    Browser berbeda dengan search engine.
+                    Chrome adalah browser, sedangkan Google Search
+                    adalah mesin pencari.
+                </div>
+            </section>
+
+            <!-- CHAPTER 4 -->
+            <section class="card" id="tools">
+                <h2>04. Tools untuk Belajar HTML</h2>
+
+                <p>Untuk mulai belajar HTML, kita membutuhkan beberapa alat:</p>
+
+                <ul>
+                    <li><strong>Visual Studio Code:</strong> Editor untuk menulis kode.</li>
+                    <li><strong>Browser:</strong> Melihat hasil website.</li>
+                    <li><strong>File Manager:</strong> Mengelola file dan folder.</li>
+                </ul>
+
+                <h3>Mengenal Ekstensi File</h3>
+
+                <p>
+                    File HTML harus menggunakan ekstensi
+                    <code class="inline-code">.html</code>.
+                </p>
+
+                <p>Contoh nama file:</p>
+
+                <pre><code>index.html
+profile.html
+about.html
+contact.html</code></pre>
+
+                <h3>Struktur Folder Sederhana</h3>
+
+                <pre><code>belajar-html/
+│
+├── index.html
+├── about.html
+└── images/
+    └── foto.jpg</code></pre>
+            </section>
+
+            <!-- CHAPTER 5 -->
+            <section class="card" id="practice">
+                <h2>05. Membuat Website Pertama</h2>
+
+                <p>
+                    Sekarang waktunya praktik!
+                    Kita akan membuat halaman HTML sederhana.
+                </p>
+
+                <h3>Langkah 1 — Buat File</h3>
+
+                <p>
+                    Buat folder bernama
+                    <code class="inline-code">belajar-html</code>,
+                    lalu buat file bernama
+                    <code class="inline-code">index.html</code>.
+                </p>
+
+                <h3>Langkah 2 — Masukkan Kode</h3>
+
+                <pre id="firstCode"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Website Pertamaku&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+    &lt;h1&gt;Halo, Dunia!&lt;/h1&gt;
+
+    &lt;p&gt;
+        Namaku Biran.
+        Aku sedang belajar HTML.
+    &lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <button class="copy-btn" onclick="copyCode()">
+                    <i data-lucide="clipboard" aria-hidden="true"></i>Salin Kode
+                </button>
+
+                <h3>Langkah 3 — Simpan dan Buka</h3>
+
+                <ol>
+                    <li>Simpan file dengan nama index.html.</li>
+                    <li>Buka folder tempat file disimpan.</li>
+                    <li>Klik dua kali file tersebut.</li>
+                    <li>Browser akan menampilkan halaman website.</li>
+                </ol>
+
+                <h3>Mengenal Bagian Kode</h3>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tag / Elemen</th>
+                                <th>Fungsi</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>&lt;!DOCTYPE html&gt;</td>
+                                <td>Memberi tahu browser bahwa dokumen menggunakan HTML5.</td>
+                            </tr>
+
+                            <tr>
+                                <td>&lt;html&gt;</td>
+                                <td>Elemen akar dokumen HTML.</td>
+                            </tr>
+
+                            <tr>
+                                <td>&lt;head&gt;</td>
+                                <td>Berisi informasi tentang dokumen.</td>
+                            </tr>
+
+                            <tr>
+                                <td>&lt;title&gt;</td>
+                                <td>Judul halaman pada tab browser.</td>
+                            </tr>
+
+                            <tr>
+                                <td>&lt;body&gt;</td>
+                                <td>Berisi konten yang ditampilkan di halaman.</td>
+                            </tr>
+
+                            <tr>
+                                <td>&lt;h1&gt;</td>
+                                <td>Heading atau judul utama.</td>
+                            </tr>
+
+                            <tr>
+                                <td>&lt;p&gt;</td>
+                                <td>Membuat paragraf.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="highlight">
+                    <strong>Eksperimen:</strong>
+                    Coba ubah tulisan "Halo, Dunia!" menjadi nama kamu.
+                    Kemudian ubah isi paragraf dan lihat hasilnya.
+                </div>
+            </section>
+
+            <!-- CHAPTER 6 -->
+            <section class="card" id="quiz">
+                <h2>06. Kuis Pemahaman</h2>
+
+                <p>
+                    Yuk, uji pemahaman kamu sebelum melanjutkan
+                    ke tantangan berikutnya.
+                </p>
+
+                <form id="quizForm">
+
+                    <div class="question">
+                        <p>1. Apa kepanjangan HTML?</p>
+
+                        <label><input type="radio" name="q1" value="a"> HyperText Markup Language</label>
+                        <label><input type="radio" name="q1" value="b"> HighText Machine Language</label>
+                        <label><input type="radio" name="q1" value="c"> Hyper Transfer Main Language</label>
+                    </div>
+
+                    <div class="question">
+                        <p>2. Apa fungsi utama HTML?</p>
+
+                        <label><input type="radio" name="q2" value="a"> Mengatur warna website</label>
+                        <label><input type="radio" name="q2" value="b"> Menyusun struktur konten</label>
+                        <label><input type="radio" name="q2" value="c"> Mengelola database</label>
+                    </div>
+
+                    <div class="question">
+                        <p>3. Teknologi apa yang digunakan untuk mengatur tampilan?</p>
+
+                        <label><input type="radio" name="q3" value="a"> HTML</label>
+                        <label><input type="radio" name="q3" value="b"> CSS</label>
+                        <label><input type="radio" name="q3" value="c"> SQL</label>
+                    </div>
+
+                    <div class="question">
+                        <p>4. Apa ekstensi file HTML?</p>
+
+                        <label><input type="radio" name="q4" value="a"> .css</label>
+                        <label><input type="radio" name="q4" value="b"> .js</label>
+                        <label><input type="radio" name="q4" value="c"> .html</label>
+                    </div>
+
+                    <div class="question">
+                        <p>5. Tag apa yang digunakan untuk membuat paragraf?</p>
+
+                        <label><input type="radio" name="q5" value="a"> &lt;h1&gt;</label>
+                        <label><input type="radio" name="q5" value="b"> &lt;p&gt;</label>
+                        <label><input type="radio" name="q5" value="c"> &lt;div&gt;</label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Periksa Jawaban
+                    </button>
+
+                    <div class="result" id="result"></div>
+
+                </form>
+
+                <details>
+                    <summary>Lihat Kunci Jawaban</summary>
+
+                    <ol>
+                        <li>A — HyperText Markup Language.</li>
+                        <li>B — Menyusun struktur konten.</li>
+                        <li>B — CSS.</li>
+                        <li>C — .html.</li>
+                        <li>B — &lt;p&gt;.</li>
+                    </ol>
+                </details>
+            </section>
+
+            <!-- CHALLENGE -->
+            <section class="card" id="challenge">
+                <h2>07. Coding Challenge</h2>
+
+                <p>
+                    Sekarang buat website profil pribadi sederhana
+                    menggunakan HTML.
+                </p>
+
+                <h3>Instruksi</h3>
+
+                <ol>
+                    <li>Buat file bernama profil.html.</li>
+                    <li>Buat judul halaman menggunakan title.</li>
+                    <li>Buat heading berisi nama kamu.</li>
+                    <li>Buat paragraf tentang diri kamu.</li>
+                    <li>Buat daftar hobi menggunakan list.</li>
+                    <li>Buat satu link menuju website favorit.</li>
+                </ol>
+
+                <h3>Contoh Hasil yang Diharapkan</h3>
+
+                <pre><code>Nama: Biran Ramadhan
+
+Tentang Saya:
+Saya sedang belajar menjadi
+seorang Web Developer.
+
+Hobi:
+- Belajar coding
+- Membaca
+- Traveling
+
+Website Favorit:
+Google</code></pre>
+
+                <div class="highlight">
+                    Tantangan ini dikerjakan sendiri.
+                    Tidak perlu langsung sempurna.
+                    Yang penting kamu memahami setiap baris kode
+                    yang kamu tulis.
+                </div>
+            </section>
+
+            <!-- REFLECTION -->
+            <section class="card" id="reflection">
+                <h2>08. Evaluasi Pembelajaran</h2>
+
+                <p>Setelah menyelesaikan modul ini, coba jawab pertanyaan berikut:</p>
+
+                <ul>
+                    <li>Apa itu HTML menurut pemahaman kamu sendiri?</li>
+                    <li>Apa perbedaan HTML dan CSS?</li>
+                    <li>Mengapa HTML membutuhkan browser?</li>
+                    <li>Apa fungsi tag body?</li>
+                    <li>Apakah kamu sudah bisa membuat halaman HTML sederhana?</li>
+                </ul>
+
+                <h3>Checklist Belajar</h3>
+
+                <label><input type="checkbox"> Saya memahami pengertian HTML.</label><br>
+                <label><input type="checkbox"> Saya memahami HTML, CSS, dan JavaScript.</label><br>
+                <label><input type="checkbox"> Saya mengetahui fungsi browser.</label><br>
+                <label><input type="checkbox"> Saya berhasil membuat file HTML.</label><br>
+                <label><input type="checkbox"> Saya berhasil menyelesaikan kuis.</label><br>
+                <label><input type="checkbox"> Saya menyelesaikan coding challenge.</label>
+
+                <div class="highlight">
+                    <strong>Selamat!</strong>
+                    Kamu telah menyelesaikan Modul 01.
+                    Selanjutnya kita akan belajar struktur dokumen HTML
+                    lebih dalam pada Modul 02.
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <strong>Kubika.</strong>
+        <p>Learn, Practice, Build.</p>
+        <p>HTML Learning Path — Module 01</p>
+        <p><a href="../../index.html">Beranda Kubika</a> · <a href="modul-02.html">Lanjut ke Modul 02</a></p>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@0.468.0"></script>
+    <script>
+        lucide.createIcons();
+
+        // Fungsi menyalin kode
+        function copyCode() {
+            const code = document.querySelector("#firstCode code").innerText;
+
+            navigator.clipboard.writeText(code)
+                .then(() => alert("Kode berhasil disalin!"))
+                .catch(() => alert("Gagal menyalin kode. Silakan salin manual."));
+        }
+
+        // Sistem penilaian kuis
+        document.getElementById("quizForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const answers = {
+                q1: "a",
+                q2: "b",
+                q3: "b",
+                q4: "c",
+                q5: "b"
+            };
+
+            let score = 0;
+            let total = Object.keys(answers).length;
+
+            for (let question in answers) {
+                const selected = document.querySelector(
+                    `input[name="${question}"]:checked`
+                );
+
+                if (selected && selected.value === answers[question]) {
+                    score++;
+                }
+            }
+
+            const finalScore = (score / total) * 100;
+
+            let message = "";
+
+            if (finalScore === 100) {
+                message = "Luar biasa! Semua jawaban benar.";
+            } else if (finalScore >= 60) {
+                message = "Bagus! Terus tingkatkan pemahamanmu.";
+            } else {
+                message = "Tidak apa-apa. Pelajari kembali materinya, lalu coba lagi.";
+            }
+
+            document.getElementById("result").innerHTML =
+                `Nilai kamu: ${finalScore} / 100<br>${message}`;
+        });
+    </script>
+
+</body>
+</html>

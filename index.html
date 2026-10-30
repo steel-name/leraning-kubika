@@ -1,0 +1,1258 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kubika - Platform belajar coding dari dasar, praktik, hingga membangun project nyata.">
+  <title>Kubika — Learn, Practice, Build</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --navy: #10213d;
+      --blue: #2563eb;
+      --cyan: #38bdf8;
+      --rubik-red: #dc2626;
+      --rubik-orange: #f97316;
+      --rubik-yellow: #facc15;
+      --rubik-green: #16a34a;
+      --rubik-gradient: linear-gradient(90deg, #dc2626, #f97316, #facc15, #16a34a, #2563eb, #ffffff);
+      --text: #263449;
+      --muted: #718096;
+      --bg: #f7f9fc;
+      --white: #ffffff;
+      --border: #e8edf4;
+      --green: #16a36a;
+      --radius: 18px;
+      --shadow-card: 0 16px 40px rgba(16, 33, 61, .07);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .55);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      background: rgba(255,255,255,.94);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      height: 3px;
+      background: var(--rubik-gradient);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 23px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      background: var(--rubik-gradient);
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    .nav-links a:not(.nav-button) {
+      transition: color .2s ease;
+    }
+
+    .nav-button {
+      background: var(--blue);
+      color: white;
+      padding: 11px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .nav-button:hover,
+    .primary-btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--navy);
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 9px;
+    }
+
+    .lucide {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+      flex: 0 0 auto;
+    }
+
+    .inline-icon {
+      width: 16px;
+      height: 16px;
+      vertical-align: -3px;
+      margin-right: 5px;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 92px 0 88px;
+      background:
+        radial-gradient(circle at 88% 18%, rgba(56,189,248,.16) 0, transparent 28%),
+        radial-gradient(circle at 8% 90%, rgba(220,38,38,.06) 0, transparent 24%),
+        linear-gradient(135deg, #fbfdff, #eff5ff);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e8f1ff;
+      color: var(--blue);
+      padding: 8px 13px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 22px;
+      letter-spacing: .04em;
+    }
+
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--navy);
+      font-size: clamp(38px, 5vw, 58px);
+      line-height: 1.12;
+      letter-spacing: -2px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: var(--blue);
+    }
+
+    .hero-description {
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 500px;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 23px;
+      border-radius: 11px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .primary-btn {
+      background: var(--blue);
+      color: white;
+    }
+
+    .secondary-btn {
+      background: white;
+      color: var(--navy);
+      border: 1px solid var(--border);
+    }
+
+    .secondary-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      transform: translateY(-2px);
+    }
+
+    .hero-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    .hero-note span {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+
+    .hero-note .lucide {
+      color: var(--green);
+    }
+
+    /* HERO VISUAL */
+    .hero-visual {
+      position: relative;
+      background: white;
+      border: 1px solid #e4eaf3;
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 28px 75px rgba(32, 68, 120, .13);
+      transform: rotate(.5deg);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .hero-visual:hover {
+      transform: translateY(-4px) rotate(0);
+      box-shadow: 0 32px 85px rgba(32, 68, 120, .17);
+    }
+
+    .visual-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #d5deea;
+    }
+
+    .dots span:nth-child(1) { background: #f87171; }
+    .dots span:nth-child(2) { background: #facc15; }
+    .dots span:nth-child(3) { background: #4ade80; }
+
+    .visual-label {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .code-window {
+      background: #101d32;
+      border-radius: 13px;
+      padding: 24px 18px;
+      color: #dbeafe;
+      font-family: monospace;
+      font-size: 13px;
+      line-height: 2;
+      overflow-x: auto;
+    }
+
+    .code-blue { color: #7dd3fc; }
+    .code-yellow { color: #fcd34d; }
+    .code-green { color: #86efac; }
+    .code-pink { color: #f9a8d4; }
+
+    .visual-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 18px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .success {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* GENERAL SECTION */
+    section {
+      padding: 80px 0;
+    }
+
+    #features,
+    #modules {
+      scroll-margin-top: 88px;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 45px;
+    }
+
+    .section-heading .small-title {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+    }
+
+    .section-heading h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(27px, 4vw, 36px);
+      color: var(--navy);
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* FEATURES */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 28px;
+      border-radius: var(--radius);
+      transition: .25s;
+      min-height: 198px;
+    }
+
+    .feature-card:hover,
+    .module-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-card);
+      border-color: #d5deec;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: #edf4ff;
+      margin-bottom: 20px;
+    }
+
+    .feature-icon .lucide {
+      width: 23px;
+      height: 23px;
+      color: var(--blue);
+    }
+
+    .feature-card:nth-child(6n + 1) .feature-icon { background: #eff6ff; }
+    .feature-card:nth-child(6n + 2) .feature-icon { background: #fff1f2; }
+    .feature-card:nth-child(6n + 2) .feature-icon .lucide { color: var(--rubik-red); }
+    .feature-card:nth-child(6n + 3) .feature-icon { background: #f0fdf4; }
+    .feature-card:nth-child(6n + 3) .feature-icon .lucide { color: var(--rubik-green); }
+    .feature-card:nth-child(6n + 4) .feature-icon { background: #fff7ed; }
+    .feature-card:nth-child(6n + 4) .feature-icon .lucide { color: var(--rubik-orange); }
+    .feature-card:nth-child(6n + 5) .feature-icon { background: #fefce8; }
+    .feature-card:nth-child(6n + 5) .feature-icon .lucide { color: #ca8a04; }
+    .feature-card:nth-child(6n) .feature-icon { background: #f5f3ff; }
+    .feature-card:nth-child(6n) .feature-icon .lucide { color: #7c3aed; }
+
+    .feature-card h3 {
+      color: var(--navy);
+      font-size: 17px;
+      margin-bottom: 9px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* LEARNING PATH */
+    .learning-section {
+      background: white;
+    }
+
+    .path-container {
+      max-width: 780px;
+      margin: auto;
+    }
+
+    .path-item {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 13px;
+      align-items: center;
+      transition: border-color .2s ease, background .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+
+    a.path-item:hover {
+      border-color: #b8d2ff;
+      background: #fbfdff;
+      transform: translateX(3px);
+      box-shadow: 0 8px 24px rgba(16, 33, 61, .05);
+    }
+
+    .path-item:focus-visible {
+      border-color: var(--blue);
+    }
+
+    .path-number {
+      min-width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #edf4ff;
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .path-content {
+      flex: 1;
+    }
+
+    .path-content h3 {
+      font-size: 15px;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+
+    .path-content p {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .path-status {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .path-status .lucide {
+      width: 15px;
+      height: 15px;
+    }
+
+    .path-status.available {
+      color: var(--green);
+    }
+
+    .path-status.upcoming {
+      color: #718096;
+    }
+
+    /* MODULES */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .module-card {
+      position: relative;
+      overflow: hidden;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 25px;
+      transition: .25s;
+      display: flex;
+      flex-direction: column;
+      min-height: 245px;
+    }
+
+    .module-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 4px;
+      background: var(--blue);
+    }
+
+    .module-card:nth-child(2)::before { background: var(--rubik-green); }
+    .module-card:nth-child(3)::before { background: var(--rubik-orange); }
+    .module-card:nth-child(4)::before { background: var(--rubik-red); }
+
+    .module-card.coming-soon {
+      background: #fcfdff;
+    }
+
+    .module-tag {
+      display: inline-block;
+      background: #eaf2ff;
+      color: var(--blue);
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      border-radius: 7px;
+      margin-bottom: 16px;
+      letter-spacing: .05em;
+      align-self: flex-start;
+    }
+
+    .module-card h3 {
+      color: var(--navy);
+      font-size: 18px;
+      margin-bottom: 9px;
+    }
+
+    .module-card p {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 24px;
+      max-width: 46ch;
+    }
+
+    .module-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 17px;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .module-duration {
+      color: var(--muted);
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .module-duration .lucide {
+      width: 15px;
+      height: 15px;
+    }
+
+    .module-link {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .module-link:hover {
+      text-decoration: underline;
+    }
+
+    .coming-soon {
+      color: #718096;
+    }
+
+    .coming-soon .module-tag {
+      background: #f1f5f9;
+      color: #64748b;
+    }
+
+    .coming-soon .module-link {
+      color: #64748b;
+    }
+
+    /* CTA */
+    .cta {
+      padding: 0 0 80px;
+    }
+
+    .cta-box {
+      background:
+        radial-gradient(circle at 95% 0, rgba(56,189,248,.24), transparent 30%),
+        linear-gradient(120deg, #10213d, #174c91);
+      color: white;
+      padding: 55px 30px;
+      border-radius: 23px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 24px 55px rgba(16, 33, 61, .16);
+    }
+
+    .cta-box::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 4px;
+      background: var(--rubik-gradient);
+    }
+
+    .cta-box h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(25px, 4vw, 34px);
+      margin-bottom: 12px;
+    }
+
+    .cta-box p {
+      color: #d3e4fa;
+      font-size: 14px;
+      max-width: 500px;
+      margin: 0 auto 24px;
+    }
+
+    .cta-box .primary-btn {
+      background: white;
+      color: var(--blue);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      background: white;
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .footer-brand {
+      font-weight: 800;
+      color: var(--navy);
+      font-size: 17px;
+    }
+
+    .footer-brand span {
+      background: var(--rubik-gradient);
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 850px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-visual {
+        max-width: 560px;
+        width: 100%;
+        margin: auto;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-inner {
+        min-height: 68px;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: calc(100% + 1px);
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 22px 5% 26px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 18px 30px rgba(16, 33, 61, .08);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-button {
+        text-align: center;
+      }
+
+      .hero {
+        padding: 65px 0;
+      }
+
+      .hero-grid {
+        gap: 34px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .hero-note {
+        gap: 7px 12px;
+      }
+
+      .features-grid,
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 65px 0;
+      }
+
+      .path-item {
+        padding: 15px;
+        gap: 12px;
+      }
+
+      .path-status {
+        font-size: 10px;
+      }
+
+      .module-card {
+        min-height: 0;
+      }
+
+      .cta {
+        padding-bottom: 60px;
+      }
+
+      .cta-box {
+        padding: 40px 20px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .path-status {
+        display: none;
+      }
+
+      .eyebrow {
+        font-size: 10px;
+      }
+
+      .code-window {
+        font-size: 11px;
+        padding: 17px 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container nav-inner">
+
+      <a href="#home" class="logo">Kub<span>ika.</span></a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">
+        <i data-lucide="menu" aria-hidden="true"></i>
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Beranda</a>
+        <a href="#features">Fitur</a>
+        <a href="#learning-path">Learning Path</a>
+        <a href="#modules">Materi</a>
+        <a href="#modules" class="nav-button">Mulai Belajar</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+
+        <div>
+          <div class="eyebrow">
+            <i data-lucide="sparkles" class="inline-icon" aria-hidden="true"></i>
+            PLATFORM BELAJAR WEB UNTUK PEMULA
+          </div>
+
+          <h1>
+            Mulai dari Dasar,<br>
+            <span>Berkarya lewat Kode.</span>
+          </h1>
+
+          <p class="hero-description">
+            Belajar HTML langkah demi langkah dengan materi yang jelas,
+            contoh kode, latihan, dan project pertamamu bersama Kubika.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#modules" class="primary-btn">
+              Mulai Belajar <i data-lucide="arrow-right" class="inline-icon" aria-hidden="true"></i>
+            </a>
+
+            <a href="#learning-path" class="secondary-btn">
+              Lihat Learning Path
+            </a>
+          </div>
+
+          <p class="hero-note">
+            <span><i data-lucide="check" class="inline-icon" aria-hidden="true"></i>Cocok untuk pemula</span>
+            <span><i data-lucide="check" class="inline-icon" aria-hidden="true"></i>Belajar bertahap</span>
+            <span><i data-lucide="check" class="inline-icon" aria-hidden="true"></i>Praktik langsung</span>
+          </p>
+        </div>
+
+        <div class="hero-visual">
+
+          <div class="visual-top">
+            <div class="dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="visual-label">index.html</div>
+          </div>
+
+          <div class="code-window">
+            <div><span class="code-blue">&lt;!DOCTYPE html&gt;</span></div>
+            <div><span class="code-blue">&lt;html&gt;</span></div>
+            <div>&nbsp;&nbsp;<span class="code-blue">&lt;head&gt;</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-blue">&lt;title&gt;</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-yellow">My First Website</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-blue">&lt;/title&gt;</span></div>
+            <div>&nbsp;&nbsp;<span class="code-blue">&lt;/head&gt;</span></div>
+            <div>&nbsp;&nbsp;<span class="code-blue">&lt;body&gt;</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-blue">&lt;h1&gt;</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-green">Hello, Developer!</span></div>
+            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-blue">&lt;/h1&gt;</span></div>
+            <div>&nbsp;&nbsp;<span class="code-blue">&lt;/body&gt;</span></div>
+            <div><span class="code-blue">&lt;/html&gt;</span></div>
+          </div>
+
+          <div class="visual-bottom">
+            <span>HTML • Beginner</span>
+            <span class="success"><i data-lucide="circle-check" class="inline-icon" aria-hidden="true"></i>Ready to learn</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- FEATURES -->
+    <section id="features">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="small-title">BELAJAR DENGAN TERARAH</div>
+          <h2>Belajar Tidak Harus Membingungkan.</h2>
+          <p>
+            Kami menyusun pengalaman belajar yang sederhana
+            agar kamu bisa memahami coding sedikit demi sedikit.
+          </p>
+        </div>
+
+        <div class="features-grid">
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true"><i data-lucide="book-open"></i></div>
+            <h3>Materi Terstruktur</h3>
+            <p>
+              Pelajari coding dari konsep paling dasar
+              hingga materi yang lebih kompleks.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true"><i data-lucide="code-xml"></i></div>
+            <h3>Contoh Kode</h3>
+            <p>
+              Setiap materi dilengkapi contoh kode
+              agar lebih mudah dipahami.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true"><i data-lucide="brain"></i></div>
+            <h3>Latihan & Kuis</h3>
+            <p>
+              Uji pemahamanmu melalui latihan
+              dan pertanyaan sederhana.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true"><i data-lucide="zap"></i></div>
+            <h3>Praktik Langsung</h3>
+            <p>
+              Tidak hanya membaca, kamu juga akan
+              membuat kode sendiri.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true"><i data-lucide="target"></i></div>
+            <h3>Belajar Bertahap</h3>
+            <p>
+              Ikuti jalur pembelajaran dari satu
+              tahap ke tahap berikutnya.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true"><i data-lucide="rocket"></i></div>
+            <h3>Bangun Project</h3>
+            <p>
+              Terapkan kemampuanmu dengan membuat
+              project sederhana.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- LEARNING PATH -->
+    <section class="learning-section" id="learning-path">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="small-title">JALUR BELAJAR</div>
+          <h2>Mulai dari Dasar.</h2>
+          <p>
+            Ikuti perjalanan belajar HTML secara bertahap.
+            Tidak perlu terburu-buru, yang penting memahami.
+          </p>
+        </div>
+
+        <div class="path-container">
+
+          <a class="path-item" href="modules/html/modul-01.html" aria-label="Buka Modul 01: Introduction to HTML">
+            <div class="path-number">01</div>
+            <div class="path-content">
+              <h3>Introduction to HTML</h3>
+              <p>Mengenal HTML, fungsi, dan cara kerjanya.</p>
+            </div>
+            <span class="path-status available"><i data-lucide="circle-check" aria-hidden="true"></i>Tersedia</span>
+          </a>
+
+          <a class="path-item" href="modules/html/modul-02.html" aria-label="Buka Modul 02: HTML Document Structure">
+            <div class="path-number">02</div>
+            <div class="path-content">
+              <h3>HTML Document Structure</h3>
+              <p>Memahami struktur dasar dokumen HTML.</p>
+            </div>
+            <span class="path-status available"><i data-lucide="circle-check" aria-hidden="true"></i>Tersedia</span>
+          </a>
+
+          <div class="path-item">
+            <div class="path-number">03</div>
+            <div class="path-content">
+              <h3>Heading & Paragraph</h3>
+              <p>Membuat judul dan paragraf pada halaman web.</p>
+            </div>
+            <span class="path-status upcoming">Segera Hadir</span>
+          </div>
+
+          <div class="path-item">
+            <div class="path-number">04</div>
+            <div class="path-content">
+              <h3>Text Formatting</h3>
+              <p>Mengatur format dan penekanan teks.</p>
+            </div>
+            <span class="path-status upcoming">Segera Hadir</span>
+          </div>
+
+          <div class="path-item">
+            <div class="path-number">05</div>
+            <div class="path-content">
+              <h3>Links & Images</h3>
+              <p>Menambahkan tautan dan gambar ke halaman web.</p>
+            </div>
+            <span class="path-status upcoming">Segera Hadir</span>
+          </div>
+
+          <div class="path-item">
+            <div class="path-number">06</div>
+            <div class="path-content">
+              <h3>Lists, Tables & Forms</h3>
+              <p>Mempelajari daftar, tabel, dan formulir.</p>
+            </div>
+            <span class="path-status upcoming">Segera Hadir</span>
+          </div>
+
+          <div class="path-item">
+            <div class="path-number">07</div>
+            <div class="path-content">
+              <h3>Semantic HTML</h3>
+              <p>Mengenal elemen HTML yang memiliki makna.</p>
+            </div>
+            <span class="path-status upcoming">Segera Hadir</span>
+          </div>
+
+          <div class="path-item">
+            <div class="path-number">08</div>
+            <div class="path-content">
+              <h3>HTML Mini Project</h3>
+              <p>Membuat halaman web sederhana dari awal.</p>
+            </div>
+            <span class="path-status upcoming">Segera Hadir</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- MODULES -->
+    <section id="modules">
+      <div class="container">
+
+        <div class="section-heading">
+          <div class="small-title">KATALOG MATERI</div>
+          <h2>Materi Pembelajaran.</h2>
+          <p>
+            Pilih materi yang ingin kamu pelajari.
+            Mulai dari modul pertama dan lanjutkan secara berurutan.
+          </p>
+        </div>
+
+        <div class="modules-grid">
+
+          <article class="module-card">
+            <span class="module-tag">MODUL 01 · PEMULA</span>
+            <h3>Introduction to HTML</h3>
+            <p>
+              Kenali apa itu HTML, bagaimana cara kerjanya,
+              tools yang dibutuhkan, dan buat halaman web pertamamu.
+            </p>
+            <div class="module-footer">
+              <span class="module-duration"><i data-lucide="book-open" aria-hidden="true"></i>Dasar HTML</span>
+              <a href="modules/html/modul-01.html" class="module-link">
+                Pelajari <i data-lucide="arrow-right" class="inline-icon" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="module-card">
+            <span class="module-tag">MODUL 02 · PEMULA</span>
+            <h3>HTML Document Structure</h3>
+            <p>
+              Pelajari struktur dokumen HTML, tag, element,
+              attribute, nesting, indentation, dan komentar.
+            </p>
+            <div class="module-footer">
+              <span class="module-duration"><i data-lucide="book-open" aria-hidden="true"></i>Struktur HTML</span>
+              <a href="modules/html/modul-02.html" class="module-link">
+                Pelajari <i data-lucide="arrow-right" class="inline-icon" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="module-card coming-soon">
+            <span class="module-tag">MODUL 03 · SEGERA HADIR</span>
+            <h3>Heading & Paragraph</h3>
+            <p>
+              Belajar membuat judul, subjudul, paragraf,
+              dan mengatur struktur konten halaman web.
+            </p>
+            <div class="module-footer">
+              <span class="module-duration">Segera tersedia</span>
+              <span class="module-link">Coming Soon</span>
+            </div>
+          </article>
+
+          <article class="module-card coming-soon">
+            <span class="module-tag">MODUL 04 · SEGERA HADIR</span>
+            <h3>Text Formatting</h3>
+            <p>
+              Kenali cara memberikan penekanan, format,
+              dan makna tambahan pada teks HTML.
+            </p>
+            <div class="module-footer">
+              <span class="module-duration">Segera tersedia</span>
+              <span class="module-link">Coming Soon</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Setiap Developer Pernah Menjadi Pemula.</h2>
+          <p>
+            Jangan takut salah saat belajar. Mulai dari satu baris kode,
+            pahami prosesnya, dan terus berkembang.
+          </p>
+          <a href="#modules" class="primary-btn">
+            Mulai Perjalananmu <i data-lucide="arrow-right" class="inline-icon" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand">Kub<span>ika.</span></div>
+      <p class="footer-copy">
+        © 2026 Kubika. Learn, Practice, Build.
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- JAVASCRIPT -->
+  <script src="https://unpkg.com/lucide@0.468.0"></script>
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    lucide.createIcons();
+
+    menuToggle.addEventListener('click', function () {
+      const isOpen = navLinks.classList.toggle('active');
+
+      menuToggle.innerHTML = `<i data-lucide="${isOpen ? 'x' : 'menu'}" aria-hidden="true"></i>`;
+      menuToggle.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
+      menuToggle.setAttribute('aria-expanded', isOpen);
+      lucide.createIcons();
+    });
+
+    // Tutup menu setelah pengguna memilih navigasi
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', function () {
+        navLinks.classList.remove('active');
+        menuToggle.innerHTML = '<i data-lucide="menu" aria-hidden="true"></i>';
+        menuToggle.setAttribute('aria-label', 'Buka menu');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        lucide.createIcons();
+      });
+    });
+  </script>
+
+</body>
+</html>

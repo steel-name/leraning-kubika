@@ -1,0 +1,1417 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Modul 02 - HTML Document Structure | Kubika</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --rubik-red: #dc2626;
+            --rubik-orange: #f97316;
+            --rubik-yellow: #facc15;
+            --rubik-green: #16a34a;
+            --rubik-gradient: linear-gradient(90deg, #dc2626, #f97316, #facc15, #16a34a, #2563eb, #ffffff);
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text: #172033;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --code: #111827;
+            --shadow-card: 0 12px 32px rgba(16, 33, 61, .055);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        :focus-visible {
+            outline: 3px solid rgba(37, 99, 235, .55);
+            outline-offset: 3px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .lucide {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2;
+            vertical-align: -4px;
+        }
+
+        .inline-icon {
+            width: 15px;
+            height: 15px;
+            margin-right: 4px;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255,255,255,.96);
+            border-bottom: 1px solid var(--border);
+            padding: 14px max(6%, calc((100% - 1200px) / 2));
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(14px);
+        }
+
+        .navbar::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: -1px;
+            left: 0;
+            height: 3px;
+            background: var(--rubik-gradient);
+        }
+
+        .logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 23px;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            background: var(--rubik-gradient);
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-label {
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: auto;
+            padding: 38px 28px 52px;
+            display: grid;
+            grid-template-columns: 250px minmax(0, 1fr);
+            gap: 32px;
+            align-items: start;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 98px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px 14px;
+            box-shadow: 0 8px 24px rgba(16, 33, 61, .04);
+        }
+
+        .sidebar h3 {
+            font-size: 14px;
+            margin: 2px 8px 14px;
+            color: var(--text);
+            letter-spacing: .04em;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 9px 11px;
+            margin-bottom: 3px;
+            border-radius: 9px;
+            font-size: 13px;
+            color: var(--muted);
+            transition: background .2s ease, color .2s ease;
+        }
+
+        .sidebar a:hover {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        .content {
+            min-width: 0;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+            background:
+                radial-gradient(circle at 95% 0, rgba(56,189,248,.22), transparent 34%),
+                linear-gradient(125deg, #10213d, #174c91);
+            color: white;
+            border-radius: 20px;
+            padding: 42px;
+            margin-bottom: 25px;
+            box-shadow: 0 20px 45px rgba(16, 33, 61, .14);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0;
+            height: 4px;
+            background: var(--rubik-gradient);
+            z-index: -1;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.18);
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            margin-bottom: 14px;
+            letter-spacing: .06em;
+        }
+
+        .hero h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(28px, 4vw, 42px);
+            line-height: 1.15;
+            margin-bottom: 12px;
+            letter-spacing: -.04em;
+        }
+
+        .hero p {
+            color: #dbeafe;
+        }
+
+        .meta {
+            font-size: 13px;
+            margin-top: 18px;
+            color: #dbeafe;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+        }
+
+        .meta span {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .meta .inline-icon {
+            margin-right: 7px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            scroll-margin-top: 100px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .card > h2:first-child {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -.025em;
+        }
+
+        .card h2 {
+            font-size: clamp(20px, 2.5vw, 24px);
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            margin: 20px 0 9px;
+        }
+
+        .card p {
+            color: #475569;
+            margin-bottom: 13px;
+        }
+
+        .card ul,
+        .card ol {
+            padding-left: 23px;
+            color: #475569;
+            margin: 12px 0;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+        }
+
+        .highlight {
+            background: linear-gradient(110deg, #eff6ff, #f8fbff);
+            border-left: 4px solid var(--primary);
+            padding: 16px 18px;
+            border-radius: 8px;
+            margin: 17px 0;
+            color: #1e40af;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        table {
+            width: 100%;
+            min-width: 480px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f1f6ff;
+            color: #1e40af;
+            font-weight: 700;
+        }
+
+        pre {
+            background: var(--code);
+            color: #e5e7eb;
+            padding: 19px;
+            border: 1px solid rgba(255,255,255,.06);
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 14px 0;
+            font-size: 13px;
+            line-height: 1.8;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+        }
+
+        .inline-code {
+            background: #f1f5f9;
+            color: #db2777;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: Consolas, monospace;
+            font-size: 13px;
+        }
+
+        .copy-btn,
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 7px;
+            padding: 11px 16px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-weight: 700;
+            transition: background .2s ease, transform .2s ease;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .copy-btn .lucide {
+            width: 15px;
+            height: 15px;
+        }
+
+        .copy-btn:hover,
+        .submit-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .question {
+            border-bottom: 1px solid var(--border);
+            padding: 18px 14px;
+            border-radius: 10px;
+            transition: background .2s ease;
+        }
+
+        .question:focus-within {
+            background: #f8fbff;
+        }
+
+        .question p {
+            font-weight: bold;
+            color: var(--text);
+        }
+
+        .question label {
+            display: block;
+            margin: 8px 0;
+            padding: 8px 10px;
+            border-radius: 8px;
+            color: var(--muted);
+            cursor: pointer;
+            transition: background .2s ease, color .2s ease;
+        }
+
+        .question label:hover {
+            background: #f1f6ff;
+            color: var(--text);
+        }
+
+        .question input {
+            margin-right: 9px;
+            accent-color: var(--primary);
+        }
+
+        .result {
+            margin-top: 17px;
+            font-weight: bold;
+        }
+
+        .submit-btn {
+            font-weight: 700;
+            transition: background .2s ease, transform .2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        details {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        summary {
+            cursor: pointer;
+            color: var(--primary);
+            font-weight: bold;
+            padding: 2px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 28px 20px 34px;
+            color: var(--muted);
+            font-size: 13px;
+            border-top: 1px solid var(--border);
+            background: white;
+        }
+
+        footer strong {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text);
+            font-size: 16px;
+        }
+
+        footer strong + p {
+            margin-top: 4px;
+        }
+
+        footer p:last-child {
+            margin-top: 12px;
+        }
+
+        footer a {
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: var(--rubik-red);
+        }
+
+        @media (max-width: 800px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 20px 20px 40px;
+                gap: 20px;
+            }
+
+            .sidebar {
+                position: static;
+                padding: 16px;
+            }
+
+            .sidebar nav {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 4px;
+            }
+
+            .hero {
+                padding: 32px 26px;
+            }
+
+            .card {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .navbar {
+                padding: 14px 16px;
+            }
+
+            .nav-label {
+                font-size: 10px;
+            }
+
+            .sidebar nav {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 2px 6px;
+            }
+
+            .sidebar a {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .container {
+                padding: 16px 14px 32px;
+            }
+
+            .hero {
+                padding: 27px 21px;
+            }
+
+            .meta {
+                gap: 7px 12px;
+                font-size: 12px;
+            }
+
+            .card {
+                padding: 20px 17px;
+            }
+
+            .question {
+                padding: 14px 8px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="../../index.html" class="logo">Kub<span>ika.</span></a>
+        <div class="nav-label">Jalur Belajar HTML / Modul 02</div>
+    </header>
+
+    <div class="container">
+
+        <aside class="sidebar">
+            <h3>DAFTAR MATERI</h3>
+
+            <nav>
+                <a href="#overview">Overview</a>
+                <a href="#structure">1. Struktur HTML</a>
+                <a href="#doctype">2. DOCTYPE</a>
+                <a href="#head">3. Head</a>
+                <a href="#body">4. Body</a>
+                <a href="#elements">5. Tag & Element</a>
+                <a href="#attributes">6. Attributes</a>
+                <a href="#void">7. Void Elements</a>
+                <a href="#nesting">8. Nesting</a>
+                <a href="#comments">9. Comments</a>
+                <a href="#practice">10. Praktik</a>
+                <a href="#quiz">11. Kuis</a>
+                <a href="#challenge">12. Challenge</a>
+            </nav>
+        </aside>
+
+        <main class="content">
+
+            <section class="hero" id="overview">
+                <span class="badge">BEGINNER LEVEL</span>
+
+                <h1>HTML Document Structure</h1>
+
+                <p>
+                    Belajar memahami susunan dasar HTML,
+                    mengenal setiap bagian dokumen, dan membuat
+                    kerangka website yang benar.
+                </p>
+
+                <div class="meta">
+                    <span><i data-lucide="book-open" class="inline-icon" aria-hidden="true"></i>Modul 02</span>
+                    <span><i data-lucide="clock-3" class="inline-icon" aria-hidden="true"></i>60–90 Menit</span>
+                    <span><i data-lucide="target" class="inline-icon" aria-hidden="true"></i>Pemula</span>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2><i data-lucide="target" class="inline-icon" aria-hidden="true"></i>Tujuan Pembelajaran</h2>
+
+                <p>Setelah menyelesaikan modul ini, kamu mampu:</p>
+
+                <ul>
+                    <li>Memahami struktur dasar dokumen HTML.</li>
+                    <li>Menjelaskan fungsi DOCTYPE, html, head, dan body.</li>
+                    <li>Membedakan tag, element, dan attribute.</li>
+                    <li>Mengenal void elements.</li>
+                    <li>Memahami nesting dan indentation.</li>
+                    <li>Membuat kerangka HTML sendiri.</li>
+                </ul>
+
+                <div class="highlight">
+                    Modul ini merupakan fondasi penting.
+                    Hampir semua halaman website yang kamu buat
+                    nantinya akan menggunakan struktur ini.
+                </div>
+            </section>
+
+            <!-- 1 -->
+            <section class="card" id="structure">
+                <h2>01. Mengenal Struktur HTML</h2>
+
+                <p>
+                    Pada modul sebelumnya kita sudah mencoba
+                    membuat halaman HTML sederhana.
+                    Sekarang kita akan memahami susunan kode tersebut.
+                </p>
+
+                <p>
+                    Dokumen HTML memiliki struktur yang terorganisasi.
+                    Setiap bagian mempunyai fungsi masing-masing.
+                </p>
+
+                <h3>Contoh Struktur Dasar</h3>
+
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Website Pertamaku&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+    &lt;h1&gt;Halo, Dunia!&lt;/h1&gt;
+    &lt;p&gt;Saya sedang belajar HTML.&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <h3>Bagaimana Susunannya?</h3>
+
+                <ul>
+                    <li>DOCTYPE memberi tahu browser versi standar HTML yang digunakan.</li>
+                    <li>HTML menjadi elemen akar dokumen.</li>
+                    <li>Head menyimpan metadata dan informasi dokumen.</li>
+                    <li>Body menyimpan konten halaman yang ditampilkan.</li>
+                </ul>
+
+                <div class="highlight">
+                    Anggap HTML seperti sebuah folder besar.
+                    Di dalamnya terdapat bagian head dan body
+                    yang memiliki tugas berbeda.
+                </div>
+            </section>
+
+            <!-- 2 -->
+            <section class="card" id="doctype">
+                <h2>02. Apa Itu DOCTYPE?</h2>
+
+                <p>
+                    DOCTYPE merupakan deklarasi yang ditulis
+                    pada bagian paling awal dokumen HTML.
+                </p>
+
+                <pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+
+                <p>
+                    Fungsinya memberi tahu browser bahwa dokumen
+                    tersebut menggunakan standar HTML modern,
+                    yaitu HTML5.
+                </p>
+
+                <p>
+                    DOCTYPE bukan tag HTML biasa.
+                    Ia merupakan deklarasi dokumen.
+                </p>
+
+                <div class="highlight">
+                    Tips: Biasakan selalu menulis DOCTYPE pada
+                    baris pertama setiap file HTML.
+                </div>
+            </section>
+
+            <!-- 3 -->
+            <section class="card" id="head">
+                <h2>03. Mengenal HEAD</h2>
+
+                <p>
+                    Elemen <code class="inline-code">&lt;head&gt;</code>
+                    berisi informasi tentang halaman website.
+                </p>
+
+                <p>
+                    Sebagian besar isinya tidak ditampilkan sebagai
+                    konten utama di halaman browser.
+                </p>
+
+                <h3>Contoh Penggunaan</h3>
+
+                <pre><code>&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+
+    &lt;meta name="viewport"
+          content="width=device-width, initial-scale=1.0"&gt;
+
+    &lt;title&gt;Website Pertamaku&lt;/title&gt;
+&lt;/head&gt;</code></pre>
+
+                <h3>Elemen yang Sering Digunakan</h3>
+
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>Elemen</th>
+                            <th>Fungsi</th>
+                        </tr>
+                        <tr>
+                            <td>title</td>
+                            <td>Menentukan judul tab browser.</td>
+                        </tr>
+                        <tr>
+                            <td>meta charset</td>
+                            <td>Menentukan encoding karakter.</td>
+                        </tr>
+                        <tr>
+                            <td>meta viewport</td>
+                            <td>Membantu tampilan menyesuaikan layar perangkat.</td>
+                        </tr>
+                        <tr>
+                            <td>link</td>
+                            <td>Menghubungkan file eksternal seperti CSS.</td>
+                        </tr>
+                        <tr>
+                            <td>style</td>
+                            <td>Menuliskan CSS internal.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3>Mengenal UTF-8</h3>
+
+                <pre><code>&lt;meta charset="UTF-8"&gt;</code></pre>
+
+                <p>
+                    UTF-8 merupakan encoding karakter yang mendukung
+                    berbagai karakter dan bahasa, termasuk bahasa Indonesia.
+                </p>
+
+                <h3>Mengenal Viewport</h3>
+
+                <pre><code>&lt;meta name="viewport"
+content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+
+                <p>
+                    Pengaturan ini membantu browser menyesuaikan
+                    lebar halaman dengan lebar layar perangkat.
+                </p>
+            </section>
+
+            <!-- 4 -->
+            <section class="card" id="body">
+                <h2>04. Mengenal BODY</h2>
+
+                <p>
+                    Elemen
+                    <code class="inline-code">&lt;body&gt;</code>
+                    merupakan tempat konten utama halaman website.
+                </p>
+
+                <p>Contohnya:</p>
+
+                <ul>
+                    <li>Heading atau judul.</li>
+                    <li>Paragraf.</li>
+                    <li>Gambar.</li>
+                    <li>Link.</li>
+                    <li>Tabel.</li>
+                    <li>Formulir.</li>
+                </ul>
+
+                <h3>Contoh Penggunaan</h3>
+
+                <pre><code>&lt;body&gt;
+
+    &lt;h1&gt;Selamat Datang&lt;/h1&gt;
+
+    &lt;p&gt;
+        Ini adalah website pertama saya.
+    &lt;/p&gt;
+
+    &lt;a href="https://example.com"&gt;
+        Kunjungi Website
+    &lt;/a&gt;
+
+&lt;/body&gt;</code></pre>
+
+                <div class="highlight">
+                    Cara mudah mengingatnya:
+                    HEAD berisi informasi dokumen,
+                    sedangkan BODY berisi konten halaman.
+                </div>
+            </section>
+
+            <!-- 5 -->
+            <section class="card" id="elements">
+                <h2>05. Tag dan Element HTML</h2>
+
+                <p>
+                    Ketika belajar HTML, kamu akan sering menemukan
+                    istilah tag dan element.
+                    Keduanya saling berhubungan tetapi tidak sepenuhnya sama.
+                </p>
+
+                <h3>Apa Itu Tag?</h3>
+
+                <p>
+                    Tag adalah penanda yang ditulis menggunakan
+                    tanda kurung sudut.
+                </p>
+
+                <pre><code>&lt;p&gt;
+&lt;/p&gt;</code></pre>
+
+                <p>
+                    <code class="inline-code">&lt;p&gt;</code>
+                    merupakan opening tag, sedangkan
+                    <code class="inline-code">&lt;/p&gt;</code>
+                    merupakan closing tag.
+                </p>
+
+                <h3>Apa Itu Element?</h3>
+
+                <p>
+                    Element merupakan keseluruhan bagian HTML,
+                    yang dapat terdiri dari tag pembuka,
+                    isi, dan tag penutup.
+                </p>
+
+                <pre><code>&lt;p&gt;Saya sedang belajar HTML.&lt;/p&gt;</code></pre>
+
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>Bagian</th>
+                            <th>Penjelasan</th>
+                        </tr>
+                        <tr>
+                            <td>&lt;p&gt;</td>
+                            <td>Opening tag.</td>
+                        </tr>
+                        <tr>
+                            <td>Saya sedang belajar HTML.</td>
+                            <td>Content atau isi.</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;/p&gt;</td>
+                            <td>Closing tag.</td>
+                        </tr>
+                        <tr>
+                            <td>Keseluruhannya</td>
+                            <td>Paragraph element.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="highlight">
+                    Ingat: tag merupakan penanda,
+                    sedangkan element adalah keseluruhan struktur
+                    yang dibentuk oleh tag dan isinya.
+                </div>
+            </section>
+
+            <!-- 6 -->
+            <section class="card" id="attributes">
+                <h2>06. Mengenal Attributes</h2>
+
+                <p>
+                    Attribute merupakan informasi tambahan
+                    yang diberikan pada sebuah elemen HTML.
+                </p>
+
+                <p>Contoh:</p>
+
+                <pre><code>&lt;a href="https://google.com"&gt;
+    Buka Google
+&lt;/a&gt;</code></pre>
+
+                <p>
+                    Pada contoh tersebut,
+                    <code class="inline-code">href</code>
+                    merupakan attribute yang menentukan alamat tujuan link.
+                </p>
+
+                <h3>Contoh Attribute Lainnya</h3>
+
+                <pre><code>&lt;img src="foto.jpg" alt="Foto profil"&gt;
+
+&lt;p class="deskripsi"&gt;
+    Belajar HTML.
+&lt;/p&gt;
+
+&lt;input type="text" placeholder="Masukkan nama"&gt;</code></pre>
+
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Fungsi</th>
+                        </tr>
+                        <tr>
+                            <td>href</td>
+                            <td>Menentukan alamat link.</td>
+                        </tr>
+                        <tr>
+                            <td>src</td>
+                            <td>Menentukan sumber file.</td>
+                        </tr>
+                        <tr>
+                            <td>alt</td>
+                            <td>Memberikan deskripsi alternatif gambar.</td>
+                        </tr>
+                        <tr>
+                            <td>class</td>
+                            <td>Memberikan nama kelas pada elemen.</td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td>Memberikan identitas unik pada elemen dalam dokumen.</td>
+                        </tr>
+                        <tr>
+                            <td>type</td>
+                            <td>Menentukan jenis input atau elemen tertentu.</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 7 -->
+            <section class="card" id="void">
+                <h2>07. Mengenal Void Elements</h2>
+
+                <p>
+                    Tidak semua elemen HTML memiliki opening tag
+                    dan closing tag.
+                </p>
+
+                <p>
+                    Ada elemen yang tidak dapat memiliki konten anak,
+                    yang dikenal sebagai void elements.
+                </p>
+
+                <h3>Contoh Void Elements</h3>
+
+                <pre><code>&lt;br&gt;
+&lt;hr&gt;
+&lt;img src="foto.jpg" alt="Foto"&gt;
+&lt;input type="text"&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>Element</th>
+                            <th>Fungsi</th>
+                        </tr>
+                        <tr>
+                            <td>br</td>
+                            <td>Membuat baris baru.</td>
+                        </tr>
+                        <tr>
+                            <td>hr</td>
+                            <td>Membuat pemisah tematik.</td>
+                        </tr>
+                        <tr>
+                            <td>img</td>
+                            <td>Menampilkan gambar.</td>
+                        </tr>
+                        <tr>
+                            <td>input</td>
+                            <td>Membuat input pengguna.</td>
+                        </tr>
+                        <tr>
+                            <td>meta</td>
+                            <td>Memberikan metadata dokumen.</td>
+                        </tr>
+                        <tr>
+                            <td>link</td>
+                            <td>Menghubungkan resource eksternal.</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="highlight">
+                    Dalam HTML5, void elements tidak membutuhkan
+                    closing tag. Penulisan seperti &lt;img /&gt;
+                    juga dapat ditemukan, tetapi garis miring
+                    tersebut tidak diperlukan.
+                </div>
+            </section>
+
+            <!-- 8 -->
+            <section class="card" id="nesting">
+                <h2>08. Nesting dan Indentation</h2>
+
+                <h3>Apa Itu Nesting?</h3>
+
+                <p>
+                    Nesting adalah kondisi ketika sebuah elemen HTML
+                    berada di dalam elemen lainnya.
+                </p>
+
+                <pre><code>&lt;div&gt;
+    &lt;h1&gt;Profil Saya&lt;/h1&gt;
+
+    &lt;p&gt;
+        Saya sedang belajar HTML.
+    &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+                <p>
+                    Pada contoh tersebut, heading dan paragraf
+                    berada di dalam elemen div.
+                </p>
+
+                <h3>Apa Itu Indentation?</h3>
+
+                <p>
+                    Indentation adalah jarak atau spasi pada awal baris
+                    kode yang digunakan untuk menunjukkan susunan kode.
+                </p>
+
+                <p>Contoh kurang rapi:</p>
+
+                <pre><code>&lt;div&gt;
+&lt;h1&gt;Halo&lt;/h1&gt;
+&lt;p&gt;Belajar HTML&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+                <p>Contoh lebih rapi:</p>
+
+                <pre><code>&lt;div&gt;
+    &lt;h1&gt;Halo&lt;/h1&gt;
+    &lt;p&gt;Belajar HTML&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+                <div class="highlight">
+                    Indentation tidak selalu mengubah hasil tampilan
+                    HTML, tetapi sangat membantu manusia membaca
+                    dan memahami struktur kode.
+                </div>
+
+                <h3>Perhatikan Penutupan Tag</h3>
+
+                <p>Contoh yang salah:</p>
+
+                <pre><code>&lt;p&gt;
+    &lt;strong&gt;Halo!
+&lt;/p&gt;
+&lt;/strong&gt;</code></pre>
+
+                <p>Contoh yang benar:</p>
+
+                <pre><code>&lt;p&gt;
+    &lt;strong&gt;Halo!&lt;/strong&gt;
+&lt;/p&gt;</code></pre>
+
+                <p>
+                    Elemen harus ditutup dalam urutan yang benar,
+                    seperti konsep susunan bertingkat.
+                </p>
+            </section>
+
+            <!-- 9 -->
+            <section class="card" id="comments">
+                <h2>09. HTML Comments</h2>
+
+                <p>
+                    Comment digunakan untuk memberikan catatan
+                    pada kode HTML.
+                </p>
+
+                <p>
+                    Browser tidak menampilkan comment sebagai
+                    konten halaman.
+                </p>
+
+                <h3>Contoh</h3>
+
+                <pre><code>&lt;!-- Ini adalah komentar HTML --&gt;
+
+&lt;h1&gt;Halo, Dunia!&lt;/h1&gt;</code></pre>
+
+                <h3>Kegunaan Comments</h3>
+
+                <ul>
+                    <li>Memberikan penjelasan kode.</li>
+                    <li>Menandai bagian tertentu.</li>
+                    <li>Membantu developer memahami kode.</li>
+                    <li>Memberikan catatan saat bekerja bersama tim.</li>
+                </ul>
+
+                <div class="highlight">
+                    Perlu diingat: comment tetap bisa dilihat
+                    melalui source code halaman. Jangan menyimpan
+                    password atau informasi rahasia di dalam comment.
+                </div>
+            </section>
+
+            <!-- 10 -->
+            <section class="card" id="practice">
+                <h2>10. Praktik Membuat Kerangka HTML</h2>
+
+                <p>
+                    Sekarang kita akan menggabungkan semua materi
+                    yang telah dipelajari.
+                </p>
+
+                <h3>Langkah 1 — Buat File</h3>
+
+                <p>Buat file baru dengan nama:</p>
+
+                <pre><code>struktur-html.html</code></pre>
+
+                <h3>Langkah 2 — Masukkan Kode</h3>
+
+                <pre id="practiceCode"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+
+    &lt;meta name="viewport"
+          content="width=device-width, initial-scale=1.0"&gt;
+
+    &lt;title&gt;Website Pertamaku&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+    &lt;!-- Bagian utama website --&gt;
+
+    &lt;h1&gt;Selamat Datang!&lt;/h1&gt;
+
+    &lt;p&gt;
+        Saya sedang belajar struktur HTML.
+    &lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <button class="copy-btn" onclick="copyPractice()">
+                    <i data-lucide="clipboard" aria-hidden="true"></i>Salin Kode
+                </button>
+
+                <h3>Langkah 3 — Jalankan</h3>
+
+                <ol>
+                    <li>Simpan file.</li>
+                    <li>Buka menggunakan browser.</li>
+                    <li>Perhatikan judul pada tab browser.</li>
+                    <li>Perhatikan konten yang tampil.</li>
+                    <li>Coba ubah beberapa bagian kode.</li>
+                </ol>
+
+                <h3>Langkah 4 — Eksperimen</h3>
+
+                <ul>
+                    <li>Ubah title menjadi nama website kamu.</li>
+                    <li>Ubah heading menjadi nama kamu.</li>
+                    <li>Tambahkan paragraf baru.</li>
+                    <li>Tambahkan komentar HTML.</li>
+                    <li>Rapikan indentation kode.</li>
+                </ul>
+            </section>
+
+            <!-- 11 -->
+            <section class="card" id="quiz">
+                <h2>11. Kuis Pemahaman</h2>
+
+                <p>
+                    Jawab pertanyaan berikut berdasarkan materi
+                    yang telah dipelajari.
+                </p>
+
+                <form id="quizForm">
+
+                    <div class="question">
+                        <p>1. Apa fungsi DOCTYPE html?</p>
+                        <label><input type="radio" name="q1" value="a"> Menampilkan judul halaman.</label>
+                        <label><input type="radio" name="q1" value="b"> Memberi tahu browser bahwa dokumen menggunakan HTML5.</label>
+                        <label><input type="radio" name="q1" value="c"> Membuat paragraf.</label>
+                    </div>
+
+                    <div class="question">
+                        <p>2. Bagian mana yang berisi konten utama halaman?</p>
+                        <label><input type="radio" name="q2" value="a"> head</label>
+                        <label><input type="radio" name="q2" value="b"> title</label>
+                        <label><input type="radio" name="q2" value="c"> body</label>
+                    </div>
+
+                    <div class="question">
+                        <p>3. Apa fungsi attribute href?</p>
+                        <label><input type="radio" name="q3" value="a"> Menentukan alamat link.</label>
+                        <label><input type="radio" name="q3" value="b"> Mengubah warna.</label>
+                        <label><input type="radio" name="q3" value="c"> Membuat paragraf.</label>
+                    </div>
+
+                    <div class="question">
+                        <p>4. Manakah yang termasuk void element?</p>
+                        <label><input type="radio" name="q4" value="a"> &lt;p&gt;</label>
+                        <label><input type="radio" name="q4" value="b"> &lt;div&gt;</label>
+                        <label><input type="radio" name="q4" value="c"> &lt;img&gt;</label>
+                    </div>
+
+                    <div class="question">
+                        <p>5. Apa tujuan indentation?</p>
+                        <label><input type="radio" name="q5" value="a"> Mengubah semua warna website.</label>
+                        <label><input type="radio" name="q5" value="b"> Membuat struktur kode lebih mudah dibaca.</label>
+                        <label><input type="radio" name="q5" value="c"> Menghapus tag HTML.</label>
+                    </div>
+
+                    <div class="question">
+                        <p>6. Apa yang dimaksud dengan HTML comment?</p>
+                        <label><input type="radio" name="q6" value="a"> Catatan dalam kode yang tidak ditampilkan sebagai konten halaman.</label>
+                        <label><input type="radio" name="q6" value="b"> Judul halaman.</label>
+                        <label><input type="radio" name="q6" value="c"> Link menuju halaman lain.</label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Periksa Jawaban
+                    </button>
+
+                    <div id="result" class="result"></div>
+
+                </form>
+
+                <details>
+                    <summary>Lihat Kunci Jawaban</summary>
+
+                    <ol>
+                        <li>B — Deklarasi HTML5.</li>
+                        <li>C — Body.</li>
+                        <li>A — Menentukan alamat link.</li>
+                        <li>C — Img.</li>
+                        <li>B — Memudahkan pembacaan kode.</li>
+                        <li>A — Catatan dalam kode.</li>
+                    </ol>
+                </details>
+            </section>
+
+            <!-- 12 -->
+            <section class="card" id="challenge">
+                <h2>12. Coding Challenge</h2>
+
+                <p>
+                    Sekarang saatnya membuktikan bahwa kamu
+                    sudah memahami struktur HTML.
+                </p>
+
+                <h3>Tantangan: Buat Website Profil</h3>
+
+                <p>Buat sebuah file bernama:</p>
+
+                <pre><code>profil-pribadi.html</code></pre>
+
+                <h3>Ketentuan Pengerjaan</h3>
+
+                <ol>
+                    <li>Gunakan DOCTYPE HTML5.</li>
+                    <li>Gunakan html dengan lang="id".</li>
+                    <li>Tambahkan charset UTF-8.</li>
+                    <li>Tambahkan viewport.</li>
+                    <li>Buat title sesuai nama website.</li>
+                    <li>Buat heading nama pribadi.</li>
+                    <li>Buat paragraf perkenalan.</li>
+                    <li>Gunakan minimal satu HTML comment.</li>
+                    <li>Pastikan nesting dan indentation benar.</li>
+                </ol>
+
+                <div class="highlight">
+                    <strong>Aturan:</strong>
+                    Kerjakan sendiri terlebih dahulu.
+                    Jangan hanya menyalin contoh kode.
+                    Pastikan kamu dapat menjelaskan fungsi
+                    setiap bagian dokumen.
+                </div>
+
+                <h3>Penilaian</h3>
+
+                <div class="table-wrapper">
+                    <table>
+                        <tr>
+                            <th>Aspek</th>
+                            <th>Bobot</th>
+                        </tr>
+                        <tr>
+                            <td>Struktur HTML benar</td>
+                            <td>30%</td>
+                        </tr>
+                        <tr>
+                            <td>Penggunaan elemen dan attribute</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>Nesting dan indentation</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>Kemandirian pengerjaan</td>
+                            <td>15%</td>
+                        </tr>
+                        <tr>
+                            <td>Kemampuan menjelaskan kode</td>
+                            <td>15%</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </section>
+
+            <!-- CLOSING -->
+            <section class="card">
+                <h2><i data-lucide="party-popper" class="inline-icon" aria-hidden="true"></i>Modul 02 Selesai!</h2>
+
+                <p>
+                    Selamat! Kamu sudah mempelajari bagaimana
+                    dokumen HTML disusun dari awal.
+                </p>
+
+                <p>
+                    Sekarang kamu sudah memahami bahwa sebuah website
+                    tidak dibuat dengan menulis kode secara acak.
+                    Ada struktur yang perlu dipahami dan diterapkan.
+                </p>
+
+                <div class="highlight">
+                    <strong>Pesan untuk kamu:</strong>
+                    Jangan hanya menghafal struktur HTML.
+                    Biasakan menulis ulang dari ingatan dan
+                    pahami alasan setiap elemen digunakan.
+                </div>
+
+                <h3>Persiapan Modul 03</h3>
+
+                <p>
+                    Pada modul selanjutnya kita akan belajar
+                    Heading dan Paragraph, yaitu bagaimana membuat
+                    judul dan konten teks pada halaman website.
+                </p>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <strong>Kubika.</strong>
+        <p>Learn, Practice, Build.</p>
+        <p>HTML Learning Path — Module 02</p>
+        <p><a href="../../index.html">Beranda Kubika</a> · <a href="modul-01.html">Kembali ke Modul 01</a></p>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@0.468.0"></script>
+    <script>
+        lucide.createIcons();
+
+        // Fungsi menyalin kode praktik
+        function copyPractice() {
+            const code = document.querySelector("#practiceCode code").innerText;
+
+            navigator.clipboard.writeText(code)
+                .then(() => alert("Kode berhasil disalin!"))
+                .catch(() => alert("Gagal menyalin. Silakan salin manual."));
+        }
+
+        // Sistem penilaian kuis
+        document.getElementById("quizForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const answers = {
+                q1: "b",
+                q2: "c",
+                q3: "a",
+                q4: "c",
+                q5: "b",
+                q6: "a"
+            };
+
+            let score = 0;
+            const total = Object.keys(answers).length;
+
+            for (let question in answers) {
+                const selected = document.querySelector(
+                    `input[name="${question}"]:checked`
+                );
+
+                if (selected && selected.value === answers[question]) {
+                    score++;
+                }
+            }
+
+            const finalScore = Math.round((score / total) * 100);
+
+            let message;
+
+            if (finalScore === 100) {
+                message = "Sempurna! Kamu memahami seluruh materi.";
+            } else if (finalScore >= 70) {
+                message = "Bagus! Tinggal perdalam beberapa konsep.";
+            } else {
+                message = "Yuk, pelajari kembali materi dan coba lagi.";
+            }
+
+            document.getElementById("result").innerHTML =
+                `Nilai kamu: ${finalScore}/100<br>${message}`;
+        });
+    </script>
+
+</body>
+</html>
