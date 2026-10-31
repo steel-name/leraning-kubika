@@ -1,0 +1,1227 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DevLearn Modul 07 - Belajar Semantic HTML dari dasar.">
+  <title>Modul 07 - Semantic HTML | DevLearn</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --dark: #14213d;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --green: #059669;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 35px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 32px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 95px;
+      align-self: start;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    .sidebar h3 {
+      font-size: 14px;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 9px 12px;
+      margin: 4px 0;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    .hero {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 38px;
+      margin-bottom: 25px;
+    }
+
+    .label {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      color: var(--dark);
+      font-size: 32px;
+      line-height: 1.3;
+      margin: 12px 0;
+    }
+
+    h2 {
+      color: var(--dark);
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      color: var(--dark);
+      margin: 20px 0 10px;
+      font-size: 17px;
+    }
+
+    p {
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      margin: 3px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+      margin-bottom: 22px;
+      scroll-margin-top: 95px;
+    }
+
+    .code {
+      background: #111827;
+      color: #e2e8f0;
+      padding: 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+      margin: 14px 0;
+      font-size: 13px;
+      line-height: 1.8;
+      white-space: pre;
+    }
+
+    .copy {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 13px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .note {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 14px 17px;
+      border-radius: 7px;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .warning {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 14px 17px;
+      border-radius: 7px;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 430px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: var(--primary-light);
+      color: var(--dark);
+    }
+
+    .example {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 15px 0;
+    }
+
+    .mock-site {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .mock-header {
+      background: #dbeafe;
+      padding: 18px;
+      text-align: center;
+      font-weight: bold;
+      color: #1e40af;
+    }
+
+    .mock-nav {
+      background: #eff6ff;
+      padding: 12px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: #1d4ed8;
+      font-size: 13px;
+    }
+
+    .mock-main {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      padding: 15px;
+    }
+
+    .mock-article,
+    .mock-aside {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 7px;
+      text-align: center;
+    }
+
+    .mock-footer {
+      background: #e2e8f0;
+      padding: 16px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .quiz-option {
+      display: block;
+      border: 1px solid var(--border);
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .quiz-option:hover {
+      background: var(--primary-light);
+    }
+
+    .quiz-option input {
+      margin-right: 8px;
+    }
+
+    .submit {
+      background: var(--primary);
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-weight: 700;
+    }
+
+    .checklist label {
+      display: block;
+      margin: 12px 0;
+      cursor: pointer;
+    }
+
+    .checklist input {
+      margin-right: 9px;
+    }
+
+    .progress-bg {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--green);
+      transition: .3s;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 35px 15px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+      }
+
+      .hero {
+        padding: 25px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 14px 5%;
+      }
+
+      .container {
+        padding: 0 14px;
+        margin-top: 20px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .sidebar nav {
+        grid-template-columns: 1fr;
+      }
+
+      .mock-main {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="module-theme.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="../../index.html" class="logo">Kub<span>ika.</span></a>
+  <a href="../../index.html#learning-path" class="nav-link">← Kembali ke Jalur Belajar</a>
+</header>
+
+<div class="container">
+
+  <aside class="sidebar">
+    <h3>Materi Pembelajaran</h3>
+    <nav>
+      <a href="#intro">Pengantar</a>
+      <a href="#concept">Konsep Semantic HTML</a>
+      <a href="#header">Header & Nav</a>
+      <a href="#main">Main & Section</a>
+      <a href="#article">Article & Aside</a>
+      <a href="#footer">Footer</a>
+      <a href="#structure">Struktur Website</a>
+      <a href="#practice">Guided Practice</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#challenge">Coding Challenge</a>
+      <a href="#review">Review</a>
+    </nav>
+  </aside>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <span class="label">HTML LEARNING PATH • MODUL 07</span>
+      <h1>Semantic HTML</h1>
+      <p>
+        Mengenal elemen HTML yang memiliki makna dan fungsi khusus
+        untuk membangun struktur halaman website yang lebih jelas,
+        terorganisir, dan mudah dipahami.
+      </p>
+      <span class="tag">Beginner Level</span>
+      <span class="tag">Estimated Time: 60–90 Menit</span>
+    </section>
+
+    <!-- INTRO -->
+    <section class="card" id="intro">
+      <h2>Pengantar Pembelajaran</h2>
+
+      <p>
+        Sebelumnya kita telah belajar membuat heading, paragraf,
+        daftar, tabel, formulir, tautan, dan gambar.
+        Sekarang kita akan mempelajari bagaimana menyusun
+        elemen-elemen tersebut menjadi struktur halaman website
+        yang memiliki arti.
+      </p>
+
+      <p>
+        Inilah yang disebut Semantic HTML.
+      </p>
+
+      <h3>Tujuan Pembelajaran</h3>
+      <ul>
+        <li>Memahami pengertian Semantic HTML.</li>
+        <li>Membedakan elemen semantic dan non-semantic.</li>
+        <li>Mengenal header, nav, main, section, article, aside, dan footer.</li>
+        <li>Menyusun struktur halaman website dengan benar.</li>
+        <li>Menerapkan Semantic HTML dalam proyek sederhana.</li>
+      </ul>
+
+      <div class="note">
+        <strong>Alur belajar:</strong>
+        Pahami konsep → Kenali elemen → Perhatikan struktur →
+        Praktikkan sendiri → Kerjakan tantangan.
+      </div>
+    </section>
+
+    <!-- CONCEPT -->
+    <section class="card" id="concept">
+      <span class="label">BAGIAN 01</span>
+      <h2>Apa Itu Semantic HTML?</h2>
+
+      <p>
+        Semantic HTML adalah penggunaan elemen HTML yang
+        menjelaskan arti atau tujuan dari konten yang ada
+        di dalamnya.
+      </p>
+
+      <p>
+        Dengan semantic HTML, browser, mesin pencari,
+        dan teknologi pembaca layar dapat lebih mudah
+        memahami struktur halaman.
+      </p>
+
+      <h3>A. Perbedaan Semantic dan Non-Semantic</h3>
+
+      <p>
+        Perhatikan dua contoh berikut.
+      </p>
+
+      <strong>Contoh 1 — Non-Semantic</strong>
+      <div class="code" id="code1">&lt;div class="header"&gt;
+  &lt;h1&gt;Website Kubika&lt;/h1&gt;
+&lt;/div&gt;
+
+&lt;div class="content"&gt;
+  &lt;p&gt;Selamat datang di website kami.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="footer"&gt;
+  &lt;p&gt;Copyright Kubika&lt;/p&gt;
+&lt;/div&gt;</div>
+      <button class="copy" onclick="copyCode('code1')">Salin Kode</button>
+
+      <strong>Contoh 2 — Semantic</strong>
+      <div class="code" id="code2">&lt;header&gt;
+  &lt;h1&gt;Website Kubika&lt;/h1&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;p&gt;Selamat datang di website kami.&lt;/p&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+  &lt;p&gt;Copyright Kubika&lt;/p&gt;
+&lt;/footer&gt;</div>
+      <button class="copy" onclick="copyCode('code2')">Salin Kode</button>
+
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Non-Semantic</th>
+            <th>Semantic</th>
+          </tr>
+          <tr>
+            <td>div</td>
+            <td>header</td>
+          </tr>
+          <tr>
+            <td>div</td>
+            <td>nav</td>
+          </tr>
+          <tr>
+            <td>div</td>
+            <td>main</td>
+          </tr>
+          <tr>
+            <td>div</td>
+            <td>article</td>
+          </tr>
+          <tr>
+            <td>div</td>
+            <td>footer</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <strong>Perlu diingat:</strong>
+        Div bukan elemen yang salah. Div tetap berguna untuk
+        pengelompokan dan kebutuhan styling ketika tidak ada
+        elemen semantic yang lebih tepat.
+      </div>
+    </section>
+
+    <!-- HEADER NAV -->
+    <section class="card" id="header">
+      <span class="label">BAGIAN 02</span>
+      <h2>Header dan Navigation</h2>
+
+      <h3>A. Header</h3>
+      <p>
+        Elemen <code>&lt;header&gt;</code> digunakan untuk
+        menampilkan bagian pengantar atau kepala dari sebuah
+        halaman maupun bagian konten.
+      </p>
+
+      <p>Biasanya berisi:</p>
+      <ul>
+        <li>Logo website.</li>
+        <li>Judul halaman atau artikel.</li>
+        <li>Informasi pengantar.</li>
+      </ul>
+
+      <div class="code" id="code3">&lt;header&gt;
+  &lt;h1&gt;Kubika Developer Team&lt;/h1&gt;
+  &lt;p&gt;Learn, Practice, Build&lt;/p&gt;
+&lt;/header&gt;</div>
+      <button class="copy" onclick="copyCode('code3')">Salin Kode</button>
+
+      <h3>B. Navigation</h3>
+      <p>
+        Elemen <code>&lt;nav&gt;</code> digunakan untuk
+        mengelompokkan tautan navigasi utama.
+      </p>
+
+      <div class="code" id="code4">&lt;nav&gt;
+  &lt;a href="index.html"&gt;Beranda&lt;/a&gt;
+  &lt;a href="about.html"&gt;Tentang&lt;/a&gt;
+  &lt;a href="portfolio.html"&gt;Portfolio&lt;/a&gt;
+  &lt;a href="contact.html"&gt;Kontak&lt;/a&gt;
+&lt;/nav&gt;</div>
+      <button class="copy" onclick="copyCode('code4')">Salin Kode</button>
+
+      <div class="example">
+        <strong>Contoh tampilan:</strong>
+        <div class="mock-site">
+          <div class="mock-header">KUBIKA DEVELOPER TEAM</div>
+          <div class="mock-nav">
+            <span>Beranda</span>
+            <span>Tentang</span>
+            <span>Portfolio</span>
+            <span>Kontak</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        Gunakan nav untuk kelompok navigasi penting, bukan
+        untuk setiap kumpulan tautan yang ada di halaman.
+      </div>
+    </section>
+
+    <!-- MAIN SECTION -->
+    <section class="card" id="main">
+      <span class="label">BAGIAN 03</span>
+      <h2>Main dan Section</h2>
+
+      <h3>A. Main</h3>
+      <p>
+        Elemen <code>&lt;main&gt;</code> berisi konten utama
+        yang menjadi fokus halaman website.
+      </p>
+
+      <div class="code" id="code5">&lt;main&gt;
+  &lt;h1&gt;Selamat Datang di DevLearn&lt;/h1&gt;
+  &lt;p&gt;Belajar web development dari dasar.&lt;/p&gt;
+&lt;/main&gt;</div>
+      <button class="copy" onclick="copyCode('code5')">Salin Kode</button>
+
+      <h3>B. Section</h3>
+      <p>
+        Elemen <code>&lt;section&gt;</code> digunakan untuk
+        mengelompokkan konten yang memiliki tema atau topik
+        yang saling berhubungan.
+      </p>
+
+      <div class="code" id="code6">&lt;section&gt;
+  &lt;h2&gt;Tentang Kubika&lt;/h2&gt;
+  &lt;p&gt;
+    Kubika adalah kelompok pengembang web.
+  &lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section&gt;
+  &lt;h2&gt;Program Pembelajaran&lt;/h2&gt;
+  &lt;p&gt;
+    Belajar HTML, CSS, dan JavaScript.
+  &lt;/p&gt;
+&lt;/section&gt;</div>
+      <button class="copy" onclick="copyCode('code6')">Salin Kode</button>
+
+      <div class="note">
+        Biasanya section memiliki heading yang menjelaskan
+        topik bagian tersebut. Jangan menggunakan section
+        hanya untuk menggantikan setiap div.
+      </div>
+    </section>
+
+    <!-- ARTICLE ASIDE -->
+    <section class="card" id="article">
+      <span class="label">BAGIAN 04</span>
+      <h2>Article dan Aside</h2>
+
+      <h3>A. Article</h3>
+      <p>
+        Elemen <code>&lt;article&gt;</code> digunakan untuk
+        konten mandiri yang dapat dipahami secara terpisah
+        dari bagian halaman lainnya.
+      </p>
+
+      <p>Contohnya:</p>
+      <ul>
+        <li>Artikel blog.</li>
+        <li>Berita.</li>
+        <li>Postingan komunitas.</li>
+        <li>Ulasan produk.</li>
+      </ul>
+
+      <div class="code" id="code7">&lt;article&gt;
+  &lt;h2&gt;Belajar HTML untuk Pemula&lt;/h2&gt;
+  &lt;p&gt;
+    HTML adalah bahasa markup untuk membangun
+    struktur halaman website.
+  &lt;/p&gt;
+&lt;/article&gt;</div>
+      <button class="copy" onclick="copyCode('code7')">Salin Kode</button>
+
+      <h3>B. Aside</h3>
+      <p>
+        Elemen <code>&lt;aside&gt;</code> digunakan untuk
+        konten tambahan yang berkaitan dengan konten utama.
+      </p>
+
+      <p>Contohnya:</p>
+      <ul>
+        <li>Sidebar.</li>
+        <li>Artikel terkait.</li>
+        <li>Informasi tambahan.</li>
+        <li>Profil penulis.</li>
+      </ul>
+
+      <div class="code" id="code8">&lt;aside&gt;
+  &lt;h3&gt;Artikel Terkait&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Belajar CSS&lt;/li&gt;
+    &lt;li&gt;Belajar JavaScript&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/aside&gt;</div>
+      <button class="copy" onclick="copyCode('code8')">Salin Kode</button>
+    </section>
+
+    <!-- FOOTER -->
+    <section class="card" id="footer">
+      <span class="label">BAGIAN 05</span>
+      <h2>Footer</h2>
+
+      <p>
+        Elemen <code>&lt;footer&gt;</code> digunakan untuk
+        menampilkan informasi penutup dari halaman atau
+        bagian tertentu.
+      </p>
+
+      <p>Biasanya berisi:</p>
+      <ul>
+        <li>Informasi copyright.</li>
+        <li>Kontak.</li>
+        <li>Informasi pembuat website.</li>
+        <li>Tautan tambahan.</li>
+      </ul>
+
+      <div class="code" id="code9">&lt;footer&gt;
+  &lt;p&gt;© 2026 Kubika Developer Team&lt;/p&gt;
+  &lt;p&gt;Learn, Practice, Build&lt;/p&gt;
+&lt;/footer&gt;</div>
+      <button class="copy" onclick="copyCode('code9')">Salin Kode</button>
+
+      <div class="note">
+        Footer tidak harus selalu berada di bagian paling bawah
+        seluruh halaman. Footer juga dapat digunakan sebagai
+        penutup sebuah article atau section.
+      </div>
+    </section>
+
+    <!-- STRUCTURE -->
+    <section class="card" id="structure">
+      <span class="label">BAGIAN 06</span>
+      <h2>Struktur Semantic Website</h2>
+
+      <p>
+        Sekarang kita gabungkan elemen yang telah dipelajari
+        menjadi satu struktur halaman website.
+      </p>
+
+      <div class="example">
+        <strong>Ilustrasi struktur website:</strong>
+        <div class="mock-site">
+          <div class="mock-header">HEADER</div>
+          <div class="mock-nav">NAVIGATION</div>
+          <div class="mock-main">
+            <div class="mock-article">
+              <strong>MAIN</strong>
+              <p>SECTION</p>
+              <p>ARTICLE</p>
+            </div>
+            <div class="mock-aside">
+              <strong>ASIDE</strong>
+              <p>Konten tambahan</p>
+            </div>
+          </div>
+          <div class="mock-footer">FOOTER</div>
+        </div>
+      </div>
+
+      <h3>Contoh Kode Lengkap</h3>
+
+      <div class="code" id="code10">&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+        content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Website Kubika&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  &lt;header&gt;
+    &lt;h1&gt;Kubika Developer Team&lt;/h1&gt;
+    &lt;p&gt;Learn, Practice, Build&lt;/p&gt;
+  &lt;/header&gt;
+
+  &lt;nav aria-label="Navigasi utama"&gt;
+    &lt;a href="#beranda"&gt;Beranda&lt;/a&gt;
+    &lt;a href="#tentang"&gt;Tentang&lt;/a&gt;
+    &lt;a href="#artikel"&gt;Artikel&lt;/a&gt;
+  &lt;/nav&gt;
+
+  &lt;main id="beranda"&gt;
+
+    &lt;section id="tentang"&gt;
+      &lt;h2&gt;Tentang Kubika&lt;/h2&gt;
+      &lt;p&gt;
+        Kubika adalah kelompok belajar dan
+        pengembangan website.
+      &lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;article id="artikel"&gt;
+      &lt;h2&gt;Belajar HTML&lt;/h2&gt;
+      &lt;p&gt;
+        HTML digunakan untuk membuat struktur
+        halaman website.
+      &lt;/p&gt;
+    &lt;/article&gt;
+
+    &lt;aside&gt;
+      &lt;h3&gt;Materi Lainnya&lt;/h3&gt;
+      &lt;p&gt;Belajar CSS dan JavaScript.&lt;/p&gt;
+    &lt;/aside&gt;
+
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;© 2026 Kubika Developer Team&lt;/p&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      <button class="copy" onclick="copyCode('code10')">Salin Kode</button>
+
+      <h3>Ringkasan Elemen Semantic</h3>
+
+      <div class="table-wrap">
+        <table>
+          <tr><th>Elemen</th><th>Fungsi</th></tr>
+          <tr><td>header</td><td>Bagian pengantar atau kepala konten</td></tr>
+          <tr><td>nav</td><td>Kelompok tautan navigasi</td></tr>
+          <tr><td>main</td><td>Konten utama halaman</td></tr>
+          <tr><td>section</td><td>Kelompok konten bertema</td></tr>
+          <tr><td>article</td><td>Konten mandiri</td></tr>
+          <tr><td>aside</td><td>Konten tambahan terkait</td></tr>
+          <tr><td>footer</td><td>Bagian penutup konten</td></tr>
+        </table>
+      </div>
+
+      <div class="warning">
+        <strong>Catatan:</strong>
+        Dalam satu halaman biasanya terdapat satu elemen main
+        yang terlihat. Elemen main tidak boleh menjadi anak
+        dari header, footer, nav, article, aside, atau section.
+      </div>
+    </section>
+
+    <!-- PRACTICE -->
+    <section class="card" id="practice">
+      <span class="label">GUIDED PRACTICE</span>
+      <h2>Latihan Terarah</h2>
+
+      <p>
+        Mari membuat struktur halaman profil sederhana
+        untuk kelompok Kubika.
+      </p>
+
+      <h3>Studi Kasus: Profil Kubika</h3>
+
+      <p>Website harus memiliki bagian berikut:</p>
+      <ol>
+        <li>Header berisi nama kelompok.</li>
+        <li>Navigation berisi tautan halaman.</li>
+        <li>Main sebagai konten utama.</li>
+        <li>Section untuk informasi tentang Kubika.</li>
+        <li>Article untuk menampilkan salah satu artikel.</li>
+        <li>Aside untuk informasi tambahan.</li>
+        <li>Footer berisi copyright.</li>
+      </ol>
+
+      <h3>Contoh Kode Latihan</h3>
+
+      <div class="code" id="code11">&lt;header&gt;
+  &lt;h1&gt;Kubika Developer Team&lt;/h1&gt;
+&lt;/header&gt;
+
+&lt;nav&gt;
+  &lt;a href="#home"&gt;Home&lt;/a&gt;
+  &lt;a href="#about"&gt;About&lt;/a&gt;
+&lt;/nav&gt;
+
+&lt;main id="home"&gt;
+  &lt;section id="about"&gt;
+    &lt;h2&gt;Tentang Kami&lt;/h2&gt;
+    &lt;p&gt;Kami belajar dan membangun website.&lt;/p&gt;
+  &lt;/section&gt;
+
+  &lt;article&gt;
+    &lt;h2&gt;Kegiatan Kubika&lt;/h2&gt;
+    &lt;p&gt;Belajar coding bersama tim.&lt;/p&gt;
+  &lt;/article&gt;
+
+  &lt;aside&gt;
+    &lt;p&gt;Informasi tambahan tentang Kubika.&lt;/p&gt;
+  &lt;/aside&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+  &lt;p&gt;© 2026 Kubika&lt;/p&gt;
+&lt;/footer&gt;</div>
+      <button class="copy" onclick="copyCode('code11')">Salin Kode</button>
+
+      <div class="note">
+        Coba ketik ulang kode di editor masing-masing.
+        Setelah itu, tambahkan CSS sederhana agar halaman
+        memiliki tampilan yang lebih menarik.
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="card" id="quiz">
+      <span class="label">TEST YOUR KNOWLEDGE</span>
+      <h2>Quiz Modul 07</h2>
+      <p>Pilih jawaban yang paling tepat.</p>
+
+      <form id="quizForm">
+
+        <div class="question">
+          <h3>1. Apa yang dimaksud dengan Semantic HTML?</h3>
+          <label class="quiz-option"><input type="radio" name="q1" value="a"> a. HTML yang hanya mengatur warna</label>
+          <label class="quiz-option"><input type="radio" name="q1" value="b"> b. HTML dengan elemen yang memiliki makna</label>
+          <label class="quiz-option"><input type="radio" name="q1" value="c"> c. HTML untuk membuat animasi</label>
+        </div>
+
+        <div class="question">
+          <h3>2. Elemen apa yang digunakan untuk konten utama halaman?</h3>
+          <label class="quiz-option"><input type="radio" name="q2" value="a"> a. &lt;main&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q2" value="b"> b. &lt;footer&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q2" value="c"> c. &lt;aside&gt;</label>
+        </div>
+
+        <div class="question">
+          <h3>3. Elemen apa yang digunakan untuk mengelompokkan navigasi?</h3>
+          <label class="quiz-option"><input type="radio" name="q3" value="a"> a. &lt;section&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q3" value="b"> b. &lt;article&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q3" value="c"> c. &lt;nav&gt;</label>
+        </div>
+
+        <div class="question">
+          <h3>4. Elemen apa yang cocok untuk artikel blog?</h3>
+          <label class="quiz-option"><input type="radio" name="q4" value="a"> a. &lt;aside&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q4" value="b"> b. &lt;article&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q4" value="c"> c. &lt;nav&gt;</label>
+        </div>
+
+        <div class="question">
+          <h3>5. Apa fungsi elemen aside?</h3>
+          <label class="quiz-option"><input type="radio" name="q5" value="a"> a. Konten tambahan yang berkaitan</label>
+          <label class="quiz-option"><input type="radio" name="q5" value="b"> b. Membuat tabel</label>
+          <label class="quiz-option"><input type="radio" name="q5" value="c"> c. Membuat input pengguna</label>
+        </div>
+
+        <div class="question">
+          <h3>6. Elemen apa yang biasa digunakan untuk informasi copyright?</h3>
+          <label class="quiz-option"><input type="radio" name="q6" value="a"> a. &lt;main&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q6" value="b"> b. &lt;section&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q6" value="c"> c. &lt;footer&gt;</label>
+        </div>
+
+        <div class="question">
+          <h3>7. Apa fungsi utama elemen section?</h3>
+          <label class="quiz-option"><input type="radio" name="q7" value="a"> a. Mengelompokkan konten dengan tema tertentu</label>
+          <label class="quiz-option"><input type="radio" name="q7" value="b"> b. Mengirim data ke server</label>
+          <label class="quiz-option"><input type="radio" name="q7" value="c"> c. Membuat navigasi</label>
+        </div>
+
+        <div class="question">
+          <h3>8. Apakah div termasuk elemen semantic?</h3>
+          <label class="quiz-option"><input type="radio" name="q8" value="a"> a. Ya, selalu</label>
+          <label class="quiz-option"><input type="radio" name="q8" value="b"> b. Tidak, div adalah elemen non-semantic</label>
+          <label class="quiz-option"><input type="radio" name="q8" value="c"> c. Hanya jika menggunakan CSS</label>
+        </div>
+
+        <button type="submit" class="submit">Periksa Jawaban</button>
+        <div id="result" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- CHALLENGE -->
+    <section class="card" id="challenge">
+      <span class="label">CODING CHALLENGE</span>
+      <h2>Mini Project: Kubika Profile Page</h2>
+
+      <p>
+        Buat sebuah halaman profil kelompok Kubika
+        menggunakan Semantic HTML.
+      </p>
+
+      <h3>Ketentuan Project</h3>
+      <ul>
+        <li>Gunakan header untuk identitas kelompok.</li>
+        <li>Gunakan nav untuk navigasi halaman.</li>
+        <li>Gunakan main sebagai konten utama.</li>
+        <li>Gunakan minimal 3 section dengan heading.</li>
+        <li>Gunakan article untuk salah satu konten mandiri.</li>
+        <li>Gunakan aside untuk informasi tambahan.</li>
+        <li>Gunakan footer untuk informasi penutup.</li>
+        <li>Tambahkan CSS sederhana untuk styling.</li>
+        <li>Pastikan struktur HTML tersusun rapi.</li>
+      </ul>
+
+      <h3>Ide Konten Website</h3>
+      <ul>
+        <li>Profil Kubika.</li>
+        <li>Visi dan misi kelompok.</li>
+        <li>Informasi anggota.</li>
+        <li>Aktivitas belajar.</li>
+        <li>Artikel seputar web development.</li>
+      </ul>
+
+      <h3>Rubrik Penilaian</h3>
+
+      <div class="table-wrap">
+        <table>
+          <tr><th>Kriteria</th><th>Bobot</th></tr>
+          <tr><td>Struktur Semantic HTML</td><td>30%</td></tr>
+          <tr><td>Ketepatan penggunaan elemen</td><td>25%</td></tr>
+          <tr><td>Kerapian kode</td><td>15%</td></tr>
+          <tr><td>Tampilan halaman</td><td>20%</td></tr>
+          <tr><td>Kelengkapan konten</td><td>10%</td></tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <strong>Target:</strong>
+        Kamu mampu menyusun struktur halaman website
+        menggunakan elemen semantic tanpa hanya bergantung
+        pada contoh yang diberikan.
+      </div>
+    </section>
+
+    <!-- REVIEW -->
+    <section class="card" id="review">
+      <span class="label">LEARNING REVIEW</span>
+      <h2>Evaluasi Pembelajaran</h2>
+
+      <p>
+        Centang materi yang sudah kamu pahami.
+      </p>
+
+      <div class="progress-bg">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <p id="progressText">0 dari 7 materi dipahami</p>
+
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox"> Saya memahami pengertian Semantic HTML.</label>
+        <label><input type="checkbox"> Saya dapat membedakan Semantic dan Non-Semantic.</label>
+        <label><input type="checkbox"> Saya memahami header dan nav.</label>
+        <label><input type="checkbox"> Saya memahami main dan section.</label>
+        <label><input type="checkbox"> Saya memahami article dan aside.</label>
+        <label><input type="checkbox"> Saya memahami fungsi footer.</label>
+        <label><input type="checkbox"> Saya dapat membuat struktur Semantic HTML.</label>
+      </div>
+
+      <div class="note">
+        <strong>Kesimpulan:</strong>
+        Semantic HTML membantu kita membuat struktur halaman
+        yang lebih bermakna, terorganisir, dan mudah dipahami
+        oleh browser serta teknologi pendukung.
+      </div>
+    </section>
+
+    <nav class="lesson-navigation" aria-label="Navigasi modul">
+      <a href="modul-06.html">← Modul sebelumnya</a>
+      <a href="modul-08.html">Modul berikutnya →</a>
+    </nav>
+  </main>
+</div>
+
+<footer>
+  <strong>DevLearn — Learn, Practice, Build</strong>
+  <p>Belajar bersama, berkembang bersama.</p>
+  <p>Modul 07 • HTML Learning Path</p>
+</footer>
+
+<script>
+  // COPY CODE
+  function copyCode(id) {
+    const text = document.getElementById(id).innerText;
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text)
+        .then(() => alert("Kode berhasil disalin!"))
+        .catch(() => fallbackCopy(text));
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+
+    try {
+      document.execCommand("copy");
+      alert("Kode berhasil disalin!");
+    } catch (error) {
+      alert("Gagal menyalin kode. Silakan salin manual.");
+    }
+
+    area.remove();
+  }
+
+  // QUIZ
+  const answers = {
+    q1: "b",
+    q2: "a",
+    q3: "c",
+    q4: "b",
+    q5: "a",
+    q6: "c",
+    q7: "a",
+    q8: "b"
+  };
+
+  document.getElementById("quizForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let score = 0;
+    let answered = 0;
+
+    Object.keys(answers).forEach(function(question) {
+      const selected = document.querySelector(
+        'input[name="' + question + '"]:checked'
+      );
+
+      if (selected) {
+        answered++;
+
+        if (selected.value === answers[question]) {
+          score++;
+        }
+      }
+    });
+
+    const result = document.getElementById("result");
+
+    if (answered < 8) {
+      result.textContent =
+        "Silakan jawab semua 8 pertanyaan terlebih dahulu.";
+      result.style.color = "#d97706";
+      return;
+    }
+
+    const finalScore = Math.round((score / 8) * 100);
+
+    result.textContent =
+      "Nilai kamu: " + finalScore + "/100 (" +
+      score + " dari 8 benar). " +
+      (finalScore >= 75
+        ? "Bagus! Kamu siap mengerjakan tantangan."
+        : "Pelajari kembali materi yang belum dipahami.");
+
+    result.style.color =
+      finalScore >= 75 ? "#059669" : "#dc2626";
+  });
+
+  // CHECKLIST PROGRESS
+  const checklist = document.querySelectorAll(
+    '#checklist input[type="checkbox"]'
+  );
+
+  function updateProgress() {
+    const checked = [...checklist].filter(
+      item => item.checked
+    ).length;
+
+    const percentage = (checked / checklist.length) * 100;
+
+    document.getElementById("progressFill").style.width =
+      percentage + "%";
+
+    document.getElementById("progressText").textContent =
+      checked + " dari " + checklist.length +
+      " materi dipahami";
+  }
+
+  checklist.forEach(item => {
+    item.addEventListener("change", updateProgress);
+  });
+
+  // SIDEBAR ACTIVE STATE
+  const navLinks = document.querySelectorAll(".sidebar a");
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", function() {
+      navLinks.forEach(item => item.classList.remove("active"));
+      this.classList.add("active");
+    });
+  });
+</script>
+
+</body>
+</html>

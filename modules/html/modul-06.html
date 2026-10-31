@@ -1,0 +1,1147 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modul 06 - Lists, Tables & Forms | DevLearn</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --dark: #14213d;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --green: #059669;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 35px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 32px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 95px;
+      align-self: start;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    .sidebar h3 {
+      font-size: 14px;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 9px 12px;
+      margin: 4px 0;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    .hero {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 38px;
+      margin-bottom: 25px;
+    }
+
+    .label {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      color: var(--dark);
+      font-size: 32px;
+      line-height: 1.3;
+      margin: 12px 0;
+    }
+
+    h2 {
+      color: var(--dark);
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      color: var(--dark);
+      margin: 20px 0 10px;
+      font-size: 17px;
+    }
+
+    p {
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+      margin-bottom: 22px;
+      scroll-margin-top: 95px;
+    }
+
+    .code {
+      background: #111827;
+      color: #e2e8f0;
+      padding: 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+      margin: 14px 0;
+      font-size: 13px;
+      line-height: 1.8;
+      white-space: pre;
+    }
+
+    .copy {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 13px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .note {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 14px 17px;
+      border-radius: 7px;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .warning {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 14px 17px;
+      border-radius: 7px;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 450px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: var(--primary-light);
+      color: var(--dark);
+    }
+
+    .example {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 15px 0;
+    }
+
+    .example ul,
+    .example ol {
+      padding-left: 25px;
+    }
+
+    .example form {
+      display: grid;
+      gap: 12px;
+      max-width: 450px;
+    }
+
+    .example input,
+    .example select,
+    .example textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font: inherit;
+      background: white;
+    }
+
+    .example button {
+      padding: 11px;
+      background: var(--primary);
+      color: white;
+      border: 0;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .example label {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .quiz-option {
+      display: block;
+      border: 1px solid var(--border);
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .quiz-option:hover {
+      background: var(--primary-light);
+    }
+
+    .quiz-option input {
+      margin-right: 8px;
+    }
+
+    .submit {
+      background: var(--primary);
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-weight: 700;
+    }
+
+    .checklist label {
+      display: block;
+      margin: 12px 0;
+      cursor: pointer;
+    }
+
+    .checklist input {
+      margin-right: 9px;
+    }
+
+    .progress-bg {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--green);
+      transition: .3s;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 35px 15px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+      }
+
+      .hero {
+        padding: 25px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 14px 5%;
+      }
+
+      .container {
+        padding: 0 14px;
+        margin-top: 20px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .sidebar nav {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="module-theme.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="../../index.html" class="logo">Kub<span>ika.</span></a>
+  <a href="../../index.html#learning-path" class="nav-link">← Kembali ke Jalur Belajar</a>
+</header>
+
+<div class="container">
+
+  <aside class="sidebar">
+    <h3>Materi Pembelajaran</h3>
+    <nav>
+      <a href="#intro">Pengantar</a>
+      <a href="#lists">1. HTML Lists</a>
+      <a href="#tables">2. HTML Tables</a>
+      <a href="#forms">3. HTML Forms</a>
+      <a href="#practice">Guided Practice</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#challenge">Coding Challenge</a>
+      <a href="#review">Review</a>
+    </nav>
+  </aside>
+
+  <main>
+
+    <section class="hero">
+      <span class="label">HTML LEARNING PATH • MODUL 06</span>
+      <h1>Lists, Tables & Forms</h1>
+      <p>
+        Belajar membuat daftar, menyajikan data dalam tabel,
+        dan membuat formulir untuk menerima informasi dari pengguna.
+      </p>
+      <span class="tag">Beginner Level</span>
+      <span class="tag">Estimated Time: 60–90 Menit</span>
+    </section>
+
+    <!-- INTRO -->
+    <section class="card" id="intro">
+      <h2>Pengantar Pembelajaran</h2>
+      <p>
+        Dalam sebuah website, informasi tidak selalu disajikan
+        menggunakan paragraf. Terkadang kita membutuhkan daftar,
+        tabel, atau formulir agar informasi lebih mudah dipahami.
+      </p>
+
+      <h3>Tujuan Pembelajaran</h3>
+      <ul>
+        <li>Memahami fungsi HTML Lists.</li>
+        <li>Membuat daftar menggunakan ul dan ol.</li>
+        <li>Menyajikan data menggunakan HTML Tables.</li>
+        <li>Memahami struktur tabel dan penggabungan sel.</li>
+        <li>Membuat formulir menggunakan HTML Forms.</li>
+        <li>Mengenal berbagai jenis input pada HTML.</li>
+      </ul>
+
+      <div class="note">
+        <strong>Alur belajar:</strong>
+        Pahami konsep → Perhatikan contoh → Coba sendiri →
+        Kerjakan tantangan.
+      </div>
+    </section>
+
+    <!-- LISTS -->
+    <section class="card" id="lists">
+      <span class="label">BAGIAN 01</span>
+      <h2>HTML Lists</h2>
+
+      <p>
+        HTML Lists digunakan untuk menampilkan sekumpulan
+        informasi dalam bentuk daftar. Contohnya daftar anggota,
+        daftar tugas, atau langkah-langkah pengerjaan.
+      </p>
+
+      <h3>A. Unordered List</h3>
+      <p>
+        Unordered List adalah daftar yang tidak memiliki
+        urutan angka. Biasanya ditampilkan dengan simbol bullet.
+        Tag yang digunakan adalah <code>&lt;ul&gt;</code> dan
+        <code>&lt;li&gt;</code>.
+      </p>
+
+      <div class="code" id="code1">&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+  &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;</div>
+      <button class="copy" onclick="copyCode('code1')">Salin Kode</button>
+
+      <div class="example">
+        <strong>Hasil:</strong>
+        <ul>
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+        </ul>
+      </div>
+
+      <h3>B. Ordered List</h3>
+      <p>
+        Ordered List digunakan ketika urutan daftar memiliki
+        arti atau tahapan. Tag yang digunakan adalah
+        <code>&lt;ol&gt;</code> dan <code>&lt;li&gt;</code>.
+      </p>
+
+      <div class="code" id="code2">&lt;ol&gt;
+  &lt;li&gt;Buka Visual Studio Code&lt;/li&gt;
+  &lt;li&gt;Buat file HTML&lt;/li&gt;
+  &lt;li&gt;Jalankan di browser&lt;/li&gt;
+&lt;/ol&gt;</div>
+      <button class="copy" onclick="copyCode('code2')">Salin Kode</button>
+
+      <div class="example">
+        <strong>Hasil:</strong>
+        <ol>
+          <li>Buka Visual Studio Code</li>
+          <li>Buat file HTML</li>
+          <li>Jalankan di browser</li>
+        </ol>
+      </div>
+
+      <h3>C. Description List</h3>
+      <p>
+        Description List digunakan untuk menampilkan istilah
+        beserta penjelasannya.
+      </p>
+
+      <div class="code" id="code3">&lt;dl&gt;
+  &lt;dt&gt;HTML&lt;/dt&gt;
+  &lt;dd&gt;Bahasa markup untuk struktur web.&lt;/dd&gt;
+
+  &lt;dt&gt;CSS&lt;/dt&gt;
+  &lt;dd&gt;Bahasa untuk mengatur tampilan web.&lt;/dd&gt;
+&lt;/dl&gt;</div>
+      <button class="copy" onclick="copyCode('code3')">Salin Kode</button>
+
+      <h3>D. Nested List</h3>
+      <p>
+        Nested List adalah daftar yang berada di dalam daftar lain.
+        Teknik ini berguna untuk membuat kategori dan subkategori.
+      </p>
+
+      <div class="code" id="code4">&lt;ul&gt;
+  &lt;li&gt;Frontend
+    &lt;ul&gt;
+      &lt;li&gt;HTML&lt;/li&gt;
+      &lt;li&gt;CSS&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Backend&lt;/li&gt;
+&lt;/ul&gt;</div>
+      <button class="copy" onclick="copyCode('code4')">Salin Kode</button>
+
+      <div class="note">
+        <strong>Ingat:</strong> Gunakan ul untuk daftar tanpa urutan,
+        ol untuk daftar berurutan, dan li untuk setiap item daftar.
+      </div>
+    </section>
+
+    <!-- TABLES -->
+    <section class="card" id="tables">
+      <span class="label">BAGIAN 02</span>
+      <h2>HTML Tables</h2>
+
+      <p>
+        HTML Tables digunakan untuk menampilkan data dalam
+        bentuk baris dan kolom. Contohnya data mahasiswa,
+        jadwal perkuliahan, dan daftar nilai.
+      </p>
+
+      <h3>A. Struktur Dasar Tabel</h3>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tag</th>
+              <th>Fungsi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>table</td><td>Membuat tabel</td></tr>
+            <tr><td>tr</td><td>Membuat baris</td></tr>
+            <tr><td>th</td><td>Membuat sel judul</td></tr>
+            <tr><td>td</td><td>Membuat sel data</td></tr>
+            <tr><td>caption</td><td>Memberikan judul tabel</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>B. Contoh Membuat Tabel</h3>
+
+      <div class="code" id="code5">&lt;table border="1"&gt;
+  &lt;caption&gt;Data Anggota Kubika&lt;/caption&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Nama&lt;/th&gt;
+    &lt;th&gt;Divisi&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Biran&lt;/td&gt;
+    &lt;td&gt;Frontend&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Andi&lt;/td&gt;
+    &lt;td&gt;Backend&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</div>
+      <button class="copy" onclick="copyCode('code5')">Salin Kode</button>
+
+      <div class="example">
+        <strong>Hasil:</strong>
+        <div class="table-wrap">
+          <table>
+            <caption>Data Anggota Kubika</caption>
+            <tr><th>Nama</th><th>Divisi</th></tr>
+            <tr><td>Biran</td><td>Frontend</td></tr>
+            <tr><td>Andi</td><td>Backend</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <h3>C. Thead, Tbody, dan Tfoot</h3>
+      <p>
+        Ketiga elemen ini membantu mengelompokkan bagian tabel
+        agar strukturnya lebih jelas.
+      </p>
+
+      <div class="code" id="code6">&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Produk&lt;/th&gt;
+      &lt;th&gt;Harga&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Keyboard&lt;/td&gt;
+      &lt;td&gt;150000&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Total&lt;/td&gt;
+      &lt;td&gt;150000&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</div>
+      <button class="copy" onclick="copyCode('code6')">Salin Kode</button>
+
+      <h3>D. Colspan dan Rowspan</h3>
+      <p>
+        Colspan digunakan untuk menggabungkan beberapa kolom.
+        Rowspan digunakan untuk menggabungkan beberapa baris.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th colspan="2">Informasi Anggota</th>
+          </tr>
+          <tr>
+            <td>Nama</td>
+            <td>Biran</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="code" id="code7">&lt;td colspan="2"&gt;Informasi Anggota&lt;/td&gt;
+
+&lt;td rowspan="2"&gt;Frontend&lt;/td&gt;</div>
+      <button class="copy" onclick="copyCode('code7')">Salin Kode</button>
+
+      <h3>E. Aksesibilitas Tabel</h3>
+      <p>
+        Gunakan atribut scope pada elemen th untuk membantu
+        pembaca layar memahami hubungan antara judul dan data.
+      </p>
+
+      <div class="code" id="code8">&lt;th scope="col"&gt;Nama&lt;/th&gt;
+&lt;th scope="col"&gt;Divisi&lt;/th&gt;</div>
+      <button class="copy" onclick="copyCode('code8')">Salin Kode</button>
+
+      <div class="note">
+        Gunakan tabel untuk data yang memang memiliki hubungan
+        baris dan kolom, bukan untuk mengatur layout seluruh halaman.
+      </div>
+    </section>
+
+    <!-- FORMS -->
+    <section class="card" id="forms">
+      <span class="label">BAGIAN 03</span>
+      <h2>HTML Forms</h2>
+
+      <p>
+        HTML Forms digunakan untuk menerima data atau informasi
+        dari pengguna. Contohnya formulir pendaftaran,
+        login, pencarian, dan kontak.
+      </p>
+
+      <h3>A. Struktur Dasar Form</h3>
+      <p>
+        Elemen form menjadi wadah untuk berbagai jenis input.
+        Setiap input dapat memiliki label agar pengguna tahu
+        informasi apa yang harus dimasukkan.
+      </p>
+
+      <div class="code" id="code9">&lt;form action="/daftar" method="post"&gt;
+  &lt;label for="nama"&gt;Nama Lengkap&lt;/label&gt;
+  &lt;input type="text" id="nama" name="nama"&gt;
+
+  &lt;button type="submit"&gt;Daftar&lt;/button&gt;
+&lt;/form&gt;</div>
+      <button class="copy" onclick="copyCode('code9')">Salin Kode</button>
+
+      <h3>B. Mengenal Elemen Form</h3>
+
+      <div class="table-wrap">
+        <table>
+          <tr><th>Elemen</th><th>Fungsi</th></tr>
+          <tr><td>form</td><td>Wadah formulir</td></tr>
+          <tr><td>label</td><td>Memberikan keterangan input</td></tr>
+          <tr><td>input</td><td>Menerima berbagai jenis data</td></tr>
+          <tr><td>textarea</td><td>Menerima teks panjang</td></tr>
+          <tr><td>select</td><td>Membuat pilihan dropdown</td></tr>
+          <tr><td>option</td><td>Isi pilihan dropdown</td></tr>
+          <tr><td>button</td><td>Membuat tombol</td></tr>
+        </table>
+      </div>
+
+      <h3>C. Jenis Input HTML</h3>
+
+      <div class="table-wrap">
+        <table>
+          <tr><th>Type</th><th>Fungsi</th></tr>
+          <tr><td>text</td><td>Memasukkan teks</td></tr>
+          <tr><td>email</td><td>Memasukkan alamat email</td></tr>
+          <tr><td>password</td><td>Memasukkan kata sandi</td></tr>
+          <tr><td>number</td><td>Memasukkan angka</td></tr>
+          <tr><td>date</td><td>Memilih tanggal</td></tr>
+          <tr><td>radio</td><td>Memilih satu opsi</td></tr>
+          <tr><td>checkbox</td><td>Memilih satu atau beberapa opsi</td></tr>
+          <tr><td>file</td><td>Mengunggah berkas</td></tr>
+          <tr><td>submit</td><td>Mengirim formulir</td></tr>
+        </table>
+      </div>
+
+      <h3>D. Contoh Formulir Pendaftaran</h3>
+
+      <div class="code" id="code10">&lt;form&gt;
+  &lt;label for="nama"&gt;Nama Lengkap&lt;/label&gt;
+  &lt;input type="text" id="nama" name="nama"
+         placeholder="Masukkan nama" required&gt;
+
+  &lt;label for="email"&gt;Email&lt;/label&gt;
+  &lt;input type="email" id="email" name="email"
+         placeholder="nama@email.com" required&gt;
+
+  &lt;label for="divisi"&gt;Pilih Divisi&lt;/label&gt;
+  &lt;select id="divisi" name="divisi"&gt;
+    &lt;option value="frontend"&gt;Frontend&lt;/option&gt;
+    &lt;option value="backend"&gt;Backend&lt;/option&gt;
+    &lt;option value="uiux"&gt;UI/UX&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;button type="submit"&gt;Daftar&lt;/button&gt;
+&lt;/form&gt;</div>
+      <button class="copy" onclick="copyCode('code10')">Salin Kode</button>
+
+      <div class="example">
+        <strong>Contoh tampilan formulir:</strong>
+        <form id="demoForm">
+          <label for="demoNama">Nama Lengkap</label>
+          <input type="text" id="demoNama" placeholder="Masukkan nama" required>
+
+          <label for="demoEmail">Email</label>
+          <input type="email" id="demoEmail" placeholder="nama@email.com" required>
+
+          <label for="demoDivisi">Pilih Divisi</label>
+          <select id="demoDivisi">
+            <option value="">Pilih divisi</option>
+            <option>Frontend</option>
+            <option>Backend</option>
+            <option>UI/UX</option>
+          </select>
+
+          <button type="submit">Daftar</button>
+          <p id="demoMessage" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <h3>E. Atribut Penting Form</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Atribut</th><th>Fungsi</th></tr>
+          <tr><td>name</td><td>Nama data saat dikirim</td></tr>
+          <tr><td>id</td><td>Identitas elemen</td></tr>
+          <tr><td>placeholder</td><td>Petunjuk di dalam input</td></tr>
+          <tr><td>required</td><td>Mewajibkan input diisi</td></tr>
+          <tr><td>value</td><td>Nilai dari sebuah input</td></tr>
+          <tr><td>action</td><td>Tujuan pengiriman data</td></tr>
+          <tr><td>method</td><td>Metode pengiriman data</td></tr>
+        </table>
+      </div>
+
+      <div class="warning">
+        <strong>Catatan penting:</strong>
+        HTML hanya membentuk struktur formulir. Untuk benar-benar
+        menyimpan atau mengirim data ke server, dibutuhkan backend
+        seperti PHP atau Laravel. Contoh formulir di atas hanya
+        simulasi tampilan dan validasi browser.
+      </div>
+    </section>
+
+    <!-- PRACTICE -->
+    <section class="card" id="practice">
+      <span class="label">GUIDED PRACTICE</span>
+      <h2>Latihan Terarah</h2>
+
+      <p>
+        Sekarang kita akan menggabungkan tiga materi yang telah
+        dipelajari menjadi satu halaman sederhana.
+      </p>
+
+      <h3>Studi Kasus: Data Anggota Kubika</h3>
+      <p>Buat halaman yang memiliki:</p>
+      <ol>
+        <li>Judul halaman.</li>
+        <li>Daftar divisi menggunakan unordered list.</li>
+        <li>Tabel data anggota.</li>
+        <li>Formulir pendaftaran anggota baru.</li>
+      </ol>
+
+      <div class="code" id="code11">&lt;h1&gt;Data Anggota Kubika&lt;/h1&gt;
+
+&lt;h2&gt;Divisi Kubika&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Frontend&lt;/li&gt;
+  &lt;li&gt;Backend&lt;/li&gt;
+  &lt;li&gt;UI/UX&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Anggota&lt;/h2&gt;
+&lt;table border="1"&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Nama&lt;/th&gt;
+    &lt;th&gt;Divisi&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Biran&lt;/td&gt;
+    &lt;td&gt;Frontend&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2&gt;Pendaftaran&lt;/h2&gt;
+&lt;form&gt;
+  &lt;input type="text" name="nama"
+         placeholder="Nama lengkap"&gt;
+  &lt;button type="submit"&gt;Daftar&lt;/button&gt;
+&lt;/form&gt;</div>
+      <button class="copy" onclick="copyCode('code11')">Salin Kode</button>
+
+      <div class="note">
+        Cobalah mengetik ulang kode tersebut, bukan hanya menyalinnya.
+        Tujuannya agar kamu mulai terbiasa menulis struktur HTML sendiri.
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="card" id="quiz">
+      <span class="label">TEST YOUR KNOWLEDGE</span>
+      <h2>Quiz Modul 06</h2>
+      <p>Pilih satu jawaban yang paling tepat.</p>
+
+      <form id="quizForm">
+
+        <div class="question">
+          <h3>1. Tag apa yang digunakan untuk membuat daftar tanpa urutan angka?</h3>
+          <label class="quiz-option"><input type="radio" name="q1" value="a"> a. &lt;ol&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q1" value="b"> b. &lt;ul&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q1" value="c"> c. &lt;li&gt;</label>
+        </div>
+
+        <div class="question">
+          <h3>2. Tag apa yang digunakan untuk membuat baris tabel?</h3>
+          <label class="quiz-option"><input type="radio" name="q2" value="a"> a. &lt;td&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q2" value="b"> b. &lt;th&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q2" value="c"> c. &lt;tr&gt;</label>
+        </div>
+
+        <div class="question">
+          <h3>3. Apa fungsi dari tag &lt;td&gt;?</h3>
+          <label class="quiz-option"><input type="radio" name="q3" value="a"> a. Membuat sel data tabel</label>
+          <label class="quiz-option"><input type="radio" name="q3" value="b"> b. Membuat judul halaman</label>
+          <label class="quiz-option"><input type="radio" name="q3" value="c"> c. Membuat formulir</label>
+        </div>
+
+        <div class="question">
+          <h3>4. Tag apa yang digunakan sebagai wadah formulir?</h3>
+          <label class="quiz-option"><input type="radio" name="q4" value="a"> a. &lt;input&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q4" value="b"> b. &lt;form&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q4" value="c"> c. &lt;label&gt;</label>
+        </div>
+
+        <div class="question">
+          <h3>5. Input type apa yang digunakan untuk alamat email?</h3>
+          <label class="quiz-option"><input type="radio" name="q5" value="a"> a. text</label>
+          <label class="quiz-option"><input type="radio" name="q5" value="b"> b. password</label>
+          <label class="quiz-option"><input type="radio" name="q5" value="c"> c. email</label>
+        </div>
+
+        <div class="question">
+          <h3>6. Apa fungsi atribut colspan?</h3>
+          <label class="quiz-option"><input type="radio" name="q6" value="a"> a. Menggabungkan beberapa kolom</label>
+          <label class="quiz-option"><input type="radio" name="q6" value="b"> b. Menggabungkan beberapa baris</label>
+          <label class="quiz-option"><input type="radio" name="q6" value="c"> c. Membuat daftar</label>
+        </div>
+
+        <div class="question">
+          <h3>7. Atribut apa yang membuat input wajib diisi?</h3>
+          <label class="quiz-option"><input type="radio" name="q7" value="a"> a. placeholder</label>
+          <label class="quiz-option"><input type="radio" name="q7" value="b"> b. required</label>
+          <label class="quiz-option"><input type="radio" name="q7" value="c"> c. value</label>
+        </div>
+
+        <div class="question">
+          <h3>8. Tag apa yang digunakan untuk membuat dropdown?</h3>
+          <label class="quiz-option"><input type="radio" name="q8" value="a"> a. &lt;textarea&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q8" value="b"> b. &lt;option&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q8" value="c"> c. &lt;select&gt;</label>
+        </div>
+
+        <button type="submit" class="submit">Periksa Jawaban</button>
+        <div id="result" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- CHALLENGE -->
+    <section class="card" id="challenge">
+      <span class="label">CODING CHALLENGE</span>
+      <h2>Mini Project: Student Data Management</h2>
+
+      <p>
+        Buat sebuah halaman HTML sederhana untuk mengelola
+        informasi mahasiswa.
+      </p>
+
+      <h3>Ketentuan Project</h3>
+      <ul>
+        <li>Gunakan heading sebagai judul halaman.</li>
+        <li>Buat daftar jurusan menggunakan ul.</li>
+        <li>Buat tabel data minimal 3 mahasiswa.</li>
+        <li>Gunakan thead dan tbody.</li>
+        <li>Buat formulir pendaftaran mahasiswa.</li>
+        <li>Gunakan minimal 4 jenis input.</li>
+        <li>Gunakan label pada setiap input.</li>
+        <li>Pastikan struktur HTML tersusun rapi.</li>
+      </ul>
+
+      <h3>Struktur Formulir Minimal</h3>
+      <ul>
+        <li>Nama lengkap.</li>
+        <li>Email.</li>
+        <li>Tanggal lahir.</li>
+        <li>Jurusan.</li>
+        <li>Jenis kelamin.</li>
+        <li>Tombol daftar.</li>
+      </ul>
+
+      <div class="note">
+        <strong>Target:</strong> Kamu mampu menggabungkan Lists,
+        Tables, dan Forms tanpa harus melihat contoh kode secara terus-menerus.
+      </div>
+
+      <h3>Rubrik Penilaian</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Kriteria</th><th>Bobot</th></tr>
+          <tr><td>Struktur HTML</td><td>20%</td></tr>
+          <tr><td>Penggunaan Lists</td><td>15%</td></tr>
+          <tr><td>Penggunaan Tables</td><td>20%</td></tr>
+          <tr><td>Penggunaan Forms</td><td>25%</td></tr>
+          <tr><td>Kerapian kode</td><td>10%</td></tr>
+          <tr><td>Kelengkapan project</td><td>10%</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- REVIEW -->
+    <section class="card" id="review">
+      <span class="label">LEARNING REVIEW</span>
+      <h2>Evaluasi Pembelajaran</h2>
+      <p>
+        Centang materi yang sudah kamu pahami.
+        Gunakan daftar ini untuk mengevaluasi kemampuanmu sendiri.
+      </p>
+
+      <div class="progress-bg">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p id="progressText">0 dari 6 materi dipahami</p>
+
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox"> Saya memahami Unordered dan Ordered List.</label>
+        <label><input type="checkbox"> Saya memahami Description dan Nested List.</label>
+        <label><input type="checkbox"> Saya dapat membuat tabel HTML.</label>
+        <label><input type="checkbox"> Saya memahami colspan dan rowspan.</label>
+        <label><input type="checkbox"> Saya memahami elemen dan atribut Forms.</label>
+        <label><input type="checkbox"> Saya dapat membuat formulir sederhana.</label>
+      </div>
+
+      <div class="note">
+        <strong>Kesimpulan:</strong>
+        HTML Lists membantu menyusun daftar, HTML Tables
+        membantu menyajikan data, dan HTML Forms membantu
+        menerima informasi dari pengguna.
+      </div>
+    </section>
+
+    <nav class="lesson-navigation" aria-label="Navigasi modul">
+      <a href="modul-05.html">← Modul sebelumnya</a>
+      <a href="modul-07.html">Modul berikutnya →</a>
+    </nav>
+  </main>
+</div>
+
+<footer>
+  <strong>DevLearn — Learn, Practice, Build</strong>
+  <p>Belajar bersama, berkembang bersama.</p>
+  <p>Modul 06 • HTML Learning Path</p>
+</footer>
+
+<script>
+  function copyCode(id) {
+    const text = document.getElementById(id).innerText;
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text)
+        .then(() => alert("Kode berhasil disalin!"))
+        .catch(() => fallbackCopy(text));
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+
+    try {
+      document.execCommand("copy");
+      alert("Kode berhasil disalin!");
+    } catch (error) {
+      alert("Gagal menyalin kode. Silakan salin manual.");
+    }
+
+    area.remove();
+  }
+
+  const answers = {
+    q1: "b",
+    q2: "c",
+    q3: "a",
+    q4: "b",
+    q5: "c",
+    q6: "a",
+    q7: "b",
+    q8: "c"
+  };
+
+  document.getElementById("quizForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let score = 0;
+    let answered = 0;
+
+    Object.keys(answers).forEach(function(question) {
+      const selected = document.querySelector(
+        'input[name="' + question + '"]:checked'
+      );
+
+      if (selected) {
+        answered++;
+        if (selected.value === answers[question]) {
+          score++;
+        }
+      }
+    });
+
+    const result = document.getElementById("result");
+
+    if (answered < 8) {
+      result.textContent = "Silakan jawab semua 8 pertanyaan terlebih dahulu.";
+      result.style.color = "#d97706";
+      return;
+    }
+
+    const finalScore = Math.round((score / 8) * 100);
+
+    result.textContent =
+      "Nilai kamu: " + finalScore + "/100 (" + score + " dari 8 benar). " +
+      (finalScore >= 75
+        ? "Bagus! Kamu bisa lanjut ke tantangan."
+        : "Ayo pelajari kembali materi yang belum dipahami.");
+
+    result.style.color = finalScore >= 75 ? "#059669" : "#dc2626";
+  });
+
+  const checklist = document.querySelectorAll(
+    '#checklist input[type="checkbox"]'
+  );
+
+  function updateProgress() {
+    const checked = [...checklist].filter(item => item.checked).length;
+    const percentage = (checked / checklist.length) * 100;
+
+    document.getElementById("progressFill").style.width =
+      percentage + "%";
+
+    document.getElementById("progressText").textContent =
+      checked + " dari " + checklist.length + " materi dipahami";
+  }
+
+  checklist.forEach(item => {
+    item.addEventListener("change", updateProgress);
+  });
+
+  document.getElementById("demoForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const nama = document.getElementById("demoNama").value;
+
+    document.getElementById("demoMessage").textContent =
+      "Halo, " + nama + "! Simulasi formulir berhasil. Data belum disimpan ke server.";
+  });
+
+  const navLinks = document.querySelectorAll(".sidebar a");
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", function() {
+      navLinks.forEach(item => item.classList.remove("active"));
+      this.classList.add("active");
+    });
+  });
+</script>
+
+</body>
+</html>

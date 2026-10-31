@@ -1,0 +1,1525 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DevLearn Modul 08 - HTML Mini Project.">
+  <title>Modul 08 - HTML Mini Project | DevLearn</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --dark: #14213d;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --green: #059669;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 35px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 32px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 95px;
+      align-self: start;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    .sidebar h3 {
+      font-size: 14px;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 9px 12px;
+      margin: 4px 0;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    .hero {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 38px;
+      margin-bottom: 25px;
+    }
+
+    .label {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      color: var(--dark);
+      font-size: 32px;
+      line-height: 1.3;
+      margin: 12px 0;
+    }
+
+    h2 {
+      color: var(--dark);
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      color: var(--dark);
+      margin: 20px 0 10px;
+      font-size: 17px;
+    }
+
+    p {
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      margin: 3px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+      margin-bottom: 22px;
+      scroll-margin-top: 95px;
+    }
+
+    .code {
+      background: #111827;
+      color: #e2e8f0;
+      padding: 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+      margin: 14px 0;
+      font-size: 13px;
+      line-height: 1.8;
+      white-space: pre;
+    }
+
+    .copy {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 13px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .note {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 14px 17px;
+      border-radius: 7px;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .warning {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 14px 17px;
+      border-radius: 7px;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 430px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: var(--primary-light);
+      color: var(--dark);
+    }
+
+    .example {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 15px 0;
+    }
+
+    .step {
+      border-left: 3px solid var(--primary);
+      padding: 3px 0 3px 18px;
+      margin: 18px 0;
+    }
+
+    .step strong {
+      color: var(--dark);
+    }
+
+    .project-preview {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .preview-nav {
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .preview-nav strong {
+      color: var(--primary);
+    }
+
+    .preview-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .preview-hero {
+      padding: 35px 22px;
+      text-align: center;
+      background: var(--primary-light);
+    }
+
+    .preview-avatar {
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      background: #bfdbfe;
+      margin: 0 auto 14px;
+      display: grid;
+      place-items: center;
+      color: var(--primary);
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .preview-hero h3 {
+      margin: 5px 0;
+    }
+
+    .preview-hero p {
+      font-size: 13px;
+      margin-bottom: 0;
+    }
+
+    .preview-content {
+      padding: 20px;
+    }
+
+    .preview-content h3 {
+      margin-top: 10px;
+    }
+
+    .preview-footer {
+      text-align: center;
+      background: #f1f5f9;
+      padding: 15px;
+      font-size: 12px;
+    }
+
+    .quiz-option {
+      display: block;
+      border: 1px solid var(--border);
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .quiz-option:hover {
+      background: var(--primary-light);
+    }
+
+    .quiz-option input {
+      margin-right: 8px;
+    }
+
+    .submit {
+      background: var(--primary);
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-weight: 700;
+    }
+
+    .checklist label {
+      display: block;
+      margin: 12px 0;
+      cursor: pointer;
+    }
+
+    .checklist input {
+      margin-right: 9px;
+    }
+
+    .progress-bg {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--green);
+      transition: .3s;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 35px 15px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+      }
+
+      .hero {
+        padding: 25px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 14px 5%;
+      }
+
+      .container {
+        padding: 0 14px;
+        margin-top: 20px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .sidebar nav {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="module-theme.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="../../index.html" class="logo">Kub<span>ika.</span></a>
+  <a href="../../index.html#learning-path" class="nav-link">← Kembali ke Jalur Belajar</a>
+</header>
+
+<div class="container">
+
+  <aside class="sidebar">
+    <h3>Materi Pembelajaran</h3>
+    <nav>
+      <a href="#intro">Pengantar</a>
+      <a href="#planning">Perencanaan Proyek</a>
+      <a href="#setup">Persiapan File</a>
+      <a href="#structure">Struktur HTML</a>
+      <a href="#content">Membuat Konten</a>
+      <a href="#style">Styling CSS</a>
+      <a href="#complete">Kode Lengkap</a>
+      <a href="#testing">Pengujian Website</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#challenge">Final Challenge</a>
+      <a href="#review">Review</a>
+    </nav>
+  </aside>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <span class="label">HTML LEARNING PATH • MODUL 08</span>
+      <h1>HTML Mini Project</h1>
+      <p>
+        Saatnya menggabungkan seluruh materi HTML yang telah
+        dipelajari menjadi sebuah website sederhana dari awal.
+      </p>
+      <span class="tag">Final HTML Module</span>
+      <span class="tag">Beginner Level</span>
+      <span class="tag">90–120 Menit</span>
+    </section>
+
+    <!-- INTRO -->
+    <section class="card" id="intro">
+      <h2>Pengantar Pembelajaran</h2>
+
+      <p>
+        Selamat! Kamu telah mempelajari berbagai elemen HTML,
+        mulai dari heading, paragraf, formatting, gambar,
+        tautan, daftar, tabel, formulir, hingga semantic HTML.
+      </p>
+
+      <p>
+        Sekarang kita akan menerapkan semuanya dalam satu proyek
+        sederhana, yaitu membuat Personal Profile Website.
+      </p>
+
+      <h3>Tujuan Pembelajaran</h3>
+      <ul>
+        <li>Membuat website dari file kosong.</li>
+        <li>Menggabungkan materi HTML Modul 01–07.</li>
+        <li>Membuat struktur website yang rapi.</li>
+        <li>Menggunakan CSS untuk mempercantik tampilan.</li>
+        <li>Menguji website melalui browser.</li>
+        <li>Memahami dasar proses pembuatan website.</li>
+      </ul>
+
+      <div class="note">
+        <strong>Prinsip utama:</strong>
+        Jangan hanya menyalin kode. Pahami fungsi setiap bagian
+        dan cobalah menulisnya sendiri.
+      </div>
+    </section>
+
+    <!-- PLANNING -->
+    <section class="card" id="planning">
+      <span class="label">BAGIAN 01</span>
+      <h2>Perencanaan Proyek</h2>
+
+      <p>
+        Sebelum menulis kode, kita perlu menentukan website
+        seperti apa yang akan dibuat.
+      </p>
+
+      <h3>Proyek: Personal Profile Website</h3>
+
+      <p>
+        Website ini digunakan untuk memperkenalkan diri,
+        menampilkan kemampuan, pengalaman, dan informasi kontak.
+      </p>
+
+      <div class="example">
+        <strong>Ilustrasi hasil website:</strong>
+        <div class="project-preview">
+          <div class="preview-nav">
+            <strong>MyProfile.</strong>
+            <div class="preview-links">
+              <span>Beranda</span>
+              <span>Tentang</span>
+              <span>Keahlian</span>
+              <span>Kontak</span>
+            </div>
+          </div>
+
+          <div class="preview-hero">
+            <div class="preview-avatar">A</div>
+            <h3>Halo, Saya Andi</h3>
+            <p>Mahasiswa dan calon Web Developer</p>
+          </div>
+
+          <div class="preview-content">
+            <h3>Tentang Saya</h3>
+            <p>Saya sedang belajar membangun website dari dasar.</p>
+
+            <h3>Keahlian</h3>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+
+          <div class="preview-footer">
+            © 2026 MyProfile. All Rights Reserved.
+          </div>
+        </div>
+      </div>
+
+      <h3>Bagian yang Harus Ada</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Bagian</th><th>Konten</th></tr>
+          <tr><td>Header</td><td>Logo atau nama website</td></tr>
+          <tr><td>Navigation</td><td>Menu navigasi</td></tr>
+          <tr><td>Hero</td><td>Foto, nama, dan deskripsi</td></tr>
+          <tr><td>About</td><td>Informasi pribadi</td></tr>
+          <tr><td>Skills</td><td>Daftar kemampuan</td></tr>
+          <tr><td>Experience</td><td>Tabel pengalaman</td></tr>
+          <tr><td>Contact</td><td>Formulir kontak</td></tr>
+          <tr><td>Footer</td><td>Informasi penutup</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- SETUP -->
+    <section class="card" id="setup">
+      <span class="label">BAGIAN 02</span>
+      <h2>Persiapan File</h2>
+
+      <p>
+        Sebelum mulai coding, buat sebuah folder baru
+        untuk menyimpan proyek.
+      </p>
+
+      <h3>Struktur Folder</h3>
+
+      <div class="code" id="code1">personal-profile/
+│
+├── index.html
+│
+└── images/
+    └── profile.jpg</div>
+      <button class="copy" onclick="copyCode('code1')">Salin Kode</button>
+
+      <h3>Langkah Persiapan</h3>
+
+      <div class="step">
+        <strong>1. Buat folder proyek</strong>
+        <p>Buat folder bernama personal-profile.</p>
+      </div>
+
+      <div class="step">
+        <strong>2. Buat file HTML</strong>
+        <p>Buat file baru bernama index.html.</p>
+      </div>
+
+      <div class="step">
+        <strong>3. Buat folder gambar</strong>
+        <p>Buat folder images untuk menyimpan foto profil.</p>
+      </div>
+
+      <div class="step">
+        <strong>4. Buka di VS Code</strong>
+        <p>Buka folder proyek menggunakan Visual Studio Code.</p>
+      </div>
+
+      <div class="note">
+        Nama file dan folder harus konsisten. Perhatikan juga
+        huruf besar dan kecil pada nama file ketika menggunakan
+        website di server.
+      </div>
+    </section>
+
+    <!-- STRUCTURE -->
+    <section class="card" id="structure">
+      <span class="label">BAGIAN 03</span>
+      <h2>Membuat Struktur HTML</h2>
+
+      <p>
+        Setiap halaman HTML memiliki struktur dasar.
+        Kita mulai dengan membuat kerangka dokumen.
+      </p>
+
+      <div class="code" id="code2">&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+        content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Personal Profile&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  &lt;!-- Konten website dibuat di sini --&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      <button class="copy" onclick="copyCode('code2')">Salin Kode</button>
+
+      <h3>Penjelasan</h3>
+      <ul>
+        <li>DOCTYPE mendeklarasikan dokumen HTML5.</li>
+        <li>HTML menjadi elemen utama dokumen.</li>
+        <li>Head berisi metadata dan judul halaman.</li>
+        <li>Body berisi konten yang ditampilkan browser.</li>
+      </ul>
+
+      <div class="note">
+        Pastikan seluruh elemen halaman nantinya berada
+        di dalam elemen body.
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="card" id="content">
+      <span class="label">BAGIAN 04</span>
+      <h2>Membuat Konten Website</h2>
+
+      <p>
+        Kita akan mulai mengisi website dengan beberapa bagian.
+      </p>
+
+      <h3>A. Header dan Navigation</h3>
+      <div class="code" id="code3">&lt;header&gt;
+  &lt;h1&gt;MyProfile.&lt;/h1&gt;
+
+  &lt;nav aria-label="Navigasi utama"&gt;
+    &lt;a href="#home"&gt;Beranda&lt;/a&gt;
+    &lt;a href="#about"&gt;Tentang&lt;/a&gt;
+    &lt;a href="#skills"&gt;Keahlian&lt;/a&gt;
+    &lt;a href="#contact"&gt;Kontak&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;</div>
+      <button class="copy" onclick="copyCode('code3')">Salin Kode</button>
+
+      <h3>B. Hero Section</h3>
+      <p>
+        Bagian hero menjadi area pengenalan utama.
+        Kita dapat menggunakan heading, paragraf, dan gambar.
+      </p>
+
+      <div class="code" id="code4">&lt;section id="home"&gt;
+  &lt;img src="images/profile.jpg"
+       alt="Foto profil Andi"
+       width="150"&gt;
+
+  &lt;h2&gt;Halo, Saya Andi&lt;/h2&gt;
+  &lt;p&gt;Mahasiswa dan calon Web Developer.&lt;/p&gt;
+&lt;/section&gt;</div>
+      <button class="copy" onclick="copyCode('code4')">Salin Kode</button>
+
+      <h3>C. About Section</h3>
+      <div class="code" id="code5">&lt;section id="about"&gt;
+  &lt;h2&gt;Tentang Saya&lt;/h2&gt;
+
+  &lt;p&gt;
+    Saya adalah mahasiswa yang tertarik
+    mempelajari dunia teknologi dan web development.
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    Saya senang belajar, mencoba hal baru,
+    dan membangun proyek digital.
+  &lt;/p&gt;
+&lt;/section&gt;</div>
+      <button class="copy" onclick="copyCode('code5')">Salin Kode</button>
+
+      <h3>D. Skills Section</h3>
+      <p>
+        Kita menggunakan unordered list untuk menampilkan
+        daftar kemampuan.
+      </p>
+
+      <div class="code" id="code6">&lt;section id="skills"&gt;
+  &lt;h2&gt;Keahlian Saya&lt;/h2&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;HTML&lt;/li&gt;
+    &lt;li&gt;CSS&lt;/li&gt;
+    &lt;li&gt;JavaScript&lt;/li&gt;
+    &lt;li&gt;Problem Solving&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/section&gt;</div>
+      <button class="copy" onclick="copyCode('code6')">Salin Kode</button>
+
+      <h3>E. Experience Section</h3>
+      <p>
+        Kita menggunakan tabel untuk menyajikan pengalaman
+        atau kegiatan.
+      </p>
+
+      <div class="code" id="code7">&lt;section id="experience"&gt;
+  &lt;h2&gt;Pengalaman Belajar&lt;/h2&gt;
+
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th scope="col"&gt;Tahun&lt;/th&gt;
+        &lt;th scope="col"&gt;Kegiatan&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2025&lt;/td&gt;
+        &lt;td&gt;Belajar HTML&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;2026&lt;/td&gt;
+        &lt;td&gt;Membuat Website&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/section&gt;</div>
+      <button class="copy" onclick="copyCode('code7')">Salin Kode</button>
+
+      <h3>F. Contact Section</h3>
+      <p>
+        Kita menggunakan form untuk membuat formulir kontak.
+      </p>
+
+      <div class="code" id="code8">&lt;section id="contact"&gt;
+  &lt;h2&gt;Hubungi Saya&lt;/h2&gt;
+
+  &lt;form&gt;
+    &lt;label for="nama"&gt;Nama&lt;/label&gt;
+    &lt;input type="text" id="nama"
+           name="nama" required&gt;
+
+    &lt;label for="email"&gt;Email&lt;/label&gt;
+    &lt;input type="email" id="email"
+           name="email" required&gt;
+
+    &lt;label for="pesan"&gt;Pesan&lt;/label&gt;
+    &lt;textarea id="pesan"
+              name="pesan" required&gt;&lt;/textarea&gt;
+
+    &lt;button type="submit"&gt;Kirim Pesan&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/section&gt;</div>
+      <button class="copy" onclick="copyCode('code8')">Salin Kode</button>
+
+      <h3>G. Footer</h3>
+      <div class="code" id="code9">&lt;footer&gt;
+  &lt;p&gt;© 2026 MyProfile. All Rights Reserved.&lt;/p&gt;
+&lt;/footer&gt;</div>
+      <button class="copy" onclick="copyCode('code9')">Salin Kode</button>
+    </section>
+
+    <!-- CSS -->
+    <section class="card" id="style">
+      <span class="label">BAGIAN 05</span>
+      <h2>Styling dengan CSS</h2>
+
+      <p>
+        HTML mengatur struktur website, sedangkan CSS
+        digunakan untuk mengatur tampilannya.
+      </p>
+
+      <p>
+        Untuk proyek ini, kita menggunakan CSS sederhana
+        di dalam elemen style pada bagian head.
+      </p>
+
+      <div class="code" id="code10">&lt;style&gt;
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f8fafc;
+    color: #334155;
+  }
+
+  header {
+    background: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #2563eb;
+  }
+
+  section {
+    background: white;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 900px;
+    border-radius: 12px;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: 50%;
+  }
+
+  button {
+    background: #2563eb;
+    color: white;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+&lt;/style&gt;</div>
+      <button class="copy" onclick="copyCode('code10')">Salin Kode</button>
+
+      <div class="note">
+        Pada tahap ini, fokuslah memahami hubungan HTML dan CSS.
+        Kamu belum perlu menghafal seluruh properti CSS.
+      </div>
+    </section>
+
+    <!-- COMPLETE -->
+    <section class="card" id="complete">
+      <span class="label">BAGIAN 06</span>
+      <h2>Proyek Lengkap</h2>
+
+      <p>
+        Berikut contoh akhir Personal Profile Website
+        yang menggabungkan seluruh materi sebelumnya.
+      </p>
+
+      <div class="warning">
+        File ini merupakan versi contoh yang bisa langsung
+        dijalankan. Gunakan sebagai referensi setelah mencoba
+        mengerjakan bagian-bagian sebelumnya sendiri.
+      </div>
+
+      <div class="code" id="code11">&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+        content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Personal Profile Website&lt;/title&gt;
+
+  &lt;style&gt;
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f8fafc;
+      color: #334155;
+      line-height: 1.7;
+    }
+
+    header {
+      background: white;
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    header h1 {
+      color: #2563eb;
+      font-size: 23px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    nav a {
+      color: #334155;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #2563eb;
+    }
+
+    .hero {
+      text-align: center;
+      background: #eff6ff;
+      padding: 55px 20px;
+    }
+
+    .hero img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid white;
+    }
+
+    .hero h2 {
+      color: #14213d;
+      margin-bottom: 5px;
+    }
+
+    section {
+      background: white;
+      max-width: 900px;
+      margin: 25px auto;
+      padding: 30px;
+      border-radius: 12px;
+    }
+
+    h2 {
+      color: #14213d;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: #eff6ff;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 7px;
+      font: inherit;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #14213d;
+      color: white;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      section {
+        margin: 15px;
+        padding: 22px;
+      }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  &lt;header&gt;
+    &lt;h1&gt;MyProfile.&lt;/h1&gt;
+
+    &lt;nav aria-label="Navigasi utama"&gt;
+      &lt;a href="#home"&gt;Beranda&lt;/a&gt;
+      &lt;a href="#about"&gt;Tentang&lt;/a&gt;
+      &lt;a href="#skills"&gt;Keahlian&lt;/a&gt;
+      &lt;a href="#experience"&gt;Pengalaman&lt;/a&gt;
+      &lt;a href="#contact"&gt;Kontak&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+
+    &lt;section class="hero" id="home"&gt;
+      &lt;img src="images/profile.jpg"
+           alt="Foto profil Andi"&gt;
+
+      &lt;h2&gt;Halo, Saya Andi&lt;/h2&gt;
+      &lt;p&gt;Mahasiswa dan calon Web Developer.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section id="about"&gt;
+      &lt;h2&gt;Tentang Saya&lt;/h2&gt;
+
+      &lt;p&gt;
+        Saya adalah mahasiswa yang tertarik
+        mempelajari dunia teknologi.
+        Saya sedang mengembangkan kemampuan
+        dalam bidang &lt;strong&gt;web development&lt;/strong&gt;.
+      &lt;/p&gt;
+
+      &lt;p&gt;
+        Saya senang belajar hal baru dan
+        mengembangkan &lt;em&gt;kreativitas&lt;/em&gt;.
+      &lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section id="skills"&gt;
+      &lt;h2&gt;Keahlian Saya&lt;/h2&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;HTML&lt;/li&gt;
+        &lt;li&gt;CSS&lt;/li&gt;
+        &lt;li&gt;JavaScript&lt;/li&gt;
+        &lt;li&gt;Problem Solving&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/section&gt;
+
+    &lt;section id="experience"&gt;
+      &lt;h2&gt;Pengalaman Belajar&lt;/h2&gt;
+
+      &lt;table&gt;
+        &lt;thead&gt;
+          &lt;tr&gt;
+            &lt;th scope="col"&gt;Tahun&lt;/th&gt;
+            &lt;th scope="col"&gt;Kegiatan&lt;/th&gt;
+          &lt;/tr&gt;
+        &lt;/thead&gt;
+
+        &lt;tbody&gt;
+          &lt;tr&gt;
+            &lt;td&gt;2025&lt;/td&gt;
+            &lt;td&gt;Mulai belajar HTML&lt;/td&gt;
+          &lt;/tr&gt;
+
+          &lt;tr&gt;
+            &lt;td&gt;2026&lt;/td&gt;
+            &lt;td&gt;Membangun website sederhana&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/tbody&gt;
+      &lt;/table&gt;
+    &lt;/section&gt;
+
+    &lt;section id="contact"&gt;
+      &lt;h2&gt;Hubungi Saya&lt;/h2&gt;
+
+      &lt;form id="contactForm"&gt;
+        &lt;label for="nama"&gt;Nama Lengkap&lt;/label&gt;
+        &lt;input type="text" id="nama"
+               name="nama" required&gt;
+
+        &lt;label for="email"&gt;Email&lt;/label&gt;
+        &lt;input type="email" id="email"
+               name="email" required&gt;
+
+        &lt;label for="pesan"&gt;Pesan&lt;/label&gt;
+        &lt;textarea id="pesan" name="pesan"
+                  rows="4" required&gt;&lt;/textarea&gt;
+
+        &lt;button type="submit"&gt;Kirim Pesan&lt;/button&gt;
+        &lt;p id="message" aria-live="polite"&gt;&lt;/p&gt;
+      &lt;/form&gt;
+    &lt;/section&gt;
+
+    &lt;aside&gt;
+      &lt;section&gt;
+        &lt;h2&gt;Informasi Tambahan&lt;/h2&gt;
+        &lt;p&gt;
+          Terus belajar dan kembangkan kemampuanmu.
+        &lt;/p&gt;
+        &lt;a href="https://developer.mozilla.org/en-US/docs/Web/HTML"&gt;
+          Belajar HTML lebih lanjut
+        &lt;/a&gt;
+      &lt;/section&gt;
+    &lt;/aside&gt;
+
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;© 2026 MyProfile. All Rights Reserved.&lt;/p&gt;
+  &lt;/footer&gt;
+
+  &lt;script&gt;
+    document.getElementById("contactForm")
+      .addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const nama = document.getElementById("nama").value;
+
+        document.getElementById("message").textContent =
+          "Terima kasih, " + nama +
+          ". Ini hanya simulasi formulir.";
+      });
+  &lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      <button class="copy" onclick="copyCode('code11')">Salin Kode Lengkap</button>
+
+      <div class="note">
+        <strong>Perhatikan:</strong>
+        Ganti gambar profile.jpg dengan foto milikmu sendiri.
+        Formulir kontak pada contoh ini hanya simulasi dan
+        belum mengirim data ke server.
+      </div>
+    </section>
+
+    <!-- TESTING -->
+    <section class="card" id="testing">
+      <span class="label">BAGIAN 07</span>
+      <h2>Pengujian Website</h2>
+
+      <p>
+        Setelah selesai membuat website, jangan langsung
+        menganggap proyek sudah selesai. Kita perlu melakukan
+        pengujian sederhana.
+      </p>
+
+      <h3>Checklist Pengujian</h3>
+      <ol>
+        <li>Apakah file HTML berhasil dibuka di browser?</li>
+        <li>Apakah semua bagian website muncul?</li>
+        <li>Apakah gambar berhasil ditampilkan?</li>
+        <li>Apakah tautan navigasi bekerja?</li>
+        <li>Apakah tabel tampil dengan benar?</li>
+        <li>Apakah formulir dapat menerima input?</li>
+        <li>Apakah website tetap nyaman di layar HP?</li>
+        <li>Apakah terdapat kesalahan pada struktur HTML?</li>
+      </ol>
+
+      <div class="note">
+        Cobalah membuka website menggunakan ukuran layar
+        yang berbeda, seperti laptop dan smartphone.
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="card" id="quiz">
+      <span class="label">TEST YOUR KNOWLEDGE</span>
+      <h2>Quiz Modul 08</h2>
+
+      <p>Pilih jawaban yang paling tepat.</p>
+
+      <form id="quizForm">
+
+        <div class="question">
+          <h3>1. Apa tujuan utama proyek Modul 08?</h3>
+          <label class="quiz-option"><input type="radio" name="q1" value="a"> a. Menghafal semua tag HTML</label>
+          <label class="quiz-option"><input type="radio" name="q1" value="b"> b. Menggabungkan materi HTML menjadi website</label>
+          <label class="quiz-option"><input type="radio" name="q1" value="c"> c. Membuat database</label>
+        </div>
+
+        <div class="question">
+          <h3>2. Elemen apa yang digunakan untuk konten utama halaman?</h3>
+          <label class="quiz-option"><input type="radio" name="q2" value="a"> a. &lt;main&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q2" value="b"> b. &lt;footer&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q2" value="c"> c. &lt;nav&gt;</label>
+        </div>
+
+        <div class="question">
+          <h3>3. Tag apa yang digunakan untuk menampilkan gambar?</h3>
+          <label class="quiz-option"><input type="radio" name="q3" value="a"> a. &lt;picture-text&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q3" value="b"> b. &lt;image&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q3" value="c"> c. &lt;img&gt;</label>
+        </div>
+
+        <div class="question">
+          <h3>4. Apa fungsi CSS dalam website?</h3>
+          <label class="quiz-option"><input type="radio" name="q4" value="a"> a. Menyimpan data</label>
+          <label class="quiz-option"><input type="radio" name="q4" value="b"> b. Mengatur tampilan halaman</label>
+          <label class="quiz-option"><input type="radio" name="q4" value="c"> c. Membuat database</label>
+        </div>
+
+        <div class="question">
+          <h3>5. Apa fungsi atribut alt pada gambar?</h3>
+          <label class="quiz-option"><input type="radio" name="q5" value="a"> a. Memberikan deskripsi alternatif gambar</label>
+          <label class="quiz-option"><input type="radio" name="q5" value="b"> b. Mengubah ukuran gambar</label>
+          <label class="quiz-option"><input type="radio" name="q5" value="c"> c. Membuat gambar bergerak</label>
+        </div>
+
+        <div class="question">
+          <h3>6. Mengapa website perlu diuji di layar smartphone?</h3>
+          <label class="quiz-option"><input type="radio" name="q6" value="a"> a. Agar ukuran file menjadi kecil</label>
+          <label class="quiz-option"><input type="radio" name="q6" value="b"> b. Agar HTML berubah menjadi CSS</label>
+          <label class="quiz-option"><input type="radio" name="q6" value="c"> c. Untuk memastikan tampilan responsif</label>
+        </div>
+
+        <div class="question">
+          <h3>7. Apakah formulir HTML otomatis menyimpan data ke database?</h3>
+          <label class="quiz-option"><input type="radio" name="q7" value="a"> a. Ya, selalu</label>
+          <label class="quiz-option"><input type="radio" name="q7" value="b"> b. Tidak, membutuhkan backend untuk pemrosesan dan penyimpanan</label>
+          <label class="quiz-option"><input type="radio" name="q7" value="c"> c. Hanya jika menggunakan CSS</label>
+        </div>
+
+        <div class="question">
+          <h3>8. Apa fungsi elemen footer?</h3>
+          <label class="quiz-option"><input type="radio" name="q8" value="a"> a. Menampilkan bagian penutup konten</label>
+          <label class="quiz-option"><input type="radio" name="q8" value="b"> b. Membuat navigasi utama</label>
+          <label class="quiz-option"><input type="radio" name="q8" value="c"> c. Membuat formulir</label>
+        </div>
+
+        <button type="submit" class="submit">Periksa Jawaban</button>
+        <div id="result" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- CHALLENGE -->
+    <section class="card" id="challenge">
+      <span class="label">FINAL CHALLENGE</span>
+      <h2>Build Your Own Personal Website</h2>
+
+      <p>
+        Sekarang waktunya membuat website versi masing-masing.
+        Jangan hanya mengikuti contoh Personal Profile Website
+        sebelumnya. Buatlah desain dan konten sendiri.
+      </p>
+
+      <h3>Ketentuan Proyek</h3>
+      <ul>
+        <li>Memiliki struktur HTML yang lengkap.</li>
+        <li>Menggunakan minimal 5 elemen semantic.</li>
+        <li>Memiliki header dan navigation.</li>
+        <li>Memiliki minimal 3 section.</li>
+        <li>Menampilkan gambar dengan alt.</li>
+        <li>Memiliki daftar keahlian.</li>
+        <li>Memiliki tabel pengalaman atau kegiatan.</li>
+        <li>Memiliki formulir kontak.</li>
+        <li>Menggunakan CSS untuk styling.</li>
+        <li>Memiliki tampilan responsif.</li>
+        <li>Memastikan seluruh tautan navigasi bekerja.</li>
+      </ul>
+
+      <h3>Ketentuan Tambahan</h3>
+      <ul>
+        <li>Gunakan identitas dan konten milik sendiri.</li>
+        <li>Gunakan nama class yang mudah dipahami.</li>
+        <li>Susun kode dengan indentasi yang rapi.</li>
+        <li>Jangan hanya menyalin proyek teman.</li>
+        <li>Pastikan dapat menjelaskan kode yang dibuat.</li>
+      </ul>
+
+      <h3>Rubrik Penilaian</h3>
+
+      <div class="table-wrap">
+        <table>
+          <tr><th>Kriteria</th><th>Bobot</th></tr>
+          <tr><td>Struktur HTML dan semantic</td><td>20%</td></tr>
+          <tr><td>Kelengkapan konten</td><td>15%</td></tr>
+          <tr><td>Penggunaan elemen HTML</td><td>20%</td></tr>
+          <tr><td>Styling dan tampilan</td><td>15%</td></tr>
+          <tr><td>Responsivitas</td><td>10%</td></tr>
+          <tr><td>Kerapian dan keterbacaan kode</td><td>10%</td></tr>
+          <tr><td>Pemahaman saat presentasi</td><td>10%</td></tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <strong>Target akhir:</strong>
+        Setiap peserta memiliki satu website sederhana
+        hasil karyanya sendiri dan mampu menjelaskan
+        bagaimana website tersebut dibuat.
+      </div>
+    </section>
+
+    <!-- REVIEW -->
+    <section class="card" id="review">
+      <span class="label">LEARNING REVIEW</span>
+      <h2>Evaluasi Akhir HTML Learning Path</h2>
+
+      <p>
+        Periksa kemampuanmu setelah menyelesaikan seluruh
+        pembelajaran HTML.
+      </p>
+
+      <div class="progress-bg">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <p id="progressText">0 dari 8 materi dipahami</p>
+
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox"> Saya memahami struktur dasar HTML.</label>
+        <label><input type="checkbox"> Saya dapat membuat heading dan paragraf.</label>
+        <label><input type="checkbox"> Saya memahami formatting teks.</label>
+        <label><input type="checkbox"> Saya dapat menggunakan link dan gambar.</label>
+        <label><input type="checkbox"> Saya dapat membuat lists, tables, dan forms.</label>
+        <label><input type="checkbox"> Saya memahami Semantic HTML.</label>
+        <label><input type="checkbox"> Saya dapat menggabungkan HTML dengan CSS.</label>
+        <label><input type="checkbox"> Saya mampu membangun website sederhana sendiri.</label>
+      </div>
+
+      <div class="note">
+        <strong>Congratulations!</strong>
+        Kamu telah menyelesaikan HTML Learning Path DevLearn.
+        Teruslah berlatih dan jangan berhenti membuat proyek.
+      </div>
+    </section>
+
+    <nav class="lesson-navigation" aria-label="Navigasi modul">
+      <a href="modul-07.html">← Modul sebelumnya</a>
+      <a href="../../index.html#learning-path">Selesai belajar HTML →</a>
+    </nav>
+  </main>
+</div>
+
+<footer>
+  <strong>DevLearn — Learn, Practice, Build</strong>
+  <p>Belajar bersama, berkembang bersama.</p>
+  <p>Modul 08 • HTML Mini Project</p>
+</footer>
+
+<script>
+  // COPY CODE
+  function copyCode(id) {
+    const text = document.getElementById(id).innerText;
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text)
+        .then(() => alert("Kode berhasil disalin!"))
+        .catch(() => fallbackCopy(text));
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+
+    try {
+      document.execCommand("copy");
+      alert("Kode berhasil disalin!");
+    } catch (error) {
+      alert("Gagal menyalin kode. Silakan salin manual.");
+    }
+
+    area.remove();
+  }
+
+  // QUIZ
+  const answers = {
+    q1: "b",
+    q2: "a",
+    q3: "c",
+    q4: "b",
+    q5: "a",
+    q6: "c",
+    q7: "b",
+    q8: "a"
+  };
+
+  document.getElementById("quizForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let score = 0;
+    let answered = 0;
+
+    Object.keys(answers).forEach(function(question) {
+      const selected = document.querySelector(
+        'input[name="' + question + '"]:checked'
+      );
+
+      if (selected) {
+        answered++;
+
+        if (selected.value === answers[question]) {
+          score++;
+        }
+      }
+    });
+
+    const result = document.getElementById("result");
+
+    if (answered < 8) {
+      result.textContent =
+        "Silakan jawab semua 8 pertanyaan terlebih dahulu.";
+      result.style.color = "#d97706";
+      return;
+    }
+
+    const finalScore = Math.round((score / 8) * 100);
+
+    result.textContent =
+      "Nilai kamu: " + finalScore + "/100 (" +
+      score + " dari 8 benar). " +
+      (finalScore >= 75
+        ? "Hebat! Kamu siap membangun proyek sendiri."
+        : "Pelajari kembali materi yang belum dipahami.");
+
+    result.style.color =
+      finalScore >= 75 ? "#059669" : "#dc2626";
+  });
+
+  // CHECKLIST PROGRESS
+  const checklist = document.querySelectorAll(
+    '#checklist input[type="checkbox"]'
+  );
+
+  function updateProgress() {
+    const checked = [...checklist].filter(
+      item => item.checked
+    ).length;
+
+    const percentage = (checked / checklist.length) * 100;
+
+    document.getElementById("progressFill").style.width =
+      percentage + "%";
+
+    document.getElementById("progressText").textContent =
+      checked + " dari " + checklist.length +
+      " materi dipahami";
+  }
+
+  checklist.forEach(item => {
+    item.addEventListener("change", updateProgress);
+  });
+
+  // DEMO CONTACT FORM
+  const contactForm = document.getElementById("contactForm");
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nama = document.getElementById("nama").value;
+
+      document.getElementById("message").textContent =
+        "Terima kasih, " + nama +
+        "! Ini adalah simulasi formulir.";
+    });
+  }
+
+  // SIDEBAR
+  const navLinks = document.querySelectorAll(".sidebar a");
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", function() {
+      navLinks.forEach(item => item.classList.remove("active"));
+      this.classList.add("active");
+    });
+  });
+</script>
+
+</body>
+</html>

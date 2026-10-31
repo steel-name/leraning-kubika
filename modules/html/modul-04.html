@@ -1,0 +1,1424 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DevLearn Module 04 - HTML Text Formatting">
+  <title>Module 04 - Text Formatting | DevLearn</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+    :root {
+      --navy: #10213d;
+      --blue: #2563eb;
+      --text: #29384d;
+      --muted: #718096;
+      --bg: #f7f9fc;
+      --white: #fff;
+      --border: #e8edf4;
+      --green: #16a36a;
+      --orange: #f59e0b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      width: min(1150px, 92%);
+      margin: auto;
+      min-height: 68px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .back-link {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      color: var(--blue);
+    }
+
+    .layout {
+      width: min(1150px, 92%);
+      margin: 35px auto 70px;
+      display: grid;
+      grid-template-columns: 245px 1fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px 17px;
+      position: sticky;
+      top: 95px;
+    }
+
+    .sidebar-label {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.3px;
+      margin: 0 0 14px 10px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 4px;
+      transition: .2s;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      color: var(--blue);
+      background: #edf4ff;
+      font-weight: 700;
+    }
+
+    .sidebar-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 18px 0;
+    }
+
+    .module-progress {
+      background: #f5f8ff;
+      border-radius: 10px;
+      padding: 13px;
+      margin-top: 18px;
+    }
+
+    .module-progress p {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .progress-track {
+      height: 6px;
+      background: #dfe8f7;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--blue);
+      transition: .3s;
+    }
+
+    /* CONTENT */
+    .content {
+      min-width: 0;
+    }
+
+    .hero {
+      background: linear-gradient(125deg, #10213d, #1e4f91);
+      border-radius: 19px;
+      padding: 43px;
+      color: white;
+      margin-bottom: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "<strong>";
+      position: absolute;
+      right: 15px;
+      bottom: -22px;
+      font-size: 75px;
+      font-weight: 800;
+      color: rgba(255,255,255,.07);
+      font-family: monospace;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,.13);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 17px;
+    }
+
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(29px, 4vw, 39px);
+      line-height: 1.25;
+      letter-spacing: -1px;
+      margin-bottom: 13px;
+    }
+
+    .hero p {
+      color: #d5e5fb;
+      font-size: 14px;
+      max-width: 560px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+      color: #d5e5fb;
+      font-size: 12px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+      margin-bottom: 20px;
+      scroll-margin-top: 100px;
+    }
+
+    .card h2 {
+      color: var(--navy);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 21px;
+      margin-bottom: 15px;
+      letter-spacing: -.5px;
+    }
+
+    .card h3 {
+      color: var(--navy);
+      font-size: 16px;
+      margin: 22px 0 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 13px;
+    }
+
+    .card ul,
+    .card ol {
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      margin: 12px 0;
+    }
+
+    .card li {
+      margin-bottom: 7px;
+    }
+
+    .highlight {
+      background: #edf4ff;
+      border-left: 4px solid var(--blue);
+      padding: 15px 17px;
+      border-radius: 7px;
+      color: #31527e;
+      font-size: 13px;
+      margin: 17px 0;
+    }
+
+    .warning {
+      background: #fff8e9;
+      border-left: 4px solid var(--orange);
+      padding: 15px 17px;
+      border-radius: 7px;
+      color: #8a641e;
+      font-size: 13px;
+      margin: 17px 0;
+    }
+
+    /* CODE */
+    .code-wrapper {
+      background: #101d32;
+      border-radius: 11px;
+      margin: 15px 0 20px;
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 16px;
+      border-bottom: 1px solid #293a54;
+      color: #b8c9e2;
+      font-size: 11px;
+    }
+
+    .copy-btn {
+      border: 1px solid #52647c;
+      color: white;
+      background: transparent;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 10px;
+    }
+
+    .copy-btn:hover {
+      background: #263a58;
+    }
+
+    pre {
+      padding: 19px;
+      overflow-x: auto;
+      color: #dbeafe;
+      font-family: Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    /* DEMO */
+    .demo-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+      color: #475569;
+      font-size: 14px;
+    }
+
+    .demo-box p {
+      color: #475569;
+    }
+
+    .demo-box hr {
+      border: none;
+      border-top: 1px solid #cbd5e1;
+      margin: 15px 0;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 480px;
+      font-size: 13px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: #f5f8ff;
+      color: var(--navy);
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    code.inline {
+      background: #edf4ff;
+      color: #2457a7;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    /* QUIZ */
+    .question {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 17px;
+      margin-bottom: 15px;
+    }
+
+    .question h4 {
+      font-size: 14px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .option {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 8px 10px;
+      cursor: pointer;
+      border-radius: 7px;
+    }
+
+    .option:hover {
+      background: #f5f8ff;
+    }
+
+    .option input {
+      margin-right: 8px;
+      accent-color: var(--blue);
+    }
+
+    .submit-btn {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .submit-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 15px;
+      padding: 16px;
+      background: #edf8f1;
+      color: #167448;
+      border-radius: 9px;
+      font-size: 14px;
+    }
+
+    /* CHALLENGE */
+    .checklist label {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 11px;
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .checklist input {
+      margin-top: 5px;
+      accent-color: var(--blue);
+    }
+
+    .next-module {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      background: #edf4ff;
+      padding: 22px;
+      border-radius: 12px;
+    }
+
+    .next-module h3 {
+      margin: 0 0 5px;
+      color: var(--navy);
+    }
+
+    .next-module p {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .next-module a {
+      background: var(--blue);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 25px;
+      border-top: 1px solid var(--border);
+      background: white;
+    }
+
+    @media (max-width: 850px) {
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .sidebar-nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+      }
+
+      .module-progress {
+        max-width: 300px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .layout {
+        margin-top: 20px;
+      }
+
+      .hero {
+        padding: 28px 23px;
+      }
+
+      .card {
+        padding: 21px 17px;
+      }
+
+      .sidebar-nav {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .back-link {
+        font-size: 11px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="module-theme.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="../../index.html" class="logo">Kub<span>ika.</span></a>
+      <a href="../../index.html#learning-path" class="back-link">← Kembali ke Jalur Belajar</a>
+    </div>
+  </header>
+
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-label">MODULE NAVIGATION</div>
+
+      <nav class="sidebar-nav">
+        <a href="#overview" class="active">Overview</a>
+        <a href="#tujuan">Tujuan Belajar</a>
+        <a href="#formatting">Text Formatting</a>
+        <a href="#meaning">Meaningful Formatting</a>
+        <a href="#decoration">Text Decoration</a>
+        <a href="#subscript">Subscript & Superscript</a>
+        <a href="#comparison">Perbandingan Tag</a>
+        <a href="#practice">Guided Practice</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#challenge">Coding Challenge</a>
+      </nav>
+
+      <hr class="sidebar-divider">
+
+      <div class="sidebar-label">YOUR PROGRESS</div>
+
+      <div class="module-progress">
+        <p id="progressText">0 dari 6 tugas selesai</p>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+      <!-- HERO -->
+      <section class="hero" id="overview">
+        <span class="hero-tag">MODULE 04 • HTML BEGINNER</span>
+
+        <h1>HTML Text Formatting</h1>
+
+        <p>
+          Pelajari cara memberikan format pada teks HTML,
+          mulai dari tulisan tebal, miring, garis bawah,
+          hingga penulisan rumus dan informasi penting.
+        </p>
+
+        <div class="hero-meta">
+          <span>📖 Materi: HTML</span>
+          <span>⏱ Estimasi: 35–45 menit</span>
+          <span>🎯 Level: Pemula</span>
+        </div>
+      </section>
+
+
+      <!-- TUJUAN -->
+      <section class="card" id="tujuan">
+        <h2>01. Tujuan Pembelajaran</h2>
+
+        <p>
+          Setelah menyelesaikan modul ini, kamu diharapkan mampu:
+        </p>
+
+        <ul>
+          <li>Memahami konsep text formatting dalam HTML.</li>
+          <li>Menggunakan tag B dan STRONG.</li>
+          <li>Menggunakan tag I dan EM.</li>
+          <li>Menggunakan tag MARK, SMALL, DEL, dan INS.</li>
+          <li>Menggunakan SUB dan SUP.</li>
+          <li>Memilih elemen sesuai makna teks yang ingin disampaikan.</li>
+        </ul>
+
+        <div class="highlight">
+          <strong>Mindset belajar:</strong>
+          Format teks bukan hanya membuat tulisan terlihat berbeda.
+          Beberapa elemen juga memberikan makna khusus pada konten.
+        </div>
+      </section>
+
+
+      <!-- BASIC FORMATTING -->
+      <section class="card" id="formatting">
+        <h2>02. Apa Itu Text Formatting?</h2>
+
+        <p>
+          Text formatting adalah proses memberikan format atau
+          penampilan tertentu pada teks di halaman website.
+        </p>
+
+        <p>
+          Dengan text formatting, kita dapat memberikan penekanan,
+          menandai informasi penting, atau membedakan bagian tertentu
+          dari sebuah tulisan.
+        </p>
+
+        <h3>Contoh kode</h3>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>formatting.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+
+          <pre><code>&lt;p&gt;Ini adalah teks normal.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Ini teks tebal.&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;Ini teks miring.&lt;/i&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;u&gt;Ini teks bergaris bawah.&lt;/u&gt;&lt;/p&gt;</code></pre>
+        </div>
+
+        <h3>Hasil tampilan di browser</h3>
+
+        <div class="demo-box">
+          <p>Ini adalah teks normal.</p>
+          <p><b>Ini teks tebal.</b></p>
+          <p><i>Ini teks miring.</i></p>
+          <p><u>Ini teks bergaris bawah.</u></p>
+        </div>
+
+        <div class="highlight">
+          HTML menyediakan berbagai elemen untuk memberikan
+          format pada teks. Setiap elemen memiliki tujuan
+          dan makna yang berbeda.
+        </div>
+      </section>
+
+
+      <!-- MEANINGFUL FORMATTING -->
+      <section class="card" id="meaning">
+        <h2>03. Formatting dengan Makna</h2>
+
+        <p>
+          Beberapa elemen HTML tidak hanya mengubah tampilan teks,
+          tetapi juga memberikan makna atau penekanan tertentu.
+        </p>
+
+        <h3>A. STRONG — Informasi penting</h3>
+
+        <p>
+          Tag STRONG digunakan untuk menunjukkan bahwa sebuah
+          teks memiliki tingkat kepentingan yang tinggi.
+          Browser biasanya menampilkannya dengan tulisan tebal.
+        </p>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>strong.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+
+          <pre><code>&lt;p&gt;
+  &lt;strong&gt;Peringatan!&lt;/strong&gt;
+  Jangan membagikan password kepada orang lain.
+&lt;/p&gt;</code></pre>
+        </div>
+
+        <div class="demo-box">
+          <p><strong>Peringatan!</strong> Jangan membagikan password kepada orang lain.</p>
+        </div>
+
+        <h3>B. EM — Penekanan pada kata</h3>
+
+        <p>
+          Tag EM digunakan untuk memberikan penekanan pada
+          kata atau bagian kalimat. Browser biasanya menampilkan
+          teks dengan gaya miring.
+        </p>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>em.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+
+          <pre><code>&lt;p&gt;
+  Kamu &lt;em&gt;harus&lt;/em&gt; memahami dasar HTML
+  sebelum melanjutkan.
+&lt;/p&gt;</code></pre>
+        </div>
+
+        <div class="demo-box">
+          <p>Kamu <em>harus</em> memahami dasar HTML sebelum melanjutkan.</p>
+        </div>
+
+        <div class="highlight">
+          <strong>Perbedaan penting:</strong>
+          STRONG menunjukkan pentingnya suatu informasi,
+          sedangkan EM memberikan penekanan pada kata atau kalimat.
+        </div>
+      </section>
+
+
+      <!-- DECORATION -->
+      <section class="card" id="decoration">
+        <h2>04. Elemen Format Teks Lainnya</h2>
+
+        <h3>A. B — Bold</h3>
+        <p>
+          B digunakan untuk menarik perhatian secara visual
+          tanpa memberikan makna penting seperti STRONG.
+        </p>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>bold.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;p&gt;Belajar &lt;b&gt;HTML&lt;/b&gt; itu menyenangkan.&lt;/p&gt;</code></pre>
+        </div>
+
+        <div class="demo-box">
+          Belajar <b>HTML</b> itu menyenangkan.
+        </div>
+
+
+        <h3>B. I — Italic</h3>
+        <p>
+          I digunakan untuk menampilkan teks dengan gaya miring
+          tanpa menambahkan penekanan seperti EM.
+        </p>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>italic.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;p&gt;Istilah &lt;i&gt;web development&lt;/i&gt; sering digunakan.&lt;/p&gt;</code></pre>
+        </div>
+
+        <div class="demo-box">
+          Istilah <i>web development</i> sering digunakan.
+        </div>
+
+
+        <h3>C. MARK — Highlight teks</h3>
+        <p>
+          MARK digunakan untuk menandai teks yang dianggap
+          relevan atau perlu diperhatikan.
+        </p>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>mark.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;p&gt;
+  Jangan lupa mempelajari &lt;mark&gt;HTML&lt;/mark&gt;.
+&lt;/p&gt;</code></pre>
+        </div>
+
+        <div class="demo-box">
+          Jangan lupa mempelajari <mark>HTML</mark>.
+        </div>
+
+
+        <h3>D. SMALL — Teks berukuran lebih kecil</h3>
+        <p>
+          SMALL digunakan untuk menampilkan informasi tambahan
+          seperti catatan atau keterangan kecil.
+        </p>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>small.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;p&gt;
+  Harga: Rp100.000
+  &lt;small&gt;*Harga dapat berubah sewaktu-waktu.&lt;/small&gt;
+&lt;/p&gt;</code></pre>
+        </div>
+
+        <div class="demo-box">
+          <p>
+            Harga: Rp100.000
+            <small>*Harga dapat berubah sewaktu-waktu.</small>
+          </p>
+        </div>
+
+
+        <h3>E. DEL — Teks yang dihapus</h3>
+        <p>
+          DEL menunjukkan bagian teks yang sudah dihapus
+          atau tidak berlaku lagi.
+        </p>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>del.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;p&gt;
+  Harga lama:
+  &lt;del&gt;Rp150.000&lt;/del&gt;
+&lt;/p&gt;</code></pre>
+        </div>
+
+        <div class="demo-box">
+          Harga lama: <del>Rp150.000</del>
+        </div>
+
+
+        <h3>F. INS — Teks yang ditambahkan</h3>
+        <p>
+          INS digunakan untuk menunjukkan teks yang baru
+          ditambahkan ke dalam dokumen.
+        </p>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>ins.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;p&gt;
+  Harga terbaru:
+  &lt;ins&gt;Rp100.000&lt;/ins&gt;
+&lt;/p&gt;</code></pre>
+        </div>
+
+        <div class="demo-box">
+          Harga terbaru: <ins>Rp100.000</ins>
+        </div>
+
+      </section>
+
+
+      <!-- SUBSCRIPT -->
+      <section class="card" id="subscript">
+        <h2>05. Subscript & Superscript</h2>
+
+        <p>
+          HTML juga menyediakan elemen untuk menampilkan
+          karakter yang berada lebih rendah atau lebih tinggi
+          dibandingkan teks normal.
+        </p>
+
+        <h3>A. SUB — Subscript</h3>
+
+        <p>
+          SUB digunakan untuk menampilkan karakter kecil
+          di bagian bawah teks.
+        </p>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>subscript.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+
+          <pre><code>&lt;p&gt;Rumus air adalah H&lt;sub&gt;2&lt;/sub&gt;O.&lt;/p&gt;</code></pre>
+        </div>
+
+        <div class="demo-box">
+          Rumus air adalah H<sub>2</sub>O.
+        </div>
+
+
+        <h3>B. SUP — Superscript</h3>
+
+        <p>
+          SUP digunakan untuk menampilkan karakter kecil
+          di bagian atas teks.
+        </p>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>superscript.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+
+          <pre><code>&lt;p&gt;2 pangkat 3 = 2&lt;sup&gt;3&lt;/sup&gt; = 8.&lt;/p&gt;</code></pre>
+        </div>
+
+        <div class="demo-box">
+          2 pangkat 3 = 2<sup>3</sup> = 8.
+        </div>
+
+        <div class="highlight">
+          <strong>Contoh penggunaan:</strong>
+          SUB sering digunakan untuk rumus kimia,
+          sedangkan SUP sering digunakan untuk pangkat matematika
+          dan catatan kaki.
+        </div>
+      </section>
+
+
+      <!-- COMPARISON -->
+      <section class="card" id="comparison">
+        <h2>06. Ringkasan Text Formatting</h2>
+
+        <p>
+          Berikut rangkuman elemen yang sudah kita pelajari.
+          Gunakan tabel ini sebagai panduan saat menulis kode.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tag</th>
+                <th>Fungsi</th>
+                <th>Contoh penggunaan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>B</td>
+                <td>Teks tebal secara visual</td>
+                <td>Nama produk</td>
+              </tr>
+              <tr>
+                <td>STRONG</td>
+                <td>Informasi penting</td>
+                <td>Peringatan</td>
+              </tr>
+              <tr>
+                <td>I</td>
+                <td>Teks miring secara visual</td>
+                <td>Istilah asing</td>
+              </tr>
+              <tr>
+                <td>EM</td>
+                <td>Memberikan penekanan</td>
+                <td>Penekanan kalimat</td>
+              </tr>
+              <tr>
+                <td>MARK</td>
+                <td>Menandai teks</td>
+                <td>Highlight</td>
+              </tr>
+              <tr>
+                <td>SMALL</td>
+                <td>Teks tambahan lebih kecil</td>
+                <td>Catatan</td>
+              </tr>
+              <tr>
+                <td>DEL</td>
+                <td>Teks yang dihapus</td>
+                <td>Harga lama</td>
+              </tr>
+              <tr>
+                <td>INS</td>
+                <td>Teks yang ditambahkan</td>
+                <td>Perubahan informasi</td>
+              </tr>
+              <tr>
+                <td>SUB</td>
+                <td>Karakter bagian bawah</td>
+                <td>H₂O</td>
+              </tr>
+              <tr>
+                <td>SUP</td>
+                <td>Karakter bagian atas</td>
+                <td>2³</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="warning">
+          <strong>Catatan developer:</strong>
+          Gunakan STRONG dan EM ketika makna penekanan memang diperlukan.
+          Jangan memilih tag hanya berdasarkan tampilan visualnya.
+        </div>
+      </section>
+
+
+      <!-- PRACTICE -->
+      <section class="card" id="practice">
+        <h2>07. Guided Practice</h2>
+
+        <p>
+          Sekarang kita akan membuat sebuah halaman informasi
+          produk sederhana dengan beberapa format teks.
+        </p>
+
+        <h3>Langkah pengerjaan</h3>
+
+        <ol>
+          <li>Buat file baru bernama <strong>produk.html</strong>.</li>
+          <li>Buat struktur dasar HTML.</li>
+          <li>Tambahkan judul menggunakan H1.</li>
+          <li>Gunakan STRONG untuk informasi penting.</li>
+          <li>Gunakan EM untuk penekanan.</li>
+          <li>Gunakan MARK untuk menandai informasi.</li>
+          <li>Gunakan DEL dan INS untuk harga lama dan terbaru.</li>
+          <li>Gunakan SMALL untuk catatan tambahan.</li>
+        </ol>
+
+        <h3>Contoh kode</h3>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>produk.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+        content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Informasi Produk&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  &lt;h1&gt;Produk Laptop&lt;/h1&gt;
+
+  &lt;p&gt;
+    &lt;strong&gt;Nama Produk:&lt;/strong&gt;
+    Laptop Student Pro
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    Cocok untuk &lt;em&gt;belajar dan bekerja&lt;/em&gt;.
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    Status: &lt;mark&gt;Produk Terlaris&lt;/mark&gt;
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    Harga lama:
+    &lt;del&gt;Rp8.000.000&lt;/del&gt;
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    Harga terbaru:
+    &lt;ins&gt;Rp7.000.000&lt;/ins&gt;
+  &lt;/p&gt;
+
+  &lt;p&gt;
+    &lt;small&gt;
+      *Harga dapat berubah sewaktu-waktu.
+    &lt;/small&gt;
+  &lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+      </section>
+
+
+      <!-- QUIZ -->
+      <section class="card" id="quiz">
+        <h2>08. Knowledge Check</h2>
+
+        <p>
+          Jawab enam pertanyaan berikut untuk menguji
+          pemahamanmu tentang HTML Text Formatting.
+        </p>
+
+        <form id="quizForm">
+
+          <div class="question">
+            <h4>1. Tag apa yang digunakan untuk menunjukkan informasi penting?</h4>
+            <label class="option"><input type="radio" name="q1" value="a"> A. B</label>
+            <label class="option"><input type="radio" name="q1" value="b"> B. STRONG</label>
+            <label class="option"><input type="radio" name="q1" value="c"> C. SMALL</label>
+            <label class="option"><input type="radio" name="q1" value="d"> D. DEL</label>
+          </div>
+
+          <div class="question">
+            <h4>2. Apa fungsi dari tag EM?</h4>
+            <label class="option"><input type="radio" name="q2" value="a"> A. Membuat gambar</label>
+            <label class="option"><input type="radio" name="q2" value="b"> B. Memberikan penekanan pada teks</label>
+            <label class="option"><input type="radio" name="q2" value="c"> C. Membuat garis</label>
+            <label class="option"><input type="radio" name="q2" value="d"> D. Membuat tabel</label>
+          </div>
+
+          <div class="question">
+            <h4>3. Tag apa yang digunakan untuk menandai teks?</h4>
+            <label class="option"><input type="radio" name="q3" value="a"> A. MARK</label>
+            <label class="option"><input type="radio" name="q3" value="b"> B. DEL</label>
+            <label class="option"><input type="radio" name="q3" value="c"> C. INS</label>
+            <label class="option"><input type="radio" name="q3" value="d"> D. SUB</label>
+          </div>
+
+          <div class="question">
+            <h4>4. Apa fungsi tag DEL?</h4>
+            <label class="option"><input type="radio" name="q4" value="a"> A. Membuat teks tebal</label>
+            <label class="option"><input type="radio" name="q4" value="b"> B. Menampilkan teks yang dihapus</label>
+            <label class="option"><input type="radio" name="q4" value="c"> C. Membuat teks miring</label>
+            <label class="option"><input type="radio" name="q4" value="d"> D. Membuat paragraf</label>
+          </div>
+
+          <div class="question">
+            <h4>5. Tag apa yang digunakan untuk menulis H₂O?</h4>
+            <label class="option"><input type="radio" name="q5" value="a"> A. SUP</label>
+            <label class="option"><input type="radio" name="q5" value="b"> B. STRONG</label>
+            <label class="option"><input type="radio" name="q5" value="c"> C. SUB</label>
+            <label class="option"><input type="radio" name="q5" value="d"> D. MARK</label>
+          </div>
+
+          <div class="question">
+            <h4>6. Apa perbedaan utama STRONG dan B?</h4>
+            <label class="option"><input type="radio" name="q6" value="a"> A. STRONG menunjukkan pentingnya teks, B menarik perhatian secara visual</label>
+            <label class="option"><input type="radio" name="q6" value="b"> B. Keduanya membuat gambar</label>
+            <label class="option"><input type="radio" name="q6" value="c"> C. B digunakan untuk paragraf</label>
+            <label class="option"><input type="radio" name="q6" value="d"> D. Tidak ada perbedaan sama sekali</label>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            Periksa Jawaban
+          </button>
+
+          <div class="result" id="quizResult" role="status"></div>
+
+        </form>
+      </section>
+
+
+      <!-- CHALLENGE -->
+      <section class="card" id="challenge">
+        <h2>09. Coding Challenge</h2>
+
+        <p>
+          Buat sebuah halaman informasi produk atau profil
+          sederhana dengan menggunakan berbagai elemen
+          text formatting yang sudah dipelajari.
+        </p>
+
+        <h3>Project: Product Information Page</h3>
+
+        <p>Ketentuan project:</p>
+
+        <ul>
+          <li>Gunakan H1 sebagai judul utama.</li>
+          <li>Gunakan minimal dua paragraf.</li>
+          <li>Gunakan STRONG untuk informasi penting.</li>
+          <li>Gunakan EM untuk memberikan penekanan.</li>
+          <li>Gunakan MARK untuk menandai informasi tertentu.</li>
+          <li>Gunakan DEL dan INS untuk menunjukkan perubahan harga.</li>
+          <li>Gunakan SMALL untuk catatan tambahan.</li>
+          <li>Gunakan SUB atau SUP minimal satu kali.</li>
+        </ul>
+
+        <h3>Checklist penyelesaian</h3>
+
+        <div class="checklist">
+          <label>
+            <input type="checkbox" class="task-check">
+            Saya sudah membuat file product-information.html.
+          </label>
+
+          <label>
+            <input type="checkbox" class="task-check">
+            Saya sudah menggunakan STRONG dan EM.
+          </label>
+
+          <label>
+            <input type="checkbox" class="task-check">
+            Saya sudah menggunakan MARK dan SMALL.
+          </label>
+
+          <label>
+            <input type="checkbox" class="task-check">
+            Saya sudah mencoba DEL dan INS.
+          </label>
+
+          <label>
+            <input type="checkbox" class="task-check">
+            Saya sudah mencoba SUB atau SUP.
+          </label>
+
+          <label>
+            <input type="checkbox" class="task-check">
+            Saya sudah membuka dan memeriksa hasilnya di browser.
+          </label>
+        </div>
+
+        <div class="highlight">
+          <strong>Standar penyelesaian:</strong>
+          Pastikan setiap elemen digunakan sesuai fungsinya.
+          Jangan sekadar memasukkan semua tag tanpa memahami
+          maknanya.
+        </div>
+      </section>
+
+
+      <!-- REVIEW -->
+      <section class="card" id="review">
+        <h2>10. Review & Kesimpulan</h2>
+
+        <p>
+          Pada modul ini kita sudah mempelajari berbagai elemen
+          untuk memberikan format dan makna pada teks HTML.
+        </p>
+
+        <ul>
+          <li>STRONG dan EM digunakan untuk memberikan makna penekanan.</li>
+          <li>B dan I digunakan untuk kebutuhan presentasi visual tertentu.</li>
+          <li>MARK digunakan untuk menandai teks.</li>
+          <li>SMALL digunakan untuk informasi tambahan.</li>
+          <li>DEL dan INS digunakan untuk menunjukkan perubahan teks.</li>
+          <li>SUB dan SUP digunakan untuk karakter bawah dan atas.</li>
+        </ul>
+
+        <h3>Pertanyaan refleksi</h3>
+
+        <ol>
+          <li>Apa perbedaan B dengan STRONG?</li>
+          <li>Mengapa EM berbeda dengan I?</li>
+          <li>Kapan kita menggunakan MARK?</li>
+          <li>Apa perbedaan SUB dan SUP?</li>
+        </ol>
+
+        <div class="next-module">
+          <div>
+            <h3>Great Work, Developer! 🎉</h3>
+            <p>Kamu sudah menyelesaikan materi HTML Text Formatting.</p>
+          </div>
+          <a href="../../index.html#learning-path">Kembali ke Jalur Belajar →</a>
+        </div>
+      </section>
+
+      <nav class="lesson-navigation" aria-label="Navigasi modul">
+        <a href="modul-03.html">← Modul sebelumnya</a>
+        <a href="modul-05.html">Modul berikutnya →</a>
+      </nav>
+    </main>
+  </div>
+
+
+  <footer>
+    © 2026 DevLearn — Learn, Practice, Build.
+  </footer>
+
+
+  <script>
+    // COPY CODE
+    document.querySelectorAll('.copy-btn').forEach(button => {
+      button.addEventListener('click', async () => {
+        const code = button.closest('.code-wrapper')
+          .querySelector('pre').innerText;
+
+        try {
+          await navigator.clipboard.writeText(code);
+        } catch (error) {
+          const textArea = document.createElement('textarea');
+          textArea.value = code;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          textArea.remove();
+        }
+
+        button.textContent = 'Copied!';
+
+        setTimeout(() => {
+          button.textContent = 'Copy Code';
+        }, 1500);
+      });
+    });
+
+
+    // QUIZ
+    const quizForm = document.getElementById('quizForm');
+
+    const answers = {
+      q1: 'b',
+      q2: 'b',
+      q3: 'a',
+      q4: 'b',
+      q5: 'c',
+      q6: 'a'
+    };
+
+    quizForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      let score = 0;
+      let answered = 0;
+
+      Object.keys(answers).forEach(question => {
+        const selected = quizForm.querySelector(
+          `input[name="${question}"]:checked`
+        );
+
+        if (selected) {
+          answered++;
+
+          if (selected.value === answers[question]) {
+            score++;
+          }
+        }
+      });
+
+      const result = document.getElementById('quizResult');
+      result.style.display = 'block';
+
+      if (answered < 6) {
+        result.style.background = '#fff8e9';
+        result.style.color = '#8a641e';
+        result.textContent =
+          `Kamu baru menjawab ${answered} dari 6 soal. Lengkapi semua jawaban dahulu.`;
+        return;
+      }
+
+      const percentage = Math.round((score / 6) * 100);
+
+      let message;
+
+      if (percentage >= 80) {
+        message = 'Bagus sekali! Kamu sudah memahami materi ini.';
+      } else if (percentage >= 60) {
+        message = 'Cukup baik! Pelajari kembali bagian yang belum dipahami.';
+      } else {
+        message = 'Jangan menyerah. Baca kembali materinya dan coba lagi.';
+      }
+
+      result.style.background = '#edf8f1';
+      result.style.color = '#167448';
+
+      result.innerHTML =
+        `<strong>Nilai kamu: ${percentage}/100</strong><br>` +
+        `${score} dari 6 jawaban benar.<br>${message}`;
+    });
+
+
+    // PROGRESS CHECKLIST
+    const checks = document.querySelectorAll('.task-check');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+
+    function updateProgress() {
+      const completed = [...checks].filter(item => item.checked).length;
+      const percentage = (completed / checks.length) * 100;
+
+      progressFill.style.width = percentage + '%';
+      progressText.textContent =
+        `${completed} dari ${checks.length} tugas selesai`;
+    }
+
+    checks.forEach(check => {
+      check.addEventListener('change', updateProgress);
+    });
+
+
+    // ACTIVE SIDEBAR
+    const sections = document.querySelectorAll(
+      '.hero[id], .card[id]'
+    );
+
+    const navItems = document.querySelectorAll('.sidebar a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 140) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navItems.forEach(link => {
+        link.classList.toggle(
+          'active',
+          link.getAttribute('href') === '#' + current
+        );
+      });
+    });
+  </script>
+
+</body>
+</html>

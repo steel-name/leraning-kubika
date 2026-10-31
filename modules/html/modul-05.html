@@ -1,0 +1,1237 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modul 05 - Links & Images | DevLearn</title>
+
+  <style>
+    :root {
+      --navy: #142b4a;
+      --blue: #2563eb;
+      --cyan: #06b6d4;
+      --bg: #f5f8fc;
+      --white: #ffffff;
+      --text: #25364b;
+      --muted: #718096;
+      --border: #e3eaf2;
+      --green: #16a34a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--blue);
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,.95);
+      border-bottom: 1px solid var(--border);
+      padding: 15px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .brand span {
+      color: var(--blue);
+    }
+
+    .nav-info {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .layout {
+      max-width: 1250px;
+      margin: 35px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 245px minmax(0, 1fr);
+      gap: 25px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 90px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+    }
+
+    .sidebar h3 {
+      color: var(--navy);
+      margin-bottom: 13px;
+      font-size: 15px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 9px 11px;
+      margin: 3px 0;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: #eff6ff;
+      color: var(--blue);
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    .hero {
+      padding: 38px;
+      border-radius: 20px;
+      background: linear-gradient(130deg, #142b4a, #1d4f91);
+      color: white;
+      margin-bottom: 22px;
+      overflow: hidden;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 12px;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 30px;
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 40px);
+      line-height: 1.2;
+      margin-bottom: 13px;
+    }
+
+    .hero p {
+      color: #dbeafe;
+      max-width: 620px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 23px;
+      color: #dbeafe;
+      font-size: 13px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 27px;
+      margin-bottom: 18px;
+      scroll-margin-top: 90px;
+    }
+
+    .card h2 {
+      color: var(--navy);
+      font-size: 21px;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      color: var(--navy);
+      font-size: 16px;
+      margin: 22px 0 8px;
+    }
+
+    .card p {
+      margin-bottom: 12px;
+    }
+
+    .card ul,
+    .card ol {
+      padding-left: 23px;
+      margin: 12px 0;
+    }
+
+    .card li {
+      margin-bottom: 7px;
+    }
+
+    .note {
+      background: #eff6ff;
+      border-left: 4px solid var(--blue);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .warning {
+      background: #fff7ed;
+      border-left: 4px solid #f59e0b;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .success {
+      background: #f0fdf4;
+      border-left: 4px solid var(--green);
+      padding: 15px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .code-box {
+      background: #111c2e;
+      border-radius: 10px;
+      margin: 14px 0;
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      color: #a8bad1;
+      background: #1b2b42;
+      font-size: 12px;
+      gap: 10px;
+    }
+
+    .copy-btn {
+      border: 1px solid #52647b;
+      color: white;
+      background: transparent;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    pre {
+      padding: 18px;
+      overflow-x: auto;
+      color: #dbeafe;
+      font-size: 13px;
+      line-height: 1.8;
+      white-space: pre;
+    }
+
+    code {
+      font-family: Consolas, monospace;
+    }
+
+    p code, li code, td code {
+      background: #eef2f7;
+      padding: 2px 5px;
+      border-radius: 4px;
+      color: #1d4ed8;
+      font-size: .9em;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 450px;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: var(--navy);
+    }
+
+    .preview {
+      border: 1px dashed #b7c9df;
+      background: #f8fbff;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 15px 0;
+    }
+
+    .preview a {
+      display: inline-block;
+      margin: 5px 10px 5px 0;
+    }
+
+    .image-preview {
+      width: 100%;
+      max-width: 350px;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+      margin: 12px 0;
+    }
+
+    .quiz-question {
+      padding: 17px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin: 13px 0;
+    }
+
+    .quiz-question p {
+      font-weight: 600;
+    }
+
+    .quiz-question label {
+      display: block;
+      margin: 8px 0;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .quiz-question input {
+      margin-right: 7px;
+    }
+
+    .primary-btn {
+      background: var(--blue);
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 12px;
+    }
+
+    .primary-btn:hover {
+      background: #1d4ed8;
+    }
+
+    #quiz-result {
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    .checklist label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .checklist input {
+      margin-top: 5px;
+      accent-color: var(--blue);
+    }
+
+    .progress-track {
+      background: #e2e8f0;
+      height: 8px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      height: 100%;
+      width: 0;
+      transition: .3s;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 30px 15px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .layout {
+        grid-template-columns: 1fr;
+        margin-top: 20px;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 3px;
+      }
+
+      .hero {
+        padding: 27px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 13px 17px;
+      }
+
+      .nav-info {
+        display: none;
+      }
+
+      .layout {
+        padding: 0 12px;
+      }
+
+      .card {
+        padding: 19px;
+      }
+
+      .sidebar nav {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 23px;
+      }
+
+      pre {
+        font-size: 12px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="module-theme.css">
+</head>
+
+<body>
+
+  <header class="navbar">
+    <a href="../../index.html" class="brand">Kub<span>ika.</span></a>
+    <a href="../../index.html#learning-path" class="nav-info">← Kembali ke Jalur Belajar</a>
+  </header>
+
+  <div class="layout">
+
+    <aside class="sidebar">
+      <h3>Materi Modul 05</h3>
+      <nav>
+        <a href="#overview">Overview</a>
+        <a href="#anchor">1. Hyperlink</a>
+        <a href="#href">2. Atribut href</a>
+        <a href="#types">3. Jenis Link</a>
+        <a href="#target">4. Target Link</a>
+        <a href="#image">5. HTML Image</a>
+        <a href="#path">6. Image Path</a>
+        <a href="#accessibility">7. Alt Text</a>
+        <a href="#practice">8. Guided Practice</a>
+        <a href="#quiz">9. Quiz</a>
+        <a href="#challenge">10. Challenge</a>
+        <a href="#review">Review</a>
+      </nav>
+    </aside>
+
+    <main>
+
+      <section class="hero" id="overview">
+        <span class="tag">MODULE 05 · HTML FUNDAMENTALS</span>
+        <h1>Links & Images</h1>
+        <p>
+          Pelajari cara menghubungkan halaman website menggunakan hyperlink
+          dan menampilkan gambar menggunakan elemen HTML.
+        </p>
+        <div class="hero-meta">
+          <span>◷ 45–60 Menit</span>
+          <span>◎ Beginner</span>
+          <span>⌘ HTML</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Learning Objectives</h2>
+        <p>Setelah menyelesaikan modul ini, kamu diharapkan mampu:</p>
+        <ul>
+          <li>Memahami fungsi hyperlink dalam HTML.</li>
+          <li>Menggunakan elemen <code>&lt;a&gt;</code> dan atribut <code>href</code>.</li>
+          <li>Membuat link eksternal, internal, email, dan telepon.</li>
+          <li>Menampilkan gambar menggunakan elemen <code>&lt;img&gt;</code>.</li>
+          <li>Memahami penggunaan <code>src</code>, <code>alt</code>, dan ukuran gambar.</li>
+          <li>Menggunakan relative path untuk mengakses file gambar.</li>
+        </ul>
+      </section>
+
+      <section class="card" id="anchor">
+        <h2>1. Apa Itu Hyperlink?</h2>
+        <p>
+          Hyperlink atau link adalah elemen yang memungkinkan pengguna
+          berpindah dari satu halaman ke halaman lainnya, membuka website lain,
+          atau menuju bagian tertentu dalam halaman.
+        </p>
+
+        <p>
+          Contohnya ketika kamu menekan tulisan "Kunjungi Google",
+          browser akan mengarahkanmu ke website Google.
+        </p>
+
+        <h3>Mengenal elemen &lt;a&gt;</h3>
+        <p>
+          Dalam HTML, hyperlink dibuat menggunakan elemen
+          <code>&lt;a&gt;</code>, yang disebut anchor element.
+        </p>
+
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;a href="https://www.google.com"&gt;
+  Kunjungi Google
+&lt;/a&gt;</code></pre>
+        </div>
+
+        <div class="preview">
+          <strong>Hasil tampilan:</strong><br><br>
+          <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">
+            Kunjungi Google
+          </a>
+        </div>
+
+        <div class="note">
+          <strong>Ingat:</strong> Elemen <code>&lt;a&gt;</code> membuat
+          sebuah teks atau elemen menjadi link yang dapat diklik.
+        </div>
+      </section>
+
+      <section class="card" id="href">
+        <h2>2. Mengenal Atribut href</h2>
+        <p>
+          Atribut <code>href</code> digunakan untuk menentukan alamat tujuan
+          dari sebuah hyperlink.
+        </p>
+
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;a href="https://www.youtube.com"&gt;
+  Buka YouTube
+&lt;/a&gt;</code></pre>
+        </div>
+
+        <p>Penjelasan:</p>
+        <ul>
+          <li><code>&lt;a&gt;</code> adalah elemen hyperlink.</li>
+          <li><code>href</code> adalah atribut tujuan link.</li>
+          <li>URL adalah alamat website yang dituju.</li>
+          <li>Teks di antara tag adalah bagian yang diklik pengguna.</li>
+        </ul>
+
+        <div class="note">
+          Tanpa atribut <code>href</code>, elemen anchor tidak memiliki tujuan
+          navigasi seperti hyperlink biasa.
+        </div>
+      </section>
+
+      <section class="card" id="types">
+        <h2>3. Jenis-Jenis Link</h2>
+
+        <h3>A. External Link</h3>
+        <p>
+          External link adalah link yang mengarah ke website atau domain lain.
+        </p>
+
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;a href="https://www.wikipedia.org"&gt;
+  Buka Wikipedia
+&lt;/a&gt;</code></pre>
+        </div>
+
+        <h3>B. Internal Link</h3>
+        <p>
+          Internal link dapat mengarah ke halaman lain dalam website yang sama.
+        </p>
+
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;a href="about.html"&gt;
+  Tentang Kami
+&lt;/a&gt;</code></pre>
+        </div>
+
+        <p>
+          Contoh tersebut mengarah ke file <code>about.html</code>
+          yang berada dalam folder yang sama.
+        </p>
+
+        <h3>C. Link ke Bagian Halaman</h3>
+        <p>
+          Kita juga dapat membuat link menuju bagian tertentu pada halaman
+          menggunakan atribut <code>id</code>.
+        </p>
+
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;a href="#kontak"&gt;
+  Pergi ke Kontak
+&lt;/a&gt;
+
+&lt;h2 id="kontak"&gt;Hubungi Kami&lt;/h2&gt;</code></pre>
+        </div>
+
+        <h3>D. Email Link</h3>
+        <p>Gunakan <code>mailto:</code> untuk membuka aplikasi email.</p>
+
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;a href="mailto:hello@example.com"&gt;
+  Kirim Email
+&lt;/a&gt;</code></pre>
+        </div>
+
+        <h3>E. Telephone Link</h3>
+        <p>Gunakan <code>tel:</code> untuk membuat link nomor telepon.</p>
+
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;a href="tel:+6281234567890"&gt;
+  Hubungi Kami
+&lt;/a&gt;</code></pre>
+        </div>
+      </section>
+
+      <section class="card" id="target">
+        <h2>4. Mengenal Atribut target</h2>
+        <p>
+          Atribut <code>target</code> menentukan tempat link dibuka.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Atribut</th>
+                <th>Fungsi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>_self</code></td>
+                <td>Membuka link pada tab yang sama.</td>
+              </tr>
+              <tr>
+                <td><code>_blank</code></td>
+                <td>Membuka link pada tab atau jendela baru.</td>
+              </tr>
+              <tr>
+                <td><code>_parent</code></td>
+                <td>Membuka link pada parent browsing context.</td>
+              </tr>
+              <tr>
+                <td><code>_top</code></td>
+                <td>Membuka link pada keseluruhan jendela.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;a
+  href="https://www.google.com"
+  target="_blank"
+  rel="noopener noreferrer"
+&gt;
+  Buka Google di Tab Baru
+&lt;/a&gt;</code></pre>
+        </div>
+
+        <div class="warning">
+          Saat menggunakan <code>target="_blank"</code>, tambahkan
+          <code>rel="noopener noreferrer"</code> sebagai praktik keamanan
+          dan privasi yang baik.
+        </div>
+      </section>
+
+      <section class="card" id="image">
+        <h2>5. Menampilkan Gambar dengan HTML</h2>
+        <p>
+          Website tidak hanya berisi teks. Kita juga dapat menampilkan gambar
+          untuk memberikan informasi dan membuat halaman lebih menarik.
+        </p>
+
+        <p>
+          HTML menggunakan elemen <code>&lt;img&gt;</code> untuk menampilkan gambar.
+        </p>
+
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;img
+  src="gambar.jpg"
+  alt="Pemandangan gunung"
+&gt;</code></pre>
+        </div>
+
+        <p>Penjelasan atribut:</p>
+        <ul>
+          <li><code>src</code>: menentukan lokasi atau sumber gambar.</li>
+          <li><code>alt</code>: memberikan teks alternatif untuk gambar.</li>
+        </ul>
+
+        <h3>Mengatur Ukuran Gambar</h3>
+        <p>
+          Kita dapat menggunakan atribut <code>width</code> dan
+          <code>height</code> untuk menentukan dimensi gambar.
+        </p>
+
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;img
+  src="gambar.jpg"
+  alt="Pemandangan gunung"
+  width="400"
+  height="250"
+&gt;</code></pre>
+        </div>
+
+        <div class="note">
+          Nilai <code>width</code> dan <code>height</code> pada HTML umumnya
+          menggunakan satuan piksel jika ditulis sebagai angka.
+          Pastikan perbandingan dimensinya sesuai dengan gambar agar tidak
+          terlihat gepeng atau terdistorsi.
+        </div>
+
+        <h3>Contoh Tampilan Gambar</h3>
+        <div class="preview">
+          <img
+            class="image-preview"
+            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=700"
+            alt="Pemandangan alam dengan perbukitan"
+            width="700"
+            height="450"
+          >
+          <p><small>Contoh gambar yang ditampilkan melalui URL.</small></p>
+        </div>
+      </section>
+
+      <section class="card" id="path">
+        <h2>6. Memahami Image Path</h2>
+        <p>
+          Image path adalah alamat atau lokasi file gambar yang ingin
+          ditampilkan pada halaman HTML.
+        </p>
+
+        <h3>A. Gambar dalam Folder yang Sama</h3>
+        <div class="code-box">
+          <div class="code-header">
+            <span>Struktur File</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>project/
+├── index.html
+└── gambar.jpg</code></pre>
+        </div>
+
+        <p>Karena gambar berada dalam folder yang sama:</p>
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;img src="gambar.jpg" alt="Contoh gambar"&gt;</code></pre>
+        </div>
+
+        <h3>B. Gambar dalam Folder images</h3>
+        <div class="code-box">
+          <div class="code-header">
+            <span>Struktur File</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>project/
+├── index.html
+└── images/
+    └── pemandangan.jpg</code></pre>
+        </div>
+
+        <p>Gunakan nama folder sebelum nama file:</p>
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;img
+  src="images/pemandangan.jpg"
+  alt="Pemandangan alam"
+&gt;</code></pre>
+        </div>
+
+        <h3>C. Mengakses Folder Sebelumnya</h3>
+        <p>
+          Gunakan <code>../</code> untuk naik satu tingkat dari folder saat ini.
+        </p>
+
+        <div class="code-box">
+          <div class="code-header">
+            <span>Struktur File</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>project/
+├── images/
+│   └── logo.png
+└── pages/
+    └── about.html</code></pre>
+        </div>
+
+        <p>Dari <code>about.html</code>, akses logo dengan:</p>
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;img src="../images/logo.png" alt="Logo"&gt;</code></pre>
+        </div>
+
+        <div class="warning">
+          Perhatikan penulisan nama file dan ekstensi. Pada banyak server,
+          <code>Foto.jpg</code> dan <code>foto.jpg</code> dianggap berbeda.
+          Hindari menggunakan alamat lokal komputer seperti
+          <code>C:\Users\...</code> untuk website yang akan dipublikasikan.
+        </div>
+      </section>
+
+      <section class="card" id="accessibility">
+        <h2>7. Pentingnya Atribut alt</h2>
+        <p>
+          Atribut <code>alt</code> memberikan deskripsi teks tentang gambar.
+          Deskripsi ini membantu pengguna pembaca layar memahami isi gambar
+          dan dapat ditampilkan ketika gambar gagal dimuat.
+        </p>
+
+        <h3>Contoh yang baik</h3>
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;img
+  src="kucing.jpg"
+  alt="Seekor kucing putih sedang duduk di sofa"
+&gt;</code></pre>
+        </div>
+
+        <h3>Contoh yang kurang baik</h3>
+        <div class="code-box">
+          <div class="code-header">
+            <span>HTML</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;img src="kucing.jpg" alt="gambar"&gt;</code></pre>
+        </div>
+
+        <div class="success">
+          Tips: Jelaskan informasi penting dari gambar secara singkat.
+          Untuk gambar dekoratif yang tidak menyampaikan informasi,
+          gunakan <code>alt=""</code>.
+        </div>
+      </section>
+
+      <section class="card" id="practice">
+        <h2>8. Guided Practice</h2>
+        <p>
+          Sekarang kita akan membuat halaman profil sederhana yang berisi
+          gambar, link media sosial, dan informasi singkat.
+        </p>
+
+        <h3>Struktur Folder</h3>
+        <div class="code-box">
+          <div class="code-header">
+            <span>Project Structure</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>profil-saya/
+├── index.html
+└── images/
+    └── profil.jpg</code></pre>
+        </div>
+
+        <h3>Source Code</h3>
+        <div class="code-box">
+          <div class="code-header">
+            <span>index.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+        content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Profil Saya&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1&gt;Halo, Saya Biran!&lt;/h1&gt;
+
+  &lt;img
+    src="images/profil.jpg"
+    alt="Foto profil saya"
+    width="200"
+    height="200"
+  &gt;
+
+  &lt;h2&gt;Tentang Saya&lt;/h2&gt;
+  &lt;p&gt;
+    Saya sedang belajar HTML untuk
+    membangun website pertama saya.
+  &lt;/p&gt;
+
+  &lt;h2&gt;Media Sosial&lt;/h2&gt;
+
+  &lt;a href="https://www.instagram.com"
+     target="_blank"
+     rel="noopener noreferrer"&gt;
+    Instagram
+  &lt;/a&gt;
+
+  &lt;br&gt;
+
+  &lt;a href="https://github.com"
+     target="_blank"
+     rel="noopener noreferrer"&gt;
+    GitHub
+  &lt;/a&gt;
+
+  &lt;h2 id="kontak"&gt;Kontak&lt;/h2&gt;
+
+  &lt;a href="mailto:hello@example.com"&gt;
+    Kirim Email
+  &lt;/a&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+
+        <div class="note">
+          Ganti <code>profil.jpg</code> dengan foto milikmu sendiri dan
+          sesuaikan alamat media sosial serta email sebelum menjalankan file.
+        </div>
+      </section>
+
+      <section class="card" id="quiz">
+        <h2>9. Knowledge Check</h2>
+        <p>Jawab enam pertanyaan berikut untuk menguji pemahamanmu.</p>
+
+        <form id="quiz-form">
+
+          <div class="quiz-question">
+            <p>1. Elemen apa yang digunakan untuk membuat hyperlink?</p>
+            <label><input type="radio" name="q1" value="a"> &lt;p&gt;</label>
+            <label><input type="radio" name="q1" value="b"> &lt;a&gt;</label>
+            <label><input type="radio" name="q1" value="c"> &lt;h1&gt;</label>
+          </div>
+
+          <div class="quiz-question">
+            <p>2. Apa fungsi atribut href?</p>
+            <label><input type="radio" name="q2" value="a"> Mengatur ukuran gambar</label>
+            <label><input type="radio" name="q2" value="b"> Menentukan tujuan link</label>
+            <label><input type="radio" name="q2" value="c"> Mengubah warna teks</label>
+          </div>
+
+          <div class="quiz-question">
+            <p>3. Atribut apa yang membuat link dibuka di tab baru?</p>
+            <label><input type="radio" name="q3" value="a"> target="_blank"</label>
+            <label><input type="radio" name="q3" value="b"> target="_self"</label>
+            <label><input type="radio" name="q3" value="c"> href="_new"</label>
+          </div>
+
+          <div class="quiz-question">
+            <p>4. Elemen apa yang digunakan untuk menampilkan gambar?</p>
+            <label><input type="radio" name="q4" value="a"> &lt;picturetext&gt;</label>
+            <label><input type="radio" name="q4" value="b"> &lt;img&gt;</label>
+            <label><input type="radio" name="q4" value="c"> &lt;image&gt;</label>
+          </div>
+
+          <div class="quiz-question">
+            <p>5. Apa fungsi atribut alt?</p>
+            <label><input type="radio" name="q5" value="a"> Mengubah posisi gambar</label>
+            <label><input type="radio" name="q5" value="b"> Membuat gambar bergerak</label>
+            <label><input type="radio" name="q5" value="c"> Memberikan teks alternatif gambar</label>
+          </div>
+
+          <div class="quiz-question">
+            <p>6. Apa arti ../ pada path file?</p>
+            <label><input type="radio" name="q6" value="a"> Naik satu tingkat folder</label>
+            <label><input type="radio" name="q6" value="b"> Membuka website baru</label>
+            <label><input type="radio" name="q6" value="c"> Menghapus folder</label>
+          </div>
+
+          <button class="primary-btn" type="submit">Periksa Jawaban</button>
+        </form>
+
+        <div id="quiz-result" aria-live="polite"></div>
+      </section>
+
+      <section class="card" id="challenge">
+        <h2>10. Coding Challenge</h2>
+        <p>
+          Saatnya membuat halaman web sederhana tanpa menyalin seluruh kode
+          Guided Practice.
+        </p>
+
+        <h3>Project: My Favorite Place</h3>
+        <p>Buat halaman HTML tentang tempat favoritmu.</p>
+
+        <strong>Persyaratan:</strong>
+        <ol>
+          <li>Buat judul halaman menggunakan <code>&lt;h1&gt;</code>.</li>
+          <li>Tampilkan satu gambar tempat favoritmu.</li>
+          <li>Gunakan atribut <code>alt</code> yang deskriptif.</li>
+          <li>Buat paragraf yang menjelaskan tempat tersebut.</li>
+          <li>Tambahkan link menuju website informasi tempat tersebut.</li>
+          <li>Buat link email menggunakan <code>mailto:</code>.</li>
+          <li>Pastikan gambar dan link berfungsi dengan baik.</li>
+        </ol>
+
+        <h3>Penilaian Project</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Kriteria</th>
+                <th>Bobot</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Struktur HTML benar</td><td>20%</td></tr>
+              <tr><td>Penggunaan hyperlink</td><td>20%</td></tr>
+              <tr><td>Gambar dan image path</td><td>25%</td></tr>
+              <tr><td>Penggunaan alt yang tepat</td><td>15%</td></tr>
+              <tr><td>Kerapian dan kreativitas</td><td>20%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card" id="review">
+        <h2>Module Review</h2>
+        <p>
+          Sebelum melanjutkan ke modul berikutnya, pastikan kamu sudah
+          memahami poin-poin berikut.
+        </p>
+
+        <div class="checklist">
+          <label><input type="checkbox" class="progress-check"> Saya memahami fungsi hyperlink.</label>
+          <label><input type="checkbox" class="progress-check"> Saya bisa menggunakan elemen &lt;a&gt; dan href.</label>
+          <label><input type="checkbox" class="progress-check"> Saya memahami external dan internal link.</label>
+          <label><input type="checkbox" class="progress-check"> Saya memahami atribut target dan rel.</label>
+          <label><input type="checkbox" class="progress-check"> Saya bisa menampilkan gambar dengan img.</label>
+          <label><input type="checkbox" class="progress-check"> Saya memahami src, alt, width, dan height.</label>
+          <label><input type="checkbox" class="progress-check"> Saya bisa menggunakan relative path.</label>
+          <label><input type="checkbox" class="progress-check"> Saya telah menyelesaikan coding challenge.</label>
+        </div>
+
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <p id="progress-text">0 dari 8 materi selesai (0%)</p>
+
+        <div class="success">
+          <strong>Great work!</strong><br>
+          Kamu sudah menyelesaikan materi Links & Images.
+          Terus berlatih agar semakin terbiasa menulis HTML.
+        </div>
+      </section>
+
+      <nav class="lesson-navigation" aria-label="Navigasi modul">
+        <a href="modul-04.html">← Modul sebelumnya</a>
+        <a href="modul-06.html">Modul berikutnya →</a>
+      </nav>
+    </main>
+  </div>
+
+  <footer>
+    <strong>DevLearn</strong> — Learn, Practice, Build.<br>
+    Module 05: HTML Fundamentals
+  </footer>
+
+  <script>
+    // Copy code
+    document.querySelectorAll(".copy-btn").forEach(button => {
+      button.addEventListener("click", async () => {
+        const code = button.closest(".code-box")
+          .querySelector("code").innerText;
+
+        try {
+          await navigator.clipboard.writeText(code);
+          button.textContent = "Copied!";
+        } catch (error) {
+          const textarea = document.createElement("textarea");
+          textarea.value = code;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand("copy");
+          textarea.remove();
+          button.textContent = "Copied!";
+        }
+
+        setTimeout(() => {
+          button.textContent = "Copy Code";
+        }, 1500);
+      });
+    });
+
+    // Quiz
+    const answers = {
+      q1: "b",
+      q2: "b",
+      q3: "a",
+      q4: "b",
+      q5: "c",
+      q6: "a"
+    };
+
+    document.getElementById("quiz-form")
+      .addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        let score = 0;
+        let unanswered = 0;
+
+        Object.keys(answers).forEach(question => {
+          const selected = document.querySelector(
+            `input[name="${question}"]:checked`
+          );
+
+          if (!selected) {
+            unanswered++;
+          } else if (selected.value === answers[question]) {
+            score++;
+          }
+        });
+
+        const result = document.getElementById("quiz-result");
+
+        if (unanswered > 0) {
+          result.textContent =
+            `Masih ada ${unanswered} soal yang belum dijawab.`;
+          result.style.color = "#d97706";
+          return;
+        }
+
+        const percentage = Math.round(score / 6 * 100);
+
+        result.textContent =
+          `Nilai kamu: ${score}/6 (${percentage}%). ` +
+          (score >= 5
+            ? "Bagus! Kamu sudah memahami materi ini."
+            : "Coba pelajari kembali materi yang belum dipahami.");
+
+        result.style.color = score >= 5 ? "#16a34a" : "#d97706";
+      });
+
+    // Checklist progress
+    const checks = document.querySelectorAll(".progress-check");
+    const fill = document.getElementById("progress-fill");
+    const progressText = document.getElementById("progress-text");
+
+    function updateProgress() {
+      const completed = [...checks].filter(item => item.checked).length;
+      const percentage = Math.round(completed / checks.length * 100);
+
+      fill.style.width = percentage + "%";
+      progressText.textContent =
+        `${completed} dari ${checks.length} materi selesai (${percentage}%)`;
+    }
+
+    checks.forEach(item => {
+      item.addEventListener("change", updateProgress);
+    });
+
+    // Active sidebar link
+    const sections = document.querySelectorAll("main section[id]");
+    const navLinks = document.querySelectorAll(".sidebar a");
+
+    window.addEventListener("scroll", () => {
+      let current = "";
+
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 130) {
+          current = section.id;
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.toggle(
+          "active",
+          link.getAttribute("href") === "#" + current
+        );
+      });
+    });
+  </script>
+
+</body>
+</html>

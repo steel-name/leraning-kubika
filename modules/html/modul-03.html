@@ -1,0 +1,1385 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 03 - Heading & Paragraph | DevLearn</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+    :root {
+      --navy: #10213d;
+      --blue: #2563eb;
+      --text: #29384d;
+      --muted: #718096;
+      --bg: #f7f9fc;
+      --white: #fff;
+      --border: #e8edf4;
+      --green: #16a36a;
+      --orange: #f59e0b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      width: min(1150px, 92%);
+      margin: auto;
+      min-height: 68px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .back-link {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .back-link:hover {
+      color: var(--blue);
+    }
+
+    .layout {
+      width: min(1150px, 92%);
+      margin: 35px auto 70px;
+      display: grid;
+      grid-template-columns: 245px 1fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 22px 17px;
+      position: sticky;
+      top: 95px;
+    }
+
+    .sidebar-label {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.3px;
+      margin: 0 0 14px 10px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 4px;
+      transition: .2s;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      color: var(--blue);
+      background: #edf4ff;
+      font-weight: 700;
+    }
+
+    .sidebar-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 18px 0;
+    }
+
+    .module-progress {
+      background: #f5f8ff;
+      border-radius: 10px;
+      padding: 13px;
+      margin-top: 18px;
+    }
+
+    .module-progress p {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .progress-track {
+      height: 6px;
+      background: #dfe8f7;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--blue);
+      transition: .3s;
+    }
+
+    /* CONTENT */
+    .content {
+      min-width: 0;
+    }
+
+    .hero {
+      background: linear-gradient(125deg, #10213d, #1e4f91);
+      border-radius: 19px;
+      padding: 43px;
+      color: white;
+      margin-bottom: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "</h1>";
+      position: absolute;
+      right: 25px;
+      bottom: -22px;
+      font-size: 90px;
+      font-weight: 800;
+      color: rgba(255,255,255,.07);
+      font-family: monospace;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,.13);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 17px;
+    }
+
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(29px, 4vw, 39px);
+      line-height: 1.25;
+      letter-spacing: -1px;
+      margin-bottom: 13px;
+    }
+
+    .hero p {
+      color: #d5e5fb;
+      font-size: 14px;
+      max-width: 560px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 25px;
+      color: #d5e5fb;
+      font-size: 12px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+      margin-bottom: 20px;
+      scroll-margin-top: 100px;
+    }
+
+    .card h2 {
+      color: var(--navy);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 21px;
+      margin-bottom: 15px;
+      letter-spacing: -.5px;
+    }
+
+    .card h3 {
+      color: var(--navy);
+      font-size: 16px;
+      margin: 22px 0 10px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 13px;
+    }
+
+    .card ul,
+    .card ol {
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      margin: 12px 0;
+    }
+
+    .card li {
+      margin-bottom: 7px;
+    }
+
+    .highlight {
+      background: #edf4ff;
+      border-left: 4px solid var(--blue);
+      padding: 15px 17px;
+      border-radius: 7px;
+      color: #31527e;
+      font-size: 13px;
+      margin: 17px 0;
+    }
+
+    .warning {
+      background: #fff8e9;
+      border-left: 4px solid var(--orange);
+      padding: 15px 17px;
+      border-radius: 7px;
+      color: #8a641e;
+      font-size: 13px;
+      margin: 17px 0;
+    }
+
+    /* CODE */
+    .code-wrapper {
+      background: #101d32;
+      border-radius: 11px;
+      margin: 15px 0 20px;
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 16px;
+      border-bottom: 1px solid #293a54;
+      color: #b8c9e2;
+      font-size: 11px;
+    }
+
+    .copy-btn {
+      border: 1px solid #52647c;
+      color: white;
+      background: transparent;
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 10px;
+    }
+
+    .copy-btn:hover {
+      background: #263a58;
+    }
+
+    pre {
+      padding: 19px;
+      overflow-x: auto;
+      color: #dbeafe;
+      font-family: Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .tag { color: #7dd3fc; }
+    .value { color: #86efac; }
+    .comment { color: #8295af; }
+
+    /* DEMO */
+    .demo-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+    }
+
+    .demo-box h1,
+    .demo-box h2,
+    .demo-box h3,
+    .demo-box h4,
+    .demo-box h5,
+    .demo-box h6 {
+      color: #172b4d;
+      line-height: 1.5;
+    }
+
+    .demo-box p {
+      color: #475569;
+      margin: 0 0 10px;
+    }
+
+    .demo-box hr {
+      border: none;
+      border-top: 1px solid #cbd5e1;
+      margin: 15px 0;
+    }
+
+    /* TABLE */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 480px;
+      font-size: 13px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: #f5f8ff;
+      color: var(--navy);
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    code.inline {
+      background: #edf4ff;
+      color: #2457a7;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    /* QUIZ */
+    .question {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 17px;
+      margin-bottom: 15px;
+    }
+
+    .question h4 {
+      font-size: 14px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .option {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      padding: 8px 10px;
+      cursor: pointer;
+      border-radius: 7px;
+    }
+
+    .option:hover {
+      background: #f5f8ff;
+    }
+
+    .option input {
+      margin-right: 8px;
+      accent-color: var(--blue);
+    }
+
+    .submit-btn {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .submit-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      display: none;
+      margin-top: 15px;
+      padding: 16px;
+      background: #edf8f1;
+      color: #167448;
+      border-radius: 9px;
+      font-size: 14px;
+    }
+
+    /* CHALLENGE */
+    .checklist label {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 11px;
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .checklist input {
+      margin-top: 5px;
+      accent-color: var(--blue);
+    }
+
+    .next-module {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      background: #edf4ff;
+      padding: 22px;
+      border-radius: 12px;
+    }
+
+    .next-module h3 {
+      margin: 0 0 5px;
+      color: var(--navy);
+    }
+
+    .next-module p {
+      margin: 0;
+      font-size: 12px;
+    }
+
+    .next-module a {
+      background: var(--blue);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 25px;
+      border-top: 1px solid var(--border);
+      background: white;
+    }
+
+    @media (max-width: 850px) {
+      .layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .sidebar-nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+      }
+
+      .module-progress {
+        max-width: 300px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .layout {
+        margin-top: 20px;
+      }
+
+      .hero {
+        padding: 28px 23px;
+      }
+
+      .card {
+        padding: 21px 17px;
+      }
+
+      .sidebar-nav {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .back-link {
+        font-size: 11px;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="module-theme.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="../../index.html" class="logo">Kub<span>ika.</span></a>
+      <a href="../../index.html#learning-path" class="back-link">← Kembali ke Jalur Belajar</a>
+    </div>
+  </header>
+
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-label">MODULE NAVIGATION</div>
+
+      <nav class="sidebar-nav">
+        <a href="#overview" class="active">Overview</a>
+        <a href="#tujuan">Tujuan Belajar</a>
+        <a href="#heading">Heading HTML</a>
+        <a href="#paragraph">Paragraph</a>
+        <a href="#line-break">Line Break</a>
+        <a href="#horizontal">Horizontal Rule</a>
+        <a href="#nesting">Struktur Konten</a>
+        <a href="#practice">Guided Practice</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#challenge">Coding Challenge</a>
+      </nav>
+
+      <hr class="sidebar-divider">
+
+      <div class="sidebar-label">YOUR PROGRESS</div>
+      <div class="module-progress">
+        <p id="progressText">0 dari 10 bagian selesai</p>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+      <!-- HERO -->
+      <section class="hero" id="overview">
+        <span class="hero-tag">MODULE 03 • HTML BEGINNER</span>
+        <h1>Heading & Paragraph</h1>
+        <p>
+          Belajar membuat judul, subjudul, dan paragraf
+          untuk menyusun konten halaman website agar lebih
+          terstruktur, mudah dibaca, dan mudah dipahami.
+        </p>
+
+        <div class="hero-meta">
+          <span>📖 Materi: HTML</span>
+          <span>⏱ Estimasi: 35–45 menit</span>
+          <span>🎯 Level: Pemula</span>
+        </div>
+      </section>
+
+
+      <!-- TUJUAN -->
+      <section class="card" id="tujuan">
+        <h2>01. Tujuan Pembelajaran</h2>
+        <p>
+          Setelah menyelesaikan modul ini, kamu diharapkan mampu:
+        </p>
+
+        <ul>
+          <li>Memahami fungsi heading dalam HTML.</li>
+          <li>Menggunakan heading dari H1 sampai H6.</li>
+          <li>Membuat paragraf menggunakan tag P.</li>
+          <li>Memahami perbedaan BR dan HR.</li>
+          <li>Menyusun konten HTML secara terstruktur.</li>
+          <li>Membuat halaman artikel sederhana.</li>
+        </ul>
+
+        <div class="highlight">
+          <strong>Mindset belajar:</strong>
+          Jangan hanya menghafal nama tag. Pahami kapan dan
+          mengapa sebuah elemen digunakan.
+        </div>
+      </section>
+
+
+      <!-- HEADING -->
+      <section class="card" id="heading">
+        <h2>02. Mengenal Heading HTML</h2>
+
+        <p>
+          Heading adalah elemen HTML yang digunakan untuk membuat
+          judul dan subjudul pada halaman website.
+          Heading membantu pembaca memahami susunan informasi.
+        </p>
+
+        <p>
+          HTML menyediakan enam tingkat heading, yaitu
+          <code class="inline">&lt;h1&gt;</code> sampai
+          <code class="inline">&lt;h6&gt;</code>.
+        </p>
+
+        <h3>Contoh penggunaan heading</h3>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>heading.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;h1&gt;Judul Utama&lt;/h1&gt;
+&lt;h2&gt;Subjudul&lt;/h2&gt;
+&lt;h3&gt;Bagian Ketiga&lt;/h3&gt;
+&lt;h4&gt;Bagian Keempat&lt;/h4&gt;
+&lt;h5&gt;Bagian Kelima&lt;/h5&gt;
+&lt;h6&gt;Bagian Keenam&lt;/h6&gt;</code></pre>
+        </div>
+
+        <h3>Hasil tampilan di browser</h3>
+
+        <div class="demo-box">
+          <h1>Heading 1</h1>
+          <h2>Heading 2</h2>
+          <h3>Heading 3</h3>
+          <h4>Heading 4</h4>
+          <h5>Heading 5</h5>
+          <h6>Heading 6</h6>
+        </div>
+
+        <h3>Perbedaan tingkat heading</h3>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Tag</th>
+                <th>Fungsi</th>
+                <th>Penggunaan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>H1</td>
+                <td>Judul utama</td>
+                <td>Judul halaman</td>
+              </tr>
+              <tr>
+                <td>H2</td>
+                <td>Subjudul utama</td>
+                <td>Bagian besar konten</td>
+              </tr>
+              <tr>
+                <td>H3</td>
+                <td>Subbagian</td>
+                <td>Bagian di dalam H2</td>
+              </tr>
+              <tr>
+                <td>H4</td>
+                <td>Subbagian lanjutan</td>
+                <td>Bagian di dalam H3</td>
+              </tr>
+              <tr>
+                <td>H5</td>
+                <td>Heading tingkat lima</td>
+                <td>Subbagian lanjutan</td>
+              </tr>
+              <tr>
+                <td>H6</td>
+                <td>Heading tingkat enam</td>
+                <td>Subbagian terdalam</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="highlight">
+          <strong>Ingat:</strong>
+          Heading bukan sekadar ukuran tulisan. Heading
+          menunjukkan hierarki dan struktur informasi.
+        </div>
+
+        <h3>Aturan penggunaan heading</h3>
+
+        <ul>
+          <li>Gunakan H1 untuk judul utama halaman.</li>
+          <li>Gunakan H2 untuk bagian utama di bawah H1.</li>
+          <li>Gunakan H3 untuk subbagian dari H2.</li>
+          <li>Jangan memilih heading hanya karena ukuran tulisannya.</li>
+          <li>Jaga urutan heading agar struktur dokumen mudah dipahami.</li>
+        </ul>
+
+        <div class="warning">
+          <strong>Kesalahan umum:</strong>
+          Menggunakan H1, lalu langsung H4 hanya karena ingin
+          mendapatkan ukuran tulisan yang lebih kecil.
+          Untuk mengatur ukuran visual, gunakan CSS.
+        </div>
+      </section>
+
+
+      <!-- PARAGRAPH -->
+      <section class="card" id="paragraph">
+        <h2>03. Mengenal Paragraph</h2>
+
+        <p>
+          Paragraph atau paragraf adalah elemen HTML untuk
+          menampilkan kumpulan kalimat dalam satu blok teks.
+        </p>
+
+        <p>
+          Untuk membuat paragraf, kita menggunakan tag
+          <code class="inline">&lt;p&gt;</code>.
+        </p>
+
+        <h3>Contoh kode</h3>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>paragraph.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;h1&gt;Tentang Saya&lt;/h1&gt;
+
+&lt;p&gt;
+  Halo, nama saya Budi.
+  Saya sedang belajar HTML.
+&lt;/p&gt;
+
+&lt;p&gt;
+  Saya ingin menjadi seorang web developer.
+&lt;/p&gt;</code></pre>
+        </div>
+
+        <h3>Hasil tampilan di browser</h3>
+
+        <div class="demo-box">
+          <h2>Tentang Saya</h2>
+          <p>
+            Halo, nama saya Budi. Saya sedang belajar HTML.
+          </p>
+          <p>
+            Saya ingin menjadi seorang web developer.
+          </p>
+        </div>
+
+        <h3>Mengapa menggunakan tag P?</h3>
+
+        <ul>
+          <li>Mengelompokkan kalimat menjadi paragraf.</li>
+          <li>Membuat konten lebih terstruktur.</li>
+          <li>Membantu browser dan teknologi pembaca layar memahami konten.</li>
+          <li>Memudahkan pengaturan tampilan menggunakan CSS.</li>
+        </ul>
+
+        <div class="highlight">
+          <strong>Catatan:</strong>
+          Browser biasanya memberikan jarak otomatis di sekitar
+          paragraf. Jarak tersebut dapat diatur menggunakan CSS.
+        </div>
+      </section>
+
+
+      <!-- LINE BREAK -->
+      <section class="card" id="line-break">
+        <h2>04. Mengenal Line Break (BR)</h2>
+
+        <p>
+          Tag <code class="inline">&lt;br&gt;</code> digunakan
+          untuk membuat baris baru tanpa memulai paragraf baru.
+        </p>
+
+        <h3>Contoh kode</h3>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>line-break.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;p&gt;
+  Nama: Budi Santoso&lt;br&gt;
+  Kelas: Sistem Informasi&lt;br&gt;
+  Kampus: LPKIA
+&lt;/p&gt;</code></pre>
+        </div>
+
+        <h3>Hasil tampilan di browser</h3>
+
+        <div class="demo-box">
+          <p>
+            Nama: Budi Santoso<br>
+            Kelas: Sistem Informasi<br>
+            Kampus: LPKIA
+          </p>
+        </div>
+
+        <div class="warning">
+          <strong>Perhatian:</strong>
+          Jangan menggunakan BR berkali-kali hanya untuk
+          membuat jarak antarbagian. Gunakan CSS margin atau padding
+          untuk mengatur jarak.
+        </div>
+      </section>
+
+
+      <!-- HORIZONTAL RULE -->
+      <section class="card" id="horizontal">
+        <h2>05. Mengenal Horizontal Rule (HR)</h2>
+
+        <p>
+          Tag <code class="inline">&lt;hr&gt;</code> digunakan
+          untuk membuat pemisah tematik antara dua bagian konten.
+          Biasanya browser menampilkannya sebagai garis horizontal.
+        </p>
+
+        <h3>Contoh kode</h3>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>horizontal-rule.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;h2&gt;Tentang Kami&lt;/h2&gt;
+&lt;p&gt;Kami sedang belajar membuat website.&lt;/p&gt;
+
+&lt;hr&gt;
+
+&lt;h2&gt;Hubungi Kami&lt;/h2&gt;
+&lt;p&gt;Email: hello@example.com&lt;/p&gt;</code></pre>
+        </div>
+
+        <h3>Hasil tampilan di browser</h3>
+
+        <div class="demo-box">
+          <h2>Tentang Kami</h2>
+          <p>Kami sedang belajar membuat website.</p>
+          <hr>
+          <h2>Hubungi Kami</h2>
+          <p>Email: hello@example.com</p>
+        </div>
+
+        <div class="highlight">
+          <strong>Perbedaan BR dan HR:</strong>
+          BR membuat baris baru, sedangkan HR memberikan
+          pemisah tematik antarbagian konten.
+        </div>
+      </section>
+
+
+      <!-- NESTING -->
+      <section class="card" id="nesting">
+        <h2>06. Menyusun Struktur Konten</h2>
+
+        <p>
+          Dalam website, heading dan paragraf biasanya
+          digunakan bersama untuk membentuk susunan informasi.
+        </p>
+
+        <p>
+          Bayangkan kamu sedang membuat artikel. Ada judul utama,
+          beberapa subjudul, lalu paragraf yang menjelaskan
+          setiap subjudul.
+        </p>
+
+        <h3>Contoh struktur artikel</h3>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>article.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;h1&gt;Belajar Web Development&lt;/h1&gt;
+
+&lt;p&gt;
+  Web development adalah proses membuat
+  dan mengembangkan website.
+&lt;/p&gt;
+
+&lt;h2&gt;Apa Itu HTML?&lt;/h2&gt;
+
+&lt;p&gt;
+  HTML digunakan untuk menyusun struktur
+  halaman website.
+&lt;/p&gt;
+
+&lt;h2&gt;Apa Itu CSS?&lt;/h2&gt;
+
+&lt;p&gt;
+  CSS digunakan untuk mengatur tampilan
+  halaman website.
+&lt;/p&gt;</code></pre>
+        </div>
+
+        <h3>Hasil tampilan di browser</h3>
+
+        <div class="demo-box">
+          <h1>Belajar Web Development</h1>
+          <p>
+            Web development adalah proses membuat dan
+            mengembangkan website.
+          </p>
+
+          <h2>Apa Itu HTML?</h2>
+          <p>
+            HTML digunakan untuk menyusun struktur
+            halaman website.
+          </p>
+
+          <h2>Apa Itu CSS?</h2>
+          <p>
+            CSS digunakan untuk mengatur tampilan
+            halaman website.
+          </p>
+        </div>
+
+        <div class="highlight">
+          <strong>Tips developer:</strong>
+          Biasakan menyusun konten dari judul utama,
+          subjudul, lalu paragraf. Struktur yang rapi
+          akan memudahkan proses pengembangan website.
+        </div>
+      </section>
+
+
+      <!-- GUIDED PRACTICE -->
+      <section class="card" id="practice">
+        <h2>07. Guided Practice</h2>
+
+        <p>
+          Sekarang kita coba membuat sebuah halaman artikel
+          sederhana menggunakan elemen yang sudah dipelajari.
+        </p>
+
+        <h3>Langkah pengerjaan</h3>
+
+        <ol>
+          <li>Buat file baru bernama <strong>artikel.html</strong>.</li>
+          <li>Buat struktur dasar HTML.</li>
+          <li>Tambahkan satu judul utama menggunakan H1.</li>
+          <li>Tambahkan paragraf pengenalan.</li>
+          <li>Tambahkan dua subjudul menggunakan H2.</li>
+          <li>Tambahkan paragraf di bawah masing-masing subjudul.</li>
+          <li>Gunakan HR sebagai pemisah jika diperlukan.</li>
+        </ol>
+
+        <h3>Contoh hasil kode</h3>
+
+        <div class="code-wrapper">
+          <div class="code-header">
+            <span>artikel.html</span>
+            <button class="copy-btn">Copy Code</button>
+          </div>
+          <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+        content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Artikel Pertamaku&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  &lt;h1&gt;Perjalanan Menjadi Developer&lt;/h1&gt;
+
+  &lt;p&gt;
+    Saya sedang mempelajari dunia web development
+    dari dasar.
+  &lt;/p&gt;
+
+  &lt;h2&gt;Mengapa Belajar Coding?&lt;/h2&gt;
+
+  &lt;p&gt;
+    Coding membantu kita membangun solusi
+    menggunakan teknologi.
+  &lt;/p&gt;
+
+  &lt;h2&gt;Target Saya&lt;/h2&gt;
+
+  &lt;p&gt;
+    Saya ingin mampu membuat website
+    sendiri dari awal.
+  &lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+      </section>
+
+
+      <!-- QUIZ -->
+      <section class="card" id="quiz">
+        <h2>08. Knowledge Check</h2>
+
+        <p>
+          Uji pemahamanmu sebelum melanjutkan ke coding challenge.
+          Pilih satu jawaban yang paling tepat.
+        </p>
+
+        <form id="quizForm">
+
+          <div class="question">
+            <h4>1. Tag apa yang digunakan untuk membuat judul utama?</h4>
+            <label class="option"><input type="radio" name="q1" value="a"> A. &lt;p&gt;</label>
+            <label class="option"><input type="radio" name="q1" value="b"> B. &lt;h1&gt;</label>
+            <label class="option"><input type="radio" name="q1" value="c"> C. &lt;br&gt;</label>
+            <label class="option"><input type="radio" name="q1" value="d"> D. &lt;hr&gt;</label>
+          </div>
+
+          <div class="question">
+            <h4>2. Berapa jumlah tingkatan heading dalam HTML?</h4>
+            <label class="option"><input type="radio" name="q2" value="a"> A. 3</label>
+            <label class="option"><input type="radio" name="q2" value="b"> B. 4</label>
+            <label class="option"><input type="radio" name="q2" value="c"> C. 6</label>
+            <label class="option"><input type="radio" name="q2" value="d"> D. 8</label>
+          </div>
+
+          <div class="question">
+            <h4>3. Tag apa yang digunakan untuk membuat paragraf?</h4>
+            <label class="option"><input type="radio" name="q3" value="a"> A. &lt;h2&gt;</label>
+            <label class="option"><input type="radio" name="q3" value="b"> B. &lt;div&gt;</label>
+            <label class="option"><input type="radio" name="q3" value="c"> C. &lt;p&gt;</label>
+            <label class="option"><input type="radio" name="q3" value="d"> D. &lt;img&gt;</label>
+          </div>
+
+          <div class="question">
+            <h4>4. Apa fungsi dari tag BR?</h4>
+            <label class="option"><input type="radio" name="q4" value="a"> A. Membuat baris baru</label>
+            <label class="option"><input type="radio" name="q4" value="b"> B. Membuat gambar</label>
+            <label class="option"><input type="radio" name="q4" value="c"> C. Membuat tabel</label>
+            <label class="option"><input type="radio" name="q4" value="d"> D. Membuat judul</label>
+          </div>
+
+          <div class="question">
+            <h4>5. Apa fungsi dari tag HR?</h4>
+            <label class="option"><input type="radio" name="q5" value="a"> A. Membuat paragraf</label>
+            <label class="option"><input type="radio" name="q5" value="b"> B. Memberikan pemisah tematik</label>
+            <label class="option"><input type="radio" name="q5" value="c"> C. Mengubah warna teks</label>
+            <label class="option"><input type="radio" name="q5" value="d"> D. Membuat link</label>
+          </div>
+
+          <div class="question">
+            <h4>6. Apakah heading dipilih hanya berdasarkan ukuran teks?</h4>
+            <label class="option"><input type="radio" name="q6" value="a"> A. Benar</label>
+            <label class="option"><input type="radio" name="q6" value="b"> B. Salah</label>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            Periksa Jawaban
+          </button>
+
+          <div class="result" id="quizResult" role="status"></div>
+
+        </form>
+      </section>
+
+
+      <!-- CHALLENGE -->
+      <section class="card" id="challenge">
+        <h2>09. Coding Challenge</h2>
+
+        <p>
+          Sekarang waktunya membuat halaman artikel tentang
+          dirimu sendiri. Gunakan semua konsep yang sudah
+          dipelajari pada modul ini.
+        </p>
+
+        <h3>Project: My Personal Introduction</h3>
+
+        <p>Buat sebuah halaman HTML yang memiliki ketentuan:</p>
+
+        <ul>
+          <li>Memiliki satu judul utama menggunakan H1.</li>
+          <li>Memiliki minimal tiga subjudul menggunakan H2.</li>
+          <li>Memiliki minimal tiga paragraf menggunakan P.</li>
+          <li>Memiliki minimal satu penggunaan BR.</li>
+          <li>Memiliki minimal satu penggunaan HR.</li>
+          <li>Memiliki struktur heading yang masuk akal.</li>
+        </ul>
+
+        <h3>Checklist penyelesaian</h3>
+
+        <div class="checklist">
+          <label>
+            <input type="checkbox" class="task-check">
+            Saya sudah membuat file personal-introduction.html.
+          </label>
+
+          <label>
+            <input type="checkbox" class="task-check">
+            Saya sudah menggunakan H1 sebagai judul utama.
+          </label>
+
+          <label>
+            <input type="checkbox" class="task-check">
+            Saya sudah membuat minimal tiga subjudul.
+          </label>
+
+          <label>
+            <input type="checkbox" class="task-check">
+            Saya sudah menambahkan paragraf menggunakan P.
+          </label>
+
+          <label>
+            <input type="checkbox" class="task-check">
+            Saya sudah mencoba BR dan HR.
+          </label>
+
+          <label>
+            <input type="checkbox" class="task-check">
+            Saya sudah membuka hasilnya di browser.
+          </label>
+        </div>
+
+        <div class="highlight">
+          <strong>Standar penyelesaian:</strong>
+          Pastikan halaman bisa dibuka di browser dan
+          seluruh elemen tampil sesuai tujuan. Jangan hanya
+          menyalin contoh, cobalah menulis kode sendiri.
+        </div>
+      </section>
+
+
+      <!-- REVIEW -->
+      <section class="card" id="review">
+        <h2>10. Review & Kesimpulan</h2>
+
+        <p>
+          Pada modul ini kita sudah mempelajari empat elemen
+          penting untuk menyusun konten HTML.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Elemen</th>
+                <th>Fungsi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>H1 - H6</td>
+                <td>Membuat judul dan subjudul berdasarkan hierarki.</td>
+              </tr>
+              <tr>
+                <td>P</td>
+                <td>Membuat paragraf.</td>
+              </tr>
+              <tr>
+                <td>BR</td>
+                <td>Membuat baris baru.</td>
+              </tr>
+              <tr>
+                <td>HR</td>
+                <td>Membuat pemisah tematik.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Pertanyaan refleksi</h3>
+        <ol>
+          <li>Apa perbedaan H1 dan H2?</li>
+          <li>Mengapa kita perlu menggunakan tag P?</li>
+          <li>Kapan sebaiknya menggunakan BR?</li>
+          <li>Mengapa struktur heading perlu diperhatikan?</li>
+        </ol>
+
+        <div class="next-module">
+          <div>
+            <h3>Great Work, Developer! 🎉</h3>
+            <p>Kamu sudah menyelesaikan materi Heading & Paragraph.</p>
+          </div>
+          <a href="../../index.html#learning-path">Kembali ke Jalur Belajar →</a>
+        </div>
+      </section>
+
+      <nav class="lesson-navigation" aria-label="Navigasi modul">
+        <a href="modul-02.html">← Modul sebelumnya</a>
+        <a href="modul-04.html">Modul berikutnya →</a>
+      </nav>
+    </main>
+  </div>
+
+
+  <footer>
+    © 2026 DevLearn — Learn, Practice, Build.
+  </footer>
+
+
+  <script>
+    // COPY CODE
+    document.querySelectorAll('.copy-btn').forEach(button => {
+      button.addEventListener('click', async () => {
+        const code = button.closest('.code-wrapper')
+          .querySelector('pre').innerText;
+
+        try {
+          await navigator.clipboard.writeText(code);
+          button.textContent = 'Copied!';
+          setTimeout(() => {
+            button.textContent = 'Copy Code';
+          }, 1500);
+        } catch (error) {
+          const textArea = document.createElement('textarea');
+          textArea.value = code;
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          textArea.remove();
+          button.textContent = 'Copied!';
+          setTimeout(() => {
+            button.textContent = 'Copy Code';
+          }, 1500);
+        }
+      });
+    });
+
+
+    // QUIZ
+    const quizForm = document.getElementById('quizForm');
+
+    const answers = {
+      q1: 'b',
+      q2: 'c',
+      q3: 'c',
+      q4: 'a',
+      q5: 'b',
+      q6: 'b'
+    };
+
+    quizForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      let score = 0;
+      let answered = 0;
+
+      Object.keys(answers).forEach(question => {
+        const selected = quizForm.querySelector(
+          `input[name="${question}"]:checked`
+        );
+
+        if (selected) {
+          answered++;
+          if (selected.value === answers[question]) {
+            score++;
+          }
+        }
+      });
+
+      const result = document.getElementById('quizResult');
+      result.style.display = 'block';
+
+      if (answered < 6) {
+        result.innerHTML =
+          `Kamu baru menjawab ${answered} dari 6 soal. ` +
+          `Lengkapi semua pertanyaan terlebih dahulu.`;
+        result.style.background = '#fff8e9';
+        result.style.color = '#8a641e';
+        return;
+      }
+
+      const percentage = Math.round((score / 6) * 100);
+
+      result.style.background = '#edf8f1';
+      result.style.color = '#167448';
+
+      let message = '';
+
+      if (percentage >= 80) {
+        message = 'Bagus sekali! Kamu sudah memahami materi ini.';
+      } else if (percentage >= 60) {
+        message = 'Cukup baik! Pelajari kembali bagian yang belum dipahami.';
+      } else {
+        message = 'Jangan menyerah. Coba baca kembali materinya.';
+      }
+
+      result.innerHTML =
+        `<strong>Nilai kamu: ${percentage}/100</strong><br>` +
+        `${score} dari 6 jawaban benar.<br>${message}`;
+    });
+
+
+    // PROGRESS CHECKLIST
+    const checks = document.querySelectorAll('.task-check');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+
+    function updateProgress() {
+      const completed = [...checks].filter(item => item.checked).length;
+      const percentage = (completed / checks.length) * 100;
+
+      progressFill.style.width = percentage + '%';
+      progressText.textContent =
+        `${completed} dari ${checks.length} tugas selesai`;
+    }
+
+    checks.forEach(check => {
+      check.addEventListener('change', updateProgress);
+    });
+
+
+    // ACTIVE SIDEBAR
+    const sections = document.querySelectorAll(
+      '.hero[id], .card[id]'
+    );
+
+    const navItems = document.querySelectorAll('.sidebar a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 140) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navItems.forEach(link => {
+        link.classList.toggle(
+          'active',
+          link.getAttribute('href') === '#' + current
+        );
+      });
+    });
+  </script>
+
+</body>
+</html>

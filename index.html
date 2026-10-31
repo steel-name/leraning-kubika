@@ -453,11 +453,60 @@
     }
 
     .path-container {
-      max-width: 780px;
+      max-width: 860px;
       margin: auto;
     }
 
+    .path-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .path-tab {
+      min-width: 110px;
+      padding: 11px 20px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: white;
+      color: var(--muted);
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
+    }
+
+    .path-tab:hover {
+      border-color: #b8d2ff;
+      color: var(--blue);
+    }
+
+    .path-tab[aria-selected="true"] {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: white;
+    }
+
+    .path-panel[hidden] {
+      display: none;
+    }
+
+    .path-panel {
+      position: relative;
+    }
+
+    .path-panel::before {
+      content: "";
+      position: absolute;
+      top: 34px;
+      bottom: 45px;
+      left: 21px;
+      width: 2px;
+      background: #e8edf4;
+    }
+
     .path-item {
+      position: relative;
       display: flex;
       gap: 20px;
       padding: 20px;
@@ -480,12 +529,15 @@
     }
 
     .path-number {
+      position: relative;
+      z-index: 1;
       min-width: 43px;
       height: 43px;
       display: grid;
       place-items: center;
       border-radius: 12px;
       background: #edf4ff;
+      box-shadow: 0 0 0 5px white;
       color: var(--blue);
       font-weight: 800;
       font-size: 14px;
@@ -532,7 +584,7 @@
     /* MODULES */
     .modules-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
 
@@ -734,6 +786,10 @@
       .features-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .modules-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 600px) {
@@ -798,6 +854,20 @@
       .path-item {
         padding: 15px;
         gap: 12px;
+      }
+
+      .path-panel::before {
+        left: 20px;
+      }
+
+      .path-tabs {
+        gap: 7px;
+      }
+
+      .path-tab {
+        min-width: 0;
+        flex: 1;
+        padding: 10px 12px;
       }
 
       .path-status {
@@ -897,8 +967,8 @@
           </h1>
 
           <p class="hero-description">
-            Belajar HTML langkah demi langkah dengan materi yang jelas,
-            contoh kode, latihan, dan project pertamamu bersama Kubika.
+            Pilih materi yang ingin kamu pelajari: HTML, CSS, atau JavaScript.
+            Belajar langkah demi langkah dengan contoh kode dan latihan.
           </p>
 
           <div class="hero-actions">
@@ -1033,87 +1103,179 @@
 
         <div class="section-heading">
           <div class="small-title">JALUR BELAJAR</div>
-          <h2>Mulai dari Dasar.</h2>
+          <h2>Pilih Materi yang Ingin Dipelajari.</h2>
           <p>
-            Ikuti perjalanan belajar HTML secara bertahap.
-            Tidak perlu terburu-buru, yang penting memahami.
+            Pilih HTML, CSS, atau JavaScript untuk melihat urutan modul
+            dan mulai belajar sesuai minatmu.
           </p>
         </div>
 
         <div class="path-container">
-
-          <a class="path-item" href="modules/html/modul-01.html" aria-label="Buka Modul 01: Introduction to HTML">
-            <div class="path-number">01</div>
-            <div class="path-content">
-              <h3>Introduction to HTML</h3>
-              <p>Mengenal HTML, fungsi, dan cara kerjanya.</p>
-            </div>
-            <span class="path-status available"><i data-lucide="circle-check" aria-hidden="true"></i>Tersedia</span>
-          </a>
-
-          <a class="path-item" href="modules/html/modul-02.html" aria-label="Buka Modul 02: HTML Document Structure">
-            <div class="path-number">02</div>
-            <div class="path-content">
-              <h3>HTML Document Structure</h3>
-              <p>Memahami struktur dasar dokumen HTML.</p>
-            </div>
-            <span class="path-status available"><i data-lucide="circle-check" aria-hidden="true"></i>Tersedia</span>
-          </a>
-
-          <div class="path-item">
-            <div class="path-number">03</div>
-            <div class="path-content">
-              <h3>Heading & Paragraph</h3>
-              <p>Membuat judul dan paragraf pada halaman web.</p>
-            </div>
-            <span class="path-status upcoming">Segera Hadir</span>
+          <div class="path-tabs" role="tablist" aria-label="Pilih materi belajar">
+            <button class="path-tab" id="tab-html" type="button" role="tab" aria-selected="true" aria-controls="panel-html" tabindex="0">HTML</button>
+            <button class="path-tab" id="tab-css" type="button" role="tab" aria-selected="false" aria-controls="panel-css" tabindex="-1">CSS</button>
+            <button class="path-tab" id="tab-javascript" type="button" role="tab" aria-selected="false" aria-controls="panel-javascript" tabindex="-1">JavaScript</button>
           </div>
 
-          <div class="path-item">
-            <div class="path-number">04</div>
-            <div class="path-content">
-              <h3>Text Formatting</h3>
-              <p>Mengatur format dan penekanan teks.</p>
-            </div>
-            <span class="path-status upcoming">Segera Hadir</span>
+          <div class="path-panel" id="panel-html" role="tabpanel" aria-labelledby="tab-html">
+            <a class="path-item" href="modules/html/modul-01.html" aria-label="Buka Modul 01: Introduction to HTML">
+              <div class="path-number">01</div>
+              <div class="path-content">
+                <h3>Introduction to HTML</h3>
+                <p>Mengenal HTML, fungsi, dan cara kerjanya.</p>
+              </div>
+              <span class="path-status available"><i data-lucide="circle-check" aria-hidden="true"></i>Tersedia</span>
+            </a>
+
+            <a class="path-item" href="modules/html/modul-02.html" aria-label="Buka Modul 02: HTML Document Structure">
+              <div class="path-number">02</div>
+              <div class="path-content">
+                <h3>HTML Document Structure</h3>
+                <p>Memahami struktur dasar dokumen HTML.</p>
+              </div>
+              <span class="path-status available"><i data-lucide="circle-check" aria-hidden="true"></i>Tersedia</span>
+            </a>
+
+            <a class="path-item" href="modules/html/modul-03.html" aria-label="Buka Modul 03: Heading and Paragraph">
+              <div class="path-number">03</div>
+              <div class="path-content">
+                <h3>Heading &amp; Paragraph</h3>
+                <p>Membuat judul dan paragraf pada halaman web.</p>
+              </div>
+              <span class="path-status available"><i data-lucide="circle-check" aria-hidden="true"></i>Tersedia</span>
+            </a>
+
+            <a class="path-item" href="modules/html/modul-04.html" aria-label="Buka Modul 04: Text Formatting">
+              <div class="path-number">04</div>
+              <div class="path-content">
+                <h3>Text Formatting</h3>
+                <p>Mengatur format dan penekanan teks.</p>
+              </div>
+              <span class="path-status available"><i data-lucide="circle-check" aria-hidden="true"></i>Tersedia</span>
+            </a>
+
+            <a class="path-item" href="modules/html/modul-05.html" aria-label="Buka Modul 05: Links and Images">
+              <div class="path-number">05</div>
+              <div class="path-content">
+                <h3>Links &amp; Images</h3>
+                <p>Menambahkan tautan dan gambar ke halaman web.</p>
+              </div>
+              <span class="path-status available"><i data-lucide="circle-check" aria-hidden="true"></i>Tersedia</span>
+            </a>
+
+            <a class="path-item" href="modules/html/modul-06.html" aria-label="Buka Modul 06: Lists, Tables and Forms">
+              <div class="path-number">06</div>
+              <div class="path-content">
+                <h3>Lists, Tables &amp; Forms</h3>
+                <p>Mempelajari daftar, tabel, dan formulir.</p>
+              </div>
+              <span class="path-status available"><i data-lucide="circle-check" aria-hidden="true"></i>Tersedia</span>
+            </a>
+
+            <a class="path-item" href="modules/html/modul-07.html" aria-label="Buka Modul 07: Semantic HTML">
+              <div class="path-number">07</div>
+              <div class="path-content">
+                <h3>Semantic HTML</h3>
+                <p>Mengenal elemen HTML yang memiliki makna.</p>
+              </div>
+              <span class="path-status available"><i data-lucide="circle-check" aria-hidden="true"></i>Tersedia</span>
+            </a>
+
+            <a class="path-item" href="modules/html/modul-08.html" aria-label="Buka Modul 08: HTML Mini Project">
+              <div class="path-number">08</div>
+              <div class="path-content">
+                <h3>HTML Mini Project</h3>
+                <p>Membuat halaman web sederhana dari awal.</p>
+              </div>
+              <span class="path-status available"><i data-lucide="circle-check" aria-hidden="true"></i>Tersedia</span>
+            </a>
           </div>
 
-          <div class="path-item">
-            <div class="path-number">05</div>
-            <div class="path-content">
-              <h3>Links & Images</h3>
-              <p>Menambahkan tautan dan gambar ke halaman web.</p>
+          <div class="path-panel" id="panel-css" role="tabpanel" aria-labelledby="tab-css" hidden>
+            <div class="path-item">
+              <div class="path-number">01</div>
+              <div class="path-content">
+                <h3>Pengenalan CSS</h3>
+                <p>Mengenal fungsi CSS dan cara menerapkannya pada HTML.</p>
+              </div>
+              <span class="path-status upcoming">Segera Hadir</span>
             </div>
-            <span class="path-status upcoming">Segera Hadir</span>
+            <div class="path-item">
+              <div class="path-number">02</div>
+              <div class="path-content">
+                <h3>Selector, Warna &amp; Teks</h3>
+                <p>Memilih elemen dan mengatur warna serta tipografi.</p>
+              </div>
+              <span class="path-status upcoming">Segera Hadir</span>
+            </div>
+            <div class="path-item">
+              <div class="path-number">03</div>
+              <div class="path-content">
+                <h3>Box Model &amp; Spacing</h3>
+                <p>Memahami ukuran, border, padding, dan margin.</p>
+              </div>
+              <span class="path-status upcoming">Segera Hadir</span>
+            </div>
+            <div class="path-item">
+              <div class="path-number">04</div>
+              <div class="path-content">
+                <h3>Layout dengan Flexbox &amp; Grid</h3>
+                <p>Menyusun elemen menjadi layout yang rapi dan fleksibel.</p>
+              </div>
+              <span class="path-status upcoming">Segera Hadir</span>
+            </div>
+            <div class="path-item">
+              <div class="path-number">05</div>
+              <div class="path-content">
+                <h3>Responsive Design</h3>
+                <p>Membuat tampilan website nyaman di berbagai ukuran layar.</p>
+              </div>
+              <span class="path-status upcoming">Segera Hadir</span>
+            </div>
           </div>
 
-          <div class="path-item">
-            <div class="path-number">06</div>
-            <div class="path-content">
-              <h3>Lists, Tables & Forms</h3>
-              <p>Mempelajari daftar, tabel, dan formulir.</p>
+          <div class="path-panel" id="panel-javascript" role="tabpanel" aria-labelledby="tab-javascript" hidden>
+            <div class="path-item">
+              <div class="path-number">01</div>
+              <div class="path-content">
+                <h3>Pengenalan JavaScript</h3>
+                <p>Mengenal JavaScript dan perannya pada halaman web.</p>
+              </div>
+              <span class="path-status upcoming">Segera Hadir</span>
             </div>
-            <span class="path-status upcoming">Segera Hadir</span>
-          </div>
-
-          <div class="path-item">
-            <div class="path-number">07</div>
-            <div class="path-content">
-              <h3>Semantic HTML</h3>
-              <p>Mengenal elemen HTML yang memiliki makna.</p>
+            <div class="path-item">
+              <div class="path-number">02</div>
+              <div class="path-content">
+                <h3>Variabel &amp; Tipe Data</h3>
+                <p>Menyimpan dan mengenali berbagai jenis nilai.</p>
+              </div>
+              <span class="path-status upcoming">Segera Hadir</span>
             </div>
-            <span class="path-status upcoming">Segera Hadir</span>
-          </div>
-
-          <div class="path-item">
-            <div class="path-number">08</div>
-            <div class="path-content">
-              <h3>HTML Mini Project</h3>
-              <p>Membuat halaman web sederhana dari awal.</p>
+            <div class="path-item">
+              <div class="path-number">03</div>
+              <div class="path-content">
+                <h3>Kondisi &amp; Perulangan</h3>
+                <p>Mengatur alur kode dengan kondisi dan perulangan.</p>
+              </div>
+              <span class="path-status upcoming">Segera Hadir</span>
             </div>
-            <span class="path-status upcoming">Segera Hadir</span>
+            <div class="path-item">
+              <div class="path-number">04</div>
+              <div class="path-content">
+                <h3>Fungsi &amp; Array</h3>
+                <p>Mengelompokkan kode dan mengolah kumpulan data.</p>
+              </div>
+              <span class="path-status upcoming">Segera Hadir</span>
+            </div>
+            <div class="path-item">
+              <div class="path-number">05</div>
+              <div class="path-content">
+                <h3>Interaksi dengan Halaman Web</h3>
+                <p>Menghubungkan JavaScript dengan elemen HTML.</p>
+              </div>
+              <span class="path-status upcoming">Segera Hadir</span>
+            </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -1125,68 +1287,53 @@
 
         <div class="section-heading">
           <div class="small-title">KATALOG MATERI</div>
-          <h2>Materi Pembelajaran.</h2>
+          <h2>Mau Belajar Apa Hari Ini?</h2>
           <p>
-            Pilih materi yang ingin kamu pelajari.
-            Mulai dari modul pertama dan lanjutkan secara berurutan.
+            Pilih topik yang menarik buatmu. Materi HTML sudah tersedia,
+            sementara CSS dan JavaScript sedang disiapkan.
           </p>
         </div>
 
         <div class="modules-grid">
 
           <article class="module-card">
-            <span class="module-tag">MODUL 01 · PEMULA</span>
-            <h3>Introduction to HTML</h3>
+            <span class="module-tag">HTML · TERSEDIA</span>
+            <h3>Bangun Struktur Halaman</h3>
             <p>
-              Kenali apa itu HTML, bagaimana cara kerjanya,
-              tools yang dibutuhkan, dan buat halaman web pertamamu.
+              Pelajari dasar HTML dan struktur dokumen untuk membuat
+              halaman web pertamamu. Tersedia 8 modul dari dasar hingga project.
             </p>
             <div class="module-footer">
-              <span class="module-duration"><i data-lucide="book-open" aria-hidden="true"></i>Dasar HTML</span>
-              <a href="modules/html/modul-01.html" class="module-link">
-                Pelajari <i data-lucide="arrow-right" class="inline-icon" aria-hidden="true"></i>
-              </a>
-            </div>
-          </article>
-
-          <article class="module-card">
-            <span class="module-tag">MODUL 02 · PEMULA</span>
-            <h3>HTML Document Structure</h3>
-            <p>
-              Pelajari struktur dokumen HTML, tag, element,
-              attribute, nesting, indentation, dan komentar.
-            </p>
-            <div class="module-footer">
-              <span class="module-duration"><i data-lucide="book-open" aria-hidden="true"></i>Struktur HTML</span>
-              <a href="modules/html/modul-02.html" class="module-link">
-                Pelajari <i data-lucide="arrow-right" class="inline-icon" aria-hidden="true"></i>
+              <span class="module-duration"><i data-lucide="book-open" aria-hidden="true"></i>8 modul tersedia</span>
+              <a href="#learning-path" class="module-link">
+                Lihat jalur <i data-lucide="arrow-right" class="inline-icon" aria-hidden="true"></i>
               </a>
             </div>
           </article>
 
           <article class="module-card coming-soon">
-            <span class="module-tag">MODUL 03 · SEGERA HADIR</span>
-            <h3>Heading & Paragraph</h3>
+            <span class="module-tag">CSS · SEGERA HADIR</span>
+            <h3>Atur Tampilan Website</h3>
             <p>
-              Belajar membuat judul, subjudul, paragraf,
-              dan mengatur struktur konten halaman web.
+              Belajar mengatur warna, layout, dan membuat halaman web
+              tampil menarik dengan CSS.
             </p>
             <div class="module-footer">
-              <span class="module-duration">Segera tersedia</span>
-              <span class="module-link">Coming Soon</span>
+              <span class="module-duration">Materi sedang disiapkan</span>
+              <span class="module-link">Segera hadir</span>
             </div>
           </article>
 
           <article class="module-card coming-soon">
-            <span class="module-tag">MODUL 04 · SEGERA HADIR</span>
-            <h3>Text Formatting</h3>
+            <span class="module-tag">JAVASCRIPT · SEGERA HADIR</span>
+            <h3>Buat Website Lebih Interaktif</h3>
             <p>
-              Kenali cara memberikan penekanan, format,
-              dan makna tambahan pada teks HTML.
+              Kenali dasar JavaScript untuk menambahkan interaksi
+              dan membuat halaman web lebih hidup.
             </p>
             <div class="module-footer">
-              <span class="module-duration">Segera tersedia</span>
-              <span class="module-link">Coming Soon</span>
+              <span class="module-duration">Materi sedang disiapkan</span>
+              <span class="module-link">Segera hadir</span>
             </div>
           </article>
 
@@ -1232,6 +1379,35 @@
     const navLinks = document.getElementById('navLinks');
 
     lucide.createIcons();
+
+    const pathTabs = Array.from(document.querySelectorAll('.path-tab'));
+
+    function selectPathTab(tab) {
+      pathTabs.forEach(function (item) {
+        const isSelected = item === tab;
+        item.setAttribute('aria-selected', String(isSelected));
+        item.tabIndex = isSelected ? 0 : -1;
+        document.getElementById(item.getAttribute('aria-controls')).hidden = !isSelected;
+      });
+    }
+
+    pathTabs.forEach(function (tab, index) {
+      tab.addEventListener('click', function () {
+        selectPathTab(tab);
+      });
+
+      tab.addEventListener('keydown', function (event) {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') {
+          return;
+        }
+
+        event.preventDefault();
+        const direction = event.key === 'ArrowRight' ? 1 : -1;
+        const nextTab = pathTabs[(index + direction + pathTabs.length) % pathTabs.length];
+        selectPathTab(nextTab);
+        nextTab.focus();
+      });
+    });
 
     menuToggle.addEventListener('click', function () {
       const isOpen = navLinks.classList.toggle('active');

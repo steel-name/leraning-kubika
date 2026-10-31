@@ -479,6 +479,33 @@
             color: var(--rubik-red);
         }
 
+        .lesson-navigation {
+            display: flex;
+            justify-content: flex-end;
+            margin: 28px 0 8px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .lesson-navigation a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            color: var(--navy);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .lesson-navigation a:hover {
+            border-color: #b8d2ff;
+            background: #fbfdff;
+            color: var(--primary);
+        }
+
         /* RESPONSIVE */
 
         @media (max-width: 800px) {
@@ -1067,6 +1094,10 @@ Google</code></pre>
                 </div>
             </section>
 
+            <nav class="lesson-navigation" aria-label="Navigasi modul">
+                <a href="modul-02.html">Lanjut ke Modul 02 →</a>
+            </nav>
+
         </main>
     </div>
 
@@ -1074,7 +1105,7 @@ Google</code></pre>
         <strong>Kubika.</strong>
         <p>Learn, Practice, Build.</p>
         <p>HTML Learning Path — Module 01</p>
-        <p><a href="../../index.html">Beranda Kubika</a> · <a href="modul-02.html">Lanjut ke Modul 02</a></p>
+        <p><a href="../../index.html#learning-path">Kembali ke Jalur Belajar</a></p>
     </footer>
 
     <script src="https://unpkg.com/lucide@0.468.0"></script>
