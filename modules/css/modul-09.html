@@ -1,0 +1,1994 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Modul CSS DevLearn 09: Belajar Responsive Design, Media Queries, Mobile First, dan membuat website responsif.">
+  <meta name="theme-color" content="#14213d">
+  <title>DevLearn — CSS Module 09: Responsive Design</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --dark: #14213d;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --green: #059669;
+      --orange: #d97706;
+      --red: #dc2626;
+      --radius: 14px;
+      --shadow: 0 3px 12px #0f172a08;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -60px;
+      left: 15px;
+      z-index: 100;
+      background: var(--dark);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
+    }
+
+    .skip-link:focus {
+      top: 10px;
+    }
+
+    /* NAVBAR */
+
+    .navbar {
+      min-height: 66px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* LAYOUT */
+
+    .layout {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      align-items: start;
+    }
+
+    .sidebar {
+      padding: 28px 20px;
+      background: white;
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 66px;
+      height: calc(100vh - 66px);
+      overflow-y: auto;
+    }
+
+    .sidebar h3 {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin: 0 0 12px;
+      letter-spacing: 1px;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 13px;
+      transition: background .2s, color .2s;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    main {
+      max-width: 1100px;
+      width: 100%;
+      padding: 40px 48px 70px;
+      margin: auto;
+      min-width: 0;
+    }
+
+    /* HERO */
+
+    .hero {
+      background: linear-gradient(120deg, #14213d, #2563eb);
+      color: white;
+      padding: 38px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: .8;
+      font-weight: 700;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.2;
+      margin: 12px 0;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #dbeafe;
+    }
+
+    .hero-meta {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      background: #ffffff20;
+      border: 1px solid #ffffff40;
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-size: 12px;
+    }
+
+    /* CONTENT */
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 85px;
+    }
+
+    h2 {
+      font-size: 23px;
+      color: var(--dark);
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+
+    h3 {
+      font-size: 17px;
+      color: var(--dark);
+      margin: 20px 0 8px;
+    }
+
+    p {
+      margin: 9px 0;
+    }
+
+    ul,
+    ol {
+      padding-left: 22px;
+      margin: 10px 0;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+
+    .note,
+    .warning,
+    .success {
+      padding: 14px 16px;
+      border-radius: 9px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .note {
+      background: #eff6ff;
+      border-left: 4px solid var(--primary);
+    }
+
+    .warning {
+      background: #fff7ed;
+      border-left: 4px solid #f59e0b;
+    }
+
+    .success {
+      background: #ecfdf5;
+      border-left: 4px solid var(--green);
+    }
+
+    /* CODE */
+
+    pre {
+      background: #101827;
+      color: #e2e8f0;
+      padding: 18px;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.7;
+      margin: 12px 0;
+      tab-size: 2;
+    }
+
+    code {
+      font-family: Consolas, monospace;
+    }
+
+    .inline-code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #be123c;
+      font-size: .9em;
+    }
+
+    /* EXAMPLES */
+
+    .example-box {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 12px 0;
+      min-width: 0;
+    }
+
+    .demo-card {
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 9px;
+      padding: 18px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .demo-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .demo-responsive {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr));
+      gap: 10px;
+    }
+
+    .demo-navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 12px;
+      gap: 12px;
+    }
+
+    .demo-navbar nav {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+
+    .demo-navbar a {
+      color: var(--primary);
+    }
+
+    .demo-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .demo-layout aside,
+    .demo-layout article {
+      background: #dbeafe;
+      padding: 18px;
+      border-radius: 9px;
+      color: #1e40af;
+      min-width: 0;
+    }
+
+    /* TABLE */
+
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 14px 0;
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 500px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      border: 1px solid var(--border);
+      padding: 10px;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: var(--dark);
+    }
+
+    /* PROJECT */
+
+    .challenge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .project-card {
+      min-height: 110px;
+      background: linear-gradient(135deg, #dbeafe, #eff6ff);
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 15px;
+      color: #1e40af;
+      font-weight: 700;
+    }
+
+    /* QUIZ */
+
+    .quiz-question {
+      border-top: 1px solid var(--border);
+      padding: 18px 0;
+    }
+
+    .quiz-question p {
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .quiz-question label {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 14px;
+      padding: 6px 0;
+      cursor: pointer;
+    }
+
+    .quiz-question input {
+      margin-top: 5px;
+      accent-color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .quiz-feedback {
+      display: none;
+      font-size: 13px;
+      margin-top: 8px;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .quiz-feedback.correct {
+      display: block;
+      background: #ecfdf5;
+      color: #047857;
+    }
+
+    .quiz-feedback.incorrect {
+      display: block;
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+
+    .quiz-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 18px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .primary-btn {
+      background: var(--primary);
+      color: white;
+    }
+
+    .primary-btn:hover {
+      background: #1d4ed8;
+    }
+
+    .secondary-btn {
+      background: #f1f5f9;
+      color: var(--dark);
+      border: 1px solid var(--border);
+    }
+
+    #quiz-result {
+      font-weight: 700;
+      margin-top: 14px;
+      font-size: 15px;
+    }
+
+    /* CHECKLIST */
+
+    .checklist label {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 7px 0;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .checklist input {
+      margin-top: 5px;
+      accent-color: var(--green);
+    }
+
+    .progress-track {
+      background: #e2e8f0;
+      height: 9px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: var(--green);
+      border-radius: 20px;
+      transition: width .25s;
+    }
+
+    /* MODULE NAVIGATION */
+
+    .module-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .module-nav a {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      border-radius: 9px;
+      font-size: 13px;
+      transition: .2s;
+    }
+
+    .module-nav a:hover {
+      background: var(--primary-light);
+      border-color: #bfdbfe;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 30px;
+    }
+
+    /* TABLET */
+
+    @media (max-width: 800px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 66px;
+        height: auto;
+        min-height: 0;
+        padding: 12px 16px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+        z-index: 15;
+      }
+
+      .sidebar h3 {
+        margin-bottom: 7px;
+      }
+
+      .sidebar nav {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 5px;
+        padding-bottom: 5px;
+        scrollbar-width: thin;
+      }
+
+      .sidebar a {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      main {
+        padding: 25px 20px 50px;
+      }
+    }
+
+    /* SMARTPHONE */
+
+    @media (max-width: 520px) {
+      html {
+        scroll-padding-top: 135px;
+      }
+
+      .navbar {
+        min-height: 60px;
+      }
+
+      .nav-label {
+        display: none;
+      }
+
+      .sidebar {
+        top: 60px;
+      }
+
+      .hero {
+        padding: 25px;
+      }
+
+      .card {
+        padding: 19px;
+      }
+
+      .demo-row,
+      .challenge-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .demo-navbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .demo-navbar nav {
+        flex-wrap: wrap;
+      }
+
+      .demo-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .module-nav {
+        flex-direction: column;
+      }
+
+      .module-nav a {
+        text-align: center;
+      }
+
+      .quiz-actions {
+        flex-direction: column;
+      }
+
+      .quiz-actions button {
+        width: 100%;
+      }
+    }
+
+    /* REDUCED MOTION */
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="../html/module-theme.css">
+</head>
+
+<body>
+
+<a href="#main-content" class="skip-link">Lewati ke materi utama</a>
+
+<header class="navbar">
+  <a href="../../index.html" class="logo" aria-label="Kubika halaman utama">
+    Kub<span>ika.</span>
+  </a>
+  <div class="nav-label">Learning Path / CSS / Module 09</div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <h3>Daftar Materi</h3>
+    <nav aria-label="Navigasi materi">
+      <a href="#intro" class="active" aria-current="location">01. Pengenalan Responsive</a>
+      <a href="#viewport">02. Viewport</a>
+      <a href="#mobile">03. Mobile First</a>
+      <a href="#media">04. Media Queries</a>
+      <a href="#breakpoint">05. Breakpoints</a>
+      <a href="#units">06. Responsive Units</a>
+      <a href="#images">07. Responsive Images</a>
+      <a href="#layout">08. Responsive Layout</a>
+      <a href="#typography">09. Responsive Typography</a>
+      <a href="#debug">10. Testing & Debugging</a>
+      <a href="#project">11. Mini Project</a>
+      <a href="#quiz">12. Quiz</a>
+      <a href="#checklist">13. Checklist</a>
+    </nav>
+  </aside>
+
+  <main id="main-content">
+
+    <!-- HERO -->
+
+    <section class="hero">
+      <div class="eyebrow">CSS Learning Path • Module 09</div>
+      <h1>Responsive Design & Media Queries</h1>
+      <p>
+        Belajar membangun website yang dapat menyesuaikan diri dengan
+        berbagai ukuran layar, mulai dari smartphone hingga desktop.
+      </p>
+
+      <div class="hero-meta">
+        <span class="pill">Beginner–Intermediate</span>
+        <span class="pill">Estimasi 75–100 menit</span>
+        <span class="pill">Praktik + Challenge</span>
+      </div>
+    </section>
+
+    <!-- 01 INTRO -->
+
+    <section class="card" id="intro">
+      <span class="tag">01 • Pengenalan</span>
+      <h2>Apa Itu Responsive Design?</h2>
+
+      <p>
+        Responsive Design adalah pendekatan dalam membuat website agar
+        tampilan dan susunan elemennya dapat menyesuaikan ukuran layar
+        perangkat yang digunakan.
+      </p>
+
+      <p>
+        Website bisa dibuka melalui laptop, tablet, maupun smartphone.
+        Namun, ukuran layar dan cara pengguna berinteraksi dengan perangkat
+        tersebut berbeda.
+      </p>
+
+      <h3>Contoh perbedaan layout</h3>
+
+      <div class="example-box">
+        <p><b>Desktop:</b> tiga kartu ditampilkan berdampingan.</p>
+
+        <div class="demo-row">
+          <div class="demo-card">Project 1</div>
+          <div class="demo-card">Project 2</div>
+          <div class="demo-card">Project 3</div>
+        </div>
+
+        <p style="margin-top:18px">
+          <b>Smartphone:</b> kartu dapat disusun menjadi satu kolom.
+        </p>
+
+        <div style="max-width:180px">
+          <div class="demo-card" style="margin-bottom:7px">Project 1</div>
+          <div class="demo-card" style="margin-bottom:7px">Project 2</div>
+          <div class="demo-card">Project 3</div>
+        </div>
+      </div>
+
+      <h3>Tujuan Responsive Design</h3>
+      <ul>
+        <li>Konten mudah dibaca pada layar kecil.</li>
+        <li>Pengguna tidak perlu menggeser layar ke samping untuk membaca halaman biasa.</li>
+        <li>Navigasi tetap mudah digunakan.</li>
+        <li>Gambar dan komponen tidak keluar dari batas layar.</li>
+        <li>Pengalaman pengguna tetap nyaman di berbagai perangkat.</li>
+      </ul>
+
+      <div class="note">
+        <b>Ingat:</b> Responsive Design bukan sekadar mengecilkan ukuran
+        website. Kita juga perlu menyesuaikan susunan konten, navigasi,
+        jarak, dan interaksi.
+      </div>
+    </section>
+
+    <!-- 02 VIEWPORT -->
+
+    <section class="card" id="viewport">
+      <span class="tag">02 • Viewport</span>
+      <h2>Mengenal Viewport</h2>
+
+      <p>
+        Viewport adalah area halaman web yang terlihat oleh pengguna
+        pada layar perangkat.
+      </p>
+
+      <p>
+        Dalam HTML, kita perlu menambahkan meta viewport agar browser
+        mobile menggunakan lebar viewport sesuai lebar perangkat.
+      </p>
+
+      <pre><code>&lt;meta name="viewport"
+      content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+
+      <p><b>Penjelasan:</b></p>
+      <ul>
+        <li><code>width=device-width</code>: lebar viewport mengikuti lebar perangkat.</li>
+        <li><code>initial-scale=1.0</code>: tingkat zoom awal ditetapkan pada skala normal.</li>
+      </ul>
+
+      <div class="warning">
+        <b>Jangan dilewatkan!</b> Tanpa meta viewport, halaman pada perangkat
+        mobile bisa dirender seolah-olah memiliki lebar desktop sehingga
+        layout responsive tidak bekerja sebagaimana mestinya.
+      </div>
+    </section>
+
+    <!-- 03 MOBILE FIRST -->
+
+    <section class="card" id="mobile">
+      <span class="tag">03 • Pendekatan</span>
+      <h2>Mengenal Mobile First</h2>
+
+      <p>
+        Mobile First adalah pendekatan desain dan pengembangan yang
+        memulai pembuatan tampilan dari layar kecil, kemudian menambahkan
+        penyesuaian untuk layar yang lebih besar.
+      </p>
+
+      <p>
+        Contohnya, pada smartphone kita menampilkan satu kolom,
+        lalu pada desktop kita mengubahnya menjadi tiga kolom.
+      </p>
+
+      <h3>Contoh CSS Mobile First</h3>
+
+      <pre><code>/* Tampilan dasar untuk layar kecil */
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Tablet dan layar lebih besar */
+@media (min-width: 768px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}</code></pre>
+
+      <div class="note">
+        Mobile First bukan berarti website hanya dibuat untuk smartphone.
+        Kita memulai dari layout sederhana, lalu meningkatkannya sesuai
+        ruang yang tersedia.
+      </div>
+
+      <h3>Mobile First vs Desktop First</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Mobile First</th>
+              <th>Desktop First</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CSS dasar untuk layar kecil.</td>
+              <td>CSS dasar untuk layar besar.</td>
+            </tr>
+            <tr>
+              <td>Menggunakan min-width untuk memperluas layout.</td>
+              <td>Umumnya menggunakan max-width untuk menyederhanakan layout.</td>
+            </tr>
+            <tr>
+              <td>Cocok untuk proyek yang memprioritaskan pengalaman mobile.</td>
+              <td>Bisa digunakan ketika desain awal berpusat pada desktop.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 04 MEDIA QUERIES -->
+
+    <section class="card" id="media">
+      <span class="tag">04 • Media Queries</span>
+      <h2>Apa Itu Media Queries?</h2>
+
+      <p>
+        Media Queries adalah fitur CSS yang memungkinkan kita menerapkan
+        aturan tertentu berdasarkan kondisi perangkat atau viewport,
+        seperti lebar layar, tinggi layar, dan orientasi.
+      </p>
+
+      <pre><code>@media (max-width: 600px) {
+  body {
+    background: lightblue;
+  }
+}</code></pre>
+
+      <p>
+        Artinya, warna latar belakang akan berubah menjadi biru muda
+        ketika lebar viewport 600px atau kurang.
+      </p>
+
+      <h3>Contoh penggunaan lainnya</h3>
+
+      <pre><code>/* Jika layar maksimal 600px */
+@media (max-width: 600px) {
+  .title {
+    font-size: 24px;
+  }
+}
+
+/* Jika layar minimal 768px */
+@media (min-width: 768px) {
+  .title {
+    font-size: 36px;
+  }
+}</code></pre>
+
+      <h3>Operator yang sering digunakan</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Sintaks</th>
+              <th>Makna</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>max-width: 600px</code></td>
+              <td>Lebar viewport 600px atau lebih kecil.</td>
+            </tr>
+            <tr>
+              <td><code>min-width: 768px</code></td>
+              <td>Lebar viewport 768px atau lebih besar.</td>
+            </tr>
+            <tr>
+              <td><code>orientation: portrait</code></td>
+              <td>Orientasi viewport lebih tinggi daripada lebar.</td>
+            </tr>
+            <tr>
+              <td><code>orientation: landscape</code></td>
+              <td>Orientasi viewport lebih lebar daripada tinggi.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        Media Queries tidak hanya digunakan untuk ukuran layar.
+        Kita juga dapat menggunakannya untuk mendeteksi preferensi pengguna,
+        seperti <code>prefers-reduced-motion</code>.
+      </div>
+    </section>
+
+    <!-- 05 BREAKPOINT -->
+
+    <section class="card" id="breakpoint">
+      <span class="tag">05 • Breakpoints</span>
+      <h2>Menentukan Breakpoints</h2>
+
+      <p>
+        Breakpoint adalah titik ukuran viewport ketika kita mengubah
+        atau menyesuaikan layout website.
+      </p>
+
+      <p>Contoh pembagian ukuran layar:</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Ukuran viewport</th>
+              <th>Contoh target</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Di bawah 600px</td>
+              <td>Smartphone</td>
+            </tr>
+            <tr>
+              <td>600px–767px</td>
+              <td>Smartphone besar atau tablet kecil</td>
+            </tr>
+            <tr>
+              <td>768px–1023px</td>
+              <td>Tablet</td>
+            </tr>
+            <tr>
+              <td>1024px ke atas</td>
+              <td>Laptop dan desktop</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">
+        Ukuran di atas hanya contoh, bukan standar wajib.
+        Breakpoint terbaik ditentukan berdasarkan kapan konten atau layout
+        mulai terlihat tidak nyaman.
+      </div>
+
+      <h3>Contoh beberapa breakpoint</h3>
+
+      <pre><code>/* Dasar: mobile */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Tablet */
+@media (min-width: 700px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop */
+@media (min-width: 1000px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}</code></pre>
+
+      <p>
+        Dengan cara ini, layout akan berubah secara bertahap
+        ketika viewport semakin lebar.
+      </p>
+    </section>
+
+    <!-- 06 UNITS -->
+
+    <section class="card" id="units">
+      <span class="tag">06 • Responsive Units</span>
+      <h2>Menggunakan Satuan yang Fleksibel</h2>
+
+      <p>
+        Satuan CSS memengaruhi bagaimana ukuran elemen mengikuti ukuran
+        layar atau ukuran elemen induknya.
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Satuan</th>
+              <th>Penjelasan</th>
+              <th>Contoh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>px</td>
+              <td>Ukuran tetap dalam CSS pixel.</td>
+              <td><code>width: 300px</code></td>
+            </tr>
+            <tr>
+              <td>%</td>
+              <td>Persentase terhadap ukuran tertentu dari elemen induk.</td>
+              <td><code>width: 100%</code></td>
+            </tr>
+            <tr>
+              <td>rem</td>
+              <td>Relatif terhadap ukuran font elemen root.</td>
+              <td><code>padding: 2rem</code></td>
+            </tr>
+            <tr>
+              <td>vw</td>
+              <td>Persentase dari lebar viewport.</td>
+              <td><code>width: 50vw</code></td>
+            </tr>
+            <tr>
+              <td>vh</td>
+              <td>Persentase dari tinggi viewport.</td>
+              <td><code>height: 50vh</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Contoh penggunaan width 100%</h3>
+
+      <pre><code>.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}</code></pre>
+
+      <p>
+        Container dapat mengikuti lebar ruang yang tersedia,
+        tetapi tidak akan melebar melebihi 1100px.
+      </p>
+
+      <h3>Menggunakan clamp()</h3>
+
+      <p>
+        Fungsi <code>clamp(minimum, preferred, maximum)</code>
+        membuat ukuran fleksibel dengan batas bawah dan atas.
+      </p>
+
+      <pre><code>.title {
+  font-size: clamp(24px, 4vw, 48px);
+}</code></pre>
+
+      <p>
+        Ukuran font akan menyesuaikan viewport, tetapi tidak lebih kecil
+        dari 24px dan tidak lebih besar dari 48px.
+      </p>
+
+      <div class="note">
+        Gunakan satuan sesuai kebutuhan. Tidak semua ukuran harus dibuat
+        relatif; ukuran border atau ikon tertentu tetap bisa menggunakan px.
+      </div>
+    </section>
+
+    <!-- 07 IMAGES -->
+
+    <section class="card" id="images">
+      <span class="tag">07 • Responsive Images</span>
+      <h2>Membuat Gambar Responsif</h2>
+
+      <p>
+        Gambar yang terlalu besar dapat menyebabkan halaman melebar
+        melebihi layar. Salah satu solusi paling umum adalah:
+      </p>
+
+      <pre><code>img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}</code></pre>
+
+      <p>
+        Artinya, gambar tidak akan melebihi lebar elemen induknya
+        dan tinggi gambar akan mengikuti proporsi aslinya.
+      </p>
+
+      <h3>Menggunakan object-fit</h3>
+
+      <pre><code>.thumbnail {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}</code></pre>
+
+      <p>
+        <code>object-fit: cover</code> membuat gambar memenuhi kotak
+        dengan tetap menjaga proporsinya. Sebagian gambar mungkin terpotong.
+      </p>
+
+      <p>
+        Sementara itu, <code>object-fit: contain</code> menampilkan
+        seluruh gambar di dalam kotak, tetapi bisa menyisakan ruang kosong.
+      </p>
+
+      <h3>Menggunakan picture untuk sumber berbeda</h3>
+
+      <pre><code>&lt;picture&gt;
+  &lt;source
+    media="(max-width: 600px)"
+    srcset="gambar-mobile.jpg"&gt;
+
+  &lt;img
+    src="gambar-desktop.jpg"
+    alt="Preview project Kubika"&gt;
+&lt;/picture&gt;</code></pre>
+
+      <p>
+        Browser dapat memilih sumber gambar berdasarkan kondisi media
+        yang cocok. Elemen <code>img</code> tetap menjadi fallback.
+      </p>
+
+      <h3>Mengenal srcset</h3>
+
+      <pre><code>&lt;img
+  src="gambar-800.jpg"
+  srcset="
+    gambar-400.jpg 400w,
+    gambar-800.jpg 800w,
+    gambar-1200.jpg 1200w
+  "
+  sizes="(max-width: 600px) 100vw, 50vw"
+  alt="Contoh gambar responsif"&gt;</code></pre>
+
+      <p>
+        <code>srcset</code> dan <code>sizes</code> membantu browser
+        memilih file gambar yang sesuai dengan ukuran tampilan dan
+        kebutuhan resolusi.
+      </p>
+
+      <div class="warning">
+        Jangan hanya mengandalkan CSS untuk gambar berukuran besar.
+        Pilih ukuran dan format file yang sesuai agar halaman tetap cepat dimuat.
+      </div>
+    </section>
+
+    <!-- 08 LAYOUT -->
+
+    <section class="card" id="layout">
+      <span class="tag">08 • Responsive Layout</span>
+      <h2>Mengubah Susunan Layout</h2>
+
+      <p>
+        Responsive Design bukan hanya mengubah ukuran font.
+        Kita juga perlu menyesuaikan susunan elemen.
+      </p>
+
+      <h3>Contoh: Sidebar dan konten</h3>
+
+      <div class="example-box">
+        <p><b>Desktop: dua kolom</b></p>
+
+        <div class="demo-layout">
+          <aside>Sidebar</aside>
+          <article>Konten utama website</article>
+        </div>
+
+        <p style="margin-top:18px">
+          <b>Mobile: satu kolom</b>
+        </p>
+
+        <div style="max-width:220px">
+          <div class="demo-card" style="margin-bottom:8px">Sidebar</div>
+          <div class="demo-card">Konten utama</div>
+        </div>
+      </div>
+
+      <pre><code>.layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 20px;
+}
+
+/* Pada layar kecil */
+@media (max-width: 700px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}</code></pre>
+
+      <h3>Contoh: Navbar responsif sederhana</h3>
+
+      <div class="example-box">
+        <div class="demo-navbar">
+          <b style="color:#14213d">KUBIKA</b>
+
+          <nav aria-label="Contoh navigasi">
+            <a href="#layout">Home</a>
+            <a href="#project">Projects</a>
+            <a href="#checklist">About</a>
+          </nav>
+        </div>
+      </div>
+
+      <pre><code>.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}</code></pre>
+
+      <div class="note">
+        Untuk layout yang lebih kompleks, CSS Grid dan Flexbox bisa
+        digunakan bersama-sama. Pilih metode berdasarkan kebutuhan layout.
+      </div>
+    </section>
+
+    <!-- 09 TYPOGRAPHY -->
+
+    <section class="card" id="typography">
+      <span class="tag">09 • Responsive Typography</span>
+      <h2>Membuat Teks Nyaman Dibaca</h2>
+
+      <p>
+        Ukuran teks yang nyaman pada desktop belum tentu nyaman pada
+        smartphone. Karena itu, tipografi perlu disesuaikan.
+      </p>
+
+      <pre><code>h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  line-height: 1.2;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.content {
+  max-width: 70ch;
+}</code></pre>
+
+      <p>Beberapa hal yang perlu diperhatikan:</p>
+
+      <ul>
+        <li>Gunakan ukuran font yang mudah dibaca.</li>
+        <li>Hindari paragraf yang terlalu panjang tanpa jeda.</li>
+        <li>Atur line-height agar jarak antarbaris nyaman.</li>
+        <li>Batasi lebar konten agar teks tidak terlalu panjang pada layar desktop.</li>
+        <li>Pastikan tombol dan tautan mudah disentuh.</li>
+      </ul>
+
+      <div class="note">
+        Responsive typography tidak selalu berarti semua teks harus
+        menggunakan vw. Fungsi clamp() sering menjadi pilihan yang
+        lebih terkontrol.
+      </div>
+    </section>
+
+    <!-- 10 DEBUG -->
+
+    <section class="card" id="debug">
+      <span class="tag">10 • Testing & Debugging</span>
+      <h2>Menguji Website Responsif</h2>
+
+      <p>
+        Setelah membuat responsive layout, kita perlu menguji hasilnya
+        pada beberapa ukuran layar.
+      </p>
+
+      <h3>Menggunakan Chrome DevTools</h3>
+
+      <ol>
+        <li>Buka website melalui Google Chrome.</li>
+        <li>Tekan <code>F12</code> atau klik kanan lalu pilih Inspect.</li>
+        <li>Klik ikon perangkat mobile/tablet (Toggle Device Toolbar).</li>
+        <li>Pilih ukuran perangkat atau masukkan ukuran viewport sendiri.</li>
+        <li>Periksa layout, teks, gambar, dan navigasi.</li>
+      </ol>
+
+      <h3>Masalah yang sering terjadi</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Masalah</th>
+              <th>Penyebab umum</th>
+              <th>Solusi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Halaman melebar ke samping.</td>
+              <td>Elemen memiliki lebar tetap terlalu besar.</td>
+              <td>Gunakan max-width, width: 100%, dan periksa overflow.</td>
+            </tr>
+            <tr>
+              <td>Gambar terpotong.</td>
+              <td>Ukuran kotak dan object-fit tidak sesuai.</td>
+              <td>Atur object-fit dan ukuran gambar.</td>
+            </tr>
+            <tr>
+              <td>Teks terlalu kecil.</td>
+              <td>Font menggunakan ukuran tetap yang terlalu kecil.</td>
+              <td>Gunakan ukuran yang nyaman atau clamp().</td>
+            </tr>
+            <tr>
+              <td>Navbar berantakan.</td>
+              <td>Ruang tidak cukup untuk seluruh menu.</td>
+              <td>Atur ulang susunan atau buat menu mobile.</td>
+            </tr>
+            <tr>
+              <td>Kartu terlalu sempit.</td>
+              <td>Kolom terlalu banyak pada layar kecil.</td>
+              <td>Kurangi kolom melalui media query atau Grid responsif.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Checklist saat melakukan testing</h3>
+
+      <ul>
+        <li>Apakah ada horizontal scroll yang tidak diperlukan?</li>
+        <li>Apakah semua teks terbaca dengan jelas?</li>
+        <li>Apakah tombol mudah ditekan?</li>
+        <li>Apakah gambar tetap proporsional?</li>
+        <li>Apakah navigasi tetap mudah digunakan?</li>
+        <li>Apakah layout tetap rapi ketika viewport diubah?</li>
+      </ul>
+
+      <div class="success">
+        Biasakan menguji pada beberapa lebar viewport, bukan hanya
+        melihat hasil pada laptop sendiri.
+      </div>
+    </section>
+
+    <!-- 11 PROJECT -->
+
+    <section class="card" id="project">
+      <span class="tag">11 • Mini Project</span>
+      <h2>Challenge: Responsive Kubika Portfolio</h2>
+
+      <p>
+        Buat halaman portfolio Kubika yang memiliki susunan berbeda
+        pada desktop, tablet, dan smartphone.
+      </p>
+
+      <h3>Target komponen</h3>
+
+      <div class="example-box">
+        <div class="challenge-grid">
+          <div class="project-card">
+            Project 01<br>
+            <small>Company Profile</small>
+          </div>
+
+          <div class="project-card">
+            Project 02<br>
+            <small>Dashboard</small>
+          </div>
+
+          <div class="project-card">
+            Project 03<br>
+            <small>Landing Page</small>
+          </div>
+
+          <div class="project-card">
+            Project 04<br>
+            <small>Online Store</small>
+          </div>
+
+          <div class="project-card">
+            Project 05<br>
+            <small>Portfolio</small>
+          </div>
+
+          <div class="project-card">
+            Project 06<br>
+            <small>Web Application</small>
+          </div>
+        </div>
+      </div>
+
+      <h3>Instruksi pengerjaan</h3>
+
+      <ol>
+        <li>Buat file <code>index.html</code> dan <code>style.css</code>.</li>
+        <li>Buat navbar dengan logo dan menu navigasi.</li>
+        <li>Buat hero section dengan judul dan deskripsi Kubika.</li>
+        <li>Buat galeri minimal enam project menggunakan Grid.</li>
+        <li>Tambahkan section anggota dan kemampuan mereka.</li>
+        <li>Gunakan media queries untuk menyesuaikan layout.</li>
+        <li>Pastikan gambar tidak keluar dari batas container.</li>
+        <li>Uji tampilan pada desktop, tablet, dan smartphone.</li>
+      </ol>
+
+      <h3>Starter CSS</h3>
+
+      <pre><code>/* Dasar mobile */
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Tablet */
+@media (min-width: 700px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Desktop */
+@media (min-width: 1000px) {
+  .project-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}</code></pre>
+
+      <h3>Bonus Challenge</h3>
+
+      <ul>
+        <li>Buat navigasi mobile yang lebih ringkas.</li>
+        <li>Gunakan clamp() pada heading.</li>
+        <li>Buat layout anggota yang responsif.</li>
+        <li>Tambahkan gambar project dengan object-fit: cover.</li>
+        <li>Pastikan tidak ada horizontal overflow.</li>
+        <li>Pastikan navigasi dapat digunakan dengan keyboard.</li>
+      </ul>
+
+      <div class="success">
+        <b>Standar selesai:</b> Website dapat digunakan pada tiga kategori
+        layar, memiliki minimal enam project, navigasi yang nyaman,
+        dan tidak mengalami horizontal overflow yang tidak diinginkan.
+      </div>
+    </section>
+
+    <!-- 12 QUIZ -->
+
+    <section class="card" id="quiz">
+      <span class="tag">12 • Evaluasi</span>
+      <h2>Quiz: Uji Pemahamanmu</h2>
+
+      <p>
+        Pilih jawaban yang paling tepat. Setelah selesai, tekan tombol
+        periksa untuk melihat skor dan pembahasan.
+      </p>
+
+      <form id="quiz-form">
+
+        <div class="quiz-question" data-question="q1">
+          <p>1. Apa tujuan utama Responsive Design?</p>
+
+          <label>
+            <input type="radio" name="q1" value="a">
+            Membuat website hanya untuk desktop.
+          </label>
+
+          <label>
+            <input type="radio" name="q1" value="b">
+            Menyesuaikan tampilan dengan berbagai ukuran layar.
+          </label>
+
+          <label>
+            <input type="radio" name="q1" value="c">
+            Membuat ukuran file HTML lebih kecil.
+          </label>
+
+          <div class="quiz-feedback" aria-live="polite"></div>
+        </div>
+
+        <div class="quiz-question" data-question="q2">
+          <p>2. Apa fungsi meta viewport?</p>
+
+          <label>
+            <input type="radio" name="q2" value="a">
+            Mengatur warna website.
+          </label>
+
+          <label>
+            <input type="radio" name="q2" value="b">
+            Mengatur animasi halaman.
+          </label>
+
+          <label>
+            <input type="radio" name="q2" value="c">
+            Membantu browser menyesuaikan viewport dengan perangkat.
+          </label>
+
+          <div class="quiz-feedback" aria-live="polite"></div>
+        </div>
+
+        <div class="quiz-question" data-question="q3">
+          <p>3. Apa arti @media (max-width: 600px)?</p>
+
+          <label>
+            <input type="radio" name="q3" value="a">
+            Aturan berlaku pada viewport 600px atau lebih kecil.
+          </label>
+
+          <label>
+            <input type="radio" name="q3" value="b">
+            Aturan hanya berlaku pada layar 600px ke atas.
+          </label>
+
+          <label>
+            <input type="radio" name="q3" value="c">
+            Aturan berlaku hanya pada desktop.
+          </label>
+
+          <div class="quiz-feedback" aria-live="polite"></div>
+        </div>
+
+        <div class="quiz-question" data-question="q4">
+          <p>4. Apa fungsi clamp()?</p>
+
+          <label>
+            <input type="radio" name="q4" value="a">
+            Menghapus elemen.
+          </label>
+
+          <label>
+            <input type="radio" name="q4" value="b">
+            Menentukan ukuran dengan batas minimum, pilihan fleksibel, dan maksimum.
+          </label>
+
+          <label>
+            <input type="radio" name="q4" value="c">
+            Mengubah gambar menjadi responsif.
+          </label>
+
+          <div class="quiz-feedback" aria-live="polite"></div>
+        </div>
+
+        <div class="quiz-question" data-question="q5">
+          <p>5. Properti yang membantu gambar tidak melebihi lebar induknya adalah...</p>
+
+          <label>
+            <input type="radio" name="q5" value="a">
+            max-width: 100%
+          </label>
+
+          <label>
+            <input type="radio" name="q5" value="b">
+            position: fixed
+          </label>
+
+          <label>
+            <input type="radio" name="q5" value="c">
+            z-index: 10
+          </label>
+
+          <div class="quiz-feedback" aria-live="polite"></div>
+        </div>
+
+        <div class="quiz-actions">
+          <button type="submit" class="primary-btn">
+            Periksa Jawaban
+          </button>
+
+          <button type="reset" class="secondary-btn" id="reset-quiz">
+            Ulangi Quiz
+          </button>
+        </div>
+
+        <div id="quiz-result" aria-live="polite"></div>
+
+      </form>
+    </section>
+
+    <!-- 13 CHECKLIST -->
+
+    <section class="card checklist" id="checklist">
+      <span class="tag">13 • Progress</span>
+      <h2>Checklist Pembelajaran</h2>
+
+      <p>Tandai materi yang sudah kamu pahami.</p>
+
+      <div
+        class="progress-track"
+        role="progressbar"
+        aria-label="Progress pembelajaran"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="0"
+        id="progress-bar"
+      >
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+
+      <p
+        id="progress-text"
+        style="font-size:13px;color:#64748b"
+        aria-live="polite"
+      >
+        0 dari 9 materi selesai (0%)
+      </p>
+
+      <div id="check-items">
+        <label>
+          <input type="checkbox">
+          Memahami konsep Responsive Design.
+        </label>
+
+        <label>
+          <input type="checkbox">
+          Memahami viewport dan meta viewport.
+        </label>
+
+        <label>
+          <input type="checkbox">
+          Memahami pendekatan Mobile First.
+        </label>
+
+        <label>
+          <input type="checkbox">
+          Memahami sintaks Media Queries.
+        </label>
+
+        <label>
+          <input type="checkbox">
+          Memahami breakpoint.
+        </label>
+
+        <label>
+          <input type="checkbox">
+          Memahami satuan responsif dan clamp().
+        </label>
+
+        <label>
+          <input type="checkbox">
+          Memahami gambar responsif.
+        </label>
+
+        <label>
+          <input type="checkbox">
+          Bisa menguji website melalui DevTools.
+        </label>
+
+        <label>
+          <input type="checkbox">
+          Menyelesaikan Responsive Kubika Portfolio.
+        </label>
+      </div>
+    </section>
+
+    <!-- MODULE NAVIGATION -->
+
+    <div class="module-nav">
+      <a href="modul-08.html">
+        ← Module 08: Grid
+      </a>
+
+      <a href="modul-10.html">
+        Module 10: Transitions, Transforms & Animations →
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  DevLearn — Learn, Practice, Build.<br>
+  Part of Kubika Learning Environment.
+</footer>
+
+<script>
+  // ==========================================
+  // QUIZ SYSTEM
+  // ==========================================
+
+  const quizForm = document.getElementById("quiz-form");
+
+  const answers = {
+    q1: "b",
+    q2: "c",
+    q3: "a",
+    q4: "b",
+    q5: "a"
+  };
+
+  const explanations = {
+    q1: "Responsive Design membantu website menyesuaikan layout dengan berbagai ukuran layar.",
+    q2: "Meta viewport membantu browser menggunakan lebar viewport sesuai perangkat.",
+    q3: "max-width: 600px berarti aturan aktif ketika viewport memiliki lebar maksimal 600px.",
+    q4: "clamp() menerima tiga nilai: minimum, nilai fleksibel, dan maksimum.",
+    q5: "max-width: 100% membatasi lebar gambar agar tidak melebihi elemen induknya."
+  };
+
+  quizForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let score = 0;
+    let answered = 0;
+
+    Object.keys(answers).forEach(function(key) {
+      const selected = quizForm.querySelector(
+        `input[name="${key}"]:checked`
+      );
+
+      const question = quizForm.querySelector(
+        `[data-question="${key}"]`
+      );
+
+      const feedback = question.querySelector(".quiz-feedback");
+
+      feedback.className = "quiz-feedback";
+
+      if (!selected) {
+        feedback.textContent = "Belum dijawab.";
+        feedback.classList.add("incorrect");
+        return;
+      }
+
+      answered++;
+
+      if (selected.value === answers[key]) {
+        score++;
+
+        feedback.textContent =
+          "Benar! " + explanations[key];
+
+        feedback.classList.add("correct");
+
+      } else {
+        feedback.textContent =
+          "Belum tepat. Jawaban yang benar: " +
+          answers[key].toUpperCase() + ". " +
+          explanations[key];
+
+        feedback.classList.add("incorrect");
+      }
+    });
+
+    const result = document.getElementById("quiz-result");
+
+    if (answered < 5) {
+      result.textContent =
+        `Kamu baru menjawab ${answered} dari 5 soal. Lengkapi jawaban yang kosong, ya!`;
+
+      result.style.color = "#d97706";
+      return;
+    }
+
+    const finalScore = score * 20;
+
+    let message = "";
+
+    if (score === 5) {
+      message = "Sempurna! Kamu sudah memahami materi dengan sangat baik.";
+    } else if (score >= 4) {
+      message = "Bagus! Pemahamanmu sudah cukup kuat.";
+    } else if (score >= 3) {
+      message = "Lumayan! Pelajari kembali bagian yang masih keliru.";
+    } else {
+      message = "Jangan menyerah. Coba baca kembali materi dan ulangi quiz.";
+    }
+
+    result.textContent =
+      `Nilai: ${finalScore}/100 (${score} dari 5 benar). ${message}`;
+
+    result.style.color =
+      score >= 4 ? "#059669" : "#d97706";
+  });
+
+  // Reset quiz
+
+  quizForm.addEventListener("reset", function() {
+    setTimeout(function() {
+      document.querySelectorAll(".quiz-feedback").forEach(function(item) {
+        item.textContent = "";
+        item.className = "quiz-feedback";
+      });
+
+      const result = document.getElementById("quiz-result");
+      result.textContent = "";
+    }, 0);
+  });
+
+
+  // ==========================================
+  // CHECKLIST PROGRESS
+  // ==========================================
+
+  const checks = document.querySelectorAll(
+    "#check-items input[type='checkbox']"
+  );
+
+  const progressFill = document.getElementById("progress-fill");
+  const progressText = document.getElementById("progress-text");
+  const progressBar = document.getElementById("progress-bar");
+
+  function updateProgress() {
+    const total = checks.length;
+
+    const done = [...checks].filter(function(item) {
+      return item.checked;
+    }).length;
+
+    const percentage = total > 0
+      ? Math.round((done / total) * 100)
+      : 0;
+
+    progressFill.style.width = percentage + "%";
+
+    progressText.textContent =
+      `${done} dari ${total} materi selesai (${percentage}%)`;
+
+    progressBar.setAttribute(
+      "aria-valuenow",
+      percentage
+    );
+  }
+
+  checks.forEach(function(item) {
+    item.addEventListener("change", updateProgress);
+  });
+
+  updateProgress();
+
+
+  // ==========================================
+  // ACTIVE SIDEBAR NAVIGATION
+  // ==========================================
+
+  const sidebarLinks = document.querySelectorAll(".sidebar a");
+
+  const sections = document.querySelectorAll(
+    "main section[id]"
+  );
+
+  function setActiveLink(id) {
+    sidebarLinks.forEach(function(link) {
+      const isActive = link.getAttribute("href") === "#" + id;
+
+      link.classList.toggle("active", isActive);
+
+      if (isActive) {
+        link.setAttribute("aria-current", "location");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  sidebarLinks.forEach(function(link) {
+    link.addEventListener("click", function() {
+      const targetId = link.getAttribute("href").slice(1);
+      setActiveLink(targetId);
+    });
+  });
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      function(entries) {
+        const visibleSections = entries
+          .filter(function(entry) {
+            return entry.isIntersecting;
+          })
+          .sort(function(a, b) {
+            return b.intersectionRatio - a.intersectionRatio;
+          });
+
+        if (visibleSections.length > 0) {
+          setActiveLink(visibleSections[0].target.id);
+        }
+      },
+      {
+        rootMargin: "-20% 0px -65% 0px",
+        threshold: [0, 0.25, 0.5, 0.75]
+      }
+    );
+
+    sections.forEach(function(section) {
+      observer.observe(section);
+    });
+  }
+</script>
+
+</body>
+</html>

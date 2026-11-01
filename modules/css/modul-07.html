@@ -1,0 +1,1548 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevLearn - CSS Modul 07</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --dark: #14213d;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --green: #059669;
+      --soft-blue: #eff6ff;
+      --soft-green: #ecfdf5;
+      --soft-yellow: #fffbeb;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      color: var(--dark);
+      font-weight: 800;
+      font-size: 19px;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--primary); }
+
+    .nav-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 32px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 85px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .sidebar h3 {
+      margin: 0 0 12px;
+      color: var(--dark);
+      font-size: 15px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 8px 10px;
+      margin: 3px 0;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 7px;
+      font-size: 13px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: var(--soft-blue);
+      color: var(--primary);
+    }
+
+    main { min-width: 0; }
+
+    .hero {
+      padding: 34px;
+      background: linear-gradient(135deg, #14213d, #2563eb);
+      color: white;
+      border-radius: 18px;
+      margin-bottom: 22px;
+    }
+
+    .hero .tag {
+      display: inline-block;
+      padding: 5px 11px;
+      background: rgba(255,255,255,.15);
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .hero h1 {
+      margin: 15px 0 8px;
+      font-size: 32px;
+      line-height: 1.25;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #dbeafe;
+      max-width: 650px;
+    }
+
+    .meta {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #dbeafe;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      color: var(--dark);
+      font-size: 21px;
+    }
+
+    .card h3 {
+      color: var(--dark);
+      font-size: 16px;
+      margin-top: 22px;
+    }
+
+    .card p { margin: 10px 0; }
+
+    .code {
+      position: relative;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 14px 0;
+      overflow-x: auto;
+    }
+
+    .code pre {
+      margin: 0;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: 1px solid #475569;
+      background: #1e293b;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .note {
+      padding: 15px 17px;
+      border-radius: 9px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .info {
+      background: var(--soft-blue);
+      border-left: 4px solid var(--primary);
+    }
+
+    .success {
+      background: var(--soft-green);
+      border-left: 4px solid var(--green);
+    }
+
+    .warning {
+      background: var(--soft-yellow);
+      border-left: 4px solid #d97706;
+    }
+
+    .example {
+      border: 1px dashed #cbd5e1;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 14px 0;
+      overflow: hidden;
+    }
+
+    .example-title {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .flex-demo {
+      display: flex;
+      min-height: 100px;
+      padding: 10px;
+      gap: 8px;
+      background: #e2e8f0;
+      border: 1px dashed #94a3b8;
+      border-radius: 8px;
+    }
+
+    .flex-item {
+      min-width: 45px;
+      min-height: 45px;
+      display: grid;
+      place-items: center;
+      padding: 8px;
+      color: white;
+      background: #2563eb;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .comparison th,
+    .comparison td {
+      border: 1px solid var(--border);
+      padding: 11px;
+      text-align: left;
+    }
+
+    .comparison th {
+      background: #f1f5f9;
+      color: var(--dark);
+    }
+
+    .quiz-question {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin: 14px 0;
+    }
+
+    .quiz-question p {
+      font-weight: bold;
+      margin-top: 0;
+    }
+
+    .quiz-question label {
+      display: block;
+      padding: 5px 0;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .quiz-result {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 9px;
+      background: var(--soft-blue);
+    }
+
+    .primary-btn {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      padding: 11px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .primary-btn:hover { background: #1d4ed8; }
+
+    .checklist label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .checklist input { margin-top: 5px; }
+
+    .progress-track {
+      height: 9px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--green);
+      transition: width .3s;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      padding: 11px 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: white;
+      font-size: 13px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .container { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+
+      .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 24px; }
+      .hero h1 { font-size: 25px; }
+      .card { padding: 19px; }
+      .sidebar nav { grid-template-columns: 1fr; }
+      .navigation { flex-direction: column; }
+    }
+  </style>
+  <link rel="stylesheet" href="../html/module-theme.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="../../index.html" class="brand">Kub<span>ika.</span></a>
+  <span class="nav-label">CSS Learning Path · Modul 07</span>
+</header>
+
+<div class="container">
+
+  <aside class="sidebar">
+    <h3>Daftar Materi</h3>
+    <nav>
+      <a href="#tujuan">Tujuan Pembelajaran</a>
+      <a href="#pengenalan">Mengenal Flexbox</a>
+      <a href="#konsep">Konsep Flexbox</a>
+      <a href="#direction">Flex Direction</a>
+      <a href="#justify">Justify Content</a>
+      <a href="#align">Align Items</a>
+      <a href="#wrap">Flex Wrap</a>
+      <a href="#gap">Gap</a>
+      <a href="#flexitem">Flex Item</a>
+      <a href="#alignself">Align Self</a>
+      <a href="#order">Order</a>
+      <a href="#latihan">Latihan Praktik</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#challenge">Final Challenge</a>
+    </nav>
+  </aside>
+
+  <main>
+
+    <section class="hero">
+      <span class="tag">CSS FUNDAMENTAL · MODUL 07</span>
+      <h1>CSS Flexbox</h1>
+      <p>
+        Pelajari cara menyusun, meratakan, dan mengatur jarak
+        antar elemen website dengan layout yang fleksibel.
+      </p>
+      <div class="meta">Level: Beginner – Intermediate · Estimasi: 60–75 menit</div>
+    </section>
+
+    <section class="card" id="tujuan">
+      <h2>01. Tujuan Pembelajaran</h2>
+      <p>Setelah menyelesaikan modul ini, kamu diharapkan mampu:</p>
+
+      <ul>
+        <li>Memahami konsep Flexbox dan cara kerjanya.</li>
+        <li>Menggunakan display: flex.</li>
+        <li>Mengatur arah elemen dengan flex-direction.</li>
+        <li>Mengatur posisi horizontal atau main axis menggunakan justify-content.</li>
+        <li>Mengatur posisi cross axis menggunakan align-items.</li>
+        <li>Mengatur perpindahan baris menggunakan flex-wrap.</li>
+        <li>Mengatur jarak dengan gap.</li>
+        <li>Mengatur ukuran dan perilaku item dengan flex-grow, flex-shrink, dan flex-basis.</li>
+        <li>Mengatur item secara individual dengan align-self dan order.</li>
+      </ul>
+
+      <div class="note info">
+        <strong>Prasyarat:</strong> Pahami display, box model,
+        margin, padding, dan dasar CSS dari modul sebelumnya.
+      </div>
+    </section>
+
+    <section class="card" id="pengenalan">
+      <h2>02. Mengenal Flexbox</h2>
+
+      <p>
+        Flexbox atau Flexible Box Layout adalah sistem layout CSS
+        yang membantu kita menyusun elemen secara fleksibel dalam
+        satu dimensi.
+      </p>
+
+      <p>
+        Satu dimensi berarti Flexbox bekerja terutama dalam satu arah:
+        horizontal atau vertikal.
+      </p>
+
+      <p>
+        Contohnya, ketika kita ingin membuat:
+      </p>
+
+      <ul>
+        <li>Navbar dengan logo di kiri dan menu di kanan.</li>
+        <li>Beberapa card dalam satu baris.</li>
+        <li>Tombol yang berada tepat di tengah.</li>
+        <li>Konten yang memiliki jarak merata.</li>
+        <li>Layout yang menyesuaikan ukuran layar.</li>
+      </ul>
+
+      <div class="note success">
+        Flexbox membantu mengurangi kebutuhan untuk mengatur posisi
+        elemen secara manual menggunakan margin atau position.
+      </div>
+    </section>
+
+    <section class="card" id="konsep">
+      <h2>03. Konsep Dasar Flexbox</h2>
+
+      <p>
+        Untuk menggunakan Flexbox, kita perlu membedakan dua istilah:
+      </p>
+
+      <ul>
+        <li><strong>Flex Container:</strong> Elemen induk yang menggunakan display: flex.</li>
+        <li><strong>Flex Items:</strong> Elemen anak langsung di dalam flex container.</li>
+      </ul>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+}</code></pre>
+      </div>
+
+      <p>
+        Setelah display: flex diterapkan pada container,
+        elemen anak langsung akan menjadi flex items.
+      </p>
+
+      <div class="example">
+        <div class="example-title">Contoh flex container</div>
+        <div class="flex-demo">
+          <div class="flex-item">Item 1</div>
+          <div class="flex-item">Item 2</div>
+          <div class="flex-item">Item 3</div>
+        </div>
+      </div>
+
+      <h3>Main Axis dan Cross Axis</h3>
+
+      <p>
+        Flexbox memiliki dua sumbu utama yang perlu dipahami:
+      </p>
+
+      <ul>
+        <li><strong>Main Axis:</strong> Sumbu utama sesuai arah flex-direction.</li>
+        <li><strong>Cross Axis:</strong> Sumbu yang tegak lurus terhadap main axis.</li>
+      </ul>
+
+      <div class="note info">
+        Jika flex-direction: row, main axis berjalan horizontal.
+        Jika flex-direction: column, main axis berjalan vertikal.
+      </div>
+    </section>
+
+    <section class="card" id="direction">
+      <h2>04. Flex Direction</h2>
+
+      <p>
+        Property flex-direction digunakan untuk menentukan arah
+        susunan flex items.
+      </p>
+
+      <h3>A. Row</h3>
+
+      <p>
+        Menyusun item secara horizontal dari kiri ke kanan
+        dalam arah penulisan normal.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  flex-direction: row;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Flex direction row</div>
+        <div class="flex-demo" style="flex-direction:row">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <h3>B. Row Reverse</h3>
+
+      <p>Menyusun item secara horizontal dengan urutan terbalik.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  flex-direction: row-reverse;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Flex direction row reverse</div>
+        <div class="flex-demo" style="flex-direction:row-reverse">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <h3>C. Column</h3>
+
+      <p>Menyusun item secara vertikal dari atas ke bawah.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  flex-direction: column;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Flex direction column</div>
+        <div class="flex-demo" style="flex-direction:column;align-items:flex-start">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <h3>D. Column Reverse</h3>
+
+      <p>Menyusun item secara vertikal dengan urutan terbalik.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  flex-direction: column-reverse;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Flex direction column reverse</div>
+        <div class="flex-demo" style="flex-direction:column-reverse;align-items:flex-start">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <table class="comparison">
+        <tr><th>Value</th><th>Arah susunan</th></tr>
+        <tr><td>row</td><td>Horizontal normal</td></tr>
+        <tr><td>row-reverse</td><td>Horizontal terbalik</td></tr>
+        <tr><td>column</td><td>Vertikal normal</td></tr>
+        <tr><td>column-reverse</td><td>Vertikal terbalik</td></tr>
+      </table>
+    </section>
+
+    <section class="card" id="justify">
+      <h2>05. Justify Content</h2>
+
+      <p>
+        Property justify-content digunakan untuk mengatur distribusi
+        ruang dan posisi flex items sepanjang main axis.
+      </p>
+
+      <h3>A. Flex Start</h3>
+
+      <p>Item dikumpulkan di awal main axis.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  justify-content: flex-start;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Flex start</div>
+        <div class="flex-demo" style="justify-content:flex-start">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <h3>B. Center</h3>
+
+      <p>Item ditempatkan di tengah main axis.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  justify-content: center;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Center</div>
+        <div class="flex-demo" style="justify-content:center">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <h3>C. Flex End</h3>
+
+      <p>Item dikumpulkan di akhir main axis.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  justify-content: flex-end;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Flex end</div>
+        <div class="flex-demo" style="justify-content:flex-end">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <h3>D. Space Between</h3>
+
+      <p>Ruang kosong dibagikan di antara item.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  justify-content: space-between;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Space between</div>
+        <div class="flex-demo" style="justify-content:space-between">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <h3>E. Space Around</h3>
+
+      <p>Setiap item mendapat ruang di kedua sisinya.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  justify-content: space-around;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Space around</div>
+        <div class="flex-demo" style="justify-content:space-around">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <h3>F. Space Evenly</h3>
+
+      <p>Semua ruang kosong, termasuk bagian tepi, dibagikan sama besar.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  justify-content: space-evenly;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Space evenly</div>
+        <div class="flex-demo" style="justify-content:space-evenly">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <table class="comparison">
+        <tr><th>Value</th><th>Perilaku</th></tr>
+        <tr><td>flex-start</td><td>Item di awal.</td></tr>
+        <tr><td>center</td><td>Item di tengah.</td></tr>
+        <tr><td>flex-end</td><td>Item di akhir.</td></tr>
+        <tr><td>space-between</td><td>Ruang dibagikan di antara item.</td></tr>
+        <tr><td>space-around</td><td>Ruang di sekitar setiap item.</td></tr>
+        <tr><td>space-evenly</td><td>Semua ruang sama besar.</td></tr>
+      </table>
+    </section>
+
+    <section class="card" id="align">
+      <h2>06. Align Items</h2>
+
+      <p>
+        Align-items digunakan untuk mengatur posisi item
+        sepanjang cross axis.
+      </p>
+
+      <h3>A. Stretch</h3>
+
+      <p>
+        Item direntangkan untuk mengisi ruang cross axis jika
+        ukuran cross-axis-nya belum ditentukan.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  align-items: stretch;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Stretch</div>
+        <div class="flex-demo" style="height:130px;align-items:stretch">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <h3>B. Center</h3>
+
+      <p>Item ditempatkan di tengah cross axis.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  align-items: center;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Align center</div>
+        <div class="flex-demo" style="height:130px;align-items:center">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <h3>C. Flex Start dan Flex End</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>/* Di awal cross axis */
+.container {
+  align-items: flex-start;
+}
+
+/* Di akhir cross axis */
+.container {
+  align-items: flex-end;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Flex start</div>
+        <div class="flex-demo" style="height:120px;align-items:flex-start">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Flex end</div>
+        <div class="flex-demo" style="height:120px;align-items:flex-end">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <div class="note warning">
+        <strong>Jangan tertukar:</strong> justify-content mengatur
+        main axis, sedangkan align-items mengatur cross axis.
+        Arah kedua sumbu berubah ketika flex-direction berubah.
+      </div>
+    </section>
+
+    <section class="card" id="wrap">
+      <h2>07. Flex Wrap</h2>
+
+      <p>
+        Secara default, flex items berusaha berada dalam satu baris.
+        Flex-wrap mengatur apakah item boleh berpindah ke baris
+        atau kolom berikutnya ketika ruang tidak cukup.
+      </p>
+
+      <h3>No Wrap</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  flex-wrap: nowrap;
+}</code></pre>
+      </div>
+
+      <h3>Wrap</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  flex-wrap: wrap;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh flex wrap</div>
+        <div class="flex-demo" style="flex-wrap:wrap">
+          <div class="flex-item" style="flex:0 0 110px">Item 1</div>
+          <div class="flex-item" style="flex:0 0 110px">Item 2</div>
+          <div class="flex-item" style="flex:0 0 110px">Item 3</div>
+          <div class="flex-item" style="flex:0 0 110px">Item 4</div>
+          <div class="flex-item" style="flex:0 0 110px">Item 5</div>
+        </div>
+      </div>
+
+      <h3>Wrap Reverse</h3>
+
+      <p>Baris baru disusun dalam arah cross axis yang terbalik.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  flex-wrap: wrap-reverse;
+}</code></pre>
+      </div>
+
+      <div class="note info">
+        Flex-wrap sering digunakan ketika membuat kumpulan card
+        atau menu yang perlu menyesuaikan lebar layar.
+      </div>
+    </section>
+
+    <section class="card" id="gap">
+      <h2>08. Gap</h2>
+
+      <p>
+        Gap digunakan untuk memberikan jarak di antara flex items
+        tanpa perlu menambahkan margin pada setiap item.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  gap: 20px;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh gap</div>
+        <div class="flex-demo" style="gap:20px">
+          <div class="flex-item">1</div>
+          <div class="flex-item">2</div>
+          <div class="flex-item">3</div>
+        </div>
+      </div>
+
+      <p>Gap juga dapat dipisahkan menjadi dua arah:</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  display: flex;
+  row-gap: 20px;
+  column-gap: 30px;
+  flex-wrap: wrap;
+}</code></pre>
+      </div>
+
+      <table class="comparison">
+        <tr><th>Property</th><th>Fungsi</th></tr>
+        <tr><td>gap</td><td>Jarak antara baris dan kolom.</td></tr>
+        <tr><td>row-gap</td><td>Jarak antarbaris.</td></tr>
+        <tr><td>column-gap</td><td>Jarak antarkolom.</td></tr>
+      </table>
+    </section>
+
+    <section class="card" id="flexitem">
+      <h2>09. Mengatur Flex Items</h2>
+
+      <p>
+        Selain mengatur container, kita juga dapat mengatur
+        bagaimana masing-masing item mengambil ruang.
+      </p>
+
+      <h3>A. Flex Grow</h3>
+
+      <p>
+        Flex-grow menentukan seberapa besar item dapat berkembang
+        untuk mengisi ruang kosong yang tersedia.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.item {
+  flex-grow: 1;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh flex grow</div>
+        <div class="flex-demo">
+          <div class="flex-item" style="flex-grow:1">Grow 1</div>
+          <div class="flex-item" style="flex-grow:2">Grow 2</div>
+          <div class="flex-item" style="flex-grow:1">Grow 1</div>
+        </div>
+      </div>
+
+      <p>
+        Item kedua mendapat bagian ruang kosong dua kali lipat
+        dibandingkan item pertama dan ketiga.
+      </p>
+
+      <h3>B. Flex Shrink</h3>
+
+      <p>
+        Flex-shrink menentukan seberapa besar item dapat menyusut
+        ketika ruang tidak mencukupi.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.item {
+  flex-shrink: 1;
+}</code></pre>
+      </div>
+
+      <p>
+        Nilai default umumnya 1. Jika menggunakan 0, item tidak
+        akan menyusut karena pembagian ruang negatif Flexbox.
+      </p>
+
+      <h3>C. Flex Basis</h3>
+
+      <p>
+        Flex-basis menentukan ukuran awal item sebelum ruang
+        yang tersisa dibagikan atau dikurangi.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.item {
+  flex-basis: 200px;
+}</code></pre>
+      </div>
+
+      <h3>D. Shorthand Flex</h3>
+
+      <p>
+        Ketiga property tersebut dapat ditulis dalam satu deklarasi.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.item {
+  flex: 1 1 200px;
+}
+
+/* grow shrink basis */</code></pre>
+      </div>
+
+      <table class="comparison">
+        <tr><th>Property</th><th>Fungsi</th></tr>
+        <tr><td>flex-grow</td><td>Mengatur kemampuan berkembang.</td></tr>
+        <tr><td>flex-shrink</td><td>Mengatur kemampuan menyusut.</td></tr>
+        <tr><td>flex-basis</td><td>Menentukan ukuran awal.</td></tr>
+        <tr><td>flex</td><td>Shorthand ketiga property.</td></tr>
+      </table>
+
+      <div class="note success">
+        <strong>Contoh penggunaan:</strong> flex: 1 sering digunakan
+        untuk membagi ruang secara merata di antara beberapa item.
+      </div>
+    </section>
+
+    <section class="card" id="alignself">
+      <h2>10. Align Self</h2>
+
+      <p>
+        Align-self digunakan untuk mengatur posisi satu flex item
+        secara individual, tanpa mengubah align-items seluruh container.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.item-special {
+  align-self: flex-end;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh align self</div>
+        <div class="flex-demo" style="height:140px;align-items:center">
+          <div class="flex-item">Normal</div>
+          <div class="flex-item" style="align-self:flex-start">Start</div>
+          <div class="flex-item" style="align-self:flex-end">End</div>
+          <div class="flex-item">Normal</div>
+        </div>
+      </div>
+
+      <p>
+        Nilai yang dapat digunakan antara lain:
+        auto, flex-start, flex-end, center, dan stretch.
+      </p>
+    </section>
+
+    <section class="card" id="order">
+      <h2>11. Order</h2>
+
+      <p>
+        Property order digunakan untuk mengubah urutan visual
+        flex items tanpa mengubah urutan HTML.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.item-first {
+  order: 1;
+}
+
+.item-last {
+  order: 3;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh order</div>
+        <div class="flex-demo">
+          <div class="flex-item" style="order:3">HTML 1</div>
+          <div class="flex-item" style="order:1">HTML 2</div>
+          <div class="flex-item" style="order:2">HTML 3</div>
+        </div>
+        <p>Urutan tampil: HTML 2 → HTML 3 → HTML 1.</p>
+      </div>
+
+      <div class="note warning">
+        Order hanya mengubah urutan visual. Urutan pembacaan dokumen
+        dan navigasi keyboard tidak otomatis berubah. Jangan
+        menggunakannya untuk menggantikan struktur HTML yang logis.
+      </div>
+    </section>
+
+    <section class="card" id="latihan">
+      <h2>12. Latihan Praktik</h2>
+
+      <p>
+        Buat sebuah <strong>Team Member Section</strong>
+        yang menampilkan beberapa anggota tim dalam bentuk card.
+      </p>
+
+      <h3>Struktur folder</h3>
+
+      <div class="code">
+        <pre><code>team-section/
+├── index.html
+└── style.css</code></pre>
+      </div>
+
+      <h3>File index.html</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+    content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Our Team&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header class="navbar"&gt;
+    &lt;h2&gt;Kubika&lt;/h2&gt;
+
+    &lt;nav&gt;
+      &lt;a href="#"&gt;Home&lt;/a&gt;
+      &lt;a href="#"&gt;Team&lt;/a&gt;
+      &lt;a href="#"&gt;Project&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main class="container"&gt;
+    &lt;section class="heading"&gt;
+      &lt;h1&gt;Meet Our Team&lt;/h1&gt;
+      &lt;p&gt;Kenali anggota tim pengembang kami.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section class="team-list"&gt;
+
+      &lt;article class="team-card"&gt;
+        &lt;div class="avatar"&gt;BR&lt;/div&gt;
+        &lt;h3&gt;Biran Ramadhan&lt;/h3&gt;
+        &lt;p&gt;Frontend Developer&lt;/p&gt;
+      &lt;/article&gt;
+
+      &lt;article class="team-card"&gt;
+        &lt;div class="avatar"&gt;AR&lt;/div&gt;
+        &lt;h3&gt;Anggota Kedua&lt;/h3&gt;
+        &lt;p&gt;UI Designer&lt;/p&gt;
+      &lt;/article&gt;
+
+      &lt;article class="team-card"&gt;
+        &lt;div class="avatar"&gt;CR&lt;/div&gt;
+        &lt;h3&gt;Anggota Ketiga&lt;/h3&gt;
+        &lt;p&gt;Backend Developer&lt;/p&gt;
+      &lt;/article&gt;
+
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </div>
+
+      <h3>File style.css</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f8fafc;
+  color: #334155;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 7%;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.navbar h2 {
+  color: #2563eb;
+  margin: 0;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #334155;
+  font-size: 14px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.heading h1 {
+  color: #14213d;
+  font-size: 32px;
+}
+
+.team-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.team-card {
+  flex: 1 1 220px;
+  max-width: 300px;
+  padding: 25px;
+  text-align: center;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+}
+
+.avatar {
+  width: 75px;
+  height: 75px;
+  margin: 0 auto 15px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.team-card h3 {
+  color: #14213d;
+  margin-bottom: 5px;
+}
+
+.team-card p {
+  color: #64748b;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .navbar nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .heading h1 {
+    font-size: 26px;
+  }
+}</code></pre>
+      </div>
+
+      <h3>Tugas eksplorasi</h3>
+
+      <ol>
+        <li>Ubah arah card menggunakan flex-direction.</li>
+        <li>Coba justify-content: space-between.</li>
+        <li>Ubah align-items menjadi center.</li>
+        <li>Tambahkan dua anggota baru.</li>
+        <li>Ubah gap menjadi 30px.</li>
+        <li>Ubah flex-basis dan flex-grow untuk mengatur ukuran card.</li>
+        <li>Uji tampilan pada layar HP.</li>
+      </ol>
+
+      <div class="note success">
+        <strong>Target latihan:</strong> Mampu membuat section anggota
+        tim yang rapi, fleksibel, dan responsif menggunakan Flexbox.
+      </div>
+    </section>
+
+    <section class="card" id="quiz">
+      <h2>13. Quiz Pemahaman</h2>
+      <p>Pilih jawaban yang paling tepat.</p>
+
+      <form id="quizForm">
+
+        <div class="quiz-question">
+          <p>1. Apa fungsi display: flex?</p>
+          <label><input type="radio" name="q1" value="a"> Menyembunyikan elemen</label>
+          <label><input type="radio" name="q1" value="b"> Mengaktifkan layout Flexbox pada container</label>
+          <label><input type="radio" name="q1" value="c"> Mengubah warna elemen</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Property apa yang digunakan untuk mengatur arah susunan flex items?</p>
+          <label><input type="radio" name="q2" value="a"> flex-direction</label>
+          <label><input type="radio" name="q2" value="b"> flex-color</label>
+          <label><input type="radio" name="q2" value="c"> flex-position</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. Apa fungsi justify-content?</p>
+          <label><input type="radio" name="q3" value="a"> Mengatur warna item</label>
+          <label><input type="radio" name="q3" value="b"> Mengatur ukuran font</label>
+          <label><input type="radio" name="q3" value="c"> Mengatur distribusi item pada main axis</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. Property apa yang digunakan agar item dapat berpindah ke baris berikutnya?</p>
+          <label><input type="radio" name="q4" value="a"> flex-wrap</label>
+          <label><input type="radio" name="q4" value="b"> flex-color</label>
+          <label><input type="radio" name="q4" value="c"> flex-order</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Apa fungsi flex-grow?</p>
+          <label><input type="radio" name="q5" value="a"> Mengatur warna background</label>
+          <label><input type="radio" name="q5" value="b"> Mengatur kemampuan item berkembang mengisi ruang kosong</label>
+          <label><input type="radio" name="q5" value="c"> Mengatur posisi fixed</label>
+        </div>
+
+        <button class="primary-btn" type="button" onclick="checkQuiz()">
+          Periksa Jawaban
+        </button>
+      </form>
+
+      <div class="quiz-result" id="quizResult"></div>
+    </section>
+
+    <section class="card" id="challenge">
+      <h2>14. Final Challenge</h2>
+
+      <p>
+        Buat sebuah halaman <strong>Kubika Team Showcase</strong>
+        dengan layout Flexbox yang menampilkan profil anggota tim.
+      </p>
+
+      <h3>Ketentuan proyek</h3>
+
+      <ul>
+        <li>Memiliki navbar dengan logo dan menu.</li>
+        <li>Memiliki judul section anggota tim.</li>
+        <li>Menampilkan minimal empat profile card.</li>
+        <li>Menggunakan display: flex.</li>
+        <li>Menggunakan justify-content dan align-items.</li>
+        <li>Menggunakan flex-wrap agar card dapat berpindah baris.</li>
+        <li>Menggunakan gap untuk mengatur jarak.</li>
+        <li>Menggunakan flex-grow atau flex-basis.</li>
+        <li>Memiliki tampilan responsif.</li>
+      </ul>
+
+      <h3>Checklist penyelesaian</h3>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <p id="progressText">0 dari 6 target selesai</p>
+
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox"> Saya memahami konsep flex container dan flex items.</label>
+        <label><input type="checkbox"> Saya memahami flex-direction.</label>
+        <label><input type="checkbox"> Saya memahami justify-content dan align-items.</label>
+        <label><input type="checkbox"> Saya memahami flex-wrap dan gap.</label>
+        <label><input type="checkbox"> Saya memahami flex-grow, flex-shrink, dan flex-basis.</label>
+        <label><input type="checkbox"> Saya berhasil menyelesaikan final challenge.</label>
+      </div>
+
+      <div class="note success">
+        <strong>Standar kelulusan:</strong> Selesaikan seluruh checklist
+        dan raih minimal 4 dari 5 jawaban benar pada quiz sebelum
+        melanjutkan ke Modul 08.
+      </div>
+    </section>
+
+    <div class="navigation">
+      <a href="modul-06.html">← Modul 06: Display & Position</a>
+      <a href="modul-08.html">Modul 08: CSS Grid →</a>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  DevLearn · Learn, Practice, Build
+  <br>Belajar hari ini, bangun sesuatu esok hari.
+</footer>
+
+<script>
+  function copyCode(button) {
+    const code = button.parentElement.querySelector("code");
+
+    navigator.clipboard.writeText(code.innerText).then(() => {
+      button.innerText = "Copied!";
+      setTimeout(() => button.innerText = "Copy", 1500);
+    }).catch(() => {
+      button.innerText = "Gagal";
+      setTimeout(() => button.innerText = "Copy", 1500);
+    });
+  }
+
+  function checkQuiz() {
+    const answers = {
+      q1: "b",
+      q2: "a",
+      q3: "c",
+      q4: "a",
+      q5: "b"
+    };
+
+    let score = 0;
+    let unanswered = 0;
+
+    Object.keys(answers).forEach(question => {
+      const selected = document.querySelector(
+        `input[name="${question}"]:checked`
+      );
+
+      if (!selected) {
+        unanswered++;
+      } else if (selected.value === answers[question]) {
+        score++;
+      }
+    });
+
+    const result = document.getElementById("quizResult");
+    result.style.display = "block";
+
+    if (unanswered > 0) {
+      result.innerHTML =
+        `Masih ada ${unanswered} soal yang belum dijawab. Lengkapi dahulu, ya.`;
+      return;
+    }
+
+    result.innerHTML =
+      `<strong>Skor kamu: ${score}/5</strong><br>` +
+      (score >= 4
+        ? "Bagus! Kamu sudah memahami dasar Flexbox."
+        : "Belum mencapai target. Pelajari kembali materi dan ulangi quiz.");
+
+    result.style.background = score >= 4 ? "#ecfdf5" : "#fffbeb";
+  }
+
+  const checklist = document.querySelectorAll(
+    "#checklist input[type='checkbox']"
+  );
+
+  function updateProgress() {
+    const checked = [...checklist].filter(item => item.checked).length;
+    const total = checklist.length;
+
+    document.getElementById("progressFill").style.width =
+      (checked / total * 100) + "%";
+
+    document.getElementById("progressText").innerText =
+      `${checked} dari ${total} target selesai`;
+  }
+
+  checklist.forEach(item => {
+    item.addEventListener("change", updateProgress);
+  });
+
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinks = document.querySelectorAll(".sidebar a");
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 130) {
+        current = section.id;
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === "#" + current
+      );
+    });
+  });
+</script>
+
+</body>
+</html>

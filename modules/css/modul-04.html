@@ -1,0 +1,1203 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevLearn - CSS Modul 04</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --dark: #14213d;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --green: #059669;
+      --soft-blue: #eff6ff;
+      --soft-green: #ecfdf5;
+      --soft-yellow: #fffbeb;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    a { color: var(--primary); }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      color: var(--dark);
+      font-weight: 800;
+      font-size: 19px;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--primary); }
+
+    .nav-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 32px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 85px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .sidebar h3 {
+      margin: 0 0 12px;
+      color: var(--dark);
+      font-size: 15px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 8px 10px;
+      margin: 3px 0;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 7px;
+      font-size: 13px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: var(--soft-blue);
+      color: var(--primary);
+    }
+
+    main { min-width: 0; }
+
+    .hero {
+      padding: 34px;
+      background: linear-gradient(135deg, #14213d, #2563eb);
+      color: white;
+      border-radius: 18px;
+      margin-bottom: 22px;
+    }
+
+    .hero .tag {
+      display: inline-block;
+      padding: 5px 11px;
+      background: rgba(255,255,255,.15);
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .hero h1 {
+      margin: 15px 0 8px;
+      font-size: 32px;
+      line-height: 1.25;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #dbeafe;
+      max-width: 650px;
+    }
+
+    .meta {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #dbeafe;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      color: var(--dark);
+      font-size: 21px;
+    }
+
+    .card h3 {
+      color: var(--dark);
+      font-size: 16px;
+      margin-top: 22px;
+    }
+
+    .card p { margin: 10px 0; }
+
+    .code {
+      position: relative;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 14px 0;
+      overflow-x: auto;
+    }
+
+    .code pre {
+      margin: 0;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: 1px solid #475569;
+      background: #1e293b;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .note {
+      padding: 15px 17px;
+      border-radius: 9px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .info {
+      background: var(--soft-blue);
+      border-left: 4px solid var(--primary);
+    }
+
+    .success {
+      background: var(--soft-green);
+      border-left: 4px solid var(--green);
+    }
+
+    .warning {
+      background: var(--soft-yellow);
+      border-left: 4px solid #d97706;
+    }
+
+    .example {
+      border: 1px dashed #cbd5e1;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+
+    .example-title {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .comparison th,
+    .comparison td {
+      border: 1px solid var(--border);
+      padding: 11px;
+      text-align: left;
+    }
+
+    .comparison th {
+      background: #f1f5f9;
+      color: var(--dark);
+    }
+
+    .quiz-question {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin: 14px 0;
+    }
+
+    .quiz-question p {
+      font-weight: bold;
+      margin-top: 0;
+    }
+
+    .quiz-question label {
+      display: block;
+      padding: 5px 0;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .quiz-result {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 9px;
+      background: var(--soft-blue);
+    }
+
+    .primary-btn {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      padding: 11px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .primary-btn:hover { background: #1d4ed8; }
+
+    .checklist label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .checklist input { margin-top: 5px; }
+
+    .progress-track {
+      height: 9px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--green);
+      transition: width .3s;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      padding: 11px 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: white;
+      font-size: 13px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .container { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 24px; }
+      .hero h1 { font-size: 25px; }
+      .card { padding: 19px; }
+      .sidebar nav { grid-template-columns: 1fr; }
+      .navigation { flex-direction: column; }
+    }
+  </style>
+  <link rel="stylesheet" href="../html/module-theme.css">
+</head>
+<body>
+
+<header class="navbar">
+  <a href="../../index.html" class="brand">Kub<span>ika.</span></a>
+  <span class="nav-label">CSS Learning Path · Modul 04</span>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h3>Daftar Materi</h3>
+    <nav>
+      <a href="#tujuan">Tujuan Pembelajaran</a>
+      <a href="#typography">Mengenal Typography</a>
+      <a href="#font-family">Font Family</a>
+      <a href="#font-size">Font Size</a>
+      <a href="#font-weight">Font Weight</a>
+      <a href="#font-style">Font Style</a>
+      <a href="#text-align">Text Align</a>
+      <a href="#line-height">Line Height</a>
+      <a href="#spacing">Text Spacing</a>
+      <a href="#decoration">Text Decoration</a>
+      <a href="#google-fonts">Google Fonts</a>
+      <a href="#latihan">Latihan Praktik</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#challenge">Final Challenge</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <span class="tag">CSS FUNDAMENTAL · MODUL 04</span>
+      <h1>Typography</h1>
+      <p>
+        Pelajari cara mengatur jenis huruf, ukuran, ketebalan,
+        jarak, dan perataan teks agar website nyaman dibaca.
+      </p>
+      <div class="meta">Level: Beginner · Estimasi: 45–60 menit</div>
+    </section>
+
+    <section class="card" id="tujuan">
+      <h2>01. Tujuan Pembelajaran</h2>
+      <p>Setelah menyelesaikan modul ini, kamu diharapkan mampu:</p>
+      <ul>
+        <li>Memahami peran typography dalam desain website.</li>
+        <li>Mengatur jenis huruf menggunakan font-family.</li>
+        <li>Mengatur ukuran dan ketebalan teks.</li>
+        <li>Mengatur gaya dan perataan teks.</li>
+        <li>Mengatur jarak antarbaris dan antarhuruf.</li>
+        <li>Menggunakan text decoration dan text transform.</li>
+        <li>Menggunakan Google Fonts dalam website.</li>
+      </ul>
+
+      <div class="note info">
+        <strong>Prasyarat:</strong> Pahami CSS syntax, selector,
+        serta warna dan background dari modul sebelumnya.
+      </div>
+    </section>
+
+    <section class="card" id="typography">
+      <h2>02. Mengenal Typography</h2>
+      <p>
+        Typography adalah pengaturan tampilan huruf dan teks agar
+        informasi mudah dibaca, dipahami, dan terlihat menarik.
+      </p>
+
+      <p>
+        Dalam website, typography membantu menentukan karakter visual.
+        Website berita, portofolio, toko online, dan aplikasi belajar
+        dapat menggunakan gaya huruf yang berbeda sesuai kebutuhannya.
+      </p>
+
+      <div class="example">
+        <div class="example-title">Perbandingan tampilan teks</div>
+        <div style="padding:15px;background:white;border-radius:8px;margin-bottom:12px">
+          <h2 style="font-family:Arial,sans-serif;color:#14213d;margin:0">
+            Belajar Web Development
+          </h2>
+          <p style="font-family:Arial,sans-serif;color:#64748b">
+            Tampilan sederhana menggunakan Arial.
+          </p>
+        </div>
+        <div style="padding:15px;background:white;border-radius:8px">
+          <h2 style="font-family:Georgia,serif;color:#14213d;margin:0">
+            Belajar Web Development
+          </h2>
+          <p style="font-family:Georgia,serif;color:#64748b">
+            Tampilan menggunakan Georgia.
+          </p>
+        </div>
+      </div>
+
+      <div class="note success">
+        <strong>Ingat:</strong> Typography bukan hanya tentang memilih
+        font yang bagus. Keterbacaan, ukuran, jarak, dan konsistensi
+        juga sangat penting.
+      </div>
+    </section>
+
+    <section class="card" id="font-family">
+      <h2>03. Font Family</h2>
+      <p>
+        Property <code>font-family</code> digunakan untuk menentukan
+        jenis huruf yang digunakan pada elemen HTML.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-family: Georgia, serif;
+}
+
+p {
+  font-family: "Courier New", monospace;
+}</code></pre>
+      </div>
+
+      <h3>Jenis font umum</h3>
+      <table class="comparison">
+        <tr><th>Jenis</th><th>Contoh</th><th>Karakteristik</th></tr>
+        <tr><td>Serif</td><td>Georgia, Times New Roman</td><td>Memiliki detail kecil di ujung huruf.</td></tr>
+        <tr><td>Sans-serif</td><td>Arial, Verdana</td><td>Tampil sederhana dan bersih.</td></tr>
+        <tr><td>Monospace</td><td>Consolas, Courier New</td><td>Setiap karakter memiliki lebar yang sama.</td></tr>
+        <tr><td>Cursive</td><td>Cursive</td><td>Menyerupai tulisan tangan.</td></tr>
+      </table>
+
+      <div class="note info">
+        <strong>Tips:</strong> Selalu sediakan font cadangan seperti
+        <code>sans-serif</code> atau <code>serif</code> agar browser
+        tetap memiliki pilihan jika font utama tidak tersedia.
+      </div>
+    </section>
+
+    <section class="card" id="font-size">
+      <h2>04. Font Size</h2>
+      <p>
+        Property <code>font-size</code> digunakan untuk mengatur
+        ukuran teks.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>h1 {
+  font-size: 32px;
+}
+
+p {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 12px;
+}</code></pre>
+      </div>
+
+      <h3>Satuan ukuran font</h3>
+      <p>Beberapa satuan yang sering digunakan:</p>
+
+      <table class="comparison">
+        <tr><th>Satuan</th><th>Penjelasan</th></tr>
+        <tr><td><code>px</code></td><td>Ukuran dalam pixel.</td></tr>
+        <tr><td><code>em</code></td><td>Relatif terhadap ukuran font elemen induk.</td></tr>
+        <tr><td><code>rem</code></td><td>Relatif terhadap ukuran font elemen root HTML.</td></tr>
+        <tr><td><code>%</code></td><td>Ukuran relatif terhadap ukuran font elemen induk.</td></tr>
+      </table>
+
+      <h3>Contoh menggunakan rem</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>html {
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1rem;
+}</code></pre>
+      </div>
+
+      <p>
+        Jika ukuran font root adalah 16px, maka <code>2rem</code>
+        setara dengan 32px dan <code>1rem</code> setara dengan 16px.
+      </p>
+
+      <div class="note success">
+        <strong>Rekomendasi:</strong> Gunakan rem untuk membangun
+        ukuran teks yang lebih mudah disesuaikan secara konsisten.
+      </div>
+    </section>
+
+    <section class="card" id="font-weight">
+      <h2>05. Font Weight</h2>
+      <p>
+        Property <code>font-weight</code> digunakan untuk mengatur
+        ketebalan teks.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.normal {
+  font-weight: 400;
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.extra-bold {
+  font-weight: 800;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh font weight</div>
+        <p style="font-weight:300">Font Weight 300 - Light</p>
+        <p style="font-weight:400">Font Weight 400 - Normal</p>
+        <p style="font-weight:500">Font Weight 500 - Medium</p>
+        <p style="font-weight:700">Font Weight 700 - Bold</p>
+        <p style="font-weight:800">Font Weight 800 - Extra Bold</p>
+      </div>
+
+      <table class="comparison">
+        <tr><th>Nilai</th><th>Nama umum</th></tr>
+        <tr><td>100–300</td><td>Tipis atau ringan</td></tr>
+        <tr><td>400</td><td>Normal</td></tr>
+        <tr><td>500</td><td>Medium</td></tr>
+        <tr><td>600</td><td>Semi-bold</td></tr>
+        <tr><td>700</td><td>Bold</td></tr>
+        <tr><td>800–900</td><td>Extra-bold hingga black</td></tr>
+      </table>
+
+      <div class="note warning">
+        <strong>Catatan:</strong> Tidak semua font menyediakan seluruh
+        variasi ketebalan. Jika variasi yang diminta tidak tersedia,
+        browser dapat menggunakan ketebalan terdekat.
+      </div>
+    </section>
+
+    <section class="card" id="font-style">
+      <h2>06. Font Style</h2>
+      <p>
+        Property <code>font-style</code> digunakan untuk mengatur
+        gaya huruf, misalnya normal atau italic.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.normal {
+  font-style: normal;
+}
+
+.italic {
+  font-style: italic;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh font style</div>
+        <p style="font-style:normal">Ini adalah teks normal.</p>
+        <p style="font-style:italic">Ini adalah teks italic.</p>
+      </div>
+    </section>
+
+    <section class="card" id="text-align">
+      <h2>07. Text Align</h2>
+      <p>
+        Property <code>text-align</code> digunakan untuk mengatur
+        perataan teks secara horizontal.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.justify {
+  text-align: justify;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh text align</div>
+        <p style="text-align:left;background:white;padding:8px">Teks rata kiri.</p>
+        <p style="text-align:center;background:white;padding:8px">Teks rata tengah.</p>
+        <p style="text-align:right;background:white;padding:8px">Teks rata kanan.</p>
+        <p style="text-align:justify;background:white;padding:8px">
+          Teks rata kanan dan kiri akan membuat sisi kiri dan kanan
+          paragraf tampak sejajar. Penggunaan perataan ini perlu
+          diperhatikan agar jarak antar kata tetap nyaman dibaca.
+        </p>
+      </div>
+
+      <div class="note info">
+        <strong>Tips:</strong> Judul sering menggunakan rata kiri
+        atau tengah, sedangkan paragraf panjang umumnya lebih nyaman
+        dibaca dengan rata kiri.
+      </div>
+    </section>
+
+    <section class="card" id="line-height">
+      <h2>08. Line Height</h2>
+      <p>
+        Property <code>line-height</code> digunakan untuk mengatur
+        jarak vertikal antarbaris teks.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>p {
+  line-height: 1.7;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Perbandingan line height</div>
+        <p style="line-height:1.1;background:white;padding:10px">
+          Line height 1.1. Ini merupakan contoh paragraf dengan jarak
+          antarbaris yang cukup rapat sehingga teks terasa padat.
+        </p>
+        <p style="line-height:1.8;background:white;padding:10px">
+          Line height 1.8. Ini merupakan contoh paragraf dengan jarak
+          antarbaris yang lebih renggang sehingga teks terasa lebih
+          lega dan nyaman dibaca.
+        </p>
+      </div>
+
+      <div class="note success">
+        <strong>Rekomendasi:</strong> Untuk paragraf panjang,
+        line-height sekitar 1.5 sampai 1.8 sering menjadi titik awal
+        yang baik. Sesuaikan kembali dengan jenis font dan ukuran teks.
+      </div>
+    </section>
+
+    <section class="card" id="spacing">
+      <h2>09. Text Spacing</h2>
+      <p>
+        CSS menyediakan beberapa property untuk mengatur jarak
+        pada teks.
+      </p>
+
+      <h3>A. Letter Spacing</h3>
+      <p>
+        Mengatur jarak antarhuruf.
+      </p>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>h1 {
+  letter-spacing: 2px;
+}</code></pre>
+      </div>
+
+      <h3>B. Word Spacing</h3>
+      <p>
+        Mengatur jarak antar kata.
+      </p>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>p {
+  word-spacing: 5px;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh spacing</div>
+        <p style="letter-spacing:3px">JARAK ANTARHURUF</p>
+        <p style="word-spacing:10px">Jarak antar kata lebih lebar</p>
+      </div>
+    </section>
+
+    <section class="card" id="decoration">
+      <h2>10. Text Decoration & Transform</h2>
+
+      <h3>A. Text Decoration</h3>
+      <p>
+        Property <code>text-decoration</code> digunakan untuk
+        memberikan dekorasi pada teks seperti garis bawah atau
+        garis coret.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.underline {
+  text-decoration: underline;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.no-decoration {
+  text-decoration: none;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh text decoration</div>
+        <p style="text-decoration:underline">Teks dengan garis bawah.</p>
+        <p style="text-decoration:line-through">Teks dengan garis coret.</p>
+        <a href="#" style="text-decoration:none">Link tanpa garis bawah.</a>
+      </div>
+
+      <h3>B. Text Transform</h3>
+      <p>
+        Property <code>text-transform</code> digunakan untuk mengubah
+        tampilan huruf menjadi huruf besar, huruf kecil, atau kapital
+        pada setiap kata.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh text transform</div>
+        <p style="text-transform:uppercase">belajar css typography</p>
+        <p style="text-transform:lowercase">BELAJAR CSS TYPOGRAPHY</p>
+        <p style="text-transform:capitalize">belajar css typography</p>
+      </div>
+    </section>
+
+    <section class="card" id="google-fonts">
+      <h2>11. Menggunakan Google Fonts</h2>
+      <p>
+        Google Fonts menyediakan banyak jenis huruf yang dapat
+        digunakan pada website. Salah satu font yang sering digunakan
+        untuk desain modern adalah Inter.
+      </p>
+
+      <h3>Langkah 1: Hubungkan Google Fonts</h3>
+      <p>
+        Tambahkan kode berikut di dalam bagian
+        <code>&lt;head&gt;</code> HTML.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;link rel="preconnect"
+  href="https://fonts.googleapis.com"&gt;
+
+&lt;link rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin&gt;
+
+&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"&gt;</code></pre>
+      </div>
+
+      <h3>Langkah 2: Gunakan font di CSS</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>body {
+  font-family: "Inter", sans-serif;
+}
+
+h1 {
+  font-weight: 800;
+}
+
+p {
+  font-weight: 400;
+}</code></pre>
+      </div>
+
+      <div class="note info">
+        <strong>Catatan:</strong> Google Fonts memerlukan koneksi internet
+        saat font diunduh oleh browser. Jika website harus bekerja secara
+        offline, gunakan font lokal atau font sistem sebagai cadangan.
+      </div>
+
+      <h3>Beberapa font populer</h3>
+      <table class="comparison">
+        <tr><th>Font</th><th>Karakteristik umum</th></tr>
+        <tr><td>Inter</td><td>Modern, bersih, cocok untuk UI.</td></tr>
+        <tr><td>Roboto</td><td>Netral dan mudah dibaca.</td></tr>
+        <tr><td>Poppins</td><td>Geometris dan terasa modern.</td></tr>
+        <tr><td>Playfair Display</td><td>Elegan, cocok untuk judul editorial.</td></tr>
+        <tr><td>Nunito</td><td>Ramah dan memiliki bentuk membulat.</td></tr>
+      </table>
+    </section>
+
+    <section class="card" id="latihan">
+      <h2>12. Latihan Praktik</h2>
+      <p>
+        Buat halaman sederhana bertema <strong>My Personal Blog</strong>.
+        Fokuskan latihan pada pengaturan teks agar halaman mudah dibaca.
+      </p>
+
+      <div class="code">
+        <pre><code>latihan-typography/
+├── index.html
+└── style.css</code></pre>
+      </div>
+
+      <h3>File index.html</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+    content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;My Personal Blog&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header class="header"&gt;
+    &lt;h1&gt;My Personal Blog&lt;/h1&gt;
+    &lt;p&gt;Cerita, pengalaman, dan perjalanan belajar saya.&lt;/p&gt;
+  &lt;/header&gt;
+
+  &lt;main class="container"&gt;
+    &lt;article class="article"&gt;
+      &lt;h2&gt;Perjalanan Belajar Web Development&lt;/h2&gt;
+      &lt;p class="date"&gt;1 November 2026&lt;/p&gt;
+
+      &lt;p&gt;
+        Belajar web development merupakan perjalanan yang
+        membutuhkan konsistensi dan latihan.
+      &lt;/p&gt;
+
+      &lt;p&gt;
+        Saya memulai dari HTML, kemudian belajar CSS,
+        dan akan melanjutkan ke JavaScript.
+      &lt;/p&gt;
+
+      &lt;a href="#"&gt;Baca Selengkapnya&lt;/a&gt;
+    &lt;/article&gt;
+  &lt;/main&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </div>
+
+      <h3>File style.css</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #334155;
+  background-color: #f8fafc;
+}
+
+.header {
+  background-color: #14213d;
+  color: white;
+  text-align: center;
+  padding: 45px 20px;
+}
+
+.header h1 {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.header p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 750px;
+  margin: 35px auto;
+  padding: 0 20px;
+}
+
+.article {
+  background-color: white;
+  padding: 28px;
+  border-radius: 12px;
+}
+
+.article h2 {
+  color: #14213d;
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.date {
+  color: #64748b;
+  font-size: 13px;
+  letter-spacing: .5px;
+}
+
+.article p {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.article a {
+  color: #2563eb;
+  font-weight: 700;
+  text-decoration: none;
+}</code></pre>
+      </div>
+
+      <h3>Tugas eksplorasi</h3>
+      <ol>
+        <li>Ganti font utama menggunakan Google Fonts.</li>
+        <li>Ubah ukuran judul dan paragraf.</li>
+        <li>Atur ketebalan teks menggunakan font-weight.</li>
+        <li>Coba ubah line-height paragraf.</li>
+        <li>Tambahkan letter-spacing pada judul.</li>
+        <li>Buat tampilan artikel yang nyaman dibaca.</li>
+      </ol>
+
+      <div class="note success">
+        <strong>Target latihan:</strong> Kamu mampu membuat halaman
+        artikel sederhana dengan typography yang konsisten dan nyaman
+        dibaca.
+      </div>
+    </section>
+
+    <section class="card" id="quiz">
+      <h2>13. Quiz Pemahaman</h2>
+      <p>Jawab pertanyaan berikut untuk menguji pemahamanmu.</p>
+
+      <form id="quizForm">
+        <div class="quiz-question">
+          <p>1. Property apa yang digunakan untuk menentukan jenis huruf?</p>
+          <label><input type="radio" name="q1" value="a"> font-size</label>
+          <label><input type="radio" name="q1" value="b"> font-family</label>
+          <label><input type="radio" name="q1" value="c"> font-weight</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Apa fungsi font-weight?</p>
+          <label><input type="radio" name="q2" value="a"> Mengatur ketebalan huruf</label>
+          <label><input type="radio" name="q2" value="b"> Mengatur warna huruf</label>
+          <label><input type="radio" name="q2" value="c"> Mengatur jarak antarbaris</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. Property apa yang digunakan untuk mengatur jarak antarbaris?</p>
+          <label><input type="radio" name="q3" value="a"> letter-spacing</label>
+          <label><input type="radio" name="q3" value="b"> word-spacing</label>
+          <label><input type="radio" name="q3" value="c"> line-height</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. Apa fungsi text-transform: uppercase?</p>
+          <label><input type="radio" name="q4" value="a"> Membuat teks menjadi miring</label>
+          <label><input type="radio" name="q4" value="b"> Mengubah tampilan teks menjadi huruf besar</label>
+          <label><input type="radio" name="q4" value="c"> Memberikan garis bawah</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Satuan rem mengacu pada ukuran font elemen apa?</p>
+          <label><input type="radio" name="q5" value="a"> Elemen root HTML</label>
+          <label><input type="radio" name="q5" value="b"> Elemen gambar</label>
+          <label><input type="radio" name="q5" value="c"> Elemen button</label>
+        </div>
+
+        <button class="primary-btn" type="button" onclick="checkQuiz()">
+          Periksa Jawaban
+        </button>
+      </form>
+
+      <div class="quiz-result" id="quizResult"></div>
+    </section>
+
+    <section class="card" id="challenge">
+      <h2>14. Final Challenge</h2>
+      <p>
+        Buat sebuah halaman bertema <strong>Personal Reading Blog</strong>.
+        Rancang tampilan artikel dengan typography yang rapi dan profesional.
+      </p>
+
+      <h3>Ketentuan proyek</h3>
+      <ul>
+        <li>Memiliki judul utama dan deskripsi.</li>
+        <li>Menggunakan minimal dua jenis font.</li>
+        <li>Menggunakan font-size yang berbeda untuk judul dan paragraf.</li>
+        <li>Menggunakan minimal dua variasi font-weight.</li>
+        <li>Menggunakan text-align.</li>
+        <li>Mengatur line-height pada paragraf.</li>
+        <li>Menggunakan letter-spacing atau word-spacing.</li>
+        <li>Menggunakan text-decoration atau text-transform.</li>
+        <li>Menggunakan Google Fonts atau font lokal.</li>
+        <li>Memisahkan HTML dan CSS ke dalam file berbeda.</li>
+      </ul>
+
+      <h3>Checklist penyelesaian</h3>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p id="progressText">0 dari 6 target selesai</p>
+
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox"> Saya memahami font-family.</label>
+        <label><input type="checkbox"> Saya bisa mengatur ukuran dan ketebalan teks.</label>
+        <label><input type="checkbox"> Saya bisa mengatur text-align dan line-height.</label>
+        <label><input type="checkbox"> Saya memahami text spacing dan decoration.</label>
+        <label><input type="checkbox"> Saya berhasil menggunakan Google Fonts.</label>
+        <label><input type="checkbox"> Saya berhasil menyelesaikan final challenge.</label>
+      </div>
+
+      <div class="note success">
+        <strong>Standar kelulusan:</strong> Selesaikan seluruh checklist
+        dan raih minimal 4 dari 5 jawaban benar pada quiz sebelum lanjut
+        ke Modul 05.
+      </div>
+    </section>
+
+    <div class="navigation">
+      <a href="modul-03.html">← Modul 03: Colors & Backgrounds</a>
+      <a href="modul-05.html">Modul 05: CSS Box Model →</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  DevLearn · Learn, Practice, Build
+  <br>Belajar hari ini, bangun sesuatu esok hari.
+</footer>
+
+<script>
+  function copyCode(button) {
+    const code = button.parentElement.querySelector("code");
+    const text = code.innerText;
+
+    navigator.clipboard.writeText(text).then(() => {
+      button.innerText = "Copied!";
+      setTimeout(() => button.innerText = "Copy", 1500);
+    }).catch(() => {
+      button.innerText = "Gagal";
+      setTimeout(() => button.innerText = "Copy", 1500);
+    });
+  }
+
+  function checkQuiz() {
+    const answers = {
+      q1: "b",
+      q2: "a",
+      q3: "c",
+      q4: "b",
+      q5: "a"
+    };
+
+    let score = 0;
+    let unanswered = 0;
+
+    Object.keys(answers).forEach((question) => {
+      const selected = document.querySelector(
+        `input[name="${question}"]:checked`
+      );
+
+      if (!selected) {
+        unanswered++;
+      } else if (selected.value === answers[question]) {
+        score++;
+      }
+    });
+
+    const result = document.getElementById("quizResult");
+    result.style.display = "block";
+
+    if (unanswered > 0) {
+      result.innerHTML =
+        `Masih ada ${unanswered} soal yang belum dijawab. Lengkapi dahulu, ya.`;
+      return;
+    }
+
+    result.innerHTML =
+      `<strong>Skor kamu: ${score}/5</strong><br>` +
+      (score >= 4
+        ? "Bagus! Kamu sudah memahami dasar CSS Typography."
+        : "Belum mencapai target. Pelajari kembali materi dan ulangi quiz.");
+
+    result.style.background = score >= 4 ? "#ecfdf5" : "#fffbeb";
+  }
+
+  const checklist = document.querySelectorAll(
+    "#checklist input[type='checkbox']"
+  );
+
+  function updateProgress() {
+    const checked = [...checklist].filter(item => item.checked).length;
+    const total = checklist.length;
+    const percentage = (checked / total) * 100;
+
+    document.getElementById("progressFill").style.width =
+      percentage + "%";
+
+    document.getElementById("progressText").innerText =
+      `${checked} dari ${total} target selesai`;
+  }
+
+  checklist.forEach(item => {
+    item.addEventListener("change", updateProgress);
+  });
+
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinks = document.querySelectorAll(".sidebar a");
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 130) {
+        current = section.id;
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === "#" + current
+      );
+    });
+  });
+</script>
+</body>
+</html>

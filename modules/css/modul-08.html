@@ -1,0 +1,1493 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Modul pembelajaran CSS Grid DevLearn. Pelajari layout dua dimensi, responsive grid, dan praktik membuat portfolio gallery.">
+<title>DevLearn — CSS Module 08: Grid</title>
+
+<style>
+:root {
+  --primary: #2563eb;
+  --primary-light: #eff6ff;
+  --dark: #14213d;
+  --text: #334155;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --bg: #f8fafc;
+  --white: #ffffff;
+  --green: #059669;
+  --green-light: #ecfdf5;
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+}
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+.navbar {
+  min-height: 66px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--dark);
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+.nav-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  min-height: calc(100vh - 66px);
+}
+
+.sidebar {
+  padding: 28px 20px;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 66px;
+  height: calc(100vh - 66px);
+  overflow-y: auto;
+}
+
+.sidebar h3 {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin: 0 0 12px;
+  letter-spacing: 1px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 13px;
+  transition: background .2s, color .2s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+main {
+  max-width: 1100px;
+  width: 100%;
+  padding: 40px 48px 70px;
+  margin: 0 auto;
+  min-width: 0;
+}
+
+.hero {
+  background: linear-gradient(120deg, #14213d, #2563eb);
+  color: var(--white);
+  padding: 38px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: .8;
+  font-weight: 700;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.2;
+  margin: 12px 0;
+}
+
+.hero p {
+  max-width: 650px;
+  color: #dbeafe;
+}
+
+.hero-meta {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  background: #ffffff20;
+  border: 1px solid #ffffff40;
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-size: 12px;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  margin-bottom: 22px;
+  box-shadow: 0 3px 12px #0f172a08;
+  scroll-margin-top: 85px;
+}
+
+h2 {
+  font-size: 23px;
+  color: var(--dark);
+  margin: 10px 0 12px;
+}
+
+.card h3 {
+  font-size: 17px;
+  color: var(--dark);
+  margin: 22px 0 8px;
+}
+
+p {
+  margin: 9px 0;
+}
+
+ul,
+ol {
+  padding-left: 22px;
+  margin: 10px 0;
+}
+
+li {
+  margin: 5px 0;
+}
+
+.tag {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.note,
+.warning,
+.success {
+  padding: 14px 16px;
+  border-radius: 9px;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.note {
+  background: #eff6ff;
+  border-left: 4px solid var(--primary);
+}
+
+.warning {
+  background: #fff7ed;
+  border-left: 4px solid #f59e0b;
+}
+
+.success {
+  background: var(--green-light);
+  border-left: 4px solid var(--green);
+}
+
+pre {
+  position: relative;
+  background: #101827;
+  color: #e2e8f0;
+  padding: 18px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 12px 0;
+  white-space: pre;
+  tab-size: 2;
+}
+
+code {
+  font-family: Consolas, monospace;
+}
+
+.inline-code {
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #be123c;
+  font-size: .9em;
+}
+
+.code-wrapper {
+  position: relative;
+}
+
+.copy-btn {
+  background: var(--primary);
+  color: white;
+  border: 0;
+  border-radius: 7px;
+  padding: 7px 12px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 4px;
+  transition: background .2s;
+}
+
+.copy-btn:hover {
+  background: #1d4ed8;
+}
+
+.example-box {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  padding: 18px;
+  margin: 12px 0;
+  min-width: 0;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.demo-item {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 20px 8px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  min-width: 0;
+}
+
+.demo-grid-two {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
+}
+
+.demo-grid-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+  gap: 10px;
+}
+
+.demo-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 55px 120px 55px;
+  grid-template-areas:
+    "header header"
+    "sidebar content"
+    "footer footer";
+  gap: 8px;
+}
+
+.demo-layout div {
+  background: #dbeafe;
+  color: #1e40af;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.demo-layout .header {
+  grid-area: header;
+}
+
+.demo-layout .sidebar-demo {
+  grid-area: sidebar;
+}
+
+.demo-layout .content {
+  grid-area: content;
+}
+
+.demo-layout .footer {
+  grid-area: footer;
+}
+
+.demo-placement {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.demo-placement div {
+  min-height: 65px;
+  display: grid;
+  place-items: center;
+  background: #dbeafe;
+  color: #1e40af;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.demo-placement .wide {
+  grid-column: 1 / 3;
+  background: #bfdbfe;
+}
+
+.demo-alignment {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  min-height: 150px;
+  gap: 8px;
+  align-items: center;
+  justify-items: center;
+}
+
+.demo-alignment div {
+  width: 65px;
+  height: 55px;
+  background: #bfdbfe;
+  color: #1e40af;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 13px;
+}
+
+th,
+td {
+  text-align: left;
+  border: 1px solid var(--border);
+  padding: 10px;
+  vertical-align: top;
+}
+
+th {
+  background: #f1f5f9;
+  color: var(--dark);
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+  gap: 12px;
+}
+
+.project-card {
+  min-height: 110px;
+  background: linear-gradient(135deg, #dbeafe, #eff6ff);
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 15px;
+  color: #1e40af;
+  font-weight: 700;
+}
+
+.project-card small {
+  font-weight: 400;
+}
+
+.quiz-question {
+  border-top: 1px solid var(--border);
+  padding: 18px 0;
+}
+
+.quiz-question p {
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.quiz-question label {
+  display: block;
+  font-size: 14px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.quiz-question label:hover {
+  background: #f8fafc;
+}
+
+.quiz-question input {
+  margin-right: 8px;
+  accent-color: var(--primary);
+}
+
+.quiz-question .correct {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.quiz-question .incorrect {
+  background: #fff1f2;
+  color: #be123c;
+}
+
+.quiz-feedback {
+  font-size: 13px;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.quiz-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#quiz-result {
+  font-weight: 700;
+  margin-top: 14px;
+  font-size: 15px;
+}
+
+.secondary-btn {
+  background: #f1f5f9;
+  color: var(--dark);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 7px 12px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.checklist label {
+  display: block;
+  padding: 7px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.checklist input {
+  margin-right: 8px;
+  accent-color: var(--green);
+}
+
+.progress-track {
+  background: #e2e8f0;
+  height: 9px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--green);
+  transition: width .25s ease;
+}
+
+.progress-info {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.module-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.module-nav a {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 9px;
+  font-size: 13px;
+  transition: border .2s, background .2s;
+}
+
+.module-nav a:hover {
+  background: var(--primary-light);
+  border-color: #bfdbfe;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 30px;
+}
+
+@media(max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 66px;
+    z-index: 50;
+    height: auto;
+    min-height: 0;
+    padding: 10px 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar h3 {
+    display: none;
+  }
+
+  .sidebar nav {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 5px;
+    scrollbar-width: thin;
+  }
+
+  .sidebar a {
+    white-space: nowrap;
+    padding: 8px 11px;
+  }
+
+  main {
+    padding: 28px 25px 55px;
+  }
+}
+
+@media(max-width: 520px) {
+  .nav-label {
+    display: none;
+  }
+
+  .hero {
+    padding: 25px;
+  }
+
+  .card {
+    padding: 19px;
+  }
+
+  .demo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .demo-layout {
+    grid-template-rows: 45px 100px 45px;
+  }
+
+  .module-nav {
+    flex-direction: column;
+  }
+
+  main {
+    padding: 22px 14px 45px;
+  }
+
+  .progress-info {
+    flex-direction: column;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+</style>
+<link rel="stylesheet" href="../html/module-theme.css">
+</head>
+
+<body>
+
+<a href="#main-content" class="skip-link">Lewati ke materi</a>
+
+<header class="navbar">
+  <a href="../../index.html" class="logo">Kub<span>ika.</span></a>
+  <div class="nav-label">Learning Path / CSS / Module 08</div>
+</header>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <h3>Daftar Materi</h3>
+  <nav aria-label="Daftar materi modul">
+    <a href="#intro" class="active">01. Pengenalan Grid</a>
+    <a href="#container">02. Grid Container</a>
+    <a href="#tracks">03. Columns & Rows</a>
+    <a href="#fraction">04. Unit fr & minmax</a>
+    <a href="#gap">05. Gap</a>
+    <a href="#placement">06. Grid Placement</a>
+    <a href="#areas">07. Grid Areas</a>
+    <a href="#responsive">08. Responsive Grid</a>
+    <a href="#alignment">09. Alignment</a>
+    <a href="#project">10. Mini Project</a>
+    <a href="#quiz">11. Quiz</a>
+    <a href="#checklist">12. Checklist</a>
+  </nav>
+</aside>
+
+<main id="main-content">
+
+<section class="hero">
+  <div class="eyebrow">CSS Learning Path • Module 08</div>
+  <h1>CSS Grid</h1>
+  <p>Pelajari cara membuat layout website menggunakan sistem baris dan kolom. Bangun tampilan yang rapi, fleksibel, dan responsif.</p>
+  <div class="hero-meta">
+    <span class="pill">Beginner–Intermediate</span>
+    <span class="pill">Estimasi 60–90 menit</span>
+    <span class="pill">Praktik + Challenge</span>
+  </div>
+</section>
+
+<section class="card" id="intro">
+  <span class="tag">01 • Pengenalan</span>
+  <h2>Apa Itu CSS Grid?</h2>
+
+  <p>CSS Grid adalah sistem layout pada CSS yang memungkinkan kita menyusun elemen website dalam bentuk <b>baris (rows) dan kolom (columns)</b>.</p>
+
+  <p>Dengan Grid, kita bisa mengatur posisi elemen secara lebih terstruktur. Contohnya untuk membuat dashboard, galeri foto, halaman portfolio, dan layout website.</p>
+
+  <h3>Bagaimana Grid Bekerja?</h3>
+  <ul>
+    <li><b>Grid Container:</b> elemen induk yang menggunakan <code>display: grid;</code>.</li>
+    <li><b>Grid Items:</b> elemen anak langsung di dalam Grid Container.</li>
+    <li><b>Grid Lines:</b> garis pembatas kolom dan baris.</li>
+    <li><b>Grid Tracks:</b> ruang berupa kolom atau baris.</li>
+    <li><b>Grid Cell:</b> satu sel yang terbentuk dari pertemuan satu baris dan satu kolom.</li>
+  </ul>
+
+  <h3>Perbedaan Flexbox dan Grid</h3>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Flexbox</th><th>Grid</th></tr>
+      <tr><td>Utamanya mengatur satu dimensi.</td><td>Mengatur dua dimensi sekaligus.</td></tr>
+      <tr><td>Berfokus pada satu baris atau kolom.</td><td>Berfokus pada baris dan kolom.</td></tr>
+      <tr><td>Cocok untuk navbar dan susunan tombol.</td><td>Cocok untuk galeri dan layout halaman.</td></tr>
+    </table>
+  </div>
+
+  <div class="note"><b>Ingat:</b> Flexbox dan Grid bukan untuk saling menggantikan. Keduanya bisa digunakan bersama dalam satu website.</div>
+</section>
+
+<section class="card" id="container">
+  <span class="tag">02 • Grid Container</span>
+  <h2>Membuat Grid Pertama</h2>
+
+  <p>Untuk mengaktifkan CSS Grid, gunakan <span class="inline-code">display: grid;</span> pada elemen induk (parent). Elemen anak langsungnya akan menjadi Grid Items.</p>
+
+  <div class="code-wrapper">
+    <pre><code>.container {
+  display: grid;
+}</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <p>Contoh HTML:</p>
+  <div class="code-wrapper">
+    <pre><code>&lt;div class="container"&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;
+  &lt;div&gt;Item 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <p>Jika hanya menggunakan <code>display: grid;</code>, browser akan membuat satu kolom eksplisit secara default, sedangkan item berikutnya ditempatkan pada baris baru. Kita bisa mengatur struktur kolomnya sendiri.</p>
+
+  <div class="note">Elemen yang berada di dalam Grid Container tetapi bukan anak langsung tidak otomatis menjadi Grid Item. Grid bekerja pada anak langsungnya.</div>
+</section>
+
+<section class="card" id="tracks">
+  <span class="tag">03 • Columns & Rows</span>
+  <h2>Mengatur Kolom dan Baris</h2>
+
+  <p>Properti <span class="inline-code">grid-template-columns</span> digunakan untuk menentukan jumlah dan ukuran kolom.</p>
+
+  <div class="code-wrapper">
+    <pre><code>.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <p>Kode tersebut membuat tiga kolom dengan ukuran yang sama.</p>
+
+  <div class="example-box">
+    <div class="demo-grid">
+      <div class="demo-item">Kolom 1</div>
+      <div class="demo-item">Kolom 2</div>
+      <div class="demo-item">Kolom 3</div>
+    </div>
+  </div>
+
+  <p>Kita juga bisa menggunakan ukuran berbeda:</p>
+
+  <div class="code-wrapper">
+    <pre><code>.container {
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr;
+}</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <p>Kolom pertama memiliki lebar 200px, sedangkan dua kolom lainnya membagi sisa ruang yang tersedia secara sama.</p>
+
+  <h3>Mengatur Baris</h3>
+  <p>Gunakan <span class="inline-code">grid-template-rows</span> untuk menentukan ukuran baris.</p>
+
+  <div class="code-wrapper">
+    <pre><code>.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 100px 200px;
+}</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <div class="note">Urutan nilai pada columns dan rows menentukan ukuran track dari kiri ke kanan dan dari atas ke bawah. Jika item lebih banyak daripada track yang ditentukan, browser dapat membuat baris tambahan secara otomatis.</div>
+</section>
+
+<section class="card" id="fraction">
+  <span class="tag">04 • Unit Grid</span>
+  <h2>Mengenal fr, repeat(), dan minmax()</h2>
+
+  <h3>1. Unit fr</h3>
+  <p><span class="inline-code">fr</span> berarti fraction atau bagian dari ruang yang tersedia pada Grid Container. Unit ini membagi ruang fleksibel setelah ukuran tetap dan kebutuhan lainnya diperhitungkan.</p>
+
+  <div class="code-wrapper">
+    <pre><code>grid-template-columns: 2fr 1fr;</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <p>Kolom pertama mendapatkan dua bagian, sedangkan kolom kedua mendapatkan satu bagian dari ruang fleksibel yang tersedia.</p>
+
+  <div class="example-box">
+    <div class="demo-grid-two">
+      <div class="demo-item">2fr</div>
+      <div class="demo-item">1fr</div>
+    </div>
+  </div>
+
+  <h3>2. Fungsi repeat()</h3>
+  <p>Digunakan untuk mengulang pola ukuran kolom atau baris agar penulisan CSS lebih ringkas.</p>
+
+  <div class="code-wrapper">
+    <pre><code>grid-template-columns: repeat(3, 1fr);
+
+/* Sama dengan: */
+grid-template-columns: 1fr 1fr 1fr;</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <h3>3. Fungsi minmax()</h3>
+  <p>Digunakan untuk menentukan ukuran minimum dan maksimum sebuah track.</p>
+
+  <div class="code-wrapper">
+    <pre><code>grid-template-columns:
+  repeat(3, minmax(150px, 1fr));</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <p>Artinya, setiap kolom memiliki ukuran minimum 150px dan dapat berkembang hingga mengambil bagian ruang fleksibel yang tersedia.</p>
+
+  <div class="warning"><b>Perhatikan:</b> Jika container terlalu sempit, tiga kolom dengan minimum 150px belum tentu muat. Gunakan pola responsif seperti auto-fit dan minmax() untuk menyesuaikan jumlah kolom.</div>
+</section>
+
+<section class="card" id="gap">
+  <span class="tag">05 • Jarak Grid</span>
+  <h2>Mengatur Jarak dengan Gap</h2>
+
+  <p>Properti <span class="inline-code">gap</span> digunakan untuk memberikan jarak antar kolom dan baris.</p>
+
+  <div class="code-wrapper">
+    <pre><code>.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <p>Jika ingin mengatur jarak secara terpisah:</p>
+
+  <div class="code-wrapper">
+    <pre><code>.container {
+  row-gap: 20px;
+  column-gap: 12px;
+}</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <ul>
+    <li><b>row-gap:</b> jarak antarbaris.</li>
+    <li><b>column-gap:</b> jarak antarkolom.</li>
+    <li><b>gap:</b> cara singkat untuk mengatur keduanya.</li>
+  </ul>
+
+  <div class="note">Gap berbeda dengan margin. Gap mengatur jarak antar-track di dalam container, sedangkan margin mengatur ruang di luar elemen.</div>
+</section>
+
+<section class="card" id="placement">
+  <span class="tag">06 • Grid Placement</span>
+  <h2>Mengatur Posisi Item</h2>
+
+  <p>Kita bisa menentukan sebuah item menempati kolom atau baris tertentu menggunakan <span class="inline-code">grid-column</span> dan <span class="inline-code">grid-row</span>.</p>
+
+  <div class="code-wrapper">
+    <pre><code>.item-1 {
+  grid-column: 1 / 3;
+}</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <p>Artinya, item dimulai dari garis kolom 1 dan berakhir pada garis kolom 3. Jadi item tersebut menempati dua track kolom.</p>
+
+  <p>Kita juga bisa menggunakan <span class="inline-code">span</span> untuk menyatakan jumlah track yang ditempati.</p>
+
+  <div class="code-wrapper">
+    <pre><code>.item-1 {
+  grid-column: span 2;
+  grid-row: span 2;
+}</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <div class="example-box">
+    <div class="demo-placement">
+      <div class="wide">Item melebar 2 kolom</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+      <div>Item 4</div>
+      <div>Item 5</div>
+    </div>
+  </div>
+
+  <div class="note"><b>Catatan penting:</b> Angka pada penempatan Grid mengacu pada garis Grid, bukan nomor item. Dua kolom memiliki tiga garis vertikal.</div>
+</section>
+
+<section class="card" id="areas">
+  <span class="tag">07 • Grid Areas</span>
+  <h2>Menggunakan Grid Template Areas</h2>
+
+  <p><span class="inline-code">grid-template-areas</span> memungkinkan kita menyusun layout menggunakan nama area. Ini sangat membantu ketika membuat struktur halaman website.</p>
+
+  <div class="code-wrapper">
+    <pre><code>.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 60px 180px 60px;
+  grid-template-areas:
+    "header header"
+    "sidebar content"
+    "footer footer";
+  gap: 10px;
+}
+
+.header  { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.content { grid-area: content; }
+.footer  { grid-area: footer; }</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <div class="example-box">
+    <div class="demo-layout">
+      <div class="header">HEADER</div>
+      <div class="sidebar-demo">SIDEBAR</div>
+      <div class="content">CONTENT</div>
+      <div class="footer">FOOTER</div>
+    </div>
+  </div>
+
+  <div class="warning">Nama area harus membentuk susunan yang valid dan berbentuk persegi panjang. Area yang tidak digunakan bisa ditulis menggunakan tanda titik (.).</div>
+
+  <p>Contoh area kosong:</p>
+
+  <div class="code-wrapper">
+    <pre><code>grid-template-areas:
+  "header header"
+  "sidebar content"
+  ". footer";</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+</section>
+
+<section class="card" id="responsive">
+  <span class="tag">08 • Responsive Grid</span>
+  <h2>Membuat Grid Responsif</h2>
+
+  <p>Website yang baik harus bisa menyesuaikan tampilan pada desktop, tablet, dan smartphone.</p>
+
+  <p>Grid memiliki <span class="inline-code">auto-fit</span> dan <span class="inline-code">auto-fill</span> yang bisa digunakan bersama <span class="inline-code">minmax()</span>.</p>
+
+  <div class="code-wrapper">
+    <pre><code>.gallery {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <p>Browser akan menyesuaikan jumlah kolom berdasarkan ruang yang tersedia. Setiap kolom memiliki ukuran minimum 180px dan dapat melebar.</p>
+
+  <div class="example-box">
+    <div class="demo-grid-auto">
+      <div class="demo-item">Project 1</div>
+      <div class="demo-item">Project 2</div>
+      <div class="demo-item">Project 3</div>
+      <div class="demo-item">Project 4</div>
+    </div>
+    <p style="font-size:12px;color:#64748b;margin-top:10px">Coba ubah lebar jendela browser untuk melihat jumlah kolom menyesuaikan ruang.</p>
+  </div>
+
+  <h3>Perbedaan auto-fit dan auto-fill</h3>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th>auto-fit</th><th>auto-fill</th></tr>
+      <tr><td>Track kosong yang tidak terpakai akan diciutkan sehingga item yang ada dapat melebar.</td><td>Mempertahankan track kosong yang masih muat di dalam container.</td></tr>
+      <tr><td>Cocok untuk galeri yang ingin mengisi ruang kosong.</td><td>Berguna ketika ingin mempertahankan pola track.</td></tr>
+    </table>
+  </div>
+
+  <div class="success">Tips: Untuk galeri portfolio, auto-fit dan minmax() adalah kombinasi yang praktis.</div>
+
+  <h3>Responsive dengan Media Query</h3>
+  <p>Selain menggunakan auto-fit, kita juga bisa mengubah struktur Grid berdasarkan ukuran layar.</p>
+
+  <div class="code-wrapper">
+    <pre><code>.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+</section>
+
+<section class="card" id="alignment">
+  <span class="tag">09 • Alignment</span>
+  <h2>Mengatur Posisi Isi Grid</h2>
+
+  <p>Grid menyediakan properti untuk mengatur posisi item di dalam area Grid dan posisi keseluruhan track.</p>
+
+  <div class="table-wrap">
+    <table>
+      <tr><th>Properti</th><th>Fungsi</th></tr>
+      <tr><td><code>align-items</code></td><td>Mengatur posisi item pada sumbu block, umumnya vertikal.</td></tr>
+      <tr><td><code>justify-items</code></td><td>Mengatur posisi item pada sumbu inline, umumnya horizontal.</td></tr>
+      <tr><td><code>place-items</code></td><td>Shorthand untuk align-items dan justify-items.</td></tr>
+      <tr><td><code>align-content</code></td><td>Mengatur posisi keseluruhan track pada sumbu block.</td></tr>
+      <tr><td><code>justify-content</code></td><td>Mengatur posisi keseluruhan track pada sumbu inline.</td></tr>
+      <tr><td><code>place-content</code></td><td>Shorthand untuk align-content dan justify-content.</td></tr>
+    </table>
+  </div>
+
+  <div class="code-wrapper">
+    <pre><code>.container {
+  display: grid;
+  place-items: center;
+}</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <p>Kode tersebut membuat isi setiap area Grid berada di tengah secara horizontal dan vertikal.</p>
+
+  <div class="example-box">
+    <div class="demo-alignment">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </div>
+  </div>
+
+  <div class="note">Alignment item berbeda dengan alignment content. Item mengatur posisi isi di dalam sel, sedangkan content mengatur posisi keseluruhan track Grid di dalam container.</div>
+</section>
+
+<section class="card" id="project">
+  <span class="tag">10 • Mini Project</span>
+  <h2>Challenge: Kubika Portfolio Gallery</h2>
+
+  <p>Sekarang waktunya praktik! Buat sebuah section galeri portfolio yang menampilkan beberapa project website dari Kubika.</p>
+
+  <h3>Target tampilan</h3>
+
+  <div class="example-box">
+    <div class="challenge-grid">
+      <div class="project-card">Project 01<br><small>Company Profile</small></div>
+      <div class="project-card">Project 02<br><small>Dashboard</small></div>
+      <div class="project-card">Project 03<br><small>Landing Page</small></div>
+      <div class="project-card">Project 04<br><small>Online Store</small></div>
+      <div class="project-card">Project 05<br><small>Portfolio</small></div>
+      <div class="project-card">Project 06<br><small>Web Application</small></div>
+    </div>
+  </div>
+
+  <h3>Instruksi pengerjaan</h3>
+  <ol>
+    <li>Buat file <code>index.html</code> dan <code>style.css</code>.</li>
+    <li>Buat section dengan judul "Our Projects".</li>
+    <li>Tampilkan minimal enam kartu project.</li>
+    <li>Gunakan CSS Grid untuk menyusun kartu.</li>
+    <li>Gunakan <code>repeat()</code> dan <code>minmax()</code>.</li>
+    <li>Tambahkan jarak menggunakan <code>gap</code>.</li>
+    <li>Pastikan layout tetap rapi di smartphone.</li>
+    <li>Gunakan nama project dan deskripsi yang jelas.</li>
+  </ol>
+
+  <h3>Starter CSS</h3>
+
+  <div class="code-wrapper">
+    <pre><code>.project-gallery {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  padding: 24px;
+  border-radius: 12px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+}</code></pre>
+    <button class="copy-btn" type="button">Salin Kode</button>
+  </div>
+
+  <h3>Bonus Challenge</h3>
+  <ul>
+    <li>Buat satu kartu project lebih besar dengan <code>grid-column: span 2;</code>.</li>
+    <li>Tambahkan gambar thumbnail pada setiap project.</li>
+    <li>Tambahkan nama anggota yang terlibat dalam project.</li>
+    <li>Tambahkan hover effect sederhana.</li>
+    <li>Pastikan kartu tetap bisa digunakan dengan keyboard.</li>
+  </ul>
+
+  <div class="success"><b>Standar selesai:</b> Galeri menampilkan minimal enam project, layout responsif, dan setiap kartu memiliki nama serta deskripsi project.</div>
+</section>
+
+<section class="card" id="quiz">
+  <span class="tag">11 • Evaluasi</span>
+  <h2>Quiz: Uji Pemahamanmu</h2>
+
+  <p>Pilih jawaban yang paling tepat. Setelah selesai, tekan tombol periksa jawaban untuk melihat nilai dan pembahasannya.</p>
+
+  <form id="quiz-form">
+
+    <div class="quiz-question" data-answer="b">
+      <p>1. Properti untuk mengaktifkan CSS Grid adalah...</p>
+      <label><input type="radio" name="q1" value="a"> position: grid</label>
+      <label><input type="radio" name="q1" value="b"> display: grid</label>
+      <label><input type="radio" name="q1" value="c"> grid: true</label>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-question" data-answer="b">
+      <p>2. CSS Grid dapat mengatur layout dalam...</p>
+      <label><input type="radio" name="q2" value="a"> Satu dimensi saja</label>
+      <label><input type="radio" name="q2" value="b"> Dua dimensi: baris dan kolom</label>
+      <label><input type="radio" name="q2" value="c"> Tiga dimensi</label>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-question" data-answer="a">
+      <p>3. Apa fungsi repeat(3, 1fr)?</p>
+      <label><input type="radio" name="q3" value="a"> Membuat tiga kolom dengan bagian sama</label>
+      <label><input type="radio" name="q3" value="b"> Membuat tiga baris otomatis</label>
+      <label><input type="radio" name="q3" value="c"> Menghilangkan jarak Grid</label>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-question" data-answer="c">
+      <p>4. Properti untuk mengatur jarak antar item Grid adalah...</p>
+      <label><input type="radio" name="q4" value="a"> padding</label>
+      <label><input type="radio" name="q4" value="b"> margin</label>
+      <label><input type="radio" name="q4" value="c"> gap</label>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-question" data-answer="b">
+      <p>5. Kombinasi yang praktis untuk membuat kolom responsif adalah...</p>
+      <label><input type="radio" name="q5" value="a"> float dan clear</label>
+      <label><input type="radio" name="q5" value="b"> repeat(auto-fit, minmax(...))</label>
+      <label><input type="radio" name="q5" value="c"> position dan z-index</label>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-actions">
+      <button type="submit" class="copy-btn">Periksa Jawaban</button>
+      <button type="reset" class="secondary-btn">Ulangi Quiz</button>
+    </div>
+
+    <div id="quiz-result" aria-live="polite"></div>
+  </form>
+</section>
+
+<section class="card checklist" id="checklist">
+  <span class="tag">12 • Progress</span>
+  <h2>Checklist Pembelajaran</h2>
+  <p>Tandai materi yang sudah kamu pahami.</p>
+
+  <div class="progress-track"
+       role="progressbar"
+       aria-label="Progress pembelajaran"
+       aria-valuemin="0"
+       aria-valuemax="100"
+       aria-valuenow="0"
+       id="progress-bar">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+
+  <div class="progress-info">
+    <span id="progress-text">0 dari 8 materi selesai</span>
+    <span id="progress-percent">0%</span>
+  </div>
+
+  <div id="check-items">
+    <label><input type="checkbox"> Memahami konsep CSS Grid.</label>
+    <label><input type="checkbox"> Memahami grid-template-columns dan rows.</label>
+    <label><input type="checkbox"> Memahami fr, repeat(), dan minmax().</label>
+    <label><input type="checkbox"> Memahami gap.</label>
+    <label><input type="checkbox"> Memahami grid-column dan grid-row.</label>
+    <label><input type="checkbox"> Memahami grid-template-areas.</label>
+    <label><input type="checkbox"> Memahami responsive Grid.</label>
+    <label><input type="checkbox"> Menyelesaikan Kubika Portfolio Gallery.</label>
+  </div>
+</section>
+
+<div class="module-nav">
+  <a href="modul-07.html">← Module 07: Flexbox</a>
+  <a href="modul-09.html">Module 09: Responsive Design →</a>
+</div>
+
+</main>
+</div>
+
+<footer>
+  DevLearn — Learn, Practice, Build.<br>
+  Part of Kubika Learning Environment.
+</footer>
+
+<script>
+// ======================================
+// 1. COPY CODE
+// ======================================
+
+document.querySelectorAll(".copy-btn").forEach(button => {
+  if (!button.closest(".code-wrapper")) return;
+
+  button.addEventListener("click", async () => {
+    const code = button.previousElementSibling?.innerText;
+
+    if (!code) return;
+
+    const originalText = button.textContent;
+
+    try {
+      await navigator.clipboard.writeText(code);
+      button.textContent = "Tersalin!";
+    } catch (error) {
+      const textarea = document.createElement("textarea");
+      textarea.value = code;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        document.execCommand("copy");
+        button.textContent = "Tersalin!";
+      } catch {
+        button.textContent = "Gagal menyalin";
+      }
+
+      textarea.remove();
+    }
+
+    setTimeout(() => {
+      button.textContent = originalText;
+    }, 1500);
+  });
+});
+
+// ======================================
+// 2. QUIZ SYSTEM
+// ======================================
+
+const quizForm = document.getElementById("quiz-form");
+const quizResult = document.getElementById("quiz-result");
+
+const explanations = {
+  q1: "display: grid digunakan untuk mengaktifkan Grid pada elemen parent.",
+  q2: "CSS Grid merupakan sistem layout dua dimensi: baris dan kolom.",
+  q3: "repeat(3, 1fr) mengulang ukuran 1fr sebanyak tiga kali.",
+  q4: "gap mengatur jarak antarbaris dan antarkolom Grid.",
+  q5: "auto-fit dan minmax() membantu membuat jumlah kolom responsif."
+};
+
+quizForm.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const questions = document.querySelectorAll(".quiz-question");
+  let score = 0;
+  let answered = 0;
+
+  questions.forEach((question, index) => {
+    const name = `q${index + 1}`;
+    const answer = question.dataset.answer;
+    const selected = question.querySelector(
+      `input[name="${name}"]:checked`
+    );
+
+    const feedback = question.querySelector(".quiz-feedback");
+    const labels = question.querySelectorAll("label");
+
+    labels.forEach(label => {
+      label.classList.remove("correct", "incorrect");
+    });
+
+    if (!selected) {
+      feedback.textContent = "Belum dijawab.";
+      feedback.style.color = "#b45309";
+      return;
+    }
+
+    answered++;
+
+    const selectedLabel = selected.closest("label");
+    const correctInput = question.querySelector(
+      `input[value="${answer}"]`
+    );
+    const correctLabel = correctInput.closest("label");
+
+    correctLabel.classList.add("correct");
+
+    if (selected.value === answer) {
+      score++;
+      feedback.textContent = "Benar! " + explanations[name];
+      feedback.style.color = "#047857";
+    } else {
+      selectedLabel.classList.add("incorrect");
+      feedback.textContent = "Belum tepat. " + explanations[name];
+      feedback.style.color = "#be123c";
+    }
+  });
+
+  if (answered < questions.length) {
+    quizResult.textContent =
+      `Kamu baru menjawab ${answered} dari ${questions.length} soal. Lengkapi jawaban yang kosong, ya!`;
+    quizResult.style.color = "#b45309";
+    return;
+  }
+
+  const finalScore = Math.round(
+    (score / questions.length) * 100
+  );
+
+  let message = "";
+
+  if (finalScore === 100) {
+    message = "Sempurna! Kamu menguasai materi ini.";
+  } else if (finalScore >= 80) {
+    message = "Bagus! Pemahamanmu sudah sangat baik.";
+  } else if (finalScore >= 60) {
+    message = "Cukup baik. Pelajari kembali bagian yang belum tepat.";
+  } else {
+    message = "Tetap semangat! Coba baca ulang materi dan kerjakan lagi.";
+  }
+
+  quizResult.textContent =
+    `Nilai: ${finalScore}/100 (${score}/${questions.length} benar). ${message}`;
+
+  quizResult.style.color =
+    score >= 4 ? "#059669" : "#b45309";
+});
+
+// Reset tampilan quiz
+quizForm.addEventListener("reset", () => {
+  setTimeout(() => {
+    document.querySelectorAll(".quiz-feedback").forEach(item => {
+      item.textContent = "";
+    });
+
+    document.querySelectorAll(".quiz-question label").forEach(label => {
+      label.classList.remove("correct", "incorrect");
+    });
+
+    quizResult.textContent = "";
+  }, 0);
+});
+
+// ======================================
+// 3. CHECKLIST PROGRESS
+// ======================================
+
+const checks = document.querySelectorAll(
+  "#check-items input[type='checkbox']"
+);
+
+const progressFill = document.getElementById("progress-fill");
+const progressText = document.getElementById("progress-text");
+const progressPercent = document.getElementById("progress-percent");
+const progressBar = document.getElementById("progress-bar");
+
+function updateProgress() {
+  const done = [...checks].filter(item => item.checked).length;
+  const total = checks.length;
+  const percentage = total ? Math.round((done / total) * 100) : 0;
+
+  progressFill.style.width = `${percentage}%`;
+  progressText.textContent = `${done} dari ${total} materi selesai`;
+  progressPercent.textContent = `${percentage}%`;
+  progressBar.setAttribute("aria-valuenow", percentage);
+}
+
+checks.forEach(item => {
+  item.addEventListener("change", updateProgress);
+});
+
+updateProgress();
+
+// ======================================
+// 4. ACTIVE SIDEBAR NAVIGATION
+// ======================================
+
+const navLinks = document.querySelectorAll(".sidebar a");
+const sections = document.querySelectorAll("main section[id]");
+
+function setActiveLink(id) {
+  navLinks.forEach(link => {
+    const isActive = link.getAttribute("href") === `#${id}`;
+
+    link.classList.toggle("active", isActive);
+
+    if (isActive) {
+      link.setAttribute("aria-current", "location");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+}
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(entries => {
+    const visible = entries
+      .filter(entry => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+    if (visible.length) {
+      setActiveLink(visible[0].target.id);
+    }
+  }, {
+    rootMargin: "-100px 0px -60% 0px",
+    threshold: [0, 0.1, 0.25, 0.5]
+  });
+
+  sections.forEach(section => observer.observe(section));
+}
+
+navLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    const targetId = link.getAttribute("href").slice(1);
+    setActiveLink(targetId);
+  });
+});
+</script>
+
+</body>
+</html>

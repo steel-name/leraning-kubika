@@ -1,0 +1,1215 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevLearn - CSS Modul 03</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --dark: #14213d;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --green: #059669;
+      --soft-blue: #eff6ff;
+      --soft-green: #ecfdf5;
+      --soft-yellow: #fffbeb;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    a { color: var(--primary); }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      color: var(--dark);
+      font-weight: 800;
+      font-size: 19px;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--primary); }
+
+    .nav-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 32px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 85px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .sidebar h3 {
+      margin: 0 0 12px;
+      color: var(--dark);
+      font-size: 15px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 8px 10px;
+      margin: 3px 0;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 7px;
+      font-size: 13px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: var(--soft-blue);
+      color: var(--primary);
+    }
+
+    main { min-width: 0; }
+
+    .hero {
+      padding: 34px;
+      background: linear-gradient(135deg, #14213d, #2563eb);
+      color: white;
+      border-radius: 18px;
+      margin-bottom: 22px;
+    }
+
+    .hero .tag {
+      display: inline-block;
+      padding: 5px 11px;
+      background: rgba(255,255,255,.15);
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .hero h1 {
+      margin: 15px 0 8px;
+      font-size: 32px;
+      line-height: 1.25;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #dbeafe;
+      max-width: 650px;
+    }
+
+    .meta {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #dbeafe;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      color: var(--dark);
+      font-size: 21px;
+    }
+
+    .card h3 {
+      color: var(--dark);
+      font-size: 16px;
+      margin-top: 22px;
+    }
+
+    .card p { margin: 10px 0; }
+
+    .code {
+      position: relative;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 14px 0;
+      overflow-x: auto;
+    }
+
+    .code pre {
+      margin: 0;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: 1px solid #475569;
+      background: #1e293b;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .note {
+      padding: 15px 17px;
+      border-radius: 9px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .info {
+      background: var(--soft-blue);
+      border-left: 4px solid var(--primary);
+    }
+
+    .success {
+      background: var(--soft-green);
+      border-left: 4px solid var(--green);
+    }
+
+    .warning {
+      background: var(--soft-yellow);
+      border-left: 4px solid #d97706;
+    }
+
+    .example {
+      border: 1px dashed #cbd5e1;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+
+    .example-title {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .color-box {
+      min-height: 85px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 10px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .comparison th,
+    .comparison td {
+      border: 1px solid var(--border);
+      padding: 11px;
+      text-align: left;
+    }
+
+    .comparison th {
+      background: #f1f5f9;
+      color: var(--dark);
+    }
+
+    .quiz-question {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin: 14px 0;
+    }
+
+    .quiz-question p {
+      font-weight: bold;
+      margin-top: 0;
+    }
+
+    .quiz-question label {
+      display: block;
+      padding: 5px 0;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .quiz-result {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 9px;
+      background: var(--soft-blue);
+    }
+
+    .primary-btn {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      padding: 11px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .primary-btn:hover { background: #1d4ed8; }
+
+    .checklist label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .checklist input { margin-top: 5px; }
+
+    .progress-track {
+      height: 9px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--green);
+      transition: width .3s;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      padding: 11px 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: white;
+      font-size: 13px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .container { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .color-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 24px; }
+      .hero h1 { font-size: 25px; }
+      .card { padding: 19px; }
+      .sidebar nav { grid-template-columns: 1fr; }
+      .navigation { flex-direction: column; }
+      .color-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <link rel="stylesheet" href="../html/module-theme.css">
+</head>
+<body>
+
+<header class="navbar">
+  <a href="../../index.html" class="brand">Kub<span>ika.</span></a>
+  <span class="nav-label">CSS Learning Path · Modul 03</span>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h3>Daftar Materi</h3>
+    <nav>
+      <a href="#tujuan">Tujuan Pembelajaran</a>
+      <a href="#warna">Dasar Warna CSS</a>
+      <a href="#format">Format Penulisan Warna</a>
+      <a href="#teks">Warna Teks</a>
+      <a href="#background">Background Color</a>
+      <a href="#opacity">Opacity & Transparansi</a>
+      <a href="#gradient">CSS Gradient</a>
+      <a href="#gambar">Background Image</a>
+      <a href="#latihan">Latihan Praktik</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#challenge">Final Challenge</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <span class="tag">CSS FUNDAMENTAL · MODUL 03</span>
+      <h1>Colors & Backgrounds</h1>
+      <p>
+        Pelajari cara menggunakan warna, transparansi, gradient,
+        dan gambar latar untuk membuat website lebih menarik.
+      </p>
+      <div class="meta">Level: Beginner · Estimasi: 45–60 menit</div>
+    </section>
+
+    <section class="card" id="tujuan">
+      <h2>01. Tujuan Pembelajaran</h2>
+      <p>Setelah menyelesaikan modul ini, kamu diharapkan mampu:</p>
+      <ul>
+        <li>Memahami penggunaan warna dalam CSS.</li>
+        <li>Mengenal nama warna dan format HEX, RGB, serta RGBA.</li>
+        <li>Mengatur warna teks dan latar belakang.</li>
+        <li>Memahami opacity dan transparansi.</li>
+        <li>Membuat background gradient sederhana.</li>
+        <li>Menggunakan gambar sebagai background.</li>
+        <li>Mengombinasikan warna agar tampilan website nyaman dilihat.</li>
+      </ul>
+
+      <div class="note info">
+        <strong>Prasyarat:</strong> Pahami CSS syntax dan selector
+        dari Modul 01 dan Modul 02.
+      </div>
+    </section>
+
+    <section class="card" id="warna">
+      <h2>02. Dasar Warna dalam CSS</h2>
+      <p>
+        Warna adalah salah satu bagian penting dalam desain website.
+        Dengan CSS, kita bisa mengatur warna teks, latar belakang,
+        border, dan berbagai elemen lainnya.
+      </p>
+
+      <p>
+        Misalnya, sebuah website menggunakan warna biru untuk tombol,
+        putih untuk latar belakang, dan abu-abu untuk teks.
+        Kombinasi tersebut dapat membuat tampilan lebih teratur dan nyaman.
+      </p>
+
+      <div class="example">
+        <div class="example-title">Contoh kombinasi warna</div>
+        <div class="color-grid">
+          <div class="color-box" style="background:#14213d;color:white">
+            Navy<br>#14213D
+          </div>
+          <div class="color-box" style="background:#2563eb;color:white">
+            Blue<br>#2563EB
+          </div>
+          <div class="color-box" style="background:#e2e8f0;color:#14213d">
+            Light Gray<br>#E2E8F0
+          </div>
+          <div class="color-box" style="background:#059669;color:white">
+            Green<br>#059669
+          </div>
+          <div class="color-box" style="background:#f59e0b;color:#14213d">
+            Amber<br>#F59E0B
+          </div>
+          <div class="color-box" style="background:#f8fafc;color:#14213d;border:1px solid #cbd5e1">
+            Off White<br>#F8FAFC
+          </div>
+        </div>
+      </div>
+
+      <div class="note success">
+        <strong>Tips desain:</strong> Gunakan beberapa warna utama
+        secara konsisten. Tidak semua bagian website harus memiliki
+        warna yang berbeda.
+      </div>
+    </section>
+
+    <section class="card" id="format">
+      <h2>03. Format Penulisan Warna</h2>
+      <p>
+        CSS menyediakan beberapa cara untuk menentukan warna.
+        Tiga format yang umum digunakan adalah named color, HEX,
+        dan RGB/RGBA.
+      </p>
+
+      <h3>A. Named Color</h3>
+      <p>
+        Named color adalah penggunaan nama warna yang sudah dikenal
+        oleh CSS, misalnya <code>red</code>, <code>blue</code>,
+        <code>green</code>, dan <code>black</code>.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>h1 {
+  color: red;
+}
+
+p {
+  color: blue;
+}
+
+body {
+  background-color: white;
+}</code></pre>
+      </div>
+
+      <h3>B. HEX Color</h3>
+      <p>
+        HEX merupakan format warna yang menggunakan kode hexadecimal.
+        Format umumnya ditulis dengan tanda pagar diikuti enam karakter.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>h1 {
+  color: #2563eb;
+}
+
+body {
+  background-color: #f8fafc;
+}
+
+button {
+  background-color: #14213d;
+}</code></pre>
+      </div>
+
+      <p>Contoh kode HEX:</p>
+      <div class="color-grid">
+        <div class="color-box" style="background:#ff0000;color:white">#FF0000<br>Merah</div>
+        <div class="color-box" style="background:#00ff00;color:#14213d">#00FF00<br>Hijau</div>
+        <div class="color-box" style="background:#0000ff;color:white">#0000FF<br>Biru</div>
+      </div>
+
+      <h3>C. RGB</h3>
+      <p>
+        RGB merupakan singkatan dari Red, Green, Blue.
+        Warna dibentuk dari kombinasi tiga nilai tersebut.
+        Setiap nilai umumnya berada dalam rentang 0 sampai 255.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>h1 {
+  color: rgb(255, 0, 0);
+}
+
+p {
+  color: rgb(0, 0, 255);
+}
+
+body {
+  background-color: rgb(245, 245, 245);
+}</code></pre>
+      </div>
+
+      <h3>D. RGBA</h3>
+      <p>
+        RGBA mirip dengan RGB, tetapi memiliki satu nilai tambahan
+        yaitu alpha untuk mengatur tingkat transparansi.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}</code></pre>
+      </div>
+
+      <p>
+        Nilai alpha berada dari 0 sampai 1.
+        Nilai 0 berarti sepenuhnya transparan, sedangkan 1 berarti
+        sepenuhnya terlihat.
+      </p>
+
+      <table class="comparison">
+        <tr><th>Format</th><th>Contoh</th><th>Keterangan</th></tr>
+        <tr><td>Named</td><td><code>red</code></td><td>Menggunakan nama warna.</td></tr>
+        <tr><td>HEX</td><td><code>#ff0000</code></td><td>Menggunakan kode hexadecimal.</td></tr>
+        <tr><td>RGB</td><td><code>rgb(255,0,0)</code></td><td>Menggunakan kombinasi merah, hijau, biru.</td></tr>
+        <tr><td>RGBA</td><td><code>rgba(255,0,0,.5)</code></td><td>RGB dengan tingkat transparansi.</td></tr>
+      </table>
+
+      <div class="note info">
+        <strong>Catatan:</strong> Ada juga format HSL dan HSLA.
+        Kita akan mengenalnya lebih lanjut ketika sudah memahami
+        dasar penggunaan warna.
+      </div>
+    </section>
+
+    <section class="card" id="teks">
+      <h2>04. Mengatur Warna Teks</h2>
+      <p>
+        Property <code>color</code> digunakan untuk mengatur warna
+        teks pada elemen HTML.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>h1 {
+  color: navy;
+}
+
+p {
+  color: #64748b;
+}
+
+.highlight {
+  color: rgb(37, 99, 235);
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh tampilan</div>
+        <h2 style="color:navy">Belajar Web Development</h2>
+        <p style="color:#64748b">Selamat datang di materi CSS DevLearn.</p>
+        <p style="color:#2563eb">Terus berlatih dan tingkatkan kemampuanmu!</p>
+      </div>
+
+      <h3>Property color</h3>
+      <p>
+        Property ini hanya mengatur warna teks, bukan warna latar belakang
+        elemen. Untuk latar belakang, gunakan
+        <code>background-color</code>.
+      </p>
+    </section>
+
+    <section class="card" id="background">
+      <h2>05. Background Color</h2>
+      <p>
+        Property <code>background-color</code> digunakan untuk
+        memberikan warna pada latar belakang elemen HTML.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>body {
+  background-color: #f8fafc;
+}
+
+.card {
+  background-color: white;
+}
+
+button {
+  background-color: #2563eb;
+  color: white;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh card</div>
+        <div style="background:#eff6ff;padding:18px;border-radius:10px">
+          <h3 style="margin-top:0;color:#14213d">Card Informasi</h3>
+          <p style="color:#334155">
+            Ini adalah contoh elemen yang memiliki background berwarna biru muda.
+          </p>
+        </div>
+      </div>
+
+      <h3>Perbedaan color dan background-color</h3>
+      <table class="comparison">
+        <tr><th>Property</th><th>Fungsi</th></tr>
+        <tr><td><code>color</code></td><td>Mengatur warna teks.</td></tr>
+        <tr><td><code>background-color</code></td><td>Mengatur warna latar belakang.</td></tr>
+      </table>
+
+      <div class="note warning">
+        <strong>Kesalahan umum:</strong> Jangan tertukar antara
+        <code>color</code> dan <code>background-color</code>.
+        Keduanya memiliki fungsi yang berbeda.
+      </div>
+    </section>
+
+    <section class="card" id="opacity">
+      <h2>06. Opacity & Transparansi</h2>
+      <p>
+        Opacity digunakan untuk mengatur tingkat ketidaktransparanan
+        suatu elemen. Nilainya berada dari 0 sampai 1.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  opacity: 0.5;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Perbandingan opacity</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+          <div style="background:#2563eb;color:white;padding:20px 5px;text-align:center;border-radius:8px">
+            1.0<br>100%
+          </div>
+          <div style="background:#2563eb;color:white;opacity:.5;padding:20px 5px;text-align:center;border-radius:8px">
+            0.5<br>50%
+          </div>
+          <div style="background:#2563eb;color:white;opacity:.2;padding:20px 5px;text-align:center;border-radius:8px">
+            0.2<br>20%
+          </div>
+        </div>
+      </div>
+
+      <p>
+        Perlu diingat, <code>opacity</code> memengaruhi seluruh elemen
+        beserta isi di dalamnya, termasuk teks dan gambar.
+      </p>
+
+      <h3>Transparansi menggunakan RGBA</h3>
+      <p>
+        Jika kamu hanya ingin membuat latar belakang transparan tanpa
+        membuat teks di dalamnya ikut transparan, gunakan RGBA.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.card {
+  background-color: rgba(37, 99, 235, 0.2);
+  color: #14213d;
+}</code></pre>
+      </div>
+
+      <div class="note success">
+        <strong>Kesimpulan:</strong> Gunakan opacity untuk mengatur
+        transparansi seluruh elemen. Gunakan RGBA jika hanya warna
+        tertentu yang ingin dibuat transparan.
+      </div>
+    </section>
+
+    <section class="card" id="gradient">
+      <h2>07. CSS Gradient</h2>
+      <p>
+        Gradient adalah perpaduan dua warna atau lebih yang berubah
+        secara bertahap. Gradient dapat membuat tampilan website
+        lebih dinamis.
+      </p>
+
+      <h3>A. Linear Gradient</h3>
+      <p>
+        Linear gradient menghasilkan perpindahan warna dalam satu arah,
+        misalnya dari kiri ke kanan atau dari atas ke bawah.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.hero {
+  background: linear-gradient(
+    to right,
+    #14213d,
+    #2563eb
+  );
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh linear gradient</div>
+        <div style="height:110px;border-radius:10px;background:linear-gradient(to right,#14213d,#2563eb);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold">
+          Linear Gradient
+        </div>
+      </div>
+
+      <h3>B. Gradient dengan tiga warna</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.banner {
+  background: linear-gradient(
+    to right,
+    #2563eb,
+    #06b6d4,
+    #10b981
+  );
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh tiga warna</div>
+        <div style="height:90px;border-radius:10px;background:linear-gradient(to right,#2563eb,#06b6d4,#10b981)"></div>
+      </div>
+
+      <h3>C. Radial Gradient</h3>
+      <p>
+        Radial gradient menghasilkan perpindahan warna yang menyebar
+        dari titik pusat ke arah luar.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.circle {
+  background: radial-gradient(
+    circle,
+    #06b6d4,
+    #14213d
+  );
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh radial gradient</div>
+        <div style="height:120px;border-radius:10px;background:radial-gradient(circle,#06b6d4,#14213d)"></div>
+      </div>
+
+      <div class="note info">
+        <strong>Tips:</strong> Gradient cocok digunakan pada hero section,
+        banner, tombol, dan elemen dekoratif. Jangan terlalu banyak
+        menggunakan warna agar desain tetap nyaman dilihat.
+      </div>
+    </section>
+
+    <section class="card" id="gambar">
+      <h2>08. Background Image</h2>
+      <p>
+        CSS juga memungkinkan kita menggunakan gambar sebagai latar
+        belakang sebuah elemen melalui property
+        <code>background-image</code>.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.hero {
+  background-image: url("gambar.jpg");
+}</code></pre>
+      </div>
+
+      <p>
+        Selain itu, ada beberapa property yang sering digunakan
+        bersama background image.
+      </p>
+
+      <h3>Background Size</h3>
+      <p>
+        <code>background-size</code> mengatur ukuran gambar latar.
+        Nilai <code>cover</code> membuat gambar memenuhi area elemen
+        sambil mempertahankan proporsinya. Sebagian gambar mungkin
+        terpotong.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.hero {
+  background-image: url("gambar.jpg");
+  background-size: cover;
+}</code></pre>
+      </div>
+
+      <h3>Background Position</h3>
+      <p>
+        <code>background-position</code> mengatur posisi gambar
+        di dalam elemen.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.hero {
+  background-position: center;
+}</code></pre>
+      </div>
+
+      <h3>Background Repeat</h3>
+      <p>
+        <code>background-repeat</code> mengatur apakah gambar latar
+        diulang atau tidak.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.hero {
+  background-repeat: no-repeat;
+}</code></pre>
+      </div>
+
+      <h3>Contoh gabungan</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.hero {
+  background-image: url("gambar.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}</code></pre>
+      </div>
+
+      <table class="comparison">
+        <tr><th>Property</th><th>Fungsi</th></tr>
+        <tr><td><code>background-image</code></td><td>Menentukan gambar latar.</td></tr>
+        <tr><td><code>background-size</code></td><td>Mengatur ukuran gambar latar.</td></tr>
+        <tr><td><code>background-position</code></td><td>Mengatur posisi gambar.</td></tr>
+        <tr><td><code>background-repeat</code></td><td>Mengatur pengulangan gambar.</td></tr>
+      </table>
+
+      <div class="note warning">
+        <strong>Perhatikan:</strong> Pastikan lokasi file gambar benar.
+        Jika gambar berada di folder <code>images</code>, gunakan
+        <code>url("images/gambar.jpg")</code>.
+      </div>
+    </section>
+
+    <section class="card" id="latihan">
+      <h2>09. Latihan Praktik</h2>
+      <p>
+        Sekarang buat sebuah halaman sederhana yang memiliki beberapa
+        kombinasi warna dan background.
+      </p>
+
+      <div class="code">
+        <pre><code>latihan-colors/
+├── index.html
+├── style.css
+└── images/
+    └── background.jpg</code></pre>
+      </div>
+
+      <h3>File index.html</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+    content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Latihan Colors & Backgrounds&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header class="hero"&gt;
+    &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+    &lt;p&gt;Belajar CSS membuat website lebih menarik.&lt;/p&gt;
+    &lt;button&gt;Mulai Belajar&lt;/button&gt;
+  &lt;/header&gt;
+
+  &lt;main class="container"&gt;
+    &lt;section class="card"&gt;
+      &lt;h2&gt;Tentang Saya&lt;/h2&gt;
+      &lt;p&gt;Saya sedang mempelajari CSS dari dasar.&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section class="card highlight"&gt;
+      &lt;h2&gt;Tujuan Belajar&lt;/h2&gt;
+      &lt;p&gt;Saya ingin bisa membuat website sendiri.&lt;/p&gt;
+    &lt;/section&gt;
+  &lt;/main&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </div>
+
+      <h3>File style.css</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8fafc;
+  color: #334155;
+}
+
+.hero {
+  background: linear-gradient(
+    135deg,
+    #14213d,
+    #2563eb
+  );
+  color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero button {
+  background-color: #06b6d4;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.card {
+  background-color: white;
+  padding: 25px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.card h2 {
+  color: #2563eb;
+}
+
+.highlight {
+  background-color: #eff6ff;
+}</code></pre>
+      </div>
+
+      <h3>Tugas eksplorasi</h3>
+      <ol>
+        <li>Ubah warna gradient pada bagian hero.</li>
+        <li>Ganti warna tombol menggunakan kode HEX berbeda.</li>
+        <li>Buat satu card dengan warna latar transparan menggunakan RGBA.</li>
+        <li>Tambahkan background image pada hero.</li>
+        <li>Coba gunakan background-position dan background-size.</li>
+      </ol>
+
+      <div class="note success">
+        <strong>Target latihan:</strong> Kamu mampu membuat halaman
+        sederhana dengan kombinasi warna yang konsisten dan background
+        yang sesuai.
+      </div>
+    </section>
+
+    <section class="card" id="quiz">
+      <h2>10. Quiz Pemahaman</h2>
+      <p>Jawab pertanyaan berikut untuk menguji pemahamanmu.</p>
+
+      <form id="quizForm">
+        <div class="quiz-question">
+          <p>1. Property apa yang digunakan untuk mengatur warna teks?</p>
+          <label><input type="radio" name="q1" value="a"> background-color</label>
+          <label><input type="radio" name="q1" value="b"> color</label>
+          <label><input type="radio" name="q1" value="c"> font-size</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Format warna HEX biasanya diawali dengan simbol apa?</p>
+          <label><input type="radio" name="q2" value="a"> #</label>
+          <label><input type="radio" name="q2" value="b"> @</label>
+          <label><input type="radio" name="q2" value="c"> &</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. Apa fungsi nilai alpha pada RGBA?</p>
+          <label><input type="radio" name="q3" value="a"> Mengatur ukuran teks</label>
+          <label><input type="radio" name="q3" value="b"> Mengatur posisi gambar</label>
+          <label><input type="radio" name="q3" value="c"> Mengatur transparansi warna</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. Property apa yang digunakan untuk membuat gradient?</p>
+          <label><input type="radio" name="q4" value="a"> text-gradient</label>
+          <label><input type="radio" name="q4" value="b"> background</label>
+          <label><input type="radio" name="q4" value="c"> font-gradient</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Apa fungsi background-size: cover?</p>
+          <label><input type="radio" name="q5" value="a"> Membuat gambar memenuhi area sambil mempertahankan proporsinya</label>
+          <label><input type="radio" name="q5" value="b"> Menghapus gambar latar</label>
+          <label><input type="radio" name="q5" value="c"> Membuat gambar selalu diulang</label>
+        </div>
+
+        <button class="primary-btn" type="button" onclick="checkQuiz()">
+          Periksa Jawaban
+        </button>
+      </form>
+
+      <div class="quiz-result" id="quizResult"></div>
+    </section>
+
+    <section class="card" id="challenge">
+      <h2>11. Final Challenge</h2>
+      <p>
+        Buat sebuah website sederhana bertema
+        <strong>My Favorite Place</strong>.
+        Gunakan warna dan background untuk membangun suasana halaman.
+      </p>
+
+      <h3>Ketentuan proyek</h3>
+      <ul>
+        <li>Memiliki hero section dengan gradient.</li>
+        <li>Memiliki judul dan deskripsi dengan warna berbeda.</li>
+        <li>Memiliki minimal dua card dengan background berbeda.</li>
+        <li>Menggunakan minimal satu warna dalam format HEX.</li>
+        <li>Menggunakan minimal satu warna dalam format RGB atau RGBA.</li>
+        <li>Menggunakan opacity atau transparansi.</li>
+        <li>Menggunakan background image atau gradient.</li>
+        <li>Memisahkan HTML dan CSS dalam file berbeda.</li>
+      </ul>
+
+      <h3>Checklist penyelesaian</h3>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p id="progressText">0 dari 6 target selesai</p>
+
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox"> Saya memahami format warna CSS.</label>
+        <label><input type="checkbox"> Saya bisa mengatur warna teks.</label>
+        <label><input type="checkbox"> Saya bisa mengatur background-color.</label>
+        <label><input type="checkbox"> Saya memahami opacity dan RGBA.</label>
+        <label><input type="checkbox"> Saya bisa membuat gradient dan background image.</label>
+        <label><input type="checkbox"> Saya berhasil menyelesaikan final challenge.</label>
+      </div>
+
+      <div class="note success">
+        <strong>Standar kelulusan:</strong> Selesaikan seluruh checklist
+        dan raih minimal 4 dari 5 jawaban benar pada quiz sebelum lanjut
+        ke Modul 04.
+      </div>
+    </section>
+
+    <div class="navigation">
+      <a href="modul-02.html">← Modul 02: CSS Syntax & Selectors</a>
+      <a href="modul-04.html">Modul 04: Typography →</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  DevLearn · Learn, Practice, Build
+  <br>Belajar hari ini, bangun sesuatu esok hari.
+</footer>
+
+<script>
+  function copyCode(button) {
+    const code = button.parentElement.querySelector("code");
+    const text = code.innerText;
+
+    navigator.clipboard.writeText(text).then(() => {
+      button.innerText = "Copied!";
+      setTimeout(() => button.innerText = "Copy", 1500);
+    }).catch(() => {
+      button.innerText = "Gagal";
+      setTimeout(() => button.innerText = "Copy", 1500);
+    });
+  }
+
+  function checkQuiz() {
+    const answers = {
+      q1: "b",
+      q2: "a",
+      q3: "c",
+      q4: "b",
+      q5: "a"
+    };
+
+    let score = 0;
+    let unanswered = 0;
+
+    Object.keys(answers).forEach((question) => {
+      const selected = document.querySelector(
+        `input[name="${question}"]:checked`
+      );
+
+      if (!selected) {
+        unanswered++;
+      } else if (selected.value === answers[question]) {
+        score++;
+      }
+    });
+
+    const result = document.getElementById("quizResult");
+    result.style.display = "block";
+
+    if (unanswered > 0) {
+      result.innerHTML =
+        `Masih ada ${unanswered} soal yang belum dijawab. Lengkapi dahulu, ya.`;
+      return;
+    }
+
+    result.innerHTML =
+      `<strong>Skor kamu: ${score}/5</strong><br>` +
+      (score >= 4
+        ? "Bagus! Kamu sudah memahami dasar Colors & Backgrounds."
+        : "Belum mencapai target. Pelajari kembali materi dan ulangi quiz.");
+
+    result.style.background = score >= 4 ? "#ecfdf5" : "#fffbeb";
+  }
+
+  const checklist = document.querySelectorAll(
+    "#checklist input[type='checkbox']"
+  );
+
+  function updateProgress() {
+    const checked = [...checklist].filter(item => item.checked).length;
+    const total = checklist.length;
+    const percentage = (checked / total) * 100;
+
+    document.getElementById("progressFill").style.width =
+      percentage + "%";
+
+    document.getElementById("progressText").innerText =
+      `${checked} dari ${total} target selesai`;
+  }
+
+  checklist.forEach(item => {
+    item.addEventListener("change", updateProgress);
+  });
+
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinks = document.querySelectorAll(".sidebar a");
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 130) {
+        current = section.id;
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === "#" + current
+      );
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,968 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevLearn - CSS Modul 02</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --dark: #14213d;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --green: #059669;
+      --soft-blue: #eff6ff;
+      --soft-green: #ecfdf5;
+      --soft-yellow: #fffbeb;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    a { color: var(--primary); }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      color: var(--dark);
+      font-weight: 800;
+      font-size: 19px;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--primary); }
+
+    .nav-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 32px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 85px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .sidebar h3 {
+      margin: 0 0 12px;
+      color: var(--dark);
+      font-size: 15px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 8px 10px;
+      margin: 3px 0;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 7px;
+      font-size: 13px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: var(--soft-blue);
+      color: var(--primary);
+    }
+
+    main { min-width: 0; }
+
+    .hero {
+      padding: 34px;
+      background: linear-gradient(135deg, #14213d, #2563eb);
+      color: white;
+      border-radius: 18px;
+      margin-bottom: 22px;
+    }
+
+    .hero .tag {
+      display: inline-block;
+      padding: 5px 11px;
+      background: rgba(255,255,255,.15);
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .hero h1 {
+      margin: 15px 0 8px;
+      font-size: 32px;
+      line-height: 1.25;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #dbeafe;
+      max-width: 650px;
+    }
+
+    .meta {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #dbeafe;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      color: var(--dark);
+      font-size: 21px;
+    }
+
+    .card h3 {
+      color: var(--dark);
+      font-size: 16px;
+      margin-top: 22px;
+    }
+
+    .card p { margin: 10px 0; }
+
+    .code {
+      position: relative;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 14px 0;
+      overflow-x: auto;
+    }
+
+    .code pre {
+      margin: 0;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: 1px solid #475569;
+      background: #1e293b;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .note {
+      padding: 15px 17px;
+      border-radius: 9px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .info {
+      background: var(--soft-blue);
+      border-left: 4px solid var(--primary);
+    }
+
+    .success {
+      background: var(--soft-green);
+      border-left: 4px solid var(--green);
+    }
+
+    .warning {
+      background: var(--soft-yellow);
+      border-left: 4px solid #d97706;
+    }
+
+    .example {
+      border: 1px dashed #cbd5e1;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 14px 0;
+    }
+
+    .example-title {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .comparison th,
+    .comparison td {
+      border: 1px solid var(--border);
+      padding: 11px;
+      text-align: left;
+    }
+
+    .comparison th {
+      background: #f1f5f9;
+      color: var(--dark);
+    }
+
+    .quiz-question {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin: 14px 0;
+    }
+
+    .quiz-question p {
+      font-weight: bold;
+      margin-top: 0;
+    }
+
+    .quiz-question label {
+      display: block;
+      padding: 5px 0;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .quiz-result {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 9px;
+      background: var(--soft-blue);
+    }
+
+    .primary-btn {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      padding: 11px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .primary-btn:hover { background: #1d4ed8; }
+
+    .checklist label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .checklist input { margin-top: 5px; }
+
+    .progress-track {
+      height: 9px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--green);
+      transition: width .3s;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      padding: 11px 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: white;
+      font-size: 13px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .container { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 24px; }
+      .hero h1 { font-size: 25px; }
+      .card { padding: 19px; }
+      .sidebar nav { grid-template-columns: 1fr; }
+      .navigation { flex-direction: column; }
+    }
+  </style>
+  <link rel="stylesheet" href="../html/module-theme.css">
+</head>
+<body>
+
+<header class="navbar">
+  <a href="../../index.html" class="brand">Kub<span>ika.</span></a>
+  <span class="nav-label">CSS Learning Path · Modul 02</span>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <h3>Daftar Materi</h3>
+    <nav>
+      <a href="#tujuan">Tujuan Pembelajaran</a>
+      <a href="#syntax">CSS Syntax</a>
+      <a href="#element">Element Selector</a>
+      <a href="#class">Class Selector</a>
+      <a href="#id">ID Selector</a>
+      <a href="#group">Grouping Selector</a>
+      <a href="#kombinasi">Selector Kombinasi</a>
+      <a href="#latihan">Latihan Praktik</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#challenge">Final Challenge</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <span class="tag">CSS FUNDAMENTAL · MODUL 02</span>
+      <h1>CSS Syntax & Selectors</h1>
+      <p>
+        Pelajari cara menulis aturan CSS dan memilih elemen HTML
+        yang ingin kamu ubah tampilannya.
+      </p>
+      <div class="meta">Level: Beginner · Estimasi: 45–60 menit</div>
+    </section>
+
+    <section class="card" id="tujuan">
+      <h2>01. Tujuan Pembelajaran</h2>
+      <p>Setelah menyelesaikan modul ini, kamu diharapkan mampu:</p>
+      <ul>
+        <li>Memahami struktur dasar penulisan CSS.</li>
+        <li>Menggunakan element selector.</li>
+        <li>Membedakan class selector dan ID selector.</li>
+        <li>Menggunakan grouping selector.</li>
+        <li>Menggabungkan beberapa selector sederhana.</li>
+        <li>Menerapkan selector pada halaman HTML.</li>
+      </ul>
+      <div class="note info">
+        <strong>Prasyarat:</strong> Kamu sudah memahami struktur HTML
+        dan cara menghubungkan file CSS eksternal dari Modul 01.
+      </div>
+    </section>
+
+    <section class="card" id="syntax">
+      <h2>02. Memahami CSS Syntax</h2>
+      <p>
+        CSS memiliki aturan penulisan yang disebut <strong>CSS syntax</strong>.
+        Aturan ini menentukan elemen mana yang akan diberi gaya dan
+        bagaimana tampilannya diubah.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>p {
+  color: blue;
+  font-size: 18px;
+}</code></pre>
+      </div>
+
+      <p>Struktur tersebut terdiri dari tiga bagian utama:</p>
+      <ul>
+        <li><strong>Selector:</strong> menentukan elemen HTML yang dipilih.</li>
+        <li><strong>Property:</strong> menentukan bagian tampilan yang diubah.</li>
+        <li><strong>Value:</strong> menentukan nilai dari property.</li>
+      </ul>
+
+      <table class="comparison">
+        <tr><th>Bagian</th><th>Contoh</th><th>Fungsi</th></tr>
+        <tr><td>Selector</td><td><code>p</code></td><td>Memilih semua elemen paragraf.</td></tr>
+        <tr><td>Property</td><td><code>color</code></td><td>Mengatur warna teks.</td></tr>
+        <tr><td>Value</td><td><code>blue</code></td><td>Menentukan warna biru.</td></tr>
+      </table>
+
+      <div class="note warning">
+        <strong>Perhatikan:</strong> Setiap deklarasi CSS diakhiri dengan
+        titik koma (<code>;</code>). Property dan value dipisahkan dengan
+        tanda titik dua (<code>:</code>).
+      </div>
+
+      <h3>Contoh lainnya</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>h1 {
+  color: navy;
+  background-color: lightblue;
+  text-align: center;
+}</code></pre>
+      </div>
+
+      <p>
+        Artinya, semua elemen <code>h1</code> akan memiliki teks berwarna
+        navy, latar belakang biru muda, dan posisi teks di tengah.
+      </p>
+    </section>
+
+    <section class="card" id="element">
+      <h2>03. Element Selector</h2>
+      <p>
+        Element selector digunakan untuk memilih elemen HTML berdasarkan
+        nama tag-nya.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>p {
+  color: gray;
+}
+
+h1 {
+  color: blue;
+}
+
+button {
+  background-color: black;
+  color: white;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh hasil</div>
+        <h2 style="color:blue">Judul Website</h2>
+        <p style="color:gray">Ini adalah paragraf yang tampil berwarna abu-abu.</p>
+        <button style="background:black;color:white;padding:8px 12px;border:0;border-radius:5px">
+          Tombol Contoh
+        </button>
+      </div>
+
+      <p>
+        Jika kamu menggunakan selector <code>p</code>, semua elemen
+        paragraf pada halaman akan terkena aturan tersebut.
+      </p>
+
+      <div class="note info">
+        <strong>Kapan digunakan?</strong> Gunakan element selector ketika
+        kamu ingin memberikan gaya dasar yang sama kepada seluruh elemen
+        dengan tag tertentu.
+      </div>
+    </section>
+
+    <section class="card" id="class">
+      <h2>04. Class Selector</h2>
+      <p>
+        Class selector digunakan untuk memilih elemen berdasarkan atribut
+        <code>class</code> pada HTML. Penulisannya di CSS diawali dengan
+        tanda titik (<code>.</code>).
+      </p>
+
+      <h3>Contoh HTML</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;h1 class="judul"&gt;Selamat Datang&lt;/h1&gt;
+
+&lt;p class="deskripsi"&gt;
+  Belajar CSS bersama DevLearn.
+&lt;/p&gt;
+
+&lt;p class="deskripsi"&gt;
+  Belajar membuat website dari dasar.
+&lt;/p&gt;</code></pre>
+      </div>
+
+      <h3>Contoh CSS</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.judul {
+  color: blue;
+  text-align: center;
+}
+
+.deskripsi {
+  color: gray;
+  font-size: 16px;
+}</code></pre>
+      </div>
+
+      <div class="note success">
+        <strong>Ingat:</strong> Satu class dapat digunakan oleh banyak
+        elemen HTML. Bahkan satu elemen bisa memiliki beberapa class.
+      </div>
+
+      <h3>Contoh beberapa class</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;p class="teks-biru tebal"&gt;
+  Belajar CSS itu menyenangkan.
+&lt;/p&gt;</code></pre>
+      </div>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.teks-biru {
+  color: blue;
+}
+
+.tebal {
+  font-weight: bold;
+}</code></pre>
+      </div>
+    </section>
+
+    <section class="card" id="id">
+      <h2>05. ID Selector</h2>
+      <p>
+        ID selector digunakan untuk memilih elemen berdasarkan atribut
+        <code>id</code>. Penulisannya diawali dengan tanda pagar
+        (<code>#</code>).
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;h1 id="judul-utama"&gt;
+  Website Pertamaku
+&lt;/h1&gt;</code></pre>
+      </div>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>#judul-utama {
+  color: darkblue;
+  text-align: center;
+  font-size: 32px;
+}</code></pre>
+      </div>
+
+      <div class="note warning">
+        <strong>Perbedaan penting:</strong> ID sebaiknya unik dalam satu
+        halaman HTML. Jangan menggunakan ID yang sama untuk banyak elemen.
+      </div>
+
+      <h3>Class vs ID</h3>
+      <table class="comparison">
+        <tr><th>Class</th><th>ID</th></tr>
+        <tr><td>Diawali titik (<code>.</code>).</td><td>Diawali pagar (<code>#</code>).</td></tr>
+        <tr><td>Dapat digunakan berulang kali.</td><td>Sebaiknya unik dalam satu halaman.</td></tr>
+        <tr><td>Cocok untuk gaya yang digunakan berulang.</td><td>Cocok untuk identitas satu elemen tertentu.</td></tr>
+      </table>
+    </section>
+
+    <section class="card" id="group">
+      <h2>06. Grouping Selector</h2>
+      <p>
+        Grouping selector memungkinkan kita memberikan aturan CSS yang
+        sama kepada beberapa selector sekaligus. Setiap selector dipisahkan
+        menggunakan koma.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>h1, h2, p {
+  font-family: Arial, sans-serif;
+  color: #334155;
+}</code></pre>
+      </div>
+
+      <p>
+        Contoh tersebut membuat semua elemen <code>h1</code>,
+        <code>h2</code>, dan <code>p</code> menggunakan jenis font
+        dan warna yang sama.
+      </p>
+
+      <div class="note info">
+        <strong>Manfaat:</strong> Kode menjadi lebih ringkas dan tidak
+        perlu menulis aturan yang sama berkali-kali.
+      </div>
+    </section>
+
+    <section class="card" id="kombinasi">
+      <h2>07. Selector Kombinasi Dasar</h2>
+      <p>
+        Selain memilih elemen secara langsung, kita juga bisa memilih
+        elemen berdasarkan hubungannya dengan elemen lain.
+      </p>
+
+      <h3>Descendant Selector</h3>
+      <p>
+        Menggunakan spasi untuk memilih elemen yang berada di dalam
+        elemen lainnya, baik secara langsung maupun bertingkat.
+      </p>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.card p {
+  color: gray;
+}</code></pre>
+      </div>
+      <p>
+        Artinya, semua paragraf yang berada di dalam elemen dengan class
+        <code>card</code> akan berwarna abu-abu.
+      </p>
+
+      <h3>Child Selector</h3>
+      <p>
+        Menggunakan tanda lebih besar (<code>&gt;</code>) untuk memilih
+        elemen yang merupakan anak langsung dari elemen tertentu.
+      </p>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.menu > a {
+  color: navy;
+}</code></pre>
+      </div>
+      <p>
+        Aturan ini hanya memilih elemen <code>a</code> yang menjadi
+        anak langsung dari elemen dengan class <code>menu</code>.
+      </p>
+
+      <div class="note success">
+        <strong>Tips belajar:</strong> Kuasai element, class, dan ID
+        terlebih dahulu. Selector kombinasi akan terasa lebih mudah
+        setelah kamu terbiasa membaca struktur HTML.
+      </div>
+    </section>
+
+    <section class="card" id="latihan">
+      <h2>08. Latihan Praktik</h2>
+      <p>
+        Sekarang waktunya mencoba sendiri. Buat dua file berikut:
+      </p>
+
+      <div class="code">
+        <pre><code>latihan-selector/
+├── index.html
+└── style.css</code></pre>
+      </div>
+
+      <h3>File index.html</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+    content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Latihan CSS Selector&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;h1 id="judul"&gt;Belajar CSS Selector&lt;/h1&gt;
+
+  &lt;p class="deskripsi"&gt;
+    Saya sedang belajar CSS dari dasar.
+  &lt;/p&gt;
+
+  &lt;div class="card"&gt;
+    &lt;h2&gt;Materi Pertama&lt;/h2&gt;
+    &lt;p&gt;Belajar mengenal selector CSS.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class="card"&gt;
+    &lt;h2&gt;Materi Kedua&lt;/h2&gt;
+    &lt;p&gt;Belajar menerapkan selector.&lt;/p&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </div>
+
+      <h3>File style.css</h3>
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>/* Selector ID */
+#judul {
+  color: navy;
+  text-align: center;
+}
+
+/* Selector Class */
+.deskripsi {
+  color: gray;
+  text-align: center;
+}
+
+/* Element Selector */
+h2 {
+  color: blue;
+}
+
+/* Grouping Selector */
+h1, h2 {
+  font-family: Arial, sans-serif;
+}
+
+/* Descendant Selector */
+.card p {
+  color: green;
+}</code></pre>
+      </div>
+
+      <h3>Tugas eksplorasi</h3>
+      <ol>
+        <li>Ubah warna judul menjadi merah.</li>
+        <li>Ubah semua paragraf deskripsi menjadi biru.</li>
+        <li>Buat class baru bernama <code>highlight</code>.</li>
+        <li>Terapkan class tersebut pada salah satu paragraf.</li>
+        <li>Coba ubah tampilan elemen menggunakan ID dan class.</li>
+      </ol>
+
+      <div class="note info">
+        <strong>Target:</strong> Kamu harus bisa menjelaskan mengapa
+        suatu elemen berubah warna setelah selector tertentu diterapkan.
+      </div>
+    </section>
+
+    <section class="card" id="quiz">
+      <h2>09. Quiz Pemahaman</h2>
+      <p>Jawab pertanyaan berikut untuk menguji pemahamanmu.</p>
+
+      <form id="quizForm">
+        <div class="quiz-question">
+          <p>1. Apa fungsi selector dalam CSS?</p>
+          <label><input type="radio" name="q1" value="a"> Mengatur database website</label>
+          <label><input type="radio" name="q1" value="b"> Memilih elemen HTML yang akan diberi gaya</label>
+          <label><input type="radio" name="q1" value="c"> Membuat struktur HTML</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Simbol apa yang digunakan untuk class selector?</p>
+          <label><input type="radio" name="q2" value="a"> #</label>
+          <label><input type="radio" name="q2" value="b"> @</label>
+          <label><input type="radio" name="q2" value="c"> .</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. Bagaimana cara menulis ID selector?</p>
+          <label><input type="radio" name="q3" value="a"> #judul</label>
+          <label><input type="radio" name="q3" value="b"> .judul</label>
+          <label><input type="radio" name="q3" value="c"> judul()</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. Selector mana yang memilih semua elemen paragraf?</p>
+          <label><input type="radio" name="q4" value="a"> .p</label>
+          <label><input type="radio" name="q4" value="b"> p</label>
+          <label><input type="radio" name="q4" value="c"> #p</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Apa fungsi grouping selector?</p>
+          <label><input type="radio" name="q5" value="a"> Menghapus elemen HTML</label>
+          <label><input type="radio" name="q5" value="b"> Menghubungkan CSS ke database</label>
+          <label><input type="radio" name="q5" value="c"> Memberikan aturan yang sama kepada beberapa selector</label>
+        </div>
+
+        <button class="primary-btn" type="button" onclick="checkQuiz()">
+          Periksa Jawaban
+        </button>
+      </form>
+
+      <div class="quiz-result" id="quizResult"></div>
+    </section>
+
+    <section class="card" id="challenge">
+      <h2>10. Final Challenge</h2>
+      <p>
+        Buat sebuah halaman sederhana bertema <strong>My Learning Profile</strong>.
+        Halaman tersebut harus menggunakan beberapa jenis selector CSS.
+      </p>
+
+      <h3>Ketentuan proyek</h3>
+      <ul>
+        <li>Memiliki satu judul utama.</li>
+        <li>Memiliki minimal dua paragraf.</li>
+        <li>Memiliki minimal dua card materi.</li>
+        <li>Menggunakan minimal satu ID selector.</li>
+        <li>Menggunakan minimal tiga class selector.</li>
+        <li>Menggunakan minimal satu grouping selector.</li>
+        <li>Menggunakan minimal satu descendant selector.</li>
+        <li>Memisahkan HTML dan CSS ke dalam dua file.</li>
+      </ul>
+
+      <h3>Checklist penyelesaian</h3>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p id="progressText">0 dari 6 target selesai</p>
+
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox"> Saya memahami struktur CSS syntax.</label>
+        <label><input type="checkbox"> Saya bisa menggunakan element selector.</label>
+        <label><input type="checkbox"> Saya bisa menggunakan class selector.</label>
+        <label><input type="checkbox"> Saya bisa menggunakan ID selector.</label>
+        <label><input type="checkbox"> Saya memahami grouping dan selector kombinasi.</label>
+        <label><input type="checkbox"> Saya berhasil menyelesaikan proyek latihan.</label>
+      </div>
+
+      <div class="note success">
+        <strong>Standar kelulusan:</strong> Selesaikan seluruh checklist
+        dan raih minimal 4 dari 5 jawaban benar pada quiz sebelum lanjut
+        ke Modul 03.
+      </div>
+    </section>
+
+    <div class="navigation">
+      <a href="modul-01.html">← Modul 01: Pengenalan CSS</a>
+      <a href="modul-03.html">Modul 03: Colors & Backgrounds →</a>
+    </div>
+  </main>
+</div>
+
+<footer>
+  DevLearn · Learn, Practice, Build
+  <br>Belajar hari ini, bangun sesuatu esok hari.
+</footer>
+
+<script>
+  function copyCode(button) {
+    const code = button.parentElement.querySelector("code");
+    const text = code.innerText;
+
+    navigator.clipboard.writeText(text).then(() => {
+      button.innerText = "Copied!";
+      setTimeout(() => button.innerText = "Copy", 1500);
+    }).catch(() => {
+      button.innerText = "Gagal";
+      setTimeout(() => button.innerText = "Copy", 1500);
+    });
+  }
+
+  function checkQuiz() {
+    const answers = {
+      q1: "b",
+      q2: "c",
+      q3: "a",
+      q4: "b",
+      q5: "c"
+    };
+
+    let score = 0;
+    let unanswered = 0;
+
+    Object.keys(answers).forEach((question) => {
+      const selected = document.querySelector(
+        `input[name="${question}"]:checked`
+      );
+
+      if (!selected) {
+        unanswered++;
+      } else if (selected.value === answers[question]) {
+        score++;
+      }
+    });
+
+    const result = document.getElementById("quizResult");
+    result.style.display = "block";
+
+    if (unanswered > 0) {
+      result.innerHTML =
+        `Masih ada ${unanswered} soal yang belum dijawab. Lengkapi dahulu, ya.`;
+      return;
+    }
+
+    result.innerHTML =
+      `<strong>Skor kamu: ${score}/5</strong><br>` +
+      (score >= 4
+        ? "Bagus! Kamu sudah memahami materi dasar selector CSS."
+        : "Belum mencapai target. Coba pelajari kembali materi dan ulangi quiz.");
+
+    result.style.background = score >= 4 ? "#ecfdf5" : "#fffbeb";
+  }
+
+  const checklist = document.querySelectorAll(
+    "#checklist input[type='checkbox']"
+  );
+
+  function updateProgress() {
+    const checked = [...checklist].filter(item => item.checked).length;
+    const total = checklist.length;
+    const percentage = (checked / total) * 100;
+
+    document.getElementById("progressFill").style.width =
+      percentage + "%";
+
+    document.getElementById("progressText").innerText =
+      `${checked} dari ${total} target selesai`;
+  }
+
+  checklist.forEach(item => {
+    item.addEventListener("change", updateProgress);
+  });
+
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinks = document.querySelectorAll(".sidebar a");
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 130) {
+        current = section.id;
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === "#" + current
+      );
+    });
+  });
+</script>
+</body>
+</html>

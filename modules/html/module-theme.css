@@ -34,7 +34,8 @@ body {
   outline-offset: 3px;
 }
 
-.navbar {
+.navbar,
+nav.topbar {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -49,7 +50,8 @@ body {
   backdrop-filter: blur(14px);
 }
 
-.navbar::after {
+.navbar::after,
+nav.topbar::after {
   content: "";
   position: absolute;
   right: 0;
@@ -326,7 +328,8 @@ footer {
 }
 
 @media (max-width: 480px) {
-  .navbar {
+  .navbar,
+  nav.topbar {
     padding: 14px 5%;
   }
 

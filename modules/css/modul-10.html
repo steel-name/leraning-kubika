@@ -1,0 +1,2096 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14213d">
+<title>DevLearn — CSS Module 10: Transitions, Transforms & Animations</title>
+
+<style>
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-light: #eff6ff;
+  --dark: #14213d;
+  --text: #334155;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --bg: #f8fafc;
+  --white: #fff;
+  --green: #059669;
+  --red: #dc2626;
+  --orange: #d97706;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+}
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.7;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.navbar {
+  height: 66px;
+  background: white;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--dark);
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+.nav-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+}
+
+.sidebar {
+  padding: 28px 20px;
+  background: white;
+  border-right: 1px solid var(--border);
+  min-height: calc(100vh - 66px);
+  position: sticky;
+  top: 66px;
+  height: calc(100vh - 66px);
+  overflow-y: auto;
+}
+
+.sidebar h3 {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 13px;
+  margin-bottom: 4px;
+  transition: .2s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+main {
+  max-width: 1050px;
+  width: 100%;
+  padding: 40px 48px 70px;
+  margin: auto;
+  min-width: 0;
+}
+
+.hero {
+  background: linear-gradient(120deg, #14213d, #2563eb);
+  color: white;
+  padding: 38px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  border: 35px solid #ffffff12;
+  border-radius: 50%;
+  right: -75px;
+  bottom: -110px;
+  pointer-events: none;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: .8;
+  font-weight: 700;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 1.2;
+  margin: 12px 0;
+}
+
+.hero p {
+  max-width: 650px;
+  color: #dbeafe;
+}
+
+.hero-meta {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  background: #ffffff20;
+  border: 1px solid #ffffff40;
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-size: 12px;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 26px;
+  margin-bottom: 22px;
+  box-shadow: 0 3px 12px #0f172a08;
+  scroll-margin-top: 85px;
+}
+
+h2 {
+  font-size: 23px;
+  color: var(--dark);
+  margin: 8px 0 12px;
+}
+
+h3 {
+  font-size: 17px;
+  color: var(--dark);
+  margin: 22px 0 8px;
+}
+
+p {
+  margin: 9px 0;
+}
+
+ul,
+ol {
+  padding-left: 22px;
+  margin: 10px 0;
+}
+
+li {
+  margin: 5px 0;
+}
+
+.tag {
+  display: inline-block;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.note,
+.warning,
+.success {
+  padding: 14px 16px;
+  border-radius: 9px;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.note {
+  background: #eff6ff;
+  border-left: 4px solid var(--primary);
+}
+
+.warning {
+  background: #fff7ed;
+  border-left: 4px solid #f59e0b;
+}
+
+.success {
+  background: #ecfdf5;
+  border-left: 4px solid var(--green);
+}
+
+pre {
+  background: #101827;
+  color: #e2e8f0;
+  padding: 18px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 12px 0;
+  tab-size: 2;
+}
+
+code {
+  font-family: Consolas, monospace;
+}
+
+.inline-code {
+  background: #f1f5f9;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #be123c;
+  font-size: .9em;
+}
+
+.example-box {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  padding: 18px;
+  margin: 12px 0;
+}
+
+.demo-area {
+  min-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.demo-item {
+  width: 95px;
+  height: 75px;
+  display: grid;
+  place-items: center;
+  background: #dbeafe;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* TRANSITION */
+
+.transition-demo {
+  transition:
+    background .3s ease,
+    color .3s ease,
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.transition-demo:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px #2563eb30;
+}
+
+/* TRANSFORM */
+
+.transform-translate {
+  transform: translate(10px, -8px);
+}
+
+.transform-scale {
+  transform: scale(1.12);
+}
+
+.transform-rotate {
+  transform: rotate(12deg);
+}
+
+.transform-skew {
+  transform: skew(-10deg);
+}
+
+/* ANIMATION */
+
+.anim-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+.anim-bounce {
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+.anim-slide {
+  animation: slide 2s ease-in-out infinite alternate;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(-20px);
+  }
+  to {
+    transform: translateX(20px);
+  }
+}
+
+.anim-spin {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animation-paused * {
+  animation-play-state: paused !important;
+}
+
+.demo-button {
+  border: 0;
+  background: var(--primary);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+.demo-button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px #2563eb40;
+}
+
+.demo-button:active {
+  transform: translateY(0) scale(.97);
+}
+
+.demo-button:focus-visible,
+.sidebar a:focus-visible,
+.action-btn:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+.demo-card {
+  padding: 20px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.demo-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px #0f172a15;
+}
+
+.demo-gradient {
+  background: linear-gradient(120deg, #2563eb, #06b6d4);
+  color: white;
+  border-radius: 10px;
+  padding: 18px;
+  transition: filter .3s ease;
+}
+
+.demo-gradient:hover {
+  filter: brightness(1.15);
+}
+
+.demo-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 13px;
+}
+
+th,
+td {
+  text-align: left;
+  border: 1px solid var(--border);
+  padding: 10px;
+  vertical-align: top;
+}
+
+th {
+  background: #f1f5f9;
+  color: var(--dark);
+}
+
+.challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.project-card {
+  min-height: 110px;
+  background: linear-gradient(135deg, #dbeafe, #eff6ff);
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 15px;
+  color: #1e40af;
+  font-weight: 700;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 12px 22px #2563eb20;
+  background: #eff6ff;
+}
+
+.quiz-question {
+  border-top: 1px solid var(--border);
+  padding: 18px 0;
+}
+
+.quiz-question p {
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.quiz-question label {
+  display: block;
+  font-size: 14px;
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+.quiz-question input {
+  margin-right: 8px;
+  accent-color: var(--primary);
+}
+
+.quiz-question label.correct {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.quiz-question label.incorrect {
+  color: var(--red);
+}
+
+.quiz-feedback {
+  font-size: 13px;
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+#quiz-result {
+  font-weight: 700;
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 8px;
+  display: none;
+}
+
+.action-btn {
+  background: var(--primary);
+  color: white;
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 17px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background .2s;
+}
+
+.action-btn:hover {
+  background: var(--primary-dark);
+}
+
+.action-btn.secondary {
+  background: #e2e8f0;
+  color: var(--dark);
+}
+
+.action-btn.secondary:hover {
+  background: #cbd5e1;
+}
+
+.checklist label {
+  display: block;
+  padding: 8px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.checklist input {
+  margin-right: 8px;
+  accent-color: var(--green);
+}
+
+.progress-track {
+  background: #e2e8f0;
+  height: 9px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--green);
+  transition: width .3s ease;
+}
+
+.module-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.module-nav a {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  border-radius: 9px;
+  font-size: 13px;
+  transition: .2s ease;
+}
+
+.module-nav a:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 30px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:800px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 66px;
+    z-index: 50;
+    height: auto;
+    min-height: 0;
+    padding: 12px 15px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .sidebar h3 {
+    display: none;
+  }
+
+  .sidebar nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 5px;
+    scrollbar-width: thin;
+  }
+
+  .sidebar a {
+    white-space: nowrap;
+    margin-bottom: 0;
+  }
+
+  main {
+    padding: 25px 20px 50px;
+  }
+}
+
+@media(max-width:520px) {
+  .navbar {
+    height: 58px;
+  }
+
+  .nav-label {
+    display: none;
+  }
+
+  .sidebar {
+    top: 58px;
+  }
+
+  .hero {
+    padding: 25px;
+  }
+
+  .card {
+    padding: 19px;
+  }
+
+  .challenge-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .module-nav {
+    flex-direction: column;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+  }
+
+  pre {
+    font-size: 12px;
+    padding: 14px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+<link rel="stylesheet" href="../html/module-theme.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="../../index.html" class="logo">Kub<span>ika.</span></a>
+  <div class="nav-label">Learning Path / CSS / Module 10</div>
+</header>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <h3>Daftar Materi</h3>
+  <nav id="sidebar-nav">
+    <a href="#intro" class="active">01. Pengenalan</a>
+    <a href="#transition">02. Transitions</a>
+    <a href="#timing">03. Timing & Delay</a>
+    <a href="#transform">04. Transforms</a>
+    <a href="#origin">05. Transform Origin</a>
+    <a href="#keyframes">06. Keyframes</a>
+    <a href="#animation">07. Animation Properties</a>
+    <a href="#hover">08. Hover & Interaction</a>
+    <a href="#performance">09. Performance</a>
+    <a href="#accessibility">10. Accessibility</a>
+    <a href="#project">11. Mini Project</a>
+    <a href="#quiz">12. Quiz</a>
+    <a href="#checklist">13. Checklist</a>
+  </nav>
+</aside>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div class="eyebrow">CSS Learning Path • Module 10</div>
+  <h1>Transitions, Transforms & Animations</h1>
+  <p>
+    Pelajari cara membuat website lebih hidup dengan efek transisi,
+    perubahan bentuk, dan animasi menggunakan CSS.
+  </p>
+
+  <div class="hero-meta">
+    <span class="pill">Beginner–Intermediate</span>
+    <span class="pill">75–100 Menit</span>
+    <span class="pill">Teori + Praktik</span>
+    <span class="pill">Mini Project</span>
+  </div>
+</section>
+
+<!-- 01 INTRO -->
+
+<section class="card" id="intro">
+  <span class="tag">01 • Pengenalan</span>
+  <h2>Mengapa Website Membutuhkan Animasi?</h2>
+
+  <p>
+    Website bukan hanya tentang tampilan yang bagus. Interaksi visual
+    juga membantu pengguna memahami respons dari sebuah elemen.
+  </p>
+
+  <p>
+    Contohnya, ketika pengguna mengarahkan kursor ke tombol,
+    tombol berubah warna atau sedikit terangkat. Perubahan tersebut
+    memberikan tanda bahwa tombol dapat digunakan.
+  </p>
+
+  <h3>Tiga Konsep Utama</h3>
+
+  <table>
+    <tr>
+      <th>Konsep</th>
+      <th>Fungsi</th>
+      <th>Contoh</th>
+    </tr>
+    <tr>
+      <td>Transition</td>
+      <td>Menghaluskan perubahan nilai CSS dari satu kondisi ke kondisi lain.</td>
+      <td>Warna tombol berubah perlahan.</td>
+    </tr>
+    <tr>
+      <td>Transform</td>
+      <td>Mengubah posisi, ukuran, rotasi, atau kemiringan elemen.</td>
+      <td>Kartu bergerak ke atas saat hover.</td>
+    </tr>
+    <tr>
+      <td>Animation</td>
+      <td>Membuat rangkaian perubahan CSS menggunakan keyframes.</td>
+      <td>Ikon berputar terus-menerus.</td>
+    </tr>
+  </table>
+
+  <h3>Bagaimana Ketiganya Bekerja Bersama?</h3>
+
+  <pre><code>.card {
+  transition: transform .3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}</code></pre>
+
+  <p>
+    Pada contoh tersebut, <code>transform</code> mengatur perubahan
+    posisi kartu, sedangkan <code>transition</code> membuat perubahan
+    posisi berlangsung secara halus.
+  </p>
+
+  <div class="note">
+    <b>Kesimpulan:</b> Transition menghaluskan perubahan,
+    Transform mengubah tampilan visual, dan Animation menjalankan
+    rangkaian perubahan yang didefinisikan menggunakan keyframes.
+  </div>
+</section>
+
+<!-- 02 TRANSITION -->
+
+<section class="card" id="transition">
+  <span class="tag">02 • Transitions</span>
+  <h2>Mengenal CSS Transition</h2>
+
+  <p>
+    Transition digunakan untuk membuat perubahan properti CSS
+    berlangsung secara bertahap, bukan langsung berubah secara mendadak.
+  </p>
+
+  <h3>Contoh tanpa Transition</h3>
+
+  <pre><code>.button {
+  background: blue;
+}
+
+.button:hover {
+  background: red;
+}</code></pre>
+
+  <p>
+    Warna tombol berubah langsung ketika pointer diarahkan ke tombol.
+  </p>
+
+  <h3>Contoh menggunakan Transition</h3>
+
+  <pre><code>.button {
+  background: blue;
+  transition: background .3s ease;
+}
+
+.button:hover {
+  background: red;
+}</code></pre>
+
+  <p>
+    Sekarang perubahan warna berlangsung selama 0,3 detik secara halus.
+  </p>
+
+  <h3>Demo Langsung</h3>
+
+  <div class="example-box">
+    <div class="demo-area">
+      <div class="demo-item transition-demo">Arahkan kursor</div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:#64748b">
+      Arahkan pointer ke kotak untuk melihat efek transition.
+    </p>
+  </div>
+
+  <h3>Properti Transition</h3>
+
+  <pre><code>transition: property duration timing-function delay;</code></pre>
+
+  <table>
+    <tr>
+      <th>Bagian</th>
+      <th>Fungsi</th>
+      <th>Contoh</th>
+    </tr>
+    <tr>
+      <td>property</td>
+      <td>Properti CSS yang ingin dianimasikan.</td>
+      <td>background, transform</td>
+    </tr>
+    <tr>
+      <td>duration</td>
+      <td>Lama perubahan berlangsung.</td>
+      <td>.3s, 500ms</td>
+    </tr>
+    <tr>
+      <td>timing-function</td>
+      <td>Mengatur pola kecepatan perubahan.</td>
+      <td>ease, linear</td>
+    </tr>
+    <tr>
+      <td>delay</td>
+      <td>Waktu tunggu sebelum perubahan dimulai.</td>
+      <td>.2s</td>
+    </tr>
+  </table>
+
+  <h3>Menggunakan Beberapa Properti</h3>
+
+  <pre><code>.card {
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    background .3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px #0002;
+}</code></pre>
+
+  <div class="warning">
+    <b>Kesalahan umum:</b> Transition biasanya ditulis pada kondisi awal
+    elemen, bukan hanya pada <code>:hover</code>. Dengan begitu,
+    perubahan saat pointer masuk maupun keluar bisa berlangsung halus.
+  </div>
+</section>
+
+<!-- 03 TIMING -->
+
+<section class="card" id="timing">
+  <span class="tag">03 • Timing & Delay</span>
+  <h2>Mengatur Kecepatan Transisi</h2>
+
+  <p>
+    Timing function menentukan bagaimana kecepatan perubahan
+    berlangsung sepanjang durasi transition.
+  </p>
+
+  <table>
+    <tr>
+      <th>Nilai</th>
+      <th>Karakteristik</th>
+    </tr>
+    <tr>
+      <td><code>linear</code></td>
+      <td>Kecepatan tetap dari awal sampai akhir.</td>
+    </tr>
+    <tr>
+      <td><code>ease</code></td>
+      <td>Mulai perlahan, lebih cepat di tengah, lalu melambat.</td>
+    </tr>
+    <tr>
+      <td><code>ease-in</code></td>
+      <td>Mulai perlahan lalu semakin cepat.</td>
+    </tr>
+    <tr>
+      <td><code>ease-out</code></td>
+      <td>Mulai cepat lalu melambat.</td>
+    </tr>
+    <tr>
+      <td><code>ease-in-out</code></td>
+      <td>Mulai dan berakhir secara perlahan.</td>
+    </tr>
+    <tr>
+      <td><code>cubic-bezier()</code></td>
+      <td>Mengatur kurva kecepatan secara khusus.</td>
+    </tr>
+  </table>
+
+  <h3>Contoh Penggunaan</h3>
+
+  <pre><code>.box {
+  transition: transform .5s ease-in-out .2s;
+}
+
+.box:hover {
+  transform: translateX(30px);
+}</code></pre>
+
+  <p>
+    Elemen menunggu 0,2 detik, kemudian bergerak selama 0,5 detik.
+  </p>
+
+  <h3>Perbedaan Timing Function</h3>
+
+  <div class="example-box">
+    <p style="font-size:13px;margin-bottom:12px">
+      Arahkan pointer ke setiap tombol untuk membandingkan efeknya.
+    </p>
+
+    <div class="demo-area" style="flex-direction:column;align-items:stretch">
+      <div class="timing-row">
+        <span>Linear</span>
+        <div class="timing-track"><div class="timing-ball linear-ball"></div></div>
+      </div>
+      <div class="timing-row">
+        <span>Ease</span>
+        <div class="timing-track"><div class="timing-ball ease-ball"></div></div>
+      </div>
+      <div class="timing-row">
+        <span>Ease-in</span>
+        <div class="timing-track"><div class="timing-ball easein-ball"></div></div>
+      </div>
+      <div class="timing-row">
+        <span>Ease-out</span>
+        <div class="timing-track"><div class="timing-ball easeout-ball"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .timing-row {
+      display:grid;
+      grid-template-columns:75px 1fr;
+      align-items:center;
+      gap:10px;
+      font-size:12px;
+    }
+    .timing-track {
+      height:35px;
+      border-radius:20px;
+      background:#e2e8f0;
+      padding:5px;
+    }
+    .timing-ball {
+      width:25px;
+      height:25px;
+      background:#2563eb;
+      border-radius:50%;
+      transition:transform .8s;
+    }
+    .timing-row:hover .timing-ball {
+      transform:translateX(min(55vw, 350px));
+    }
+    .linear-ball {transition-timing-function:linear}
+    .ease-ball {transition-timing-function:ease}
+    .easein-ball {transition-timing-function:ease-in}
+    .easeout-ball {transition-timing-function:ease-out}
+  </style>
+
+  <div class="note">
+    Durasi dan timing function adalah dua hal berbeda.
+    Duration mengatur berapa lama perubahan berlangsung,
+    sedangkan timing function mengatur pola kecepatannya.
+  </div>
+</section>
+
+<!-- 04 TRANSFORM -->
+
+<section class="card" id="transform">
+  <span class="tag">04 • Transforms</span>
+  <h2>Mengenal CSS Transform</h2>
+
+  <p>
+    Transform memungkinkan kita mengubah bentuk atau posisi visual
+    sebuah elemen tanpa mengubah alur normal layout dokumen.
+  </p>
+
+  <h3>1. translate()</h3>
+  <p>Digunakan untuk memindahkan elemen pada sumbu X dan Y.</p>
+
+  <pre><code>.box {
+  transform: translate(20px, 10px);
+}</code></pre>
+
+  <p>Elemen bergerak 20px ke kanan dan 10px ke bawah.</p>
+
+  <h3>2. scale()</h3>
+  <p>Digunakan untuk memperbesar atau memperkecil elemen.</p>
+
+  <pre><code>.box {
+  transform: scale(1.2);
+}</code></pre>
+
+  <p>Elemen menjadi 1,2 kali ukuran awalnya.</p>
+
+  <h3>3. rotate()</h3>
+  <p>Digunakan untuk memutar elemen.</p>
+
+  <pre><code>.box {
+  transform: rotate(45deg);
+}</code></pre>
+
+  <p>Nilai positif memutar searah jarum jam, sedangkan nilai negatif memutar berlawanan arah jarum jam.</p>
+
+  <h3>4. skew()</h3>
+  <p>Digunakan untuk memiringkan elemen.</p>
+
+  <pre><code>.box {
+  transform: skew(10deg, 5deg);
+}</code></pre>
+
+  <h3>Demo Transform</h3>
+
+  <div class="example-box">
+    <div class="demo-area">
+      <div class="demo-item">Normal</div>
+      <div class="demo-item transform-translate">Translate</div>
+      <div class="demo-item transform-scale">Scale</div>
+      <div class="demo-item transform-rotate">Rotate</div>
+      <div class="demo-item transform-skew">Skew</div>
+    </div>
+  </div>
+
+  <h3>Menggabungkan Transform</h3>
+
+  <pre><code>.box:hover {
+  transform:
+    translateY(-8px)
+    scale(1.05)
+    rotate(2deg);
+}</code></pre>
+
+  <div class="note">
+    Transform mengubah tampilan visual elemen. Ruang asli yang
+    ditempatinya dalam layout tetap dipertahankan, sehingga elemen
+    lain tidak otomatis berpindah untuk mengisi ruang tersebut.
+  </div>
+</section>
+
+<!-- 05 ORIGIN -->
+
+<section class="card" id="origin">
+  <span class="tag">05 • Transform Origin</span>
+  <h2>Mengatur Titik Transformasi</h2>
+
+  <p>
+    Secara default, transform dilakukan dari titik tengah elemen.
+    Kita dapat mengubah titik tersebut menggunakan
+    <code>transform-origin</code>.
+  </p>
+
+  <pre><code>.box {
+  transform-origin: top left;
+  transform: rotate(15deg);
+}</code></pre>
+
+  <h3>Beberapa Nilai Transform Origin</h3>
+
+  <ul>
+    <li><code>center</code>: titik tengah.</li>
+    <li><code>top left</code>: sudut kiri atas.</li>
+    <li><code>top right</code>: sudut kanan atas.</li>
+    <li><code>bottom center</code>: bagian tengah bawah.</li>
+    <li><code>50% 50%</code>: titik tengah dalam bentuk persentase.</li>
+  </ul>
+
+  <h3>Contoh Penggunaan</h3>
+
+  <pre><code>.card {
+  transform-origin: bottom right;
+}
+
+.card:hover {
+  transform: rotate(5deg);
+}</code></pre>
+
+  <h3>Demo Titik Putar</h3>
+
+  <div class="example-box">
+    <div class="origin-demo">
+      <div class="origin-box origin-left">Top Left</div>
+      <div class="origin-box origin-center">Center</div>
+      <div class="origin-box origin-right">Bottom Right</div>
+    </div>
+  </div>
+
+  <style>
+    .origin-demo {
+      display:flex;
+      justify-content:space-around;
+      gap:35px;
+      flex-wrap:wrap;
+      padding:40px 10px;
+    }
+    .origin-box {
+      width:90px;
+      height:75px;
+      background:#dbeafe;
+      border:1px solid #93c5fd;
+      color:#1e40af;
+      display:grid;
+      place-items:center;
+      border-radius:8px;
+      font-size:11px;
+      font-weight:bold;
+      transition:transform .5s ease;
+    }
+    .origin-left {transform-origin:top left}
+    .origin-center {transform-origin:center}
+    .origin-right {transform-origin:bottom right}
+    .origin-box:hover {transform:rotate(35deg)}
+  </style>
+
+  <p>
+    Konsep ini berguna untuk membuat efek pintu terbuka,
+    kartu miring, dan animasi elemen yang memiliki titik putar khusus.
+  </p>
+</section>
+
+<!-- 06 KEYFRAMES -->
+
+<section class="card" id="keyframes">
+  <span class="tag">06 • Keyframes</span>
+  <h2>Membuat Animasi dengan @keyframes</h2>
+
+  <p>
+    Keyframes adalah aturan CSS yang mendefinisikan tahapan perubahan
+    dalam sebuah animasi.
+  </p>
+
+  <p>
+    Kita dapat menentukan kondisi awal, kondisi tengah,
+    dan kondisi akhir.
+  </p>
+
+  <pre><code>@keyframes moveBox {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100px);
+  }
+}</code></pre>
+
+  <p>
+    Animasi tersebut memindahkan elemen dari posisi awal ke kanan
+    sejauh 100px.
+  </p>
+
+  <h3>Menggunakan Persentase</h3>
+
+  <pre><code>@keyframes colorChange {
+  0% {
+    background: blue;
+  }
+
+  50% {
+    background: cyan;
+  }
+
+  100% {
+    background: purple;
+  }
+}</code></pre>
+
+  <p>
+    Persentase menunjukkan posisi tahapan animasi dari awal hingga akhir.
+  </p>
+
+  <h3>Demo Animasi</h3>
+
+  <div class="example-box">
+    <div class="demo-area" id="animation-demo">
+      <div class="demo-item anim-pulse">Pulse</div>
+      <div class="demo-item anim-bounce">Bounce</div>
+      <div class="demo-item anim-slide">Slide</div>
+      <div class="demo-item anim-spin">Spin</div>
+    </div>
+
+    <div class="demo-controls">
+      <button class="action-btn" id="pause-animation">Jeda Animasi</button>
+      <button class="action-btn secondary" id="restart-animation">Ulangi Animasi</button>
+    </div>
+  </div>
+
+  <h3>Contoh Animasi Bergerak</h3>
+
+  <pre><code>@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.ball {
+  animation: bounce 1s ease-in-out infinite;
+}</code></pre>
+
+  <div class="note">
+    <b>Perbedaan penting:</b> <code>@keyframes</code> mendefinisikan
+    gerakan, sedangkan properti <code>animation</code> menentukan
+    bagaimana gerakan itu dijalankan.
+  </div>
+</section>
+
+<!-- 07 ANIMATION -->
+
+<section class="card" id="animation">
+  <span class="tag">07 • Animation Properties</span>
+  <h2>Mengatur Animation</h2>
+
+  <p>
+    CSS memiliki beberapa properti untuk mengatur jalannya animasi.
+  </p>
+
+  <pre><code>animation: name duration timing-function
+           delay iteration-count direction
+           fill-mode play-state;</code></pre>
+
+  <table>
+    <tr>
+      <th>Properti</th>
+      <th>Fungsi</th>
+      <th>Contoh</th>
+    </tr>
+    <tr>
+      <td>animation-name</td>
+      <td>Nama keyframes.</td>
+      <td>bounce</td>
+    </tr>
+    <tr>
+      <td>animation-duration</td>
+      <td>Lama satu siklus animasi.</td>
+      <td>2s</td>
+    </tr>
+    <tr>
+      <td>animation-timing-function</td>
+      <td>Pola kecepatan.</td>
+      <td>ease-in-out</td>
+    </tr>
+    <tr>
+      <td>animation-delay</td>
+      <td>Waktu tunggu sebelum animasi.</td>
+      <td>1s</td>
+    </tr>
+    <tr>
+      <td>animation-iteration-count</td>
+      <td>Jumlah pengulangan.</td>
+      <td>3, infinite</td>
+    </tr>
+    <tr>
+      <td>animation-direction</td>
+      <td>Arah animasi.</td>
+      <td>normal, reverse, alternate</td>
+    </tr>
+    <tr>
+      <td>animation-fill-mode</td>
+      <td>Menentukan gaya sebelum atau sesudah animasi.</td>
+      <td>forwards, backwards</td>
+    </tr>
+    <tr>
+      <td>animation-play-state</td>
+      <td>Menjalankan atau menjeda animasi.</td>
+      <td>running, paused</td>
+    </tr>
+  </table>
+
+  <h3>Contoh Lengkap</h3>
+
+  <pre><code>.box {
+  animation-name: bounce;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-delay: .5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}</code></pre>
+
+  <p>Versi singkat:</p>
+
+  <pre><code>.box {
+  animation: bounce 2s ease-in-out .5s infinite alternate;
+}</code></pre>
+
+  <h3>Apa Itu Animation Fill Mode?</h3>
+
+  <p>
+    Fill mode mengatur apakah gaya dari animasi tetap diterapkan
+    sebelum atau sesudah animasi berlangsung.
+  </p>
+
+  <ul>
+    <li><code>none</code>: tidak mempertahankan gaya keyframes.</li>
+    <li><code>forwards</code>: mempertahankan kondisi akhir animasi.</li>
+    <li><code>backwards</code>: menerapkan kondisi awal selama delay.</li>
+    <li><code>both</code>: menggabungkan forwards dan backwards.</li>
+  </ul>
+
+  <h3>Mengenal Animation Direction</h3>
+
+  <ul>
+    <li><code>normal</code>: berjalan dari awal ke akhir.</li>
+    <li><code>reverse</code>: berjalan dari akhir ke awal.</li>
+    <li><code>alternate</code>: bergantian maju dan mundur.</li>
+    <li><code>alternate-reverse</code>: bergantian dengan arah awal terbalik.</li>
+  </ul>
+
+  <div class="warning">
+    Hati-hati menggunakan <code>infinite</code>.
+    Animasi tanpa henti bisa mengganggu pengguna jika terlalu banyak
+    atau terlalu mencolok.
+  </div>
+</section>
+
+<!-- 08 HOVER -->
+
+<section class="card" id="hover">
+  <span class="tag">08 • Hover & Interaction</span>
+  <h2>Membuat Interaksi yang Menarik</h2>
+
+  <p>
+    Hover adalah kondisi ketika pointer diarahkan ke sebuah elemen.
+    Kita bisa menggabungkan hover dengan transition dan transform
+    untuk membuat interaksi yang lebih responsif.
+  </p>
+
+  <h3>Contoh Tombol Interaktif</h3>
+
+  <pre><code>.button {
+  background: #2563eb;
+  color: white;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px #2563eb40;
+}
+
+.button:active {
+  transform: scale(.97);
+}</code></pre>
+
+  <div class="example-box">
+    <div class="demo-area">
+      <button class="demo-button">Coba Klik Saya</button>
+    </div>
+  </div>
+
+  <h3>Contoh Kartu Portfolio</h3>
+
+  <div class="example-box">
+    <div class="demo-area">
+      <div class="demo-card">
+        <b>Project Kubika</b>
+        <p>Website Company Profile</p>
+        <small style="color:#64748b">Arahkan pointer ke kartu ini.</small>
+      </div>
+    </div>
+  </div>
+
+  <pre><code>.project-card {
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px #0002;
+}</code></pre>
+
+  <h3>Efek Tambahan</h3>
+
+  <pre><code>/* Memudarkan elemen */
+.card:hover {
+  opacity: .8;
+}
+
+/* Mengubah kecerahan */
+.image:hover {
+  filter: brightness(1.1);
+}
+
+/* Mengubah warna */
+.link:hover {
+  color: #2563eb;
+}</code></pre>
+
+  <div class="note">
+    Jangan mengandalkan hover saja untuk informasi penting.
+    Pengguna smartphone umumnya menggunakan layar sentuh, bukan pointer.
+  </div>
+</section>
+
+<!-- 09 PERFORMANCE -->
+
+<section class="card" id="performance">
+  <span class="tag">09 • Performance</span>
+  <h2>Membuat Animasi yang Ringan</h2>
+
+  <p>
+    Animasi yang terlalu banyak atau menggunakan properti yang
+    kurang tepat bisa membuat website terasa lambat.
+  </p>
+
+  <h3>Properti yang Umumnya Baik untuk Animasi</h3>
+
+  <ul>
+    <li><code>transform</code>: memindahkan, memutar, atau mengubah ukuran secara visual.</li>
+    <li><code>opacity</code>: mengubah tingkat transparansi.</li>
+  </ul>
+
+  <h3>Contoh Animasi Sederhana</h3>
+
+  <pre><code>.card {
+  transition:
+    transform .25s ease,
+    opacity .25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  opacity: .9;
+}</code></pre>
+
+  <p>
+    Animasi pada properti seperti <code>width</code>, <code>height</code>,
+    <code>top</code>, dan <code>left</code> bisa memicu perhitungan ulang
+    layout atau pengecatan ulang. Gunakan dengan pertimbangan.
+  </p>
+
+  <h3>Hindari Hal Berikut</h3>
+
+  <ul>
+    <li>Animasi terlalu banyak dalam satu halaman.</li>
+    <li>Durasi terlalu panjang untuk interaksi sederhana.</li>
+    <li>Menggerakkan banyak elemen besar secara bersamaan.</li>
+    <li>Menambahkan efek hanya karena terlihat keren tanpa tujuan.</li>
+  </ul>
+
+  <div class="success">
+    Prinsipnya: animasi harus membantu pengalaman pengguna,
+    bukan mengganggunya.
+  </div>
+</section>
+
+<!-- 10 ACCESSIBILITY -->
+
+<section class="card" id="accessibility">
+  <span class="tag">10 • Accessibility</span>
+  <h2>Memperhatikan Kenyamanan Pengguna</h2>
+
+  <p>
+    Sebagian pengguna lebih nyaman jika gerakan pada website dikurangi.
+    CSS menyediakan media query <code>prefers-reduced-motion</code>
+    untuk mendeteksi preferensi tersebut.
+  </p>
+
+  <pre><code>@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}</code></pre>
+
+  <p>
+    Aturan tersebut mengurangi durasi animasi dan transisi ketika
+    pengguna mengaktifkan preferensi pengurangan gerakan pada perangkatnya.
+  </p>
+
+  <h3>Prinsip Animasi yang Nyaman</h3>
+
+  <ul>
+    <li>Hindari kedipan cepat dan berulang.</li>
+    <li>Jangan membuat animasi yang mengganggu pembacaan.</li>
+    <li>Berikan kontrol jeda untuk animasi yang berjalan lama jika diperlukan.</li>
+    <li>Pastikan informasi tetap tersedia walaupun animasi tidak dijalankan.</li>
+    <li>Pastikan tombol dan elemen interaktif tetap mudah digunakan.</li>
+  </ul>
+
+  <div class="note">
+    Accessibility bukan sekadar tambahan. Website yang baik harus
+    tetap nyaman digunakan oleh berbagai pengguna.
+  </div>
+</section>
+
+<!-- 11 PROJECT -->
+
+<section class="card" id="project">
+  <span class="tag">11 • Mini Project</span>
+  <h2>Challenge: Interactive Kubika Portfolio Cards</h2>
+
+  <p>
+    Sekarang saatnya menerapkan seluruh materi yang sudah dipelajari.
+    Buat komponen kartu portfolio yang memiliki interaksi visual
+    ketika pengguna mengarahkan pointer atau mengaktifkan elemen.
+  </p>
+
+  <h3>Target Tampilan</h3>
+
+  <div class="example-box">
+    <div class="challenge-grid">
+      <div class="project-card">Project 01<br><small>Company Profile</small></div>
+      <div class="project-card">Project 02<br><small>Dashboard</small></div>
+      <div class="project-card">Project 03<br><small>Landing Page</small></div>
+      <div class="project-card">Project 04<br><small>Online Store</small></div>
+      <div class="project-card">Project 05<br><small>Web Application</small></div>
+      <div class="project-card">Project 06<br><small>Portfolio Website</small></div>
+    </div>
+  </div>
+
+  <h3>Instruksi Pengerjaan</h3>
+
+  <ol>
+    <li>Buat folder baru bernama <code>kubika-portfolio</code>.</li>
+    <li>Buat file <code>index.html</code> dan <code>style.css</code>.</li>
+    <li>Buat section dengan judul "Our Projects".</li>
+    <li>Tampilkan minimal enam kartu portfolio.</li>
+    <li>Gunakan transition pada setiap kartu.</li>
+    <li>Tambahkan efek hover menggunakan transform.</li>
+    <li>Buat tombol dengan efek hover dan active.</li>
+    <li>Tambahkan minimal satu animasi menggunakan @keyframes.</li>
+    <li>Gunakan prefers-reduced-motion.</li>
+    <li>Pastikan website tetap responsif.</li>
+  </ol>
+
+  <h3>Starter CSS</h3>
+
+  <pre><code>.project-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 12px 24px #0002;
+}
+
+.button {
+  transition: transform .2s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro {
+  animation: appear .7s ease both;
+}</code></pre>
+
+  <h3>Bonus Challenge</h3>
+
+  <ul>
+    <li>Buat efek gambar membesar sedikit ketika kartu di-hover.</li>
+    <li>Buat ikon panah yang bergerak ke kanan saat hover.</li>
+    <li>Buat animasi masuk sederhana untuk hero section.</li>
+    <li>Gunakan prefers-reduced-motion.</li>
+    <li>Pastikan interaksi tetap jelas pada perangkat sentuh.</li>
+  </ul>
+
+  <h3>Kriteria Penilaian</h3>
+
+  <table>
+    <tr>
+      <th>Kriteria</th>
+      <th>Bobot</th>
+    </tr>
+    <tr>
+      <td>Struktur HTML dan CSS rapi</td>
+      <td>20%</td>
+    </tr>
+    <tr>
+      <td>Penggunaan transition dan transform</td>
+      <td>25%</td>
+    </tr>
+    <tr>
+      <td>Penggunaan keyframes dan animation</td>
+      <td>20%</td>
+    </tr>
+    <tr>
+      <td>Responsivitas dan kenyamanan pengguna</td>
+      <td>20%</td>
+    </tr>
+    <tr>
+      <td>Kreativitas dan konsistensi desain</td>
+      <td>15%</td>
+    </tr>
+  </table>
+
+  <div class="success">
+    <b>Standar selesai:</b> Portfolio memiliki minimal enam kartu,
+    efek interaksi yang halus, satu animasi keyframes,
+    dan tetap nyaman digunakan di berbagai ukuran layar.
+  </div>
+</section>
+
+<!-- 12 QUIZ -->
+
+<section class="card" id="quiz">
+  <span class="tag">12 • Evaluasi</span>
+  <h2>Quiz: Uji Pemahamanmu</h2>
+
+  <p>
+    Jawab lima pertanyaan berikut berdasarkan materi yang telah dipelajari.
+    Pilih satu jawaban yang paling tepat.
+  </p>
+
+  <form id="quiz-form">
+
+    <div class="quiz-question" data-answer="a">
+      <p>1. Apa fungsi utama transition?</p>
+      <label><input type="radio" name="q1" value="a"> Membuat perubahan CSS berlangsung lebih halus</label>
+      <label><input type="radio" name="q1" value="b"> Menghapus elemen HTML</label>
+      <label><input type="radio" name="q1" value="c"> Membuat kolom Grid</label>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-question" data-answer="b">
+      <p>2. Properti untuk memindahkan posisi visual elemen adalah...</p>
+      <label><input type="radio" name="q2" value="a"> display</label>
+      <label><input type="radio" name="q2" value="b"> transform: translate()</label>
+      <label><input type="radio" name="q2" value="c"> overflow</label>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-question" data-answer="c">
+      <p>3. Apa fungsi @keyframes?</p>
+      <label><input type="radio" name="q3" value="a"> Mengatur ukuran container</label>
+      <label><input type="radio" name="q3" value="b"> Mengatur posisi Grid</label>
+      <label><input type="radio" name="q3" value="c"> Mendefinisikan tahapan animasi</label>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-question" data-answer="b">
+      <p>4. Apa fungsi animation-iteration-count: infinite?</p>
+      <label><input type="radio" name="q4" value="a"> Animasi berjalan sekali</label>
+      <label><input type="radio" name="q4" value="b"> Animasi berjalan tanpa batas pengulangan</label>
+      <label><input type="radio" name="q4" value="c"> Animasi langsung berhenti</label>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <div class="quiz-question" data-answer="a">
+      <p>5. Properti apa yang mengatur titik transformasi?</p>
+      <label><input type="radio" name="q5" value="a"> transform-origin</label>
+      <label><input type="radio" name="q5" value="b"> animation-delay</label>
+      <label><input type="radio" name="q5" value="c"> transition-duration</label>
+      <div class="quiz-feedback"></div>
+    </div>
+
+    <button type="button" class="action-btn" id="check-quiz">
+      Periksa Jawaban
+    </button>
+
+    <button type="button" class="action-btn secondary" id="reset-quiz">
+      Ulangi Quiz
+    </button>
+
+    <div id="quiz-result" aria-live="polite"></div>
+
+  </form>
+</section>
+
+<!-- 13 CHECKLIST -->
+
+<section class="card checklist" id="checklist">
+  <span class="tag">13 • Progress</span>
+  <h2>Checklist Pembelajaran</h2>
+
+  <p>
+    Tandai materi yang sudah kamu pahami.
+    Gunakan checklist ini untuk mengetahui perkembangan belajarmu.
+  </p>
+
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+
+  <p id="progress-text" style="font-size:13px;color:#64748b">
+    0 dari 9 materi selesai
+  </p>
+
+  <div id="check-items">
+    <label><input type="checkbox"> Memahami konsep transition.</label>
+    <label><input type="checkbox"> Memahami duration, timing-function, dan delay.</label>
+    <label><input type="checkbox"> Memahami translate, scale, rotate, dan skew.</label>
+    <label><input type="checkbox"> Memahami transform-origin.</label>
+    <label><input type="checkbox"> Memahami @keyframes.</label>
+    <label><input type="checkbox"> Memahami properti animation.</label>
+    <label><input type="checkbox"> Bisa membuat efek hover interaktif.</label>
+    <label><input type="checkbox"> Memahami performance dan reduced motion.</label>
+    <label><input type="checkbox"> Menyelesaikan Interactive Kubika Portfolio Cards.</label>
+  </div>
+
+  <div class="success" id="completion-message" hidden>
+    <b>Hebat!</b> Semua materi telah kamu tandai selesai.
+    Sekarang saatnya menerapkan ilmu yang sudah dipelajari.
+  </div>
+</section>
+
+<!-- NAVIGATION -->
+
+<div class="module-nav">
+  <a href="modul-09.html">← Module 09: Responsive Design</a>
+  <a href="modul-11.html">Module 11: CSS Mini Project →</a>
+</div>
+
+</main>
+</div>
+
+<footer>
+  DevLearn — Learn, Practice, Build.<br>
+  Part of Kubika Learning Environment.
+</footer>
+
+<script>
+// ===================================
+// 1. QUIZ SYSTEM
+// ===================================
+
+const quizForm = document.getElementById("quiz-form");
+const quizResult = document.getElementById("quiz-result");
+
+const quizQuestions = document.querySelectorAll(".quiz-question");
+
+document.getElementById("check-quiz").addEventListener("click", () => {
+
+  let score = 0;
+  let answered = 0;
+
+  quizQuestions.forEach(question => {
+
+    const answer = question.dataset.answer;
+    const selected = question.querySelector("input:checked");
+    const feedback = question.querySelector(".quiz-feedback");
+    const labels = question.querySelectorAll("label");
+
+    labels.forEach(label => {
+      label.classList.remove("correct", "incorrect");
+    });
+
+    if (!selected) {
+      feedback.textContent = "Belum dijawab.";
+      return;
+    }
+
+    answered++;
+
+    if (selected.value === answer) {
+
+      score++;
+
+      feedback.textContent = "Benar! Jawabanmu tepat.";
+      feedback.style.color = "#059669";
+
+    } else {
+
+      feedback.textContent = "Belum tepat. Periksa kembali materi.";
+      feedback.style.color = "#dc2626";
+
+    }
+
+    labels.forEach(label => {
+
+      const input = label.querySelector("input");
+
+      if (input.value === answer) {
+        label.classList.add("correct");
+      }
+
+      if (input.checked && input.value !== answer) {
+        label.classList.add("incorrect");
+      }
+
+    });
+
+  });
+
+  if (answered < quizQuestions.length) {
+
+    quizResult.style.display = "block";
+    quizResult.style.background = "#fff7ed";
+    quizResult.style.color = "#b45309";
+
+    quizResult.textContent =
+      `Kamu baru menjawab ${answered} dari 5 soal. Lengkapi dahulu, ya!`;
+
+    return;
+  }
+
+  const finalScore = score * 20;
+
+  quizResult.style.display = "block";
+
+  if (score >= 4) {
+
+    quizResult.style.background = "#ecfdf5";
+    quizResult.style.color = "#059669";
+
+    quizResult.textContent =
+      `Hebat! Nilai kamu ${finalScore}/100 (${score}/5 benar).`;
+
+  } else {
+
+    quizResult.style.background = "#fff7ed";
+    quizResult.style.color = "#b45309";
+
+    quizResult.textContent =
+      `Nilai kamu ${finalScore}/100 (${score}/5 benar). Pelajari kembali bagian yang belum dipahami.`;
+
+  }
+
+});
+
+// Reset quiz
+
+document.getElementById("reset-quiz").addEventListener("click", () => {
+
+  quizForm.reset();
+
+  quizResult.style.display = "none";
+
+  quizQuestions.forEach(question => {
+
+    question.querySelector(".quiz-feedback").textContent = "";
+
+    question.querySelectorAll("label").forEach(label => {
+      label.classList.remove("correct", "incorrect");
+    });
+
+  });
+
+});
+
+
+// ===================================
+// 2. LEARNING PROGRESS
+// ===================================
+
+const checks = document.querySelectorAll("#check-items input");
+
+const progressFill = document.getElementById("progress-fill");
+
+const progressText = document.getElementById("progress-text");
+
+const completionMessage = document.getElementById("completion-message");
+
+function updateProgress() {
+
+  const done = [...checks].filter(item => item.checked).length;
+
+  const total = checks.length;
+
+  const percentage = (done / total) * 100;
+
+  progressFill.style.width = `${percentage}%`;
+
+  progressText.textContent =
+    `${done} dari ${total} materi selesai (${Math.round(percentage)}%)`;
+
+  completionMessage.hidden = done !== total;
+
+}
+
+checks.forEach(item => {
+
+  item.addEventListener("change", updateProgress);
+
+});
+
+updateProgress();
+
+
+// ===================================
+// 3. ANIMATION CONTROL
+// ===================================
+
+const animationDemo = document.getElementById("animation-demo");
+
+const pauseButton = document.getElementById("pause-animation");
+
+const restartButton = document.getElementById("restart-animation");
+
+let animationPaused = false;
+
+pauseButton.addEventListener("click", () => {
+
+  animationPaused = !animationPaused;
+
+  animationDemo.classList.toggle("animation-paused", animationPaused);
+
+  pauseButton.textContent = animationPaused
+    ? "Lanjutkan Animasi"
+    : "Jeda Animasi";
+
+});
+
+restartButton.addEventListener("click", () => {
+
+  animationDemo.classList.remove("animation-paused");
+
+  animationPaused = false;
+
+  pauseButton.textContent = "Jeda Animasi";
+
+  // Memulai ulang animasi CSS
+  const animatedElements = animationDemo.querySelectorAll(".demo-item");
+
+  animatedElements.forEach(element => {
+
+    element.style.animation = "none";
+
+    void element.offsetWidth;
+
+    element.style.animation = "";
+
+  });
+
+});
+
+
+// ===================================
+// 4. SIDEBAR ACTIVE NAVIGATION
+// ===================================
+
+const links = document.querySelectorAll(".sidebar a");
+
+const sections = document.querySelectorAll("main section[id]");
+
+const observer = new IntersectionObserver(entries => {
+
+  entries.forEach(entry => {
+
+    if (entry.isIntersecting) {
+
+      links.forEach(link => {
+
+        link.classList.toggle(
+          "active",
+          link.getAttribute("href") === `#${entry.target.id}`
+        );
+
+      });
+
+    }
+
+  });
+
+}, {
+  rootMargin: "-20% 0px -65% 0px"
+});
+
+sections.forEach(section => observer.observe(section));
+
+</script>
+
+</body>
+</html>

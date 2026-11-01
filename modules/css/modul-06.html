@@ -1,0 +1,1390 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevLearn - CSS Modul 06</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --dark: #14213d;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --green: #059669;
+      --soft-blue: #eff6ff;
+      --soft-green: #ecfdf5;
+      --soft-yellow: #fffbeb;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    a { color: var(--primary); }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      color: var(--dark);
+      font-weight: 800;
+      font-size: 19px;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--primary); }
+
+    .nav-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 32px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 85px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .sidebar h3 {
+      margin: 0 0 12px;
+      color: var(--dark);
+      font-size: 15px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 8px 10px;
+      margin: 3px 0;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 7px;
+      font-size: 13px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: var(--soft-blue);
+      color: var(--primary);
+    }
+
+    main { min-width: 0; }
+
+    .hero {
+      padding: 34px;
+      background: linear-gradient(135deg, #14213d, #2563eb);
+      color: white;
+      border-radius: 18px;
+      margin-bottom: 22px;
+    }
+
+    .hero .tag {
+      display: inline-block;
+      padding: 5px 11px;
+      background: rgba(255,255,255,.15);
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .hero h1 {
+      margin: 15px 0 8px;
+      font-size: 32px;
+      line-height: 1.25;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #dbeafe;
+      max-width: 650px;
+    }
+
+    .meta {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #dbeafe;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      color: var(--dark);
+      font-size: 21px;
+    }
+
+    .card h3 {
+      color: var(--dark);
+      font-size: 16px;
+      margin-top: 22px;
+    }
+
+    .card p { margin: 10px 0; }
+
+    .code {
+      position: relative;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 14px 0;
+      overflow-x: auto;
+    }
+
+    .code pre {
+      margin: 0;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: 1px solid #475569;
+      background: #1e293b;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .note {
+      padding: 15px 17px;
+      border-radius: 9px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .info {
+      background: var(--soft-blue);
+      border-left: 4px solid var(--primary);
+    }
+
+    .success {
+      background: var(--soft-green);
+      border-left: 4px solid var(--green);
+    }
+
+    .warning {
+      background: var(--soft-yellow);
+      border-left: 4px solid #d97706;
+    }
+
+    .example {
+      border: 1px dashed #cbd5e1;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 14px 0;
+      overflow: hidden;
+    }
+
+    .example-title {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .demo-block {
+      background: #bfdbfe;
+      border: 1px solid #2563eb;
+      padding: 10px;
+      margin: 5px 0;
+      color: #14213d;
+      border-radius: 5px;
+    }
+
+    .demo-inline {
+      background: #bbf7d0;
+      border: 1px solid #059669;
+      padding: 5px;
+      color: #064e3b;
+    }
+
+    .demo-inline-block {
+      display: inline-block;
+      background: #fde68a;
+      border: 1px solid #d97706;
+      padding: 12px;
+      width: 120px;
+      height: 70px;
+      margin: 5px;
+      color: #78350f;
+    }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .comparison th,
+    .comparison td {
+      border: 1px solid var(--border);
+      padding: 11px;
+      text-align: left;
+    }
+
+    .comparison th {
+      background: #f1f5f9;
+      color: var(--dark);
+    }
+
+    .position-stage {
+      height: 230px;
+      position: relative;
+      background: #e2e8f0;
+      border: 2px dashed #94a3b8;
+      border-radius: 9px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+
+    .position-box {
+      width: 100px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      border-radius: 7px;
+    }
+
+    .static-box {
+      background: #64748b;
+    }
+
+    .relative-box {
+      position: relative;
+      top: 20px;
+      left: 25px;
+      background: #2563eb;
+    }
+
+    .absolute-parent {
+      position: relative;
+      height: 140px;
+      background: #dbeafe;
+      border: 2px dashed #2563eb;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .absolute-box {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      background: #059669;
+    }
+
+    .sticky-demo {
+      height: 180px;
+      overflow-y: auto;
+      background: #e2e8f0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .sticky-demo-header {
+      position: sticky;
+      top: 0;
+      background: #2563eb;
+      color: white;
+      padding: 12px;
+      font-weight: bold;
+    }
+
+    .sticky-demo-content {
+      padding: 15px;
+      min-height: 300px;
+    }
+
+    .z-stage {
+      height: 190px;
+      position: relative;
+      background: #e2e8f0;
+      border-radius: 9px;
+    }
+
+    .z-box {
+      position: absolute;
+      width: 130px;
+      height: 110px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: bold;
+      border-radius: 9px;
+    }
+
+    .z-one {
+      background: #2563eb;
+      top: 20px;
+      left: 30px;
+      z-index: 1;
+    }
+
+    .z-two {
+      background: #059669;
+      top: 50px;
+      left: 85px;
+      z-index: 2;
+    }
+
+    .z-three {
+      background: #d97706;
+      top: 80px;
+      left: 140px;
+      z-index: 3;
+    }
+
+    .quiz-question {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin: 14px 0;
+    }
+
+    .quiz-question p {
+      font-weight: bold;
+      margin-top: 0;
+    }
+
+    .quiz-question label {
+      display: block;
+      padding: 5px 0;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .quiz-result {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 9px;
+      background: var(--soft-blue);
+    }
+
+    .primary-btn {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      padding: 11px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .primary-btn:hover { background: #1d4ed8; }
+
+    .checklist label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .checklist input { margin-top: 5px; }
+
+    .progress-track {
+      height: 9px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--green);
+      transition: width .3s;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      padding: 11px 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: white;
+      font-size: 13px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .container { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+
+      .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 24px; }
+      .hero h1 { font-size: 25px; }
+      .card { padding: 19px; }
+      .sidebar nav { grid-template-columns: 1fr; }
+      .navigation { flex-direction: column; }
+    }
+  </style>
+  <link rel="stylesheet" href="../html/module-theme.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="../../index.html" class="brand">Kub<span>ika.</span></a>
+  <span class="nav-label">CSS Learning Path · Modul 06</span>
+</header>
+
+<div class="container">
+
+  <aside class="sidebar">
+    <h3>Daftar Materi</h3>
+    <nav>
+      <a href="#tujuan">Tujuan Pembelajaran</a>
+      <a href="#pengenalan">Mengenal Display</a>
+      <a href="#block">Block</a>
+      <a href="#inline">Inline</a>
+      <a href="#inline-block">Inline Block</a>
+      <a href="#none">Display None</a>
+      <a href="#position">Mengenal Position</a>
+      <a href="#static">Static</a>
+      <a href="#relative">Relative</a>
+      <a href="#absolute">Absolute</a>
+      <a href="#fixed">Fixed</a>
+      <a href="#sticky">Sticky</a>
+      <a href="#zindex">Z-index</a>
+      <a href="#latihan">Latihan Praktik</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#challenge">Final Challenge</a>
+    </nav>
+  </aside>
+
+  <main>
+
+    <section class="hero">
+      <span class="tag">CSS FUNDAMENTAL · MODUL 06</span>
+      <h1>Display & Position</h1>
+      <p>
+        Pelajari bagaimana elemen HTML ditampilkan dan bagaimana
+        mengatur posisi elemen agar halaman website tersusun rapi.
+      </p>
+      <div class="meta">Level: Beginner · Estimasi: 45–60 menit</div>
+    </section>
+
+    <section class="card" id="tujuan">
+      <h2>01. Tujuan Pembelajaran</h2>
+      <p>Setelah menyelesaikan modul ini, kamu diharapkan mampu:</p>
+
+      <ul>
+        <li>Memahami fungsi property display.</li>
+        <li>Membedakan block, inline, dan inline-block.</li>
+        <li>Memahami fungsi display: none.</li>
+        <li>Memahami lima jenis position pada CSS.</li>
+        <li>Menggunakan top, right, bottom, dan left.</li>
+        <li>Memahami stacking order melalui z-index.</li>
+        <li>Mengatur posisi elemen dalam halaman website.</li>
+      </ul>
+
+      <div class="note info">
+        <strong>Prasyarat:</strong> Pahami HTML dasar dan CSS Box Model
+        dari Modul 05.
+      </div>
+    </section>
+
+    <section class="card" id="pengenalan">
+      <h2>02. Mengenal Display</h2>
+
+      <p>
+        Property <code>display</code> digunakan untuk menentukan
+        bagaimana sebuah elemen HTML ditampilkan dalam halaman.
+      </p>
+
+      <p>
+        Setiap elemen HTML memiliki perilaku tampilan default.
+        Contohnya, elemen div biasanya ditampilkan sebagai block,
+        sedangkan span biasanya ditampilkan sebagai inline.
+      </p>
+
+      <p>Beberapa nilai display yang sering digunakan:</p>
+
+      <ul>
+        <li>block</li>
+        <li>inline</li>
+        <li>inline-block</li>
+        <li>none</li>
+        <li>flex</li>
+        <li>grid</li>
+      </ul>
+
+      <div class="note success">
+        Pada modul ini kita fokus pada block, inline, inline-block,
+        dan none. Flexbox dan Grid akan dipelajari lebih mendalam
+        pada modul berikutnya.
+      </div>
+    </section>
+
+    <section class="card" id="block">
+      <h2>03. Display Block</h2>
+
+      <p>
+        Elemen dengan display: block biasanya mengambil seluruh
+        lebar yang tersedia pada barisnya.
+      </p>
+
+      <p>Karakteristiknya:</p>
+
+      <ul>
+        <li>Dimulai pada baris baru.</li>
+        <li>Biasanya memenuhi lebar container.</li>
+        <li>Dapat diatur width dan height.</li>
+        <li>Dapat diberikan margin dan padding.</li>
+      </ul>
+
+      <p>Contoh elemen block: div, p, h1, section, dan article.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  display: block;
+  width: 200px;
+  padding: 12px;
+  background: #bfdbfe;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh block</div>
+        <div class="demo-block">Elemen pertama</div>
+        <div class="demo-block">Elemen kedua</div>
+        <div class="demo-block">Elemen ketiga</div>
+      </div>
+
+      <p>
+        Meskipun ukuran kontennya kecil, setiap elemen block
+        tetap memulai baris baru.
+      </p>
+    </section>
+
+    <section class="card" id="inline">
+      <h2>04. Display Inline</h2>
+
+      <p>
+        Elemen inline hanya menggunakan ruang sesuai kebutuhan kontennya
+        dan tetap berada dalam alur teks yang sama.
+      </p>
+
+      <p>Karakteristiknya:</p>
+
+      <ul>
+        <li>Tidak memulai baris baru.</li>
+        <li>Lebarnya mengikuti konten.</li>
+        <li>Width dan height tidak berlaku seperti pada elemen block.</li>
+        <li>Padding dan border dapat diterapkan, tetapi tidak mengubah alur baris seperti block.</li>
+      </ul>
+
+      <p>Contoh elemen inline: span, a, strong, dan em.</p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.text {
+  display: inline;
+  background: #bbf7d0;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh inline</div>
+        <span class="demo-inline">Elemen pertama</span>
+        <span class="demo-inline">Elemen kedua</span>
+        <span class="demo-inline">Elemen ketiga</span>
+      </div>
+
+      <div class="note warning">
+        Elemen inline tidak menerima width dan height seperti block.
+        Jika kamu ingin elemen tetap sejajar tetapi dapat diatur ukurannya,
+        gunakan inline-block.
+      </div>
+    </section>
+
+    <section class="card" id="inline-block">
+      <h2>05. Display Inline-block</h2>
+
+      <p>
+        Inline-block menggabungkan perilaku inline dan block.
+        Elemen tetap dapat berjajar dalam satu baris, tetapi
+        width dan height bisa diatur.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  display: inline-block;
+  width: 120px;
+  height: 70px;
+  padding: 12px;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh inline-block</div>
+        <div class="demo-inline-block">Box 1</div>
+        <div class="demo-inline-block">Box 2</div>
+        <div class="demo-inline-block">Box 3</div>
+      </div>
+
+      <div class="note info">
+        Inline-block berguna untuk elemen kecil yang perlu berjajar,
+        tetapi tetap memiliki ukuran tertentu. Untuk layout yang lebih
+        kompleks, gunakan Flexbox atau Grid.
+      </div>
+    </section>
+
+    <section class="card" id="none">
+      <h2>06. Display None</h2>
+
+      <p>
+        <code>display: none</code> digunakan untuk menyembunyikan
+        elemen dari tampilan halaman.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.hidden {
+  display: none;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh display none</div>
+        <div class="demo-block">Elemen terlihat</div>
+        <div style="display:none" class="demo-block">
+          Elemen tersembunyi
+        </div>
+        <div class="demo-block">Elemen berikutnya</div>
+        <p>Elemen kedua tidak terlihat dan tidak mengambil ruang layout.</p>
+      </div>
+
+      <h3>Perbedaan dengan visibility: hidden</h3>
+
+      <table class="comparison">
+        <tr><th>Property</th><th>Hasil</th></tr>
+        <tr><td>display: none</td><td>Elemen tidak terlihat dan ruangnya dihilangkan.</td></tr>
+        <tr><td>visibility: hidden</td><td>Elemen tidak terlihat, tetapi ruang layout tetap ada.</td></tr>
+      </table>
+    </section>
+
+    <section class="card" id="position">
+      <h2>07. Mengenal Position</h2>
+
+      <p>
+        Property <code>position</code> digunakan untuk mengatur
+        bagaimana sebuah elemen ditempatkan dalam halaman.
+      </p>
+
+      <p>
+        CSS menyediakan lima nilai position yang perlu kamu pahami:
+      </p>
+
+      <ul>
+        <li>static</li>
+        <li>relative</li>
+        <li>absolute</li>
+        <li>fixed</li>
+        <li>sticky</li>
+      </ul>
+
+      <p>
+        Untuk mengatur letaknya, kita dapat menggunakan:
+        <code>top</code>, <code>right</code>, <code>bottom</code>,
+        dan <code>left</code>.
+      </p>
+
+      <div class="note info">
+        Nilai top, right, bottom, dan left tidak memindahkan elemen
+        ketika position masih static.
+      </div>
+    </section>
+
+    <section class="card" id="static">
+      <h2>08. Position Static</h2>
+
+      <p>
+        Static adalah posisi default setiap elemen HTML.
+        Elemen ditampilkan mengikuti alur normal dokumen.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  position: static;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh static</div>
+        <div class="position-stage" style="padding:15px">
+          <div class="position-box static-box">Static 1</div>
+          <div class="position-box static-box">Static 2</div>
+          <div class="position-box static-box">Static 3</div>
+        </div>
+      </div>
+
+      <p>
+        Elemen tetap berada pada urutan normal halaman.
+        Property top, right, bottom, dan left tidak berpengaruh
+        pada elemen static.
+      </p>
+    </section>
+
+    <section class="card" id="relative">
+      <h2>09. Position Relative</h2>
+
+      <p>
+        Relative memungkinkan elemen digeser dari posisi awalnya
+        menggunakan top, right, bottom, atau left.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  position: relative;
+  top: 20px;
+  left: 25px;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh relative</div>
+        <div class="position-stage" style="padding:15px">
+          <div class="position-box static-box">Normal</div>
+          <div class="position-box relative-box">Relative</div>
+        </div>
+      </div>
+
+      <p>
+        Elemen relative bergeser dari tempat awalnya, tetapi
+        ruang awalnya tetap dipertahankan dalam layout.
+      </p>
+
+      <div class="note success">
+        Relative juga sering digunakan pada parent agar menjadi
+        acuan posisi untuk elemen absolute di dalamnya.
+      </div>
+    </section>
+
+    <section class="card" id="absolute">
+      <h2>10. Position Absolute</h2>
+
+      <p>
+        Absolute membuat elemen keluar dari alur normal dokumen.
+        Elemen biasanya diposisikan berdasarkan ancestor terdekat
+        yang memiliki position selain static.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.parent {
+  position: relative;
+}
+
+.child {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh absolute</div>
+        <div class="absolute-parent">
+          Parent: position relative
+          <div class="position-box absolute-box">
+            Absolute
+          </div>
+        </div>
+      </div>
+
+      <p>
+        Pada contoh tersebut, elemen absolute berada di kanan bawah
+        parent karena parent menggunakan position relative.
+      </p>
+
+      <h3>Contoh penggunaan nyata</h3>
+
+      <ul>
+        <li>Badge diskon pada product card.</li>
+        <li>Ikon pada sudut gambar.</li>
+        <li>Tombol close pada modal.</li>
+        <li>Label pada thumbnail.</li>
+      </ul>
+
+      <div class="note warning">
+        Jika tidak ada ancestor yang diposisikan, elemen absolute
+        akan menggunakan containing block lain, umumnya initial
+        containing block. Karena itu, perhatikan struktur parent
+        dan child saat menggunakannya.
+      </div>
+    </section>
+
+    <section class="card" id="fixed">
+      <h2>11. Position Fixed</h2>
+
+      <p>
+        Fixed membuat elemen tetap berada pada posisi tertentu
+        relatif terhadap viewport, meskipun halaman di-scroll.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.floating-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Ilustrasi fixed</div>
+        <div style="
+          height:140px;
+          overflow-y:auto;
+          background:#e2e8f0;
+          border-radius:8px;
+          padding:12px;
+        ">
+          <p>Konten halaman pertama.</p>
+          <p>Konten halaman kedua.</p>
+          <p>Konten halaman ketiga.</p>
+          <p>Konten halaman keempat.</p>
+          <p>Konten halaman kelima.</p>
+          <p>Konten halaman keenam.</p>
+        </div>
+      </div>
+
+      <p>Contoh penggunaan fixed:</p>
+
+      <ul>
+        <li>Tombol kembali ke atas.</li>
+        <li>Tombol chat yang selalu terlihat.</li>
+        <li>Floating action button.</li>
+        <li>Elemen navigasi yang menempel pada layar.</li>
+      </ul>
+    </section>
+
+    <section class="card" id="sticky">
+      <h2>12. Position Sticky</h2>
+
+      <p>
+        Sticky menggabungkan perilaku relative dan fixed.
+        Elemen awalnya mengikuti alur normal, kemudian menempel
+        pada posisi tertentu saat area scroll mencapainya.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.navbar {
+  position: sticky;
+  top: 0;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Coba scroll area berikut</div>
+        <div class="sticky-demo">
+          <div class="sticky-demo-header">
+            Sticky Header
+          </div>
+          <div class="sticky-demo-content">
+            <p>Bagian konten pertama.</p>
+            <p>Bagian konten kedua.</p>
+            <p>Bagian konten ketiga.</p>
+            <p>Bagian konten keempat.</p>
+            <p>Bagian konten kelima.</p>
+            <p>Bagian konten keenam.</p>
+            <p>Bagian konten ketujuh.</p>
+          </div>
+        </div>
+      </div>
+
+      <p>
+        Pada contoh tersebut, header akan menempel di bagian atas
+        area scroll saat kamu menggulir konten.
+      </p>
+
+      <div class="note info">
+        Sticky membutuhkan nilai batas seperti top: 0 agar perilaku
+        menempelnya dapat terlihat. Perhatikan juga ancestor yang
+        memiliki overflow karena dapat memengaruhi area scroll sticky.
+      </div>
+    </section>
+
+    <section class="card" id="zindex">
+      <h2>13. Mengenal Z-index</h2>
+
+      <p>
+        Z-index digunakan untuk mengatur urutan tumpukan elemen.
+        Semakin besar nilai z-index, semakin tinggi posisi elemen
+        dalam stacking order pada konteks yang sama.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box-one {
+  position: absolute;
+  z-index: 1;
+}
+
+.box-two {
+  position: absolute;
+  z-index: 2;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh z-index</div>
+        <div class="z-stage">
+          <div class="z-box z-one">Z-index 1</div>
+          <div class="z-box z-two">Z-index 2</div>
+          <div class="z-box z-three">Z-index 3</div>
+        </div>
+      </div>
+
+      <div class="note warning">
+        Z-index tidak selalu bisa dibandingkan langsung antar elemen
+        jika berada pada stacking context yang berbeda. Jadi, angka
+        besar tidak otomatis membuat elemen selalu tampil paling depan.
+      </div>
+    </section>
+
+    <section class="card" id="latihan">
+      <h2>14. Latihan Praktik</h2>
+
+      <p>
+        Buat halaman <strong>Profile Card</strong> dengan badge
+        status di sudut kanan atas.
+      </p>
+
+      <h3>Struktur folder</h3>
+
+      <div class="code">
+        <pre><code>profile-card/
+├── index.html
+└── style.css</code></pre>
+      </div>
+
+      <h3>File index.html</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+    content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Profile Card&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;main class="container"&gt;
+    &lt;article class="profile-card"&gt;
+
+      &lt;span class="status"&gt;Online&lt;/span&gt;
+
+      &lt;div class="avatar"&gt;BR&lt;/div&gt;
+
+      &lt;h1&gt;Biran Ramadhan&lt;/h1&gt;
+      &lt;p class="role"&gt;Web Developer Beginner&lt;/p&gt;
+
+      &lt;p class="description"&gt;
+        Sedang belajar membangun website
+        dan mengembangkan kemampuan programming.
+      &lt;/p&gt;
+
+      &lt;a href="#" class="button"&gt;
+        Lihat Profil
+      &lt;/a&gt;
+
+    &lt;/article&gt;
+  &lt;/main&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </div>
+
+      <h3>File style.css</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.profile-card {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  padding: 35px 25px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.status {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 5px 12px;
+  background: #dcfce7;
+  color: #15803d;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.avatar {
+  width: 85px;
+  height: 85px;
+  margin: 15px auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.profile-card h1 {
+  color: #14213d;
+  font-size: 22px;
+  margin: 15px 0 5px;
+}
+
+.role {
+  color: #2563eb;
+  font-size: 13px;
+}
+
+.description {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 18px 0;
+}
+
+.button {
+  display: inline-block;
+  padding: 11px 20px;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.button:hover {
+  background: #1d4ed8;
+}</code></pre>
+      </div>
+
+      <h3>Tugas eksplorasi</h3>
+
+      <ol>
+        <li>Ubah status menjadi badge di kiri atas.</li>
+        <li>Ganti position absolute menjadi static dan amati perbedaannya.</li>
+        <li>Tambahkan tombol floating menggunakan position fixed.</li>
+        <li>Coba display none pada badge status.</li>
+        <li>Ubah ukuran avatar menggunakan width dan height.</li>
+        <li>Tambahkan elemen lain dan atur z-index-nya.</li>
+      </ol>
+    </section>
+
+    <section class="card" id="quiz">
+      <h2>15. Quiz Pemahaman</h2>
+      <p>Pilih jawaban yang paling tepat.</p>
+
+      <form id="quizForm">
+
+        <div class="quiz-question">
+          <p>1. Apa fungsi display: block?</p>
+          <label><input type="radio" name="q1" value="a"> Elemen selalu tersembunyi</label>
+          <label><input type="radio" name="q1" value="b"> Elemen memulai baris baru dan umumnya mengisi lebar yang tersedia</label>
+          <label><input type="radio" name="q1" value="c"> Elemen selalu berada di depan</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Display apa yang memungkinkan elemen berjajar dan memiliki width serta height?</p>
+          <label><input type="radio" name="q2" value="a"> inline-block</label>
+          <label><input type="radio" name="q2" value="b"> none</label>
+          <label><input type="radio" name="q2" value="c"> static</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. Apa yang terjadi ketika elemen menggunakan display: none?</p>
+          <label><input type="radio" name="q3" value="a"> Elemen hanya berubah warna</label>
+          <label><input type="radio" name="q3" value="b"> Elemen tetap mengambil ruang</label>
+          <label><input type="radio" name="q3" value="c"> Elemen tidak terlihat dan tidak mengambil ruang layout</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. Position apa yang membuat elemen tetap di viewport ketika halaman di-scroll?</p>
+          <label><input type="radio" name="q4" value="a"> static</label>
+          <label><input type="radio" name="q4" value="b"> fixed</label>
+          <label><input type="radio" name="q4" value="c"> relative</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Apa fungsi z-index?</p>
+          <label><input type="radio" name="q5" value="a"> Mengatur urutan tumpukan elemen</label>
+          <label><input type="radio" name="q5" value="b"> Mengatur ukuran teks</label>
+          <label><input type="radio" name="q5" value="c"> Mengatur warna border</label>
+        </div>
+
+        <button class="primary-btn" type="button" onclick="checkQuiz()">
+          Periksa Jawaban
+        </button>
+      </form>
+
+      <div class="quiz-result" id="quizResult"></div>
+    </section>
+
+    <section class="card" id="challenge">
+      <h2>16. Final Challenge</h2>
+
+      <p>
+        Buat halaman <strong>Personal Profile Website</strong>
+        dengan komponen yang menggunakan display dan position.
+      </p>
+
+      <h3>Ketentuan proyek</h3>
+
+      <ul>
+        <li>Memiliki navbar.</li>
+        <li>Memiliki profile card.</li>
+        <li>Memiliki badge status dengan absolute.</li>
+        <li>Menggunakan display block dan inline-block.</li>
+        <li>Memiliki tombol floating dengan fixed.</li>
+        <li>Memiliki navbar sticky.</li>
+        <li>Menggunakan z-index untuk mengatur tumpukan elemen.</li>
+        <li>Memastikan tampilan tetap nyaman pada layar kecil.</li>
+      </ul>
+
+      <h3>Checklist penyelesaian</h3>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <p id="progressText">0 dari 6 target selesai</p>
+
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox"> Saya memahami block, inline, dan inline-block.</label>
+        <label><input type="checkbox"> Saya memahami display none.</label>
+        <label><input type="checkbox"> Saya memahami static dan relative.</label>
+        <label><input type="checkbox"> Saya memahami absolute, fixed, dan sticky.</label>
+        <label><input type="checkbox"> Saya memahami fungsi z-index.</label>
+        <label><input type="checkbox"> Saya berhasil menyelesaikan final challenge.</label>
+      </div>
+
+      <div class="note success">
+        <strong>Standar kelulusan:</strong> Selesaikan seluruh checklist
+        dan raih minimal 4 dari 5 jawaban benar pada quiz sebelum
+        melanjutkan ke Modul 07.
+      </div>
+    </section>
+
+    <div class="navigation">
+      <a href="modul-05.html">← Modul 05: Box Model</a>
+      <a href="modul-07.html">Modul 07: Flexbox →</a>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  DevLearn · Learn, Practice, Build
+  <br>Belajar hari ini, bangun sesuatu esok hari.
+</footer>
+
+<script>
+  function copyCode(button) {
+    const code = button.parentElement.querySelector("code");
+    navigator.clipboard.writeText(code.innerText).then(() => {
+      button.innerText = "Copied!";
+      setTimeout(() => button.innerText = "Copy", 1500);
+    }).catch(() => {
+      button.innerText = "Gagal";
+      setTimeout(() => button.innerText = "Copy", 1500);
+    });
+  }
+
+  function checkQuiz() {
+    const answers = {
+      q1: "b",
+      q2: "a",
+      q3: "c",
+      q4: "b",
+      q5: "a"
+    };
+
+    let score = 0;
+    let unanswered = 0;
+
+    Object.keys(answers).forEach(question => {
+      const selected = document.querySelector(
+        `input[name="${question}"]:checked`
+      );
+
+      if (!selected) {
+        unanswered++;
+      } else if (selected.value === answers[question]) {
+        score++;
+      }
+    });
+
+    const result = document.getElementById("quizResult");
+    result.style.display = "block";
+
+    if (unanswered > 0) {
+      result.innerHTML =
+        `Masih ada ${unanswered} soal yang belum dijawab. Lengkapi dahulu, ya.`;
+      return;
+    }
+
+    result.innerHTML =
+      `<strong>Skor kamu: ${score}/5</strong><br>` +
+      (score >= 4
+        ? "Bagus! Kamu sudah memahami dasar Display & Position."
+        : "Belum mencapai target. Pelajari kembali materi dan ulangi quiz.");
+
+    result.style.background = score >= 4 ? "#ecfdf5" : "#fffbeb";
+  }
+
+  const checklist = document.querySelectorAll(
+    "#checklist input[type='checkbox']"
+  );
+
+  function updateProgress() {
+    const checked = [...checklist].filter(item => item.checked).length;
+    const total = checklist.length;
+
+    document.getElementById("progressFill").style.width =
+      (checked / total * 100) + "%";
+
+    document.getElementById("progressText").innerText =
+      `${checked} dari ${total} target selesai`;
+  }
+
+  checklist.forEach(item => {
+    item.addEventListener("change", updateProgress);
+  });
+
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinks = document.querySelectorAll(".sidebar a");
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 130) {
+        current = section.id;
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === "#" + current
+      );
+    });
+  });
+</script>
+
+</body>
+</html>

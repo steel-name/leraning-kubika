@@ -1,0 +1,1492 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DevLearn CSS Modul 01 - Introduction to CSS.">
+  <title>Modul 01 - Introduction to CSS | DevLearn</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --dark: #14213d;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --green: #059669;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-link {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 1150px;
+      margin: 35px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 32px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 95px;
+      align-self: start;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    .sidebar h3 {
+      font-size: 14px;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 9px 12px;
+      margin: 4px 0;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    .hero {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 38px;
+      margin-bottom: 25px;
+    }
+
+    .label {
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      color: var(--dark);
+      font-size: 32px;
+      line-height: 1.3;
+      margin: 12px 0;
+    }
+
+    h2 {
+      color: var(--dark);
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      color: var(--dark);
+      margin: 20px 0 10px;
+      font-size: 17px;
+    }
+
+    p {
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      margin: 3px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 28px;
+      margin-bottom: 22px;
+      scroll-margin-top: 95px;
+    }
+
+    .code {
+      background: #111827;
+      color: #e2e8f0;
+      padding: 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+      margin: 14px 0;
+      font-size: 13px;
+      line-height: 1.8;
+      white-space: pre;
+    }
+
+    .copy {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 13px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .note {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 14px 17px;
+      border-radius: 7px;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .warning {
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 14px 17px;
+      border-radius: 7px;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 430px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: var(--primary-light);
+      color: var(--dark);
+    }
+
+    .example {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 15px 0;
+    }
+
+    .step {
+      border-left: 3px solid var(--primary);
+      padding: 3px 0 3px 18px;
+      margin: 18px 0;
+    }
+
+    .demo-box {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px 0;
+    }
+
+    .demo-css {
+      background: #eff6ff;
+      color: #1d4ed8;
+      padding: 12px;
+      border-radius: 8px;
+      border: 2px solid #93c5fd;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .comparison > div {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      min-width: 0;
+    }
+
+    .comparison h3 {
+      margin-top: 0;
+    }
+
+    .quiz-option {
+      display: block;
+      border: 1px solid var(--border);
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .quiz-option:hover {
+      background: var(--primary-light);
+    }
+
+    .quiz-option input {
+      margin-right: 8px;
+    }
+
+    .submit {
+      background: var(--primary);
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-weight: 700;
+    }
+
+    .checklist label {
+      display: block;
+      margin: 12px 0;
+      cursor: pointer;
+    }
+
+    .checklist input {
+      margin-right: 9px;
+    }
+
+    .progress-bg {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--green);
+      transition: .3s;
+    }
+
+    .lesson-navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 25px 0;
+      flex-wrap: wrap;
+    }
+
+    .lesson-navigation a {
+      background: var(--primary-light);
+      color: var(--primary);
+      padding: 11px 15px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 35px 15px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+      }
+
+      .hero {
+        padding: 25px;
+      }
+
+      h1 {
+        font-size: 27px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 14px 5%;
+      }
+
+      .container {
+        padding: 0 14px;
+        margin-top: 20px;
+      }
+
+      .card {
+        padding: 20px;
+      }
+
+      .sidebar nav {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="../html/module-theme.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="../../index.html" class="logo">Kub<span>ika.</span></a>
+  <a href="../../index.html#learning-path" class="nav-link">← Kembali ke Jalur Belajar</a>
+</header>
+
+<div class="container">
+
+  <aside class="sidebar">
+    <h3>Materi Pembelajaran</h3>
+    <nav>
+      <a href="#intro">Pengantar</a>
+      <a href="#definition">Apa Itu CSS?</a>
+      <a href="#relationship">HTML dan CSS</a>
+      <a href="#benefit">Fungsi CSS</a>
+      <a href="#syntax">Cara Kerja CSS</a>
+      <a href="#methods">Cara Menghubungkan CSS</a>
+      <a href="#first-css">CSS Pertamamu</a>
+      <a href="#browser">CSS di Browser</a>
+      <a href="#mistakes">Kesalahan Umum</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#challenge">Final Challenge</a>
+      <a href="#review">Review</a>
+    </nav>
+  </aside>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <span class="label">CSS LEARNING PATH • MODUL 01</span>
+      <h1>Introduction to CSS</h1>
+      <p>
+        Kenali CSS dari dasar dan pelajari bagaimana sebuah
+        halaman HTML dapat diubah menjadi website yang lebih
+        menarik, rapi, dan nyaman digunakan.
+      </p>
+      <span class="tag">CSS Foundation</span>
+      <span class="tag">Beginner Level</span>
+      <span class="tag">60–90 Menit</span>
+    </section>
+
+    <!-- INTRO -->
+    <section class="card" id="intro">
+      <span class="label">START LEARNING</span>
+      <h2>Pengantar Pembelajaran</h2>
+
+      <p>
+        Selamat datang di CSS Learning Path DevLearn!
+        Pada pembelajaran HTML sebelumnya, kamu sudah belajar
+        membuat struktur halaman website.
+      </p>
+
+      <p>
+        Namun, halaman HTML yang hanya berisi struktur biasanya
+        terlihat sederhana. Teks, gambar, dan bagian lainnya
+        belum memiliki desain yang menarik.
+      </p>
+
+      <p>
+        Di sinilah CSS digunakan. CSS membantu kita mengatur
+        warna, ukuran teks, jarak, posisi, hingga tata letak
+        sebuah halaman website.
+      </p>
+
+      <h3>Tujuan Pembelajaran</h3>
+      <ul>
+        <li>Memahami pengertian dan fungsi CSS.</li>
+        <li>Mengetahui hubungan antara HTML dan CSS.</li>
+        <li>Memahami cara kerja CSS pada halaman website.</li>
+        <li>Mengenal struktur dasar penulisan CSS.</li>
+        <li>Mengetahui tiga cara menghubungkan CSS dengan HTML.</li>
+        <li>Membuat styling CSS sederhana secara mandiri.</li>
+      </ul>
+
+      <div class="note">
+        <strong>Prinsip pembelajaran:</strong>
+        Jangan terburu-buru menghafal semua kode CSS.
+        Pahami dahulu bagaimana CSS bekerja dan bagaimana
+        browser menerapkannya pada elemen HTML.
+      </div>
+    </section>
+
+    <!-- DEFINITION -->
+    <section class="card" id="definition">
+      <span class="label">BAGIAN 01</span>
+      <h2>Apa Itu CSS?</h2>
+
+      <p>
+        CSS merupakan singkatan dari
+        <strong>Cascading Style Sheets</strong>.
+        CSS adalah bahasa stylesheet yang digunakan untuk
+        mengatur tampilan dan tata letak dokumen HTML.
+      </p>
+
+      <p>
+        Dengan CSS, kita dapat mengubah warna teks, ukuran
+        tulisan, jenis font, background, jarak antar elemen,
+        posisi, dan berbagai aspek visual lainnya.
+      </p>
+
+      <h3>Analogi Sederhana</h3>
+
+      <p>
+        Bayangkan sebuah rumah yang sedang dibangun.
+        Setiap bagian memiliki perannya masing-masing.
+      </p>
+
+      <div class="example">
+        <div class="comparison">
+          <div>
+            <h3>HTML</h3>
+            <p>Struktur bangunan.</p>
+            <ul>
+              <li>Dinding</li>
+              <li>Pintu</li>
+              <li>Jendela</li>
+              <li>Ruangan</li>
+            </ul>
+          </div>
+
+          <div>
+            <h3>CSS</h3>
+            <p>Tampilan bangunan.</p>
+            <ul>
+              <li>Warna dinding</li>
+              <li>Desain pintu</li>
+              <li>Ukuran jendela</li>
+              <li>Interior ruangan</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h3>Perbandingan HTML dan CSS</h3>
+
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>HTML</th>
+            <th>CSS</th>
+          </tr>
+          <tr>
+            <td>Membuat struktur konten.</td>
+            <td>Mengatur tampilan konten.</td>
+          </tr>
+          <tr>
+            <td>Membuat heading dan paragraf.</td>
+            <td>Mengatur ukuran dan warna teks.</td>
+          </tr>
+          <tr>
+            <td>Menampilkan gambar.</td>
+            <td>Mengatur ukuran dan bentuk gambar.</td>
+          </tr>
+          <tr>
+            <td>Membuat bagian website.</td>
+            <td>Mengatur layout bagian website.</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note">
+        HTML dan CSS bekerja bersama. HTML membentuk struktur,
+        sedangkan CSS menentukan bagaimana struktur tersebut
+        ditampilkan kepada pengguna.
+      </div>
+    </section>
+
+    <!-- RELATIONSHIP -->
+    <section class="card" id="relationship">
+      <span class="label">BAGIAN 02</span>
+      <h2>Hubungan HTML dan CSS</h2>
+
+      <p>
+        Untuk memahami CSS, kita perlu melihat bagaimana
+        HTML dan CSS bekerja bersama.
+      </p>
+
+      <h3>Contoh HTML Tanpa CSS</h3>
+
+      <div class="example">
+        <p>Halo, selamat datang!</p>
+        <h2 style="margin: 8px 0;">Saya sedang belajar website.</h2>
+        <button style="font:inherit; padding:5px 10px;">
+          Klik Saya
+        </button>
+      </div>
+
+      <p>
+        Elemen tersebut sudah dapat ditampilkan browser,
+        tetapi tampilannya masih menggunakan gaya bawaan browser.
+      </p>
+
+      <h3>Contoh HTML dengan CSS</h3>
+
+      <div class="example">
+        <div class="demo-box">
+          <div class="demo-css">
+            Halo, selamat datang!
+          </div>
+          <h2 style="text-align:center; margin:15px 0 5px;">
+            Saya sedang belajar website.
+          </h2>
+          <p style="text-align:center; color:#64748b;">
+            Sekarang tampilannya lebih menarik.
+          </p>
+          <div style="text-align:center;">
+            <button style="background:#2563eb;color:white;border:0;padding:10px 18px;border-radius:7px;">
+              Mulai Belajar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Peran JavaScript</h3>
+
+      <p>
+        Selain HTML dan CSS, ada JavaScript yang digunakan
+        untuk menambahkan perilaku dan interaksi pada website.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Teknologi</th>
+            <th>Peran</th>
+            <th>Contoh</th>
+          </tr>
+          <tr>
+            <td>HTML</td>
+            <td>Struktur</td>
+            <td>Judul dan tombol</td>
+          </tr>
+          <tr>
+            <td>CSS</td>
+            <td>Tampilan</td>
+            <td>Warna dan layout</td>
+          </tr>
+          <tr>
+            <td>JavaScript</td>
+            <td>Interaksi</td>
+            <td>Menu dan validasi form</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <strong>Ingat:</strong>
+        Ketiga teknologi ini memiliki peran yang berbeda,
+        tetapi dapat bekerja bersama untuk membangun website.
+      </div>
+    </section>
+
+    <!-- BENEFIT -->
+    <section class="card" id="benefit">
+      <span class="label">BAGIAN 03</span>
+      <h2>Fungsi dan Manfaat CSS</h2>
+
+      <p>
+        CSS bukan hanya digunakan untuk membuat website
+        terlihat berwarna. Ada banyak fungsi penting lainnya.
+      </p>
+
+      <h3>1. Mengatur Warna</h3>
+      <p>
+        CSS dapat mengatur warna teks, background,
+        border, dan elemen lainnya.
+      </p>
+
+      <div class="code" id="code1">h1 {
+  color: blue;
+}
+
+body {
+  background-color: #f8fafc;
+}</div>
+      <button class="copy" onclick="copyCode('code1')">Salin Kode</button>
+
+      <h3>2. Mengatur Typography</h3>
+      <p>
+        Typography berkaitan dengan tampilan tulisan,
+        seperti jenis font, ukuran, ketebalan, dan jarak baris.
+      </p>
+
+      <div class="code" id="code2">p {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.7;
+}</div>
+      <button class="copy" onclick="copyCode('code2')">Salin Kode</button>
+
+      <h3>3. Mengatur Jarak dan Ukuran</h3>
+      <p>
+        CSS dapat mengatur ukuran elemen serta jarak
+        antara satu elemen dengan elemen lainnya.
+      </p>
+
+      <div class="code" id="code3">.card {
+  width: 300px;
+  padding: 20px;
+  margin: 15px;
+}</div>
+      <button class="copy" onclick="copyCode('code3')">Salin Kode</button>
+
+      <h3>4. Mengatur Tata Letak</h3>
+      <p>
+        CSS dapat digunakan untuk menyusun elemen
+        menggunakan Flexbox, Grid, dan berbagai teknik layout.
+      </p>
+
+      <div class="code" id="code4">.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}</div>
+      <button class="copy" onclick="copyCode('code4')">Salin Kode</button>
+
+      <h3>5. Membuat Website Responsif</h3>
+      <p>
+        CSS memungkinkan tampilan website menyesuaikan
+        ukuran layar perangkat yang berbeda.
+      </p>
+
+      <div class="code" id="code5">@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+}</div>
+      <button class="copy" onclick="copyCode('code5')">Salin Kode</button>
+
+      <div class="note">
+        Responsif berarti tampilan website dapat menyesuaikan
+        perangkat, bukan sekadar mengecilkan seluruh elemen.
+      </div>
+    </section>
+
+    <!-- SYNTAX -->
+    <section class="card" id="syntax">
+      <span class="label">BAGIAN 04</span>
+      <h2>Memahami Cara Kerja CSS</h2>
+
+      <p>
+        CSS bekerja dengan memilih elemen HTML, kemudian
+        memberikan aturan tampilan kepada elemen tersebut.
+      </p>
+
+      <h3>Struktur Dasar CSS</h3>
+
+      <div class="code" id="code6">selector {
+  property: value;
+}</div>
+      <button class="copy" onclick="copyCode('code6')">Salin Kode</button>
+
+      <h3>Penjelasan Setiap Bagian</h3>
+
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Bagian</th>
+            <th>Pengertian</th>
+          </tr>
+          <tr>
+            <td>Selector</td>
+            <td>Memilih elemen HTML yang ingin diberi styling.</td>
+          </tr>
+          <tr>
+            <td>Property</td>
+            <td>Menentukan aspek tampilan yang ingin diubah.</td>
+          </tr>
+          <tr>
+            <td>Value</td>
+            <td>Menentukan nilai dari property.</td>
+          </tr>
+          <tr>
+            <td>Declaration</td>
+            <td>Pasangan property dan value.</td>
+          </tr>
+          <tr>
+            <td>Declaration Block</td>
+            <td>Kumpulan deklarasi di dalam kurung kurawal.</td>
+          </tr>
+        </table>
+      </div>
+
+      <h3>Contoh Penggunaan</h3>
+
+      <div class="code" id="code7">h1 {
+  color: blue;
+  font-size: 32px;
+}</div>
+      <button class="copy" onclick="copyCode('code7')">Salin Kode</button>
+
+      <p>Penjelasan kode di atas:</p>
+      <ul>
+        <li><strong>h1</strong> adalah selector.</li>
+        <li><strong>color</strong> adalah property untuk warna teks.</li>
+        <li><strong>blue</strong> adalah value warna.</li>
+        <li><strong>font-size</strong> mengatur ukuran teks.</li>
+        <li><strong>32px</strong> adalah nilai ukuran teks.</li>
+      </ul>
+
+      <div class="note">
+        Setiap deklarasi CSS umumnya diakhiri dengan titik koma (;).
+        Property dan value dipisahkan menggunakan titik dua (:).
+      </div>
+    </section>
+
+    <!-- METHODS -->
+    <section class="card" id="methods">
+      <span class="label">BAGIAN 05</span>
+      <h2>3 Cara Menghubungkan CSS dengan HTML</h2>
+
+      <p>
+        Ada tiga cara umum untuk menerapkan CSS pada dokumen HTML.
+        Masing-masing memiliki cara penggunaan yang berbeda.
+      </p>
+
+      <h3>1. Inline CSS</h3>
+
+      <p>
+        Inline CSS ditulis langsung pada elemen HTML
+        menggunakan atribut style.
+      </p>
+
+      <div class="code" id="code8">&lt;h1 style="color: blue;"&gt;
+  Halo Dunia!
+&lt;/h1&gt;</div>
+      <button class="copy" onclick="copyCode('code8')">Salin Kode</button>
+
+      <div class="example">
+        <h2 style="color:#2563eb;margin:0;">Halo Dunia!</h2>
+        <p style="margin:5px 0 0;">Contoh hasil Inline CSS.</p>
+      </div>
+
+      <h3>2. Internal CSS</h3>
+
+      <p>
+        Internal CSS ditulis di dalam elemen
+        <code>&lt;style&gt;</code> pada bagian
+        <code>&lt;head&gt;</code> dokumen HTML.
+      </p>
+
+      <div class="code" id="code9">&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;title&gt;Internal CSS&lt;/title&gt;
+
+  &lt;style&gt;
+    h1 {
+      color: blue;
+      text-align: center;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;h1&gt;Halo Dunia!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      <button class="copy" onclick="copyCode('code9')">Salin Kode</button>
+
+      <h3>3. External CSS</h3>
+
+      <p>
+        External CSS ditulis pada file terpisah dengan ekstensi
+        .css, kemudian dihubungkan dengan HTML menggunakan
+        elemen link.
+      </p>
+
+      <p><strong>File index.html:</strong></p>
+
+      <div class="code" id="code10">&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;title&gt;External CSS&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;h1&gt;Halo Dunia!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      <button class="copy" onclick="copyCode('code10')">Salin Kode</button>
+
+      <p><strong>File style.css:</strong></p>
+
+      <div class="code" id="code11">h1 {
+  color: blue;
+  text-align: center;
+}</div>
+      <button class="copy" onclick="copyCode('code11')">Salin Kode</button>
+
+      <h3>Perbandingan Ketiga Metode</h3>
+
+      <div class="table-wrap">
+        <table>
+          <tr>
+            <th>Metode</th>
+            <th>Lokasi CSS</th>
+            <th>Penggunaan</th>
+          </tr>
+          <tr>
+            <td>Inline</td>
+            <td>Atribut style</td>
+            <td>Styling satu elemen tertentu.</td>
+          </tr>
+          <tr>
+            <td>Internal</td>
+            <td>Elemen style</td>
+            <td>Styling satu halaman HTML.</td>
+          </tr>
+          <tr>
+            <td>External</td>
+            <td>File .css terpisah</td>
+            <td>Styling yang dapat digunakan banyak halaman.</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <strong>Rekomendasi DevLearn:</strong>
+        Biasakan menggunakan External CSS untuk proyek website.
+        Cara ini membuat struktur HTML lebih bersih dan styling
+        lebih mudah dikelola.
+      </div>
+    </section>
+
+    <!-- FIRST CSS -->
+    <section class="card" id="first-css">
+      <span class="label">BAGIAN 06</span>
+      <h2>Membuat CSS Pertamamu</h2>
+
+      <p>
+        Sekarang waktunya mencoba langsung. Kita akan membuat
+        halaman HTML sederhana dan menghubungkannya dengan CSS.
+      </p>
+
+      <h3>Langkah 1. Buat Folder Proyek</h3>
+
+      <div class="code" id="code12">belajar-css/
+│
+├── index.html
+│
+└── style.css</div>
+      <button class="copy" onclick="copyCode('code12')">Salin Struktur</button>
+
+      <h3>Langkah 2. Buat File HTML</h3>
+
+      <p>Buka index.html dan tulis kode berikut:</p>
+
+      <div class="code" id="code13">&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+        content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Belajar CSS&lt;/title&gt;
+
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;h1&gt;Halo, Saya Sedang Belajar CSS!&lt;/h1&gt;
+
+  &lt;p&gt;
+    Ini adalah halaman website pertama saya
+    yang menggunakan CSS.
+  &lt;/p&gt;
+
+  &lt;button&gt;Mulai Belajar&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      <button class="copy" onclick="copyCode('code13')">Salin Kode</button>
+
+      <h3>Langkah 3. Buat File CSS</h3>
+
+      <p>Buka style.css dan masukkan kode berikut:</p>
+
+      <div class="code" id="code14">body {
+  font-family: Arial, sans-serif;
+  background-color: #f8fafc;
+  color: #334155;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+h1 {
+  color: #2563eb;
+  font-size: 30px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+button {
+  background-color: #2563eb;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}</div>
+      <button class="copy" onclick="copyCode('code14')">Salin Kode</button>
+
+      <h3>Langkah 4. Jalankan Website</h3>
+
+      <div class="step">
+        <strong>1. Simpan seluruh file.</strong>
+        <p>Pastikan index.html dan style.css berada di folder yang sama.</p>
+      </div>
+
+      <div class="step">
+        <strong>2. Buka index.html.</strong>
+        <p>Kamu bisa membukanya melalui browser atau menggunakan Live Server di VS Code.</p>
+      </div>
+
+      <div class="step">
+        <strong>3. Amati hasilnya.</strong>
+        <p>Perhatikan bagaimana CSS mengubah tampilan halaman HTML.</p>
+      </div>
+
+      <div class="note">
+        Jika styling tidak muncul, periksa kembali nama file CSS
+        dan lokasi href pada elemen link.
+      </div>
+    </section>
+
+    <!-- BROWSER -->
+    <section class="card" id="browser">
+      <span class="label">BAGIAN 07</span>
+      <h2>Bagaimana Browser Membaca CSS?</h2>
+
+      <p>
+        Browser bertugas membaca HTML dan CSS, kemudian
+        mengolah keduanya untuk menampilkan halaman website.
+      </p>
+
+      <h3>Alur Sederhana</h3>
+
+      <div class="example">
+        <div style="background:#eff6ff;border:1px solid #bfdbfe;padding:15px;border-radius:8px;text-align:center;font-weight:bold;color:#1d4ed8;">
+          File HTML
+        </div>
+        <p style="text-align:center;margin:8px 0;">+</p>
+        <div style="background:#ecfeff;border:1px solid #a5f3fc;padding:15px;border-radius:8px;text-align:center;font-weight:bold;color:#0e7490;">
+          File CSS
+        </div>
+        <p style="text-align:center;margin:8px 0;">↓</p>
+        <div style="background:#f1f5f9;border:1px solid #cbd5e1;padding:15px;border-radius:8px;text-align:center;font-weight:bold;">
+          Browser memproses dokumen
+        </div>
+        <p style="text-align:center;margin:8px 0;">↓</p>
+        <div style="background:#dcfce7;border:1px solid #86efac;padding:15px;border-radius:8px;text-align:center;font-weight:bold;color:#166534;">
+          Website ditampilkan kepada pengguna
+        </div>
+      </div>
+
+      <h3>Peran Browser</h3>
+
+      <ul>
+        <li>Membaca struktur HTML.</li>
+        <li>Membaca aturan CSS yang diterapkan.</li>
+        <li>Menentukan tampilan setiap elemen.</li>
+        <li>Menampilkan halaman website pada layar.</li>
+      </ul>
+
+      <div class="note">
+        Browser populer untuk menguji website antara lain
+        Google Chrome, Mozilla Firefox, Microsoft Edge,
+        dan Safari.
+      </div>
+    </section>
+
+    <!-- MISTAKES -->
+    <section class="card" id="mistakes">
+      <span class="label">BAGIAN 08</span>
+      <h2>Kesalahan Umum Saat Belajar CSS</h2>
+
+      <p>
+        Ketika mulai belajar CSS, ada beberapa kesalahan
+        yang sering dialami pemula.
+      </p>
+
+      <h3>1. Salah Menulis Nama File</h3>
+
+      <div class="code">href="styles.css"</div>
+
+      <p>
+        Padahal file yang tersedia bernama style.css.
+        Akibatnya, browser tidak menemukan stylesheet tersebut.
+      </p>
+
+      <h3>2. Lupa Menggunakan Titik Koma</h3>
+
+      <div class="code">h1 {
+  color: blue
+  font-size: 30px;
+}</div>
+
+      <p>
+        Sebaiknya setiap deklarasi diakhiri titik koma
+        agar aturan CSS lebih konsisten.
+      </p>
+
+      <h3>3. Salah Menggunakan Kurung Kurawal</h3>
+
+      <div class="code">h1 {
+  color: blue;
+  font-size: 30px;</div>
+
+      <p>
+        Kurung kurawal pembuka dan penutup harus digunakan
+        dengan benar.
+      </p>
+
+      <h3>4. Tidak Memeriksa Lokasi File</h3>
+
+      <p>
+        File CSS yang berada di folder berbeda membutuhkan
+        path yang sesuai pada atribut href.
+      </p>
+
+      <h3>5. Terlalu Banyak Menyalin Kode</h3>
+
+      <p>
+        Menyalin kode memang dapat membantu proses belajar,
+        tetapi kamu tetap perlu memahami fungsi setiap barisnya.
+      </p>
+
+      <div class="warning">
+        <strong>Tips:</strong>
+        Jika tampilan website tidak berubah, periksa nama file,
+        path stylesheet, selector, dan deklarasi CSS terlebih dahulu.
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section class="card" id="quiz">
+      <span class="label">TEST YOUR KNOWLEDGE</span>
+      <h2>Quiz Modul 01</h2>
+
+      <p>Pilih jawaban yang paling tepat.</p>
+
+      <form id="quizForm">
+
+        <div class="question">
+          <h3>1. Apa kepanjangan dari CSS?</h3>
+          <label class="quiz-option"><input type="radio" name="q1" value="a"> a. Computer Style System</label>
+          <label class="quiz-option"><input type="radio" name="q1" value="b"> b. Cascading Style Sheets</label>
+          <label class="quiz-option"><input type="radio" name="q1" value="c"> c. Creative Styling Source</label>
+        </div>
+
+        <div class="question">
+          <h3>2. Apa fungsi utama CSS?</h3>
+          <label class="quiz-option"><input type="radio" name="q2" value="a"> a. Mengatur tampilan website</label>
+          <label class="quiz-option"><input type="radio" name="q2" value="b"> b. Menyimpan data pengguna</label>
+          <label class="quiz-option"><input type="radio" name="q2" value="c"> c. Membuat database</label>
+        </div>
+
+        <div class="question">
+          <h3>3. Teknologi apa yang digunakan untuk membangun struktur HTML?</h3>
+          <label class="quiz-option"><input type="radio" name="q3" value="a"> a. CSS</label>
+          <label class="quiz-option"><input type="radio" name="q3" value="b"> b. JavaScript</label>
+          <label class="quiz-option"><input type="radio" name="q3" value="c"> c. HTML</label>
+        </div>
+
+        <div class="question">
+          <h3>4. Bagian mana yang disebut selector dalam CSS?</h3>
+          <label class="quiz-option"><input type="radio" name="q4" value="a"> a. color</label>
+          <label class="quiz-option"><input type="radio" name="q4" value="b"> b. h1</label>
+          <label class="quiz-option"><input type="radio" name="q4" value="c"> c. blue</label>
+        </div>
+
+        <div class="question">
+          <h3>5. Apa ekstensi file CSS?</h3>
+          <label class="quiz-option"><input type="radio" name="q5" value="a"> a. .html</label>
+          <label class="quiz-option"><input type="radio" name="q5" value="b"> b. .js</label>
+          <label class="quiz-option"><input type="radio" name="q5" value="c"> c. .css</label>
+        </div>
+
+        <div class="question">
+          <h3>6. Elemen apa yang digunakan untuk menghubungkan External CSS?</h3>
+          <label class="quiz-option"><input type="radio" name="q6" value="a"> a. &lt;link&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q6" value="b"> b. &lt;script&gt;</label>
+          <label class="quiz-option"><input type="radio" name="q6" value="c"> c. &lt;style&gt;</label>
+        </div>
+
+        <div class="question">
+          <h3>7. Apa fungsi property color?</h3>
+          <label class="quiz-option"><input type="radio" name="q7" value="a"> a. Mengatur jarak elemen</label>
+          <label class="quiz-option"><input type="radio" name="q7" value="b"> b. Mengatur warna teks</label>
+          <label class="quiz-option"><input type="radio" name="q7" value="c"> c. Mengatur ukuran elemen</label>
+        </div>
+
+        <div class="question">
+          <h3>8. Metode CSS apa yang direkomendasikan untuk proyek website?</h3>
+          <label class="quiz-option"><input type="radio" name="q8" value="a"> a. Inline CSS</label>
+          <label class="quiz-option"><input type="radio" name="q8" value="b"> b. Internal CSS saja</label>
+          <label class="quiz-option"><input type="radio" name="q8" value="c"> c. External CSS</label>
+        </div>
+
+        <button type="submit" class="submit">Periksa Jawaban</button>
+        <div id="result" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- CHALLENGE -->
+    <section class="card" id="challenge">
+      <span class="label">PRACTICE CHALLENGE</span>
+      <h2>Final Challenge: Style Your First Page</h2>
+
+      <p>
+        Sekarang buat halaman HTML sederhana dan berikan
+        styling menggunakan CSS milikmu sendiri.
+      </p>
+
+      <h3>Instruksi Proyek</h3>
+
+      <p>
+        Buatlah sebuah halaman perkenalan diri sederhana
+        dengan nama proyek <strong>My First Styled Page</strong>.
+      </p>
+
+      <h3>Ketentuan Proyek</h3>
+
+      <ul>
+        <li>Gunakan file index.html.</li>
+        <li>Buat file style.css secara terpisah.</li>
+        <li>Hubungkan HTML dan CSS menggunakan External CSS.</li>
+        <li>Tambahkan heading sebagai judul utama.</li>
+        <li>Tambahkan minimal dua paragraf.</li>
+        <li>Atur warna background halaman.</li>
+        <li>Atur warna dan ukuran heading.</li>
+        <li>Atur jenis dan ukuran font.</li>
+        <li>Tambahkan sebuah tombol.</li>
+        <li>Gunakan padding agar konten tidak terlalu rapat.</li>
+      </ul>
+
+      <h3>Contoh Struktur Folder</h3>
+
+      <div class="code" id="code15">my-first-styled-page/
+│
+├── index.html
+│
+└── style.css</div>
+      <button class="copy" onclick="copyCode('code15')">Salin Struktur</button>
+
+      <h3>Rubrik Penilaian</h3>
+
+      <div class="table-wrap">
+        <table>
+          <tr><th>Kriteria</th><th>Bobot</th></tr>
+          <tr><td>Struktur HTML</td><td>20%</td></tr>
+          <tr><td>Penggunaan External CSS</td><td>20%</td></tr>
+          <tr><td>Penggunaan property CSS</td><td>20%</td></tr>
+          <tr><td>Kerapian kode</td><td>15%</td></tr>
+          <tr><td>Kesesuaian tampilan</td><td>15%</td></tr>
+          <tr><td>Pemahaman saat presentasi</td><td>10%</td></tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <strong>Target akhir:</strong>
+        Kamu mampu membuat halaman HTML sederhana,
+        menghubungkan file CSS, dan mengubah tampilan
+        halaman melalui kode CSS sendiri.
+      </div>
+
+      <h3>Pertanyaan Refleksi</h3>
+
+      <ol>
+        <li>Apa perbedaan HTML dan CSS?</li>
+        <li>Mengapa CSS dibutuhkan dalam pembuatan website?</li>
+        <li>Apa perbedaan Inline, Internal, dan External CSS?</li>
+        <li>Bagian CSS mana yang masih terasa sulit?</li>
+        <li>Bagaimana kamu memastikan file CSS terhubung dengan HTML?</li>
+      </ol>
+    </section>
+
+    <!-- REVIEW -->
+    <section class="card" id="review">
+      <span class="label">LEARNING REVIEW</span>
+      <h2>Evaluasi Pembelajaran</h2>
+
+      <p>
+        Sebelum melanjutkan ke Modul 02, periksa kembali
+        pemahamanmu mengenai materi yang telah dipelajari.
+      </p>
+
+      <div class="progress-bg">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <p id="progressText">0 dari 7 materi dipahami</p>
+
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox"> Saya memahami pengertian CSS.</label>
+        <label><input type="checkbox"> Saya memahami hubungan HTML dan CSS.</label>
+        <label><input type="checkbox"> Saya mengetahui fungsi CSS.</label>
+        <label><input type="checkbox"> Saya memahami selector, property, dan value.</label>
+        <label><input type="checkbox"> Saya mengetahui tiga cara menghubungkan CSS.</label>
+        <label><input type="checkbox"> Saya berhasil membuat file CSS sendiri.</label>
+        <label><input type="checkbox"> Saya mampu menjelaskan kode CSS sederhana.</label>
+      </div>
+
+      <div class="note">
+        <strong>Good job!</strong>
+        Kamu telah menyelesaikan CSS Modul 01.
+        Selanjutnya, kita akan mempelajari CSS Syntax
+        dan Selectors secara lebih mendalam.
+      </div>
+    </section>
+
+    <nav class="lesson-navigation" aria-label="Navigasi modul">
+      <a href="../../index.html#learning-path">← Kembali ke Learning Path</a>
+      <a href="modul-02.html">Lanjut Modul 02 →</a>
+    </nav>
+
+  </main>
+</div>
+
+<footer>
+  <strong>DevLearn — Learn, Practice, Build</strong>
+  <p>Belajar bersama, berkembang bersama.</p>
+  <p>CSS Modul 01 • Introduction to CSS</p>
+</footer>
+
+<script>
+  // COPY CODE
+  function copyCode(id) {
+    const element = document.getElementById(id);
+    const text = element.innerText;
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text)
+        .then(() => alert("Kode berhasil disalin!"))
+        .catch(() => fallbackCopy(text));
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+
+    try {
+      document.execCommand("copy");
+      alert("Kode berhasil disalin!");
+    } catch (error) {
+      alert("Gagal menyalin kode. Silakan salin manual.");
+    }
+
+    area.remove();
+  }
+
+  // QUIZ
+  const answers = {
+    q1: "b",
+    q2: "a",
+    q3: "c",
+    q4: "b",
+    q5: "c",
+    q6: "a",
+    q7: "b",
+    q8: "c"
+  };
+
+  document.getElementById("quizForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let score = 0;
+    let answered = 0;
+
+    Object.keys(answers).forEach(function(question) {
+      const selected = document.querySelector(
+        'input[name="' + question + '"]:checked'
+      );
+
+      if (selected) {
+        answered++;
+
+        if (selected.value === answers[question]) {
+          score++;
+        }
+      }
+    });
+
+    const result = document.getElementById("result");
+
+    if (answered < 8) {
+      result.textContent =
+        "Silakan jawab semua 8 pertanyaan terlebih dahulu.";
+      result.style.color = "#d97706";
+      return;
+    }
+
+    const finalScore = Math.round((score / 8) * 100);
+
+    result.textContent =
+      "Nilai kamu: " + finalScore + "/100 (" +
+      score + " dari 8 benar). " +
+      (finalScore >= 75
+        ? "Hebat! Kamu siap melanjutkan pembelajaran."
+        : "Pelajari kembali materi yang belum dipahami.");
+
+    result.style.color =
+      finalScore >= 75 ? "#059669" : "#dc2626";
+  });
+
+  // CHECKLIST PROGRESS
+  const checklist = document.querySelectorAll(
+    '#checklist input[type="checkbox"]'
+  );
+
+  function updateProgress() {
+    const checked = [...checklist].filter(
+      item => item.checked
+    ).length;
+
+    const percentage = (checked / checklist.length) * 100;
+
+    document.getElementById("progressFill").style.width =
+      percentage + "%";
+
+    document.getElementById("progressText").textContent =
+      checked + " dari " + checklist.length +
+      " materi dipahami";
+  }
+
+  checklist.forEach(item => {
+    item.addEventListener("change", updateProgress);
+  });
+
+  // SIDEBAR ACTIVE STATE
+  const navLinks = document.querySelectorAll(".sidebar a");
+  const sections = document.querySelectorAll("main section[id]");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle(
+            "active",
+            link.getAttribute("href") === "#" + entry.target.id
+          );
+        });
+      }
+    });
+  }, {
+    rootMargin: "-20% 0px -65% 0px"
+  });
+
+  sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>

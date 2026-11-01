@@ -1,0 +1,1934 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DevLearn CSS Module 11 - Final Portfolio Project">
+<title>CSS Modul 11 - Final Mini Project | DevLearn</title>
+
+<style>
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --dark: #14213d;
+  --text: #334155;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --bg: #f8fafc;
+  --white: #ffffff;
+  --green: #059669;
+  --orange: #ea580c;
+  --radius: 14px;
+  --shadow: 0 8px 25px rgba(15,23,42,.05);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.7;
+}
+
+button, input {
+  font: inherit;
+}
+
+nav.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 7%;
+  background: rgba(255,255,255,.96);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+
+.logo {
+  color: var(--primary);
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.nav-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 245px minmax(0,1fr);
+  max-width: 1300px;
+  margin: auto;
+  gap: 28px;
+  padding: 30px 24px;
+}
+
+.sidebar {
+  position: sticky;
+  top: 85px;
+  align-self: start;
+  max-height: calc(100vh - 105px);
+  overflow-y: auto;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.sidebar h3 {
+  color: var(--dark);
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 7px 10px;
+  margin: 3px 0;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: 7px;
+  font-size: 13px;
+  transition: .2s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: #eff6ff;
+  color: var(--primary);
+}
+
+main {
+  min-width: 0;
+}
+
+.hero {
+  padding: 42px;
+  border-radius: 18px;
+  background: linear-gradient(125deg,#14213d,#2563eb);
+  color: white;
+  margin-bottom: 25px;
+}
+
+.hero .tag {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  padding: 5px 12px;
+  border-radius: 30px;
+  font-size: 12px;
+}
+
+.hero .number {
+  color: #bfdbfe;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+.hero h1 {
+  font-size: clamp(28px,5vw,42px);
+  line-height: 1.2;
+  margin: 12px 0;
+}
+
+.hero p {
+  color: #dbeafe;
+  max-width: 650px;
+}
+
+.hero-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 22px;
+  font-size: 13px;
+  color: #dbeafe;
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+h2 {
+  color: var(--dark);
+  margin-bottom: 15px;
+  font-size: 23px;
+}
+
+h3 {
+  color: var(--dark);
+  margin: 20px 0 10px;
+  font-size: 17px;
+}
+
+p {
+  margin: 10px 0;
+}
+
+code {
+  color: #1d4ed8;
+  background: #eff6ff;
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-size: .9em;
+}
+
+pre {
+  overflow-x: auto;
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 18px;
+  border-radius: 10px;
+  margin: 14px 0;
+  font-size: 12px;
+  line-height: 1.8;
+  tab-size: 2;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+.note, .warning, .success {
+  padding: 14px 16px;
+  border-radius: 7px;
+  margin: 16px 0;
+}
+
+.note {
+  background: #eff6ff;
+  border-left: 4px solid var(--primary);
+}
+
+.warning {
+  background: #fff7ed;
+  border-left: 4px solid var(--orange);
+}
+
+.success {
+  background: #ecfdf5;
+  border-left: 4px solid var(--green);
+}
+
+ul, ol {
+  padding-left: 23px;
+  margin: 12px 0;
+}
+
+li {
+  margin: 7px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+}
+
+th, td {
+  border: 1px solid var(--border);
+  padding: 11px;
+  text-align: left;
+  font-size: 13px;
+  vertical-align: top;
+}
+
+th {
+  background: #f1f5f9;
+  color: var(--dark);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 15px;
+  margin-top: 18px;
+}
+
+.project-item {
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 17px;
+  transition: transform .25s, box-shadow .25s;
+}
+
+.project-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(15,23,42,.08);
+}
+
+.project-item span {
+  font-size: 25px;
+}
+
+.project-item h3 {
+  margin: 8px 0;
+}
+
+.level {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 12px 0;
+}
+
+.level strong {
+  color: var(--primary);
+}
+
+.progress-wrap {
+  background: #e2e8f0;
+  height: 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 15px 0 8px;
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  background: var(--green);
+  transition: width .3s;
+}
+
+.check-item {
+  display: flex;
+  gap: 10px;
+  margin: 11px 0;
+  align-items: flex-start;
+}
+
+.check-item input {
+  margin-top: 6px;
+  accent-color: var(--green);
+  flex-shrink: 0;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  border-radius: 8px;
+  padding: 11px 17px;
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  transition: background .2s;
+}
+
+button:hover {
+  background: var(--primary-dark);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+.button-secondary {
+  background: #e2e8f0;
+  color: var(--dark);
+}
+
+.button-secondary:hover {
+  background: #cbd5e1;
+}
+
+.answer {
+  border: 1px solid var(--border);
+  padding: 15px;
+  border-radius: 9px;
+  margin: 13px 0;
+}
+
+.answer label {
+  cursor: pointer;
+}
+
+.result {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.explanation {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  background: #eff6ff;
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+.quiz-correct {
+  border-color: var(--green);
+}
+
+.quiz-wrong {
+  border-color: var(--orange);
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media(max-width:850px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    max-height: none;
+  }
+
+  .sidebar nav {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 3px;
+  }
+}
+
+@media(max-width:600px) {
+  nav.topbar {
+    padding: 12px 5%;
+  }
+
+  .nav-label {
+    font-size: 10px;
+  }
+
+  .layout {
+    padding: 18px 13px;
+  }
+
+  .hero {
+    padding: 28px 20px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  th, td {
+    font-size: 11px;
+    padding: 7px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+<link rel="stylesheet" href="../html/module-theme.css">
+</head>
+
+<body>
+
+<nav class="topbar">
+  <a href="../../index.html" class="logo">Kub<span>ika.</span></a>
+  <div class="nav-label">CSS Learning Path / Module 11</div>
+</nav>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <h3>Daftar Isi</h3>
+  <nav id="sideNavigation">
+    <a href="#intro">01. Pengenalan</a>
+    <a href="#goal">02. Tujuan</a>
+    <a href="#requirements">03. Persyaratan</a>
+    <a href="#environment">04. Persiapan</a>
+    <a href="#structure">05. Struktur File</a>
+    <a href="#design">06. Perencanaan UI</a>
+    <a href="#steps">07. Tahapan</a>
+    <a href="#starter">08. Starter Code</a>
+    <a href="#css">09. CSS Implementation</a>
+    <a href="#responsive">10. Responsive</a>
+    <a href="#debugging">11. Debugging</a>
+    <a href="#challenge">12. Tantangan</a>
+    <a href="#review">13. Evaluasi</a>
+    <a href="#quiz">14. Kuis</a>
+    <a href="#submission">15. Submission</a>
+  </nav>
+</aside>
+
+<main>
+
+<header class="hero">
+  <span class="tag">FINAL MINI PROJECT</span>
+  <p class="number">CSS MODULE 11 • CAPSTONE PROJECT</p>
+  <h1>Build Your First Portfolio Website</h1>
+  <p>
+    Saatnya menggabungkan seluruh kemampuan CSS yang telah kamu pelajari
+    untuk membangun website portofolio pribadi yang menarik, terstruktur,
+    responsif, dan dapat dikembangkan.
+  </p>
+  <div class="hero-info">
+    <span>📚 15 Materi Pembelajaran</span>
+    <span>💻 1 Final Project</span>
+    <span>🎯 Beginner Friendly</span>
+  </div>
+</header>
+
+<!-- 01 INTRO -->
+<section class="card" id="intro">
+<h2>01. Pengenalan Proyek</h2>
+
+<p>
+Selamat datang di modul terakhir CSS! Pada sepuluh modul sebelumnya,
+kamu telah mempelajari berbagai konsep dasar hingga lanjutan CSS.
+Sekarang waktunya menerapkan semua pengetahuan tersebut ke dalam
+sebuah proyek nyata.
+</p>
+
+<p>
+Pada proyek ini, kamu akan membuat sebuah <strong>Personal Portfolio Website</strong>.
+Website ini digunakan untuk memperkenalkan diri, menampilkan kemampuan,
+memperlihatkan hasil pekerjaan, dan menyediakan informasi kontak.
+</p>
+
+<div class="note">
+<strong>Konsep utama:</strong>
+Kamu tidak dituntut membuat website yang sempurna.
+Fokus pada struktur yang benar, tampilan yang nyaman,
+kode yang rapi, dan pemahaman terhadap setiap kode yang digunakan.
+</div>
+
+<h3>Hasil akhir proyek</h3>
+
+<div class="project-grid">
+  <div class="project-item">
+    <span>👤</span>
+    <h3>Profile</h3>
+    <p>Informasi pribadi, foto, dan deskripsi singkat.</p>
+  </div>
+  <div class="project-item">
+    <span>🛠️</span>
+    <h3>Skills</h3>
+    <p>Daftar kemampuan dan teknologi yang dipelajari.</p>
+  </div>
+  <div class="project-item">
+    <span>💻</span>
+    <h3>Projects</h3>
+    <p>Galeri hasil pekerjaan atau latihan.</p>
+  </div>
+  <div class="project-item">
+    <span>✉️</span>
+    <h3>Contact</h3>
+    <p>Informasi untuk menghubungi pemilik website.</p>
+  </div>
+</div>
+
+<h3>Alur pembelajaran</h3>
+<ol>
+  <li>Memahami instruksi dan persyaratan proyek.</li>
+  <li>Menyiapkan folder dan lingkungan kerja.</li>
+  <li>Merancang tampilan website.</li>
+  <li>Membangun struktur HTML.</li>
+  <li>Menerapkan CSS dan layout.</li>
+  <li>Menguji responsivitas dan memperbaiki kesalahan.</li>
+  <li>Mengumpulkan hasil akhir.</li>
+</ol>
+</section>
+
+<!-- 02 GOAL -->
+<section class="card" id="goal">
+<h2>02. Tujuan Pembelajaran</h2>
+
+<p>Setelah menyelesaikan proyek ini, kamu diharapkan mampu:</p>
+
+<ol>
+  <li>Membangun struktur website menggunakan semantic HTML.</li>
+  <li>Mengatur warna, font, ukuran, dan tampilan menggunakan CSS.</li>
+  <li>Menerapkan Box Model dengan benar.</li>
+  <li>Menggunakan Flexbox dan Grid untuk mengatur layout.</li>
+  <li>Membuat website responsif untuk desktop, tablet, dan smartphone.</li>
+  <li>Menerapkan hover, transition, transform, dan animation.</li>
+  <li>Menggunakan pseudo-class dan media query.</li>
+  <li>Memeriksa dan memperbaiki kesalahan CSS.</li>
+  <li>Menulis kode yang rapi dan mudah dipahami.</li>
+  <li>Menjelaskan hasil proyek secara mandiri.</li>
+</ol>
+
+<div class="success">
+<strong>Standar kelulusan:</strong>
+Peserta harus mampu menjelaskan struktur HTML dan CSS yang digunakan,
+bukan hanya menunjukkan hasil tampilannya.
+</div>
+</section>
+
+<!-- 03 REQUIREMENTS -->
+<section class="card" id="requirements">
+<h2>03. Persyaratan Proyek</h2>
+
+<p>Website wajib memiliki komponen berikut.</p>
+
+<table>
+<tr>
+<th>Bagian</th>
+<th>Ketentuan</th>
+<th>Materi CSS</th>
+</tr>
+<tr>
+<td>Navbar</td>
+<td>Logo dan menu navigasi.</td>
+<td>Flexbox, Position</td>
+</tr>
+<tr>
+<td>Hero</td>
+<td>Nama, profesi atau minat, deskripsi, tombol.</td>
+<td>Typography, Colors</td>
+</tr>
+<tr>
+<td>About</td>
+<td>Foto atau ilustrasi dan deskripsi profil.</td>
+<td>Grid, Box Model</td>
+</tr>
+<tr>
+<td>Skills</td>
+<td>Minimal 4 kemampuan.</td>
+<td>Grid, Colors</td>
+</tr>
+<tr>
+<td>Projects</td>
+<td>Minimal 3 kartu proyek.</td>
+<td>Grid, Transition</td>
+</tr>
+<tr>
+<td>Contact</td>
+<td>Email atau tautan media sosial.</td>
+<td>Flexbox</td>
+</tr>
+<tr>
+<td>Footer</td>
+<td>Informasi hak cipta.</td>
+<td>Spacing, Typography</td>
+</tr>
+</table>
+
+<h3>Ketentuan teknis</h3>
+<ul>
+  <li>Gunakan HTML dan CSS eksternal.</li>
+  <li>Gunakan semantic HTML seperti header, main, section, article, dan footer.</li>
+  <li>Gunakan minimal satu Flexbox dan satu CSS Grid.</li>
+  <li>Gunakan minimal dua media query.</li>
+  <li>Gunakan minimal satu efek hover dan transition.</li>
+  <li>Gunakan nama class yang mudah dipahami.</li>
+  <li>Hindari penggunaan CSS inline.</li>
+  <li>Pastikan tautan navigasi mengarah ke bagian yang benar.</li>
+</ul>
+
+<div class="warning">
+<strong>Perhatian:</strong>
+Jangan hanya menyalin starter code. Kamu harus mengembangkan tampilan,
+mengganti konten, dan memahami fungsi setiap bagian.
+</div>
+</section>
+
+<!-- 04 ENVIRONMENT -->
+<section class="card" id="environment">
+<h2>04. Persiapan Lingkungan Kerja</h2>
+
+<p>Sebelum memulai, siapkan beberapa alat berikut.</p>
+
+<table>
+<tr><th>Alat</th><th>Fungsi</th></tr>
+<tr><td>Visual Studio Code</td><td>Menulis dan mengelola kode.</td></tr>
+<tr><td>Google Chrome</td><td>Menampilkan dan menguji website.</td></tr>
+<tr><td>Live Server</td><td>Menampilkan perubahan website secara langsung.</td></tr>
+<tr><td>File Explorer</td><td>Mengelola folder dan aset proyek.</td></tr>
+</table>
+
+<h3>Langkah persiapan</h3>
+<ol>
+  <li>Buka Visual Studio Code.</li>
+  <li>Buat folder baru bernama <code>my-portfolio</code>.</li>
+  <li>Buka folder tersebut di VS Code.</li>
+  <li>Buat file HTML dan CSS sesuai struktur proyek.</li>
+  <li>Jalankan website melalui browser.</li>
+</ol>
+
+<div class="note">
+<strong>Alternatif:</strong>
+Jika belum memiliki laptop, kamu dapat menggunakan editor HTML/CSS
+di smartphone yang mendukung preview browser.
+</div>
+</section>
+
+<!-- 05 STRUCTURE -->
+<section class="card" id="structure">
+<h2>05. Struktur Folder dan File</h2>
+
+<p>Gunakan susunan folder berikut agar proyek lebih terorganisasi.</p>
+
+<pre><code>my-portfolio/
+│
+├── index.html
+│
+├── css/
+│   └── style.css
+│
+├── images/
+│   ├── profile.jpg
+│   ├── project-1.jpg
+│   ├── project-2.jpg
+│   └── project-3.jpg
+│
+└── README.md</code></pre>
+
+<h3>Penjelasan file</h3>
+<ul>
+  <li><code>index.html</code>: struktur utama halaman website.</li>
+  <li><code>style.css</code>: seluruh aturan desain dan tampilan.</li>
+  <li><code>images/</code>: menyimpan foto profil dan gambar proyek.</li>
+  <li><code>README.md</code>: dokumentasi singkat proyek.</li>
+</ul>
+
+<div class="note">
+<strong>Catatan:</strong>
+Nama file dan folder harus sesuai dengan yang dipanggil di HTML.
+Contohnya, jika gambar bernama profile.jpg, gunakan
+<code>images/profile.jpg</code>.
+</div>
+</section>
+
+<!-- 06 DESIGN -->
+<section class="card" id="design">
+<h2>06. Perencanaan Desain UI</h2>
+
+<p>
+Sebelum menulis kode CSS, tentukan terlebih dahulu bagaimana
+website akan terlihat.
+</p>
+
+<h3>A. Menentukan warna</h3>
+<p>Gunakan maksimal tiga sampai empat warna utama agar tampilan konsisten.</p>
+
+<pre><code>:root {
+  --primary: #2563eb;
+  --dark: #14213d;
+  --text: #334155;
+  --background: #f8fafc;
+  --white: #ffffff;
+}</code></pre>
+
+<h3>B. Menentukan tipografi</h3>
+<ul>
+  <li>Heading harus mudah dibedakan dari teks biasa.</li>
+  <li>Gunakan font yang mudah dibaca.</li>
+  <li>Hindari terlalu banyak jenis font.</li>
+  <li>Atur line-height agar paragraf nyaman dibaca.</li>
+</ul>
+
+<h3>C. Menentukan spacing</h3>
+<p>Spacing adalah jarak antar elemen dalam website.</p>
+
+<pre><code>.section {
+  padding: 80px 8%;
+}
+
+.card {
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+}</code></pre>
+
+<h3>D. Menentukan layout</h3>
+<ul>
+  <li>Flexbox untuk susunan horizontal atau vertikal satu dimensi.</li>
+  <li>Grid untuk susunan baris dan kolom dua dimensi.</li>
+  <li>Position untuk elemen yang membutuhkan posisi khusus.</li>
+</ul>
+
+<div class="success">
+<strong>Tips desain:</strong>
+Buat desain sederhana terlebih dahulu. Setelah struktur selesai,
+barulah tambahkan dekorasi dan animasi.
+</div>
+</section>
+
+<!-- 07 STEPS -->
+<section class="card" id="steps">
+<h2>07. Tahapan Pengerjaan</h2>
+
+<h3>Tahap 1 — Membuat struktur HTML</h3>
+<p>Mulailah dengan membangun bagian utama website.</p>
+
+<pre><code>&lt;header&gt;
+  &lt;nav&gt;...&lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;section id="home"&gt;...&lt;/section&gt;
+  &lt;section id="about"&gt;...&lt;/section&gt;
+  &lt;section id="skills"&gt;...&lt;/section&gt;
+  &lt;section id="projects"&gt;...&lt;/section&gt;
+  &lt;section id="contact"&gt;...&lt;/section&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;...&lt;/footer&gt;</code></pre>
+
+<h3>Tahap 2 — Membuat navbar</h3>
+<p>Gunakan Flexbox agar logo dan navigasi tersusun rapi.</p>
+
+<pre><code>.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+}</code></pre>
+
+<h3>Tahap 3 — Membuat Hero Section</h3>
+<p>Hero merupakan bagian pertama yang dilihat pengunjung.</p>
+<ul>
+  <li>Tambahkan nama atau identitas.</li>
+  <li>Tambahkan deskripsi singkat.</li>
+  <li>Tambahkan tombol menuju bagian proyek.</li>
+</ul>
+
+<h3>Tahap 4 — Membuat About dan Skills</h3>
+<p>Gunakan Grid atau Flexbox untuk menata foto, deskripsi, dan daftar kemampuan.</p>
+
+<h3>Tahap 5 — Membuat Projects</h3>
+<p>Gunakan elemen article untuk setiap kartu proyek.</p>
+<ul>
+  <li>Nama proyek.</li>
+  <li>Deskripsi singkat.</li>
+  <li>Teknologi yang digunakan.</li>
+  <li>Gambar atau ilustrasi proyek jika tersedia.</li>
+</ul>
+
+<h3>Tahap 6 — Membuat Contact dan Footer</h3>
+<p>Tambahkan email, media sosial, atau tautan portofolio lain.</p>
+
+<h3>Tahap 7 — Styling dan pengujian</h3>
+<p>Atur warna, ukuran, jarak, layout, hover, dan responsivitas.</p>
+</section>
+
+<!-- 08 HTML -->
+<section class="card" id="starter">
+<h2>08. Starter Code HTML</h2>
+
+<p>
+Gunakan kode berikut sebagai kerangka awal.
+Ganti seluruh konten contoh dengan informasi dan identitasmu sendiri.
+</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+    content="width=device-width, initial-scale=1.0"&gt;
+
+  &lt;meta name="description"
+    content="Personal portfolio website"&gt;
+
+  &lt;title&gt;My Portfolio&lt;/title&gt;
+
+  &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+  &lt;header&gt;
+    &lt;nav class="navbar"&gt;
+      &lt;a href="#home" class="logo"&gt;MyPortfolio&lt;/a&gt;
+
+      &lt;div class="nav-links"&gt;
+        &lt;a href="#home"&gt;Home&lt;/a&gt;
+        &lt;a href="#about"&gt;About&lt;/a&gt;
+        &lt;a href="#skills"&gt;Skills&lt;/a&gt;
+        &lt;a href="#projects"&gt;Projects&lt;/a&gt;
+        &lt;a href="#contact"&gt;Contact&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+
+    &lt;section id="home" class="hero"&gt;
+      &lt;p&gt;Hello, I'm&lt;/p&gt;
+      &lt;h1&gt;Nama Kamu&lt;/h1&gt;
+      &lt;h2&gt;Web Developer in Progress&lt;/h2&gt;
+
+      &lt;p&gt;
+        Saya sedang belajar membangun website
+        dan mengembangkan kemampuan di bidang teknologi.
+      &lt;/p&gt;
+
+      &lt;a href="#projects" class="button"&gt;
+        Lihat Proyek
+      &lt;/a&gt;
+    &lt;/section&gt;
+
+    &lt;section id="about" class="section"&gt;
+      &lt;h2&gt;About Me&lt;/h2&gt;
+
+      &lt;div class="about-container"&gt;
+        &lt;img
+          src="images/profile.jpg"
+          alt="Foto profil pemilik website"
+          class="profile-image"&gt;
+
+        &lt;div&gt;
+          &lt;h3&gt;Halo, saya Nama Kamu&lt;/h3&gt;
+          &lt;p&gt;
+            Tuliskan deskripsi tentang dirimu,
+            pendidikan, minat, dan tujuanmu.
+          &lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id="skills" class="section"&gt;
+      &lt;h2&gt;My Skills&lt;/h2&gt;
+
+      &lt;div class="skills-grid"&gt;
+        &lt;div class="skill-card"&gt;HTML&lt;/div&gt;
+        &lt;div class="skill-card"&gt;CSS&lt;/div&gt;
+        &lt;div class="skill-card"&gt;JavaScript&lt;/div&gt;
+        &lt;div class="skill-card"&gt;UI Design&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id="projects" class="section"&gt;
+      &lt;h2&gt;My Projects&lt;/h2&gt;
+
+      &lt;div class="projects-grid"&gt;
+
+        &lt;article class="project-card"&gt;
+          &lt;img src="images/project-1.jpg"
+            alt="Tampilan proyek pertama"&gt;
+          &lt;h3&gt;Project One&lt;/h3&gt;
+          &lt;p&gt;Deskripsi proyek pertama.&lt;/p&gt;
+          &lt;p&gt;HTML, CSS&lt;/p&gt;
+        &lt;/article&gt;
+
+        &lt;article class="project-card"&gt;
+          &lt;img src="images/project-2.jpg"
+            alt="Tampilan proyek kedua"&gt;
+          &lt;h3&gt;Project Two&lt;/h3&gt;
+          &lt;p&gt;Deskripsi proyek kedua.&lt;/p&gt;
+          &lt;p&gt;HTML, CSS&lt;/p&gt;
+        &lt;/article&gt;
+
+        &lt;article class="project-card"&gt;
+          &lt;img src="images/project-3.jpg"
+            alt="Tampilan proyek ketiga"&gt;
+          &lt;h3&gt;Project Three&lt;/h3&gt;
+          &lt;p&gt;Deskripsi proyek ketiga.&lt;/p&gt;
+          &lt;p&gt;HTML, CSS&lt;/p&gt;
+        &lt;/article&gt;
+
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;section id="contact" class="section"&gt;
+      &lt;h2&gt;Contact Me&lt;/h2&gt;
+
+      &lt;p&gt;
+        Email:
+        &lt;a href="mailto:emailkamu@example.com"&gt;
+          emailkamu@example.com
+        &lt;/a&gt;
+      &lt;/p&gt;
+
+      &lt;p&gt;
+        Instagram:
+        &lt;a href="https://instagram.com/"
+          target="_blank"
+          rel="noopener noreferrer"&gt;
+          Instagram
+        &lt;/a&gt;
+      &lt;/p&gt;
+    &lt;/section&gt;
+
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;© 2026 Nama Kamu. All rights reserved.&lt;/p&gt;
+  &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<div class="note">
+<strong>Perhatikan:</strong>
+Tag <code>alt</code> digunakan untuk memberikan deskripsi gambar.
+Sementara <code>mailto:</code> digunakan untuk membuka aplikasi email.
+</div>
+</section>
+
+<!-- 09 CSS -->
+<section class="card" id="css">
+<h2>09. Starter Code CSS Implementation</h2>
+
+<p>
+Buat file <code>css/style.css</code>, kemudian masukkan kode berikut.
+Pelajari setiap kelompok aturan CSS dan jangan hanya menghafalnya.
+</p>
+
+<pre><code>/* 1. RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 2. GLOBAL */
+body {
+  font-family: Arial, sans-serif;
+  color: #334155;
+  line-height: 1.7;
+  background: #ffffff;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+/* 3. NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.logo {
+  color: #2563eb;
+  font-size: 22px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 22px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  transition: color .3s ease;
+}
+
+.nav-links a:hover {
+  color: #2563eb;
+}
+
+/* 4. HERO */
+.hero {
+  min-height: 70vh;
+  padding: 100px 8%;
+  background: #eff6ff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 5vw, 55px);
+  color: #14213d;
+}
+
+.hero h2 {
+  font-size: 23px;
+  margin: 10px 0;
+}
+
+/* 5. BUTTON */
+.button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 22px;
+  background: #2563eb;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background .3s, transform .3s;
+}
+
+.button:hover {
+  background: #1d4ed8;
+  transform: translateY(-3px);
+}
+
+/* 6. GENERAL SECTION */
+.section {
+  padding: 80px 8%;
+}
+
+.section h2 {
+  color: #14213d;
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+/* 7. ABOUT */
+.about-container {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  align-items: center;
+  gap: 35px;
+}
+
+.profile-image {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* 8. SKILLS */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.skill-card {
+  padding: 22px;
+  text-align: center;
+  background: #eff6ff;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: transform .3s;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+}
+
+/* 9. PROJECTS */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.project-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+  transition: transform .3s, box-shadow .3s;
+}
+
+.project-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.project-card h3,
+.project-card p {
+  margin: 12px 16px;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0,0,0,.1);
+}
+
+/* 10. CONTACT */
+#contact a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+/* 11. FOOTER */
+footer {
+  padding: 25px;
+  text-align: center;
+  background: #14213d;
+  color: white;
+}
+
+/* 12. ACCESSIBILITY */
+a:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 4px;
+}
+
+/* 13. TABLET */
+@media (max-width: 900px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 14. MOBILE */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .hero {
+    min-height: 55vh;
+    padding: 75px 6%;
+  }
+
+  .section {
+    padding: 55px 6%;
+  }
+
+  .about-container {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-image {
+    width: 170px;
+    height: 170px;
+  }
+
+  .skills-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 15. REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+    transition: none !important;
+  }
+}</code></pre>
+
+<div class="warning">
+<strong>Penting:</strong>
+Jika gambar tidak muncul, periksa nama file, ekstensi, dan lokasi folder.
+Pastikan juga file CSS benar-benar terhubung dengan HTML.
+</div>
+</section>
+
+<!-- 10 RESPONSIVE -->
+<section class="card" id="responsive">
+<h2>10. Responsive Design</h2>
+
+<p>
+Responsive design adalah pendekatan untuk membuat website
+menyesuaikan tampilannya berdasarkan ukuran layar perangkat.
+</p>
+
+<table>
+<tr><th>Perangkat</th><th>Standar tampilan</th></tr>
+<tr><td>Desktop</td><td>Layout lebar, tiga kolom proyek.</td></tr>
+<tr><td>Tablet</td><td>Layout lebih ringkas, dua kolom.</td></tr>
+<tr><td>Smartphone</td><td>Konten satu kolom dan navigasi dapat membungkus.</td></tr>
+</table>
+
+<h3>Mengenal Media Query</h3>
+
+<pre><code>/* Untuk layar maksimal 768px */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Untuk layar maksimal 480px */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 28px;
+  }
+}</code></pre>
+
+<h3>Pengujian menggunakan browser</h3>
+<ol>
+  <li>Buka website di Google Chrome.</li>
+  <li>Tekan F12 atau klik kanan lalu Inspect.</li>
+  <li>Aktifkan Device Toolbar.</li>
+  <li>Pilih ukuran smartphone atau tablet.</li>
+  <li>Periksa seluruh bagian website.</li>
+</ol>
+
+<div class="note">
+<strong>Ingat:</strong>
+Jangan hanya menguji website pada satu ukuran layar.
+Coba beberapa ukuran agar kamu mengetahui apakah layout benar-benar fleksibel.
+</div>
+</section>
+
+<!-- 11 DEBUGGING -->
+<section class="card" id="debugging">
+<h2>11. Debugging dan Optimization</h2>
+
+<p>
+Debugging adalah proses menemukan, menganalisis, dan memperbaiki
+kesalahan dalam program.
+</p>
+
+<h3>Kesalahan CSS yang sering terjadi</h3>
+
+<table>
+<tr><th>Masalah</th><th>Penyebab umum</th><th>Solusi</th></tr>
+<tr>
+<td>CSS tidak bekerja</td>
+<td>File CSS tidak terhubung.</td>
+<td>Periksa href pada link stylesheet.</td>
+</tr>
+<tr>
+<td>Gambar tidak muncul</td>
+<td>Path atau nama gambar salah.</td>
+<td>Periksa lokasi dan ekstensi file.</td>
+</tr>
+<tr>
+<td>Elemen keluar layar</td>
+<td>Ukuran elemen terlalu besar.</td>
+<td>Periksa width, padding, dan margin.</td>
+</tr>
+<tr>
+<td>Grid tidak tersusun</td>
+<td>Pengaturan kolom tidak sesuai.</td>
+<td>Periksa grid-template-columns.</td>
+</tr>
+<tr>
+<td>Hover tidak berfungsi</td>
+<td>Selector atau deklarasi salah.</td>
+<td>Periksa selector :hover.</td>
+</tr>
+</table>
+
+<h3>Contoh debugging</h3>
+
+<p>Perhatikan kode berikut yang memiliki kesalahan.</p>
+
+<pre><code>.container {
+  display: grid;
+  grid-template-columns: repeat(3 1fr);
+  gap: 20px;
+}</code></pre>
+
+<p>Kesalahan terdapat pada fungsi <code>repeat()</code>.</p>
+
+<p>Perbaikannya:</p>
+
+<pre><code>.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}</code></pre>
+
+<h3>Optimasi sederhana</h3>
+<ul>
+  <li>Gunakan gambar dengan ukuran yang sesuai.</li>
+  <li>Hindari CSS yang tidak digunakan.</li>
+  <li>Gunakan nama class yang konsisten.</li>
+  <li>Hindari terlalu banyak animasi.</li>
+  <li>Gunakan satu file CSS utama agar mudah dikelola.</li>
+</ul>
+
+<div class="success">
+<strong>Prinsip debugging:</strong>
+Jangan langsung menghapus kode ketika terjadi kesalahan.
+Cari tahu penyebabnya, pahami masalahnya, lalu perbaiki.
+</div>
+</section>
+
+<!-- 12 CHALLENGE -->
+<section class="card" id="challenge">
+<h2>12. Tantangan Tambahan</h2>
+
+<p>
+Setelah persyaratan utama selesai, kamu dapat mengembangkan website
+melalui tiga tingkat tantangan berikut.
+</p>
+
+<div class="level">
+<strong>LEVEL 1 — BEGINNER</strong>
+<p>Tingkat dasar untuk memperkuat pemahaman CSS.</p>
+<ol>
+  <li>Ubah warna utama website.</li>
+  <li>Tambahkan gambar profil.</li>
+  <li>Tambahkan hover pada semua kartu.</li>
+  <li>Gunakan font dan ukuran heading yang konsisten.</li>
+</ol>
+</div>
+
+<div class="level">
+<strong>LEVEL 2 — INTERMEDIATE</strong>
+<p>Tingkat menengah untuk mengembangkan layout dan interaksi.</p>
+<ol>
+  <li>Buat navbar sticky.</li>
+  <li>Tambahkan animasi sederhana pada hero.</li>
+  <li>Buat layout project dengan variasi ukuran kartu.</li>
+  <li>Tambahkan tombol kembali ke atas.</li>
+</ol>
+</div>
+
+<div class="level">
+<strong>LEVEL 3 — ADVANCED</strong>
+<p>Tingkat lanjutan untuk mengembangkan website lebih jauh.</p>
+<ol>
+  <li>Buat dark mode menggunakan JavaScript.</li>
+  <li>Buat navigasi mobile menggunakan tombol menu.</li>
+  <li>Tambahkan halaman detail proyek.</li>
+  <li>Publikasikan website menggunakan layanan hosting statis.</li>
+</ol>
+</div>
+
+<div class="note">
+<strong>Catatan:</strong>
+Tantangan level 3 merupakan pengembangan di luar materi inti CSS.
+JavaScript dan deployment tidak menjadi syarat kelulusan proyek.
+</div>
+</section>
+
+<!-- 13 REVIEW -->
+<section class="card" id="review">
+<h2>13. Evaluasi dan Penilaian</h2>
+
+<p>Berikut standar penilaian untuk mengukur hasil proyek.</p>
+
+<table>
+<tr><th>Aspek</th><th>Bobot</th></tr>
+<tr><td>Struktur dan semantic HTML</td><td>15%</td></tr>
+<tr><td>Penguasaan CSS</td><td>20%</td></tr>
+<tr><td>Desain dan konsistensi UI</td><td>15%</td></tr>
+<tr><td>Flexbox dan Grid</td><td>10%</td></tr>
+<tr><td>Responsive Design</td><td>15%</td></tr>
+<tr><td>Kerapian dan kualitas kode</td><td>10%</td></tr>
+<tr><td>Pemahaman dan presentasi</td><td>15%</td></tr>
+<tr><th>Total</th><th>100%</th></tr>
+</table>
+
+<h3>Checklist penyelesaian proyek</h3>
+<p>Centang setiap tugas yang sudah selesai.</p>
+
+<div class="progress-wrap">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+<p id="progressText">0 dari 15 tugas selesai (0%)</p>
+
+<div id="checklist">
+  <label class="check-item"><input type="checkbox"> Struktur folder sudah dibuat.</label>
+  <label class="check-item"><input type="checkbox"> File HTML sudah dibuat.</label>
+  <label class="check-item"><input type="checkbox"> File CSS sudah terhubung.</label>
+  <label class="check-item"><input type="checkbox"> Navbar dan navigasi selesai.</label>
+  <label class="check-item"><input type="checkbox"> Hero section selesai.</label>
+  <label class="check-item"><input type="checkbox"> About section selesai.</label>
+  <label class="check-item"><input type="checkbox"> Minimal 4 skills ditampilkan.</label>
+  <label class="check-item"><input type="checkbox"> Minimal 3 project ditampilkan.</label>
+  <label class="check-item"><input type="checkbox"> Contact dan footer selesai.</label>
+  <label class="check-item"><input type="checkbox"> Flexbox diterapkan.</label>
+  <label class="check-item"><input type="checkbox"> Grid diterapkan.</label>
+  <label class="check-item"><input type="checkbox"> Hover dan transition diterapkan.</label>
+  <label class="check-item"><input type="checkbox"> Responsive design diuji.</label>
+  <label class="check-item"><input type="checkbox"> Tidak ada kesalahan tampilan utama.</label>
+  <label class="check-item"><input type="checkbox"> Saya mampu menjelaskan kode sendiri.</label>
+</div>
+
+<button type="button" class="button-secondary" id="resetProgress">
+  Reset Checklist
+</button>
+
+<div class="note">
+Progres checklist disimpan pada browser perangkat yang sedang digunakan.
+Menghapus data browser dapat menghapus progres tersebut.
+</div>
+</section>
+
+<!-- 14 QUIZ -->
+<section class="card" id="quiz">
+<h2>14. Kuis Evaluasi</h2>
+
+<p>
+Jawab seluruh pertanyaan berikut untuk menguji pemahamanmu
+terhadap materi CSS.
+</p>
+
+<div id="questions"></div>
+
+<button type="button" id="checkQuiz">Periksa Jawaban</button>
+<button type="button" class="button-secondary" id="resetQuiz">
+  Ulangi Kuis
+</button>
+
+<div class="result" id="quizResult" aria-live="polite"></div>
+</section>
+
+<!-- 15 SUBMISSION -->
+<section class="card" id="submission">
+<h2>15. Final Submission</h2>
+
+<p>
+Setelah menyelesaikan proyek, kumpulkan hasil pekerjaan
+dengan format berikut.
+</p>
+
+<h3>Dokumen yang dikumpulkan</h3>
+<ol>
+  <li>Folder proyek lengkap.</li>
+  <li>Screenshot tampilan desktop.</li>
+  <li>Screenshot tampilan smartphone.</li>
+  <li>README berisi deskripsi proyek dan teknologi.</li>
+  <li>Penjelasan singkat mengenai tantangan yang dihadapi.</li>
+</ol>
+
+<h3>Contoh README.md</h3>
+
+<pre><code># My Personal Portfolio
+
+## Deskripsi
+Website portofolio pribadi yang dibuat
+sebagai proyek akhir pembelajaran CSS.
+
+## Teknologi
+- HTML5
+- CSS3
+
+## Fitur
+- Navigation Bar
+- Hero Section
+- About Me
+- Skills
+- Projects
+- Contact
+- Responsive Design
+
+## Pembelajaran
+Saya mempelajari penggunaan Flexbox,
+Grid, Media Query, Transition,
+dan berbagai properti CSS lainnya.</code></pre>
+
+<h3>Pertanyaan refleksi</h3>
+<ol>
+  <li>Bagian mana yang paling mudah kamu kerjakan?</li>
+  <li>Bagian mana yang paling sulit?</li>
+  <li>Properti CSS apa yang paling sering kamu gunakan?</li>
+  <li>Bagaimana cara kamu memperbaiki kesalahan?</li>
+  <li>Apa yang ingin kamu kembangkan selanjutnya?</li>
+</ol>
+
+<div class="success">
+<strong>FINAL TARGET</strong>
+<p>
+Kamu berhasil memiliki satu website portofolio buatan sendiri,
+memahami kode yang digunakan, dan mampu menjelaskan proses pembuatannya.
+</p>
+</div>
+</section>
+
+<footer>
+  <p><strong>DevLearn — Learn, Practice, Build.</strong></p>
+  <p>CSS Learning Path • Module 11 of 11</p>
+  <p>Keep learning. Keep building.</p>
+</footer>
+
+</main>
+</div>
+
+<script>
+/* =================================
+   1. CHECKLIST PROGRESS
+================================= */
+
+const checklist = document.querySelectorAll('#checklist input');
+const progressBar = document.getElementById('progressBar');
+const progressText = document.getElementById('progressText');
+const resetProgress = document.getElementById('resetProgress');
+
+const STORAGE_KEY = 'devlearn_css_module11_progress';
+
+function loadProgress() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+    if (Array.isArray(saved)) {
+      checklist.forEach((item, index) => {
+        item.checked = saved[index] === true;
+      });
+    }
+  } catch (error) {
+    console.warn('Gagal memuat progres:', error);
+  }
+
+  updateProgress();
+}
+
+function updateProgress() {
+  const done = [...checklist].filter(item => item.checked).length;
+  const total = checklist.length;
+  const percent = total ? (done / total) * 100 : 0;
+
+  progressBar.style.width = percent + '%';
+
+  progressText.textContent =
+    `${done} dari ${total} tugas selesai (${Math.round(percent)}%)`;
+
+  try {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify([...checklist].map(item => item.checked))
+    );
+  } catch (error) {
+    console.warn('Progres tidak dapat disimpan:', error);
+  }
+}
+
+checklist.forEach(item => {
+  item.addEventListener('change', updateProgress);
+});
+
+resetProgress.addEventListener('click', () => {
+  const confirmReset = confirm(
+    'Apakah kamu yakin ingin menghapus seluruh progres?'
+  );
+
+  if (!confirmReset) return;
+
+  checklist.forEach(item => item.checked = false);
+  updateProgress();
+});
+
+loadProgress();
+
+
+/* =================================
+   2. QUIZ DATA
+================================= */
+
+const quizData = [
+  {
+    question: 'Apa fungsi utama Flexbox?',
+    options: [
+      'Mengatur layout satu dimensi',
+      'Membuat database',
+      'Mengatur file gambar',
+      'Mengubah HTML menjadi JavaScript'
+    ],
+    answer: 0,
+    explanation:
+      'Flexbox digunakan untuk mengatur elemen dalam satu dimensi, yaitu baris atau kolom.'
+  },
+  {
+    question: 'CSS Grid paling cocok digunakan untuk...',
+    options: [
+      'Membuat animasi suara',
+      'Mengatur layout dua dimensi',
+      'Mengubah teks menjadi gambar',
+      'Membuat tautan'
+    ],
+    answer: 1,
+    explanation:
+      'CSS Grid memungkinkan pengaturan layout berdasarkan baris dan kolom.'
+  },
+  {
+    question: 'Apa fungsi Media Query?',
+    options: [
+      'Membuat database',
+      'Menghapus elemen HTML',
+      'Mengatur tampilan berdasarkan kondisi layar',
+      'Mengubah nama file'
+    ],
+    answer: 2,
+    explanation:
+      'Media Query digunakan untuk menerapkan aturan CSS berdasarkan kondisi perangkat atau layar.'
+  },
+  {
+    question: 'Properti apa yang digunakan untuk membuat perubahan visual secara halus?',
+    options: [
+      'transition',
+      'float',
+      'border',
+      'font-size'
+    ],
+    answer: 0,
+    explanation:
+      'Transition mengatur perubahan nilai properti CSS agar berlangsung secara bertahap.'
+  },
+  {
+    question: 'Apa tujuan utama Responsive Design?',
+    options: [
+      'Membuat website hanya untuk desktop',
+      'Membuat website selalu berwarna gelap',
+      'Menghilangkan semua gambar',
+      'Menyesuaikan tampilan dengan ukuran perangkat'
+    ],
+    answer: 3,
+    explanation:
+      'Responsive Design membuat website nyaman digunakan pada berbagai ukuran layar.'
+  },
+  {
+    question: 'Apa fungsi box-sizing: border-box?',
+    options: [
+      'Menghapus border',
+      'Memasukkan padding dan border ke dalam perhitungan width dan height',
+      'Mengubah warna background',
+      'Membuat layout otomatis'
+    ],
+    answer: 1,
+    explanation:
+      'Dengan border-box, ukuran width dan height sudah mencakup content, padding, dan border.'
+  },
+  {
+    question: 'Apa fungsi object-fit: cover?',
+    options: [
+      'Mengatur gambar agar memenuhi area tanpa mengubah rasio aslinya',
+      'Menghapus gambar',
+      'Mengubah gambar menjadi teks',
+      'Mengatur warna gambar'
+    ],
+    answer: 0,
+    explanation:
+      'Object-fit: cover membuat gambar memenuhi area dengan tetap mempertahankan rasio gambar, meskipun sebagian gambar bisa terpotong.'
+  },
+  {
+    question: 'Selector :hover digunakan ketika...',
+    options: [
+      'Halaman ditutup',
+      'Elemen diklik dua kali',
+      'Kursor berada di atas elemen',
+      'Browser dimatikan'
+    ],
+    answer: 2,
+    explanation:
+      ':hover merupakan pseudo-class yang aktif saat pointer berada di atas elemen.'
+  },
+  {
+    question: 'Apa kegunaan gap pada Grid dan Flexbox?',
+    options: [
+      'Mengubah ukuran font',
+      'Mengatur jarak antar item',
+      'Menghapus item',
+      'Mengubah posisi halaman'
+    ],
+    answer: 1,
+    explanation:
+      'Gap digunakan untuk menentukan jarak antar item dalam layout Grid maupun Flexbox.'
+  },
+  {
+    question: 'Apa yang harus dilakukan ketika gambar tidak muncul?',
+    options: [
+      'Menghapus seluruh CSS',
+      'Mengganti browser',
+      'Menghapus folder proyek',
+      'Memeriksa path dan nama file gambar'
+    ],
+    answer: 3,
+    explanation:
+      'Periksa src, nama file, ekstensi, serta lokasi gambar pada folder proyek.'
+  }
+];
+
+
+/* =================================
+   3. RENDER QUIZ
+================================= */
+
+const questionContainer = document.getElementById('questions');
+const quizResult = document.getElementById('quizResult');
+
+function renderQuiz() {
+  questionContainer.innerHTML = '';
+  quizResult.textContent = '';
+
+  quizData.forEach((item, index) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'answer';
+
+    const title = document.createElement('strong');
+    title.textContent = `${index + 1}. ${item.question}`;
+    wrapper.appendChild(title);
+
+    item.options.forEach((option, optionIndex) => {
+      const label = document.createElement('label');
+      label.className = 'check-item';
+
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = `question-${index}`;
+      input.value = optionIndex;
+
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(option));
+
+      wrapper.appendChild(label);
+    });
+
+    const explanation = document.createElement('div');
+    explanation.className = 'explanation';
+    explanation.textContent = 'Pembahasan: ' + item.explanation;
+
+    wrapper.appendChild(explanation);
+    questionContainer.appendChild(wrapper);
+  });
+}
+
+
+/* =================================
+   4. CHECK QUIZ
+================================= */
+
+function checkQuiz() {
+  let score = 0;
+  let unanswered = 0;
+
+  const answers = [];
+
+  quizData.forEach((item, index) => {
+    const selected = document.querySelector(
+      `input[name="question-${index}"]:checked`
+    );
+
+    if (!selected) {
+      unanswered++;
+      answers.push(null);
+    } else {
+      const value = Number(selected.value);
+      answers.push(value);
+
+      if (value === item.answer) {
+        score++;
+      }
+    }
+  });
+
+  if (unanswered > 0) {
+    quizResult.textContent =
+      `Masih ada ${unanswered} soal yang belum dijawab.`;
+    return;
+  }
+
+  const percent = Math.round(score / quizData.length * 100);
+
+  quizData.forEach((item, index) => {
+    const wrapper = questionContainer.children[index];
+    const explanation = wrapper.querySelector('.explanation');
+
+    wrapper.classList.remove('quiz-correct', 'quiz-wrong');
+
+    if (answers[index] === item.answer) {
+      wrapper.classList.add('quiz-correct');
+    } else {
+      wrapper.classList.add('quiz-wrong');
+    }
+
+    explanation.style.display = 'block';
+  });
+
+  let message = '';
+
+  if (percent === 100) {
+    message = 'Sempurna! Kamu memahami seluruh materi.';
+  } else if (percent >= 80) {
+    message = 'Bagus! Pemahamanmu sudah sangat baik.';
+  } else if (percent >= 60) {
+    message = 'Cukup baik. Pelajari kembali beberapa materi.';
+  } else {
+    message = 'Jangan menyerah. Pelajari kembali materi dan coba lagi.';
+  }
+
+  quizResult.textContent =
+    `Nilai kamu: ${score}/${quizData.length} (${percent}%). ${message}`;
+}
+
+
+/* =================================
+   5. RESET QUIZ
+================================= */
+
+document.getElementById('checkQuiz')
+  .addEventListener('click', checkQuiz);
+
+document.getElementById('resetQuiz')
+  .addEventListener('click', () => {
+    renderQuiz();
+  });
+
+renderQuiz();
+
+
+/* =================================
+   6. SIDEBAR ACTIVE LINK
+================================= */
+
+const sections = document.querySelectorAll('main section[id]');
+const navLinks = document.querySelectorAll('#sideNavigation a');
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle(
+            'active',
+            link.getAttribute('href') === '#' + entry.target.id
+          );
+        });
+      }
+    });
+  }, {
+    rootMargin: '-20% 0px -65% 0px'
+  });
+
+  sections.forEach(section => observer.observe(section));
+}
+</script>
+
+</body>
+</html>

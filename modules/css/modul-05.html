@@ -1,0 +1,1389 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevLearn - CSS Modul 05</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --dark: #14213d;
+      --text: #334155;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --green: #059669;
+      --soft-blue: #eff6ff;
+      --soft-green: #ecfdf5;
+      --soft-yellow: #fffbeb;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+    }
+
+    a { color: var(--primary); }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      color: var(--dark);
+      font-weight: 800;
+      font-size: 19px;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--primary); }
+
+    .nav-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 32px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 85px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .sidebar h3 {
+      margin: 0 0 12px;
+      color: var(--dark);
+      font-size: 15px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 8px 10px;
+      margin: 3px 0;
+      color: var(--muted);
+      text-decoration: none;
+      border-radius: 7px;
+      font-size: 13px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: var(--soft-blue);
+      color: var(--primary);
+    }
+
+    main { min-width: 0; }
+
+    .hero {
+      padding: 34px;
+      background: linear-gradient(135deg, #14213d, #2563eb);
+      color: white;
+      border-radius: 18px;
+      margin-bottom: 22px;
+    }
+
+    .hero .tag {
+      display: inline-block;
+      padding: 5px 11px;
+      background: rgba(255,255,255,.15);
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .hero h1 {
+      margin: 15px 0 8px;
+      font-size: 32px;
+      line-height: 1.25;
+    }
+
+    .hero p {
+      margin: 0;
+      color: #dbeafe;
+      max-width: 650px;
+    }
+
+    .meta {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #dbeafe;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 26px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      margin: 0 0 14px;
+      color: var(--dark);
+      font-size: 21px;
+    }
+
+    .card h3 {
+      color: var(--dark);
+      font-size: 16px;
+      margin-top: 22px;
+    }
+
+    .card p { margin: 10px 0; }
+
+    .code {
+      position: relative;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 14px 0;
+      overflow-x: auto;
+    }
+
+    .code pre {
+      margin: 0;
+      white-space: pre;
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: 1px solid #475569;
+      background: #1e293b;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .note {
+      padding: 15px 17px;
+      border-radius: 9px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+
+    .info {
+      background: var(--soft-blue);
+      border-left: 4px solid var(--primary);
+    }
+
+    .success {
+      background: var(--soft-green);
+      border-left: 4px solid var(--green);
+    }
+
+    .warning {
+      background: var(--soft-yellow);
+      border-left: 4px solid #d97706;
+    }
+
+    .example {
+      border: 1px dashed #cbd5e1;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 14px 0;
+      overflow: hidden;
+    }
+
+    .example-title {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--muted);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+      font-size: 14px;
+    }
+
+    .comparison th,
+    .comparison td {
+      border: 1px solid var(--border);
+      padding: 11px;
+      text-align: left;
+    }
+
+    .comparison th {
+      background: #f1f5f9;
+      color: var(--dark);
+    }
+
+    .diagram {
+      padding: 20px;
+      background: #eff6ff;
+      border: 2px dashed #93c5fd;
+      border-radius: 10px;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .diagram-margin {
+      background: #fde68a;
+      padding: 18px;
+      border-radius: 8px;
+    }
+
+    .diagram-border {
+      background: #bfdbfe;
+      border: 5px solid #2563eb;
+      padding: 15px;
+    }
+
+    .diagram-padding {
+      background: #bbf7d0;
+      padding: 18px;
+    }
+
+    .diagram-content {
+      background: white;
+      border: 1px dashed #64748b;
+      padding: 12px;
+      color: #14213d;
+      font-weight: bold;
+    }
+
+    .quiz-question {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin: 14px 0;
+    }
+
+    .quiz-question p {
+      font-weight: bold;
+      margin-top: 0;
+    }
+
+    .quiz-question label {
+      display: block;
+      padding: 5px 0;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .quiz-result {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 9px;
+      background: var(--soft-blue);
+    }
+
+    .primary-btn {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      padding: 11px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .primary-btn:hover { background: #1d4ed8; }
+
+    .checklist label {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .checklist input { margin-top: 5px; }
+
+    .progress-track {
+      height: 9px;
+      background: #e2e8f0;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      background: var(--green);
+      transition: width .3s;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .navigation a {
+      text-decoration: none;
+      padding: 11px 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: white;
+      font-size: 13px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .container { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+
+      .sidebar nav {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero { padding: 24px; }
+      .hero h1 { font-size: 25px; }
+      .card { padding: 19px; }
+      .sidebar nav { grid-template-columns: 1fr; }
+      .navigation { flex-direction: column; }
+    }
+  </style>
+  <link rel="stylesheet" href="../html/module-theme.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <a href="../../index.html" class="brand">Kub<span>ika.</span></a>
+  <span class="nav-label">CSS Learning Path · Modul 05</span>
+</header>
+
+<div class="container">
+
+  <aside class="sidebar">
+    <h3>Daftar Materi</h3>
+    <nav>
+      <a href="#tujuan">Tujuan Pembelajaran</a>
+      <a href="#pengenalan">Mengenal Box Model</a>
+      <a href="#content">Content</a>
+      <a href="#padding">Padding</a>
+      <a href="#border">Border</a>
+      <a href="#margin">Margin</a>
+      <a href="#shorthand">Shorthand</a>
+      <a href="#dimensions">Width & Height</a>
+      <a href="#boxsizing">Box Sizing</a>
+      <a href="#overflow">Overflow</a>
+      <a href="#latihan">Latihan Praktik</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#challenge">Final Challenge</a>
+    </nav>
+  </aside>
+
+  <main>
+
+    <section class="hero">
+      <span class="tag">CSS FUNDAMENTAL · MODUL 05</span>
+      <h1>CSS Box Model</h1>
+      <p>
+        Pelajari bagaimana ukuran, ruang, dan batas setiap elemen
+        HTML bekerja menggunakan Content, Padding, Border, dan Margin.
+      </p>
+      <div class="meta">Level: Beginner · Estimasi: 45–60 menit</div>
+    </section>
+
+    <section class="card" id="tujuan">
+      <h2>01. Tujuan Pembelajaran</h2>
+      <p>Setelah menyelesaikan modul ini, kamu diharapkan mampu:</p>
+
+      <ul>
+        <li>Memahami konsep CSS Box Model.</li>
+        <li>Menjelaskan fungsi Content, Padding, Border, dan Margin.</li>
+        <li>Mengatur ruang di dalam elemen menggunakan Padding.</li>
+        <li>Mengatur batas elemen menggunakan Border.</li>
+        <li>Mengatur jarak antar elemen menggunakan Margin.</li>
+        <li>Memahami penggunaan Width dan Height.</li>
+        <li>Menggunakan Box Sizing untuk mengontrol perhitungan ukuran.</li>
+        <li>Memahami dasar Overflow.</li>
+      </ul>
+
+      <div class="note info">
+        <strong>Prasyarat:</strong> Pahami HTML dasar dan materi CSS
+        sebelumnya, terutama selector, warna, dan typography.
+      </div>
+    </section>
+
+    <section class="card" id="pengenalan">
+      <h2>02. Mengenal CSS Box Model</h2>
+
+      <p>
+        Setiap elemen HTML yang ditampilkan oleh browser pada dasarnya
+        memiliki bentuk kotak atau box.
+      </p>
+
+      <p>
+        CSS Box Model adalah konsep yang menjelaskan bagaimana ukuran
+        sebuah elemen dibentuk oleh empat bagian utama:
+      </p>
+
+      <ol>
+        <li><strong>Content:</strong> Bagian utama yang berisi teks, gambar, atau konten lainnya.</li>
+        <li><strong>Padding:</strong> Ruang antara content dan border.</li>
+        <li><strong>Border:</strong> Garis batas yang mengelilingi elemen.</li>
+        <li><strong>Margin:</strong> Ruang di luar border untuk memisahkan elemen dari elemen lain.</li>
+      </ol>
+
+      <div class="diagram">
+        <div class="diagram-margin">
+          <strong>Margin</strong>
+          <div class="diagram-border">
+            <strong>Border</strong>
+            <div class="diagram-padding">
+              <strong>Padding</strong>
+              <div class="diagram-content">
+                CONTENT
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note success">
+        <strong>Ingat urutannya:</strong>
+        Content → Padding → Border → Margin.
+        Mulai dari bagian paling dalam menuju bagian paling luar.
+      </div>
+    </section>
+
+    <section class="card" id="content">
+      <h2>03. Content</h2>
+
+      <p>
+        Content merupakan bagian utama dari sebuah elemen HTML.
+        Bagian ini dapat berisi teks, gambar, video, atau elemen lainnya.
+      </p>
+
+      <p>
+        Ukuran content umumnya dapat diatur menggunakan property
+        <code>width</code> dan <code>height</code>.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  width: 250px;
+  height: 120px;
+  background-color: #bfdbfe;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh content</div>
+
+        <div style="
+          width:250px;
+          height:120px;
+          background:#bfdbfe;
+          display:flex;
+          justify-content:center;
+          align-items:center;
+          color:#14213d;
+          font-weight:bold;
+          max-width:100%;
+        ">
+          Content Area
+        </div>
+      </div>
+
+      <p>
+        Pada contoh tersebut, area content memiliki lebar 250px
+        dan tinggi 120px.
+      </p>
+    </section>
+
+    <section class="card" id="padding">
+      <h2>04. Padding</h2>
+
+      <p>
+        Padding adalah ruang kosong di antara content dan border.
+        Padding membuat isi elemen tidak terlalu dekat dengan batas kotaknya.
+      </p>
+
+      <h3>Contoh penggunaan padding</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.card {
+  background-color: #dbeafe;
+  padding: 20px;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Perbandingan padding</div>
+
+        <div style="display:flex;gap:15px;flex-wrap:wrap">
+          <div style="background:#bfdbfe;padding:0;width:150px;color:#14213d">
+            <div style="background:white;text-align:center">Tanpa Padding</div>
+          </div>
+
+          <div style="background:#bfdbfe;padding:20px;width:150px;color:#14213d">
+            <div style="background:white;text-align:center">Padding 20px</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Mengatur padding secara terpisah</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+  padding-left: 40px;
+}</code></pre>
+      </div>
+
+      <p>Penjelasannya:</p>
+
+      <table class="comparison">
+        <tr><th>Property</th><th>Fungsi</th></tr>
+        <tr><td>padding-top</td><td>Jarak bagian atas.</td></tr>
+        <tr><td>padding-right</td><td>Jarak bagian kanan.</td></tr>
+        <tr><td>padding-bottom</td><td>Jarak bagian bawah.</td></tr>
+        <tr><td>padding-left</td><td>Jarak bagian kiri.</td></tr>
+      </table>
+
+      <div class="note info">
+        <strong>Contoh nyata:</strong> Ketika membuat tombol website,
+        padding digunakan agar teks di dalam tombol memiliki ruang
+        yang nyaman.
+      </div>
+    </section>
+
+    <section class="card" id="border">
+      <h2>05. Border</h2>
+
+      <p>
+        Border adalah garis batas yang mengelilingi content dan padding.
+        Border dapat diatur melalui ketebalan, jenis garis, dan warna.
+      </p>
+
+      <h3>Contoh penggunaan border</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.card {
+  border: 2px solid #2563eb;
+}</code></pre>
+      </div>
+
+      <h3>Komponen border</h3>
+
+      <table class="comparison">
+        <tr><th>Property</th><th>Fungsi</th></tr>
+        <tr><td>border-width</td><td>Mengatur ketebalan garis.</td></tr>
+        <tr><td>border-style</td><td>Mengatur jenis garis.</td></tr>
+        <tr><td>border-color</td><td>Mengatur warna garis.</td></tr>
+        <tr><td>border-radius</td><td>Membuat sudut elemen membulat.</td></tr>
+      </table>
+
+      <h3>Jenis border</h3>
+
+      <div class="example">
+        <div style="padding:12px;border:2px solid #2563eb;margin-bottom:10px">
+          Solid
+        </div>
+
+        <div style="padding:12px;border:2px dashed #2563eb;margin-bottom:10px">
+          Dashed
+        </div>
+
+        <div style="padding:12px;border:2px dotted #2563eb;margin-bottom:10px">
+          Dotted
+        </div>
+
+        <div style="padding:12px;border:4px double #2563eb">
+          Double
+        </div>
+      </div>
+
+      <h3>Border radius</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}</code></pre>
+      </div>
+
+      <div class="example" style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="background:#bfdbfe;padding:20px;border-radius:0">0px</div>
+        <div style="background:#bfdbfe;padding:20px;border-radius:10px">10px</div>
+        <div style="background:#bfdbfe;padding:20px;border-radius:20px">20px</div>
+        <div style="background:#bfdbfe;padding:20px;border-radius:50%">50%</div>
+      </div>
+
+      <div class="note success">
+        <strong>Tips desain:</strong> Border radius sering digunakan
+        untuk membuat card, tombol, input, dan gambar terlihat lebih halus.
+      </div>
+    </section>
+
+    <section class="card" id="margin">
+      <h2>06. Margin</h2>
+
+      <p>
+        Margin adalah ruang kosong di luar border.
+        Fungsinya untuk memberikan jarak antara satu elemen
+        dengan elemen lainnya.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.card {
+  margin: 20px;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Perbandingan margin</div>
+
+        <div style="background:#bfdbfe;padding:10px">
+          <div style="background:#2563eb;color:white;padding:12px">
+            Box pertama
+          </div>
+
+          <div style="background:#1d4ed8;color:white;padding:12px;margin-top:20px">
+            Box kedua dengan margin-top: 20px
+          </div>
+        </div>
+      </div>
+
+      <h3>Mengatur margin secara terpisah</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 30px;
+  margin-left: 40px;
+}</code></pre>
+      </div>
+
+      <h3>Margin auto</h3>
+
+      <p>
+        Margin juga dapat digunakan untuk menempatkan elemen
+        di tengah secara horizontal.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  width: 500px;
+  max-width: 100%;
+  margin: 0 auto;
+}</code></pre>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Contoh margin auto</div>
+
+        <div style="background:#e2e8f0;padding:15px">
+          <div style="
+            background:#2563eb;
+            color:white;
+            padding:15px;
+            width:180px;
+            max-width:100%;
+            margin:0 auto;
+            text-align:center;
+          ">
+            Elemen di tengah
+          </div>
+        </div>
+      </div>
+
+      <div class="note info">
+        <strong>Perbedaan penting:</strong> Padding memberikan ruang
+        di dalam border, sedangkan margin memberikan ruang di luar border.
+      </div>
+    </section>
+
+    <section class="card" id="shorthand">
+      <h2>07. Shorthand Padding & Margin</h2>
+
+      <p>
+        Shorthand adalah cara menulis beberapa property CSS
+        dalam satu deklarasi yang lebih ringkas.
+      </p>
+
+      <h3>Satu nilai</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  padding: 20px;
+}</code></pre>
+      </div>
+
+      <p>Semua sisi mendapatkan nilai 20px.</p>
+
+      <h3>Dua nilai</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  padding: 10px 20px;
+}</code></pre>
+      </div>
+
+      <p>
+        Nilai pertama untuk atas dan bawah.
+        Nilai kedua untuk kanan dan kiri.
+      </p>
+
+      <h3>Tiga nilai</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  padding: 10px 20px 30px;
+}</code></pre>
+      </div>
+
+      <p>
+        Urutannya adalah atas, kanan-kiri, kemudian bawah.
+      </p>
+
+      <h3>Empat nilai</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  padding: 10px 20px 30px 40px;
+}</code></pre>
+      </div>
+
+      <p>
+        Urutannya mengikuti arah jarum jam:
+        atas → kanan → bawah → kiri.
+      </p>
+
+      <table class="comparison">
+        <tr><th>Penulisan</th><th>Atas</th><th>Kanan</th><th>Bawah</th><th>Kiri</th></tr>
+        <tr><td>10px</td><td>10</td><td>10</td><td>10</td><td>10</td></tr>
+        <tr><td>10px 20px</td><td>10</td><td>20</td><td>10</td><td>20</td></tr>
+        <tr><td>10px 20px 30px</td><td>10</td><td>20</td><td>30</td><td>20</td></tr>
+        <tr><td>10px 20px 30px 40px</td><td>10</td><td>20</td><td>30</td><td>40</td></tr>
+      </table>
+
+      <div class="note warning">
+        <strong>Jangan tertukar:</strong> Urutan empat nilai shorthand
+        selalu mengikuti arah jarum jam, dimulai dari atas.
+      </div>
+    </section>
+
+    <section class="card" id="dimensions">
+      <h2>08. Width & Height</h2>
+
+      <p>
+        Property width dan height digunakan untuk menentukan
+        lebar dan tinggi sebuah elemen.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  width: 300px;
+  height: 150px;
+}</code></pre>
+      </div>
+
+      <h3>Min dan Max</h3>
+
+      <p>
+        Selain ukuran tetap, CSS menyediakan batas ukuran minimum
+        dan maksimum.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.container {
+  width: 100%;
+  max-width: 900px;
+  min-height: 300px;
+}</code></pre>
+      </div>
+
+      <table class="comparison">
+        <tr><th>Property</th><th>Fungsi</th></tr>
+        <tr><td>width</td><td>Menentukan lebar.</td></tr>
+        <tr><td>height</td><td>Menentukan tinggi.</td></tr>
+        <tr><td>min-width</td><td>Menentukan lebar minimum.</td></tr>
+        <tr><td>max-width</td><td>Menentukan lebar maksimum.</td></tr>
+        <tr><td>min-height</td><td>Menentukan tinggi minimum.</td></tr>
+        <tr><td>max-height</td><td>Menentukan tinggi maksimum.</td></tr>
+      </table>
+
+      <div class="note success">
+        <strong>Tips responsive:</strong> Kombinasi width: 100% dan
+        max-width sering digunakan agar elemen dapat mengikuti layar
+        tetapi tidak menjadi terlalu lebar.
+      </div>
+    </section>
+
+    <section class="card" id="boxsizing">
+      <h2>09. Box Sizing</h2>
+
+      <p>
+        Salah satu hal yang sering membingungkan pemula adalah
+        perhitungan ukuran elemen ketika padding dan border ditambahkan.
+      </p>
+
+      <h3>A. Content-box</h3>
+
+      <p>
+        Ini adalah nilai default box-sizing. Width dan height hanya
+        menghitung area content. Padding dan border ditambahkan
+        di luar ukuran tersebut.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  box-sizing: content-box;
+  width: 200px;
+  padding: 20px;
+  border: 5px solid #2563eb;
+}</code></pre>
+      </div>
+
+      <p>Perhitungan lebar total:</p>
+
+      <div class="diagram">
+        <strong>200px + 40px + 10px = 250px</strong>
+        <p>Content + Padding kiri/kanan + Border kiri/kanan</p>
+      </div>
+
+      <h3>B. Border-box</h3>
+
+      <p>
+        Dengan border-box, width dan height sudah mencakup content,
+        padding, dan border.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  box-sizing: border-box;
+  width: 200px;
+  padding: 20px;
+  border: 5px solid #2563eb;
+}</code></pre>
+      </div>
+
+      <div class="diagram">
+        <strong>Lebar total tetap 200px</strong>
+        <p>Padding dan border masuk ke dalam ukuran yang ditentukan.</p>
+      </div>
+
+      <h3>Perbandingan</h3>
+
+      <table class="comparison">
+        <tr><th>Jenis</th><th>Perhitungan lebar</th><th>Total</th></tr>
+        <tr><td>content-box</td><td>200 + 40 + 10</td><td>250px</td></tr>
+        <tr><td>border-box</td><td>Ukuran sudah termasuk padding dan border</td><td>200px</td></tr>
+      </table>
+
+      <h3>Best Practice</h3>
+
+      <p>
+        Banyak developer menggunakan aturan berikut di awal CSS
+        agar perhitungan ukuran elemen lebih mudah dikontrol.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}</code></pre>
+      </div>
+
+      <div class="note success">
+        <strong>Rekomendasi:</strong> Biasakan menggunakan border-box
+        pada project baru. Dengan begitu, pengaturan width dan height
+        lebih mudah diprediksi.
+      </div>
+    </section>
+
+    <section class="card" id="overflow">
+      <h2>10. Overflow</h2>
+
+      <p>
+        Overflow mengatur apa yang terjadi ketika isi sebuah elemen
+        melebihi ruang yang tersedia.
+      </p>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>.box {
+  width: 200px;
+  height: 100px;
+  overflow: auto;
+}</code></pre>
+      </div>
+
+      <h3>Jenis overflow</h3>
+
+      <table class="comparison">
+        <tr><th>Nilai</th><th>Fungsi</th></tr>
+        <tr><td>visible</td><td>Konten dapat terlihat keluar dari kotak. Ini nilai default.</td></tr>
+        <tr><td>hidden</td><td>Bagian konten yang keluar akan dipotong.</td></tr>
+        <tr><td>scroll</td><td>Menampilkan mekanisme scroll.</td></tr>
+        <tr><td>auto</td><td>Scroll muncul ketika memang dibutuhkan.</td></tr>
+      </table>
+
+      <div class="example">
+        <div class="example-title">Contoh overflow auto</div>
+
+        <div style="
+          width:100%;
+          max-width:300px;
+          height:100px;
+          overflow:auto;
+          background:#dbeafe;
+          padding:12px;
+          border:2px solid #2563eb;
+        ">
+          Ini adalah contoh konten yang lebih panjang daripada
+          ruang yang tersedia. Karena elemen menggunakan
+          overflow auto, browser menyediakan scroll ketika
+          konten tidak muat di dalam kotak.
+          Tambahkan beberapa kalimat lagi untuk melihat
+          bagaimana scroll bekerja.
+        </div>
+      </div>
+
+      <div class="note info">
+        <strong>Contoh penggunaan:</strong> Overflow sering digunakan
+        pada area komentar, panel kode, tabel lebar, dan kontainer
+        dengan tinggi terbatas.
+      </div>
+    </section>
+
+    <section class="card" id="latihan">
+      <h2>11. Latihan Praktik</h2>
+
+      <p>
+        Buat halaman sederhana bertema <strong>Product Card</strong>.
+        Latihan ini akan membantu kamu memahami hubungan antara
+        padding, margin, border, dan ukuran elemen.
+      </p>
+
+      <div class="code">
+        <pre><code>product-card/
+├── index.html
+└── style.css</code></pre>
+      </div>
+
+      <h3>File index.html</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport"
+    content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Product Card&lt;/title&gt;
+  &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;main class="container"&gt;
+    &lt;div class="product-card"&gt;
+      &lt;div class="product-image"&gt;
+        Product Image
+      &lt;/div&gt;
+
+      &lt;div class="product-content"&gt;
+        &lt;p class="category"&gt;Technology&lt;/p&gt;
+        &lt;h1&gt;Wireless Headphone&lt;/h1&gt;
+        &lt;p class="description"&gt;
+          Headphone modern dengan desain minimalis
+          dan kualitas suara yang nyaman.
+        &lt;/p&gt;
+
+        &lt;h2 class="price"&gt;Rp350.000&lt;/h2&gt;
+
+        &lt;button&gt;Beli Sekarang&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+      </div>
+
+      <h3>File style.css</h3>
+
+      <div class="code">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre><code>*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.product-card {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.product-image {
+  height: 200px;
+  background: #dbeafe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2563eb;
+  font-weight: bold;
+}
+
+.product-content {
+  padding: 22px;
+}
+
+.category {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.product-content h1 {
+  font-size: 23px;
+  color: #14213d;
+  margin: 10px 0;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #64748b;
+}
+
+.price {
+  color: #14213d;
+  margin: 18px 0;
+}
+
+button {
+  width: 100%;
+  padding: 13px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}</code></pre>
+      </div>
+
+      <h3>Tugas eksplorasi</h3>
+
+      <ol>
+        <li>Ubah padding pada product-content.</li>
+        <li>Ubah margin pada judul dan harga.</li>
+        <li>Tambahkan border pada product-card.</li>
+        <li>Ubah border-radius menjadi 20px.</li>
+        <li>Coba gunakan box-sizing: content-box, lalu bandingkan dengan border-box.</li>
+        <li>Tambahkan max-width agar card tidak terlalu lebar.</li>
+      </ol>
+
+      <div class="note success">
+        <strong>Target latihan:</strong> Kamu mampu membuat product card
+        dengan ukuran, jarak, dan batas elemen yang terkontrol.
+      </div>
+    </section>
+
+    <section class="card" id="quiz">
+      <h2>12. Quiz Pemahaman</h2>
+      <p>Jawab pertanyaan berikut untuk menguji pemahamanmu.</p>
+
+      <form id="quizForm">
+
+        <div class="quiz-question">
+          <p>1. Apa saja empat bagian utama CSS Box Model?</p>
+          <label><input type="radio" name="q1" value="a"> Width, Height, Color, Font</label>
+          <label><input type="radio" name="q1" value="b"> Content, Padding, Border, Margin</label>
+          <label><input type="radio" name="q1" value="c"> Display, Position, Flex, Grid</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Apa fungsi padding?</p>
+          <label><input type="radio" name="q2" value="a"> Memberikan jarak di luar elemen</label>
+          <label><input type="radio" name="q2" value="b"> Mengatur warna background</label>
+          <label><input type="radio" name="q2" value="c"> Memberikan ruang antara content dan border</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. Property apa yang digunakan untuk mengatur jarak antar elemen?</p>
+          <label><input type="radio" name="q3" value="a"> Margin</label>
+          <label><input type="radio" name="q3" value="b"> Font-size</label>
+          <label><input type="radio" name="q3" value="c"> Border-color</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. Apa fungsi box-sizing: border-box?</p>
+          <label><input type="radio" name="q4" value="a"> Menghapus border</label>
+          <label><input type="radio" name="q4" value="b"> Memasukkan padding dan border ke dalam ukuran width dan height</label>
+          <label><input type="radio" name="q4" value="c"> Membuat semua elemen menjadi kotak</label>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Apa fungsi overflow: hidden?</p>
+          <label><input type="radio" name="q5" value="a"> Menampilkan scroll secara otomatis</label>
+          <label><input type="radio" name="q5" value="b"> Memperbesar ukuran elemen</label>
+          <label><input type="radio" name="q5" value="c"> Memotong bagian konten yang keluar dari area elemen</label>
+        </div>
+
+        <button class="primary-btn" type="button" onclick="checkQuiz()">
+          Periksa Jawaban
+        </button>
+      </form>
+
+      <div class="quiz-result" id="quizResult"></div>
+    </section>
+
+    <section class="card" id="challenge">
+      <h2>13. Final Challenge</h2>
+
+      <p>
+        Buat sebuah halaman <strong>Product Showcase</strong>
+        yang menampilkan minimal tiga product card.
+      </p>
+
+      <h3>Ketentuan proyek</h3>
+
+      <ul>
+        <li>Memiliki container utama.</li>
+        <li>Memiliki minimal tiga product card.</li>
+        <li>Menggunakan padding pada isi card.</li>
+        <li>Menggunakan margin untuk mengatur jarak.</li>
+        <li>Menggunakan border dan border-radius.</li>
+        <li>Menggunakan width dan max-width.</li>
+        <li>Menerapkan box-sizing: border-box.</li>
+        <li>Menggunakan overflow jika diperlukan.</li>
+        <li>Memisahkan HTML dan CSS.</li>
+        <li>Memastikan tampilan tidak berantakan pada layar kecil.</li>
+      </ul>
+
+      <h3>Checklist penyelesaian</h3>
+
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <p id="progressText">0 dari 6 target selesai</p>
+
+      <div class="checklist" id="checklist">
+        <label><input type="checkbox"> Saya memahami empat bagian Box Model.</label>
+        <label><input type="checkbox"> Saya bisa menggunakan padding dan margin.</label>
+        <label><input type="checkbox"> Saya bisa mengatur border dan border-radius.</label>
+        <label><input type="checkbox"> Saya memahami width dan height.</label>
+        <label><input type="checkbox"> Saya memahami box-sizing dan overflow.</label>
+        <label><input type="checkbox"> Saya berhasil menyelesaikan final challenge.</label>
+      </div>
+
+      <div class="note success">
+        <strong>Standar kelulusan:</strong> Selesaikan seluruh checklist
+        dan raih minimal 4 dari 5 jawaban benar pada quiz sebelum
+        melanjutkan ke Modul 06.
+      </div>
+    </section>
+
+    <div class="navigation">
+      <a href="modul-04.html">← Modul 04: Typography</a>
+      <a href="modul-06.html">Modul 06: Display & Position →</a>
+    </div>
+
+  </main>
+</div>
+
+<footer>
+  DevLearn · Learn, Practice, Build
+  <br>Belajar hari ini, bangun sesuatu esok hari.
+</footer>
+
+<script>
+  function copyCode(button) {
+    const code = button.parentElement.querySelector("code");
+    const text = code.innerText;
+
+    navigator.clipboard.writeText(text).then(() => {
+      button.innerText = "Copied!";
+      setTimeout(() => button.innerText = "Copy", 1500);
+    }).catch(() => {
+      button.innerText = "Gagal";
+      setTimeout(() => button.innerText = "Copy", 1500);
+    });
+  }
+
+  function checkQuiz() {
+    const answers = {
+      q1: "b",
+      q2: "c",
+      q3: "a",
+      q4: "b",
+      q5: "c"
+    };
+
+    let score = 0;
+    let unanswered = 0;
+
+    Object.keys(answers).forEach((question) => {
+      const selected = document.querySelector(
+        `input[name="${question}"]:checked`
+      );
+
+      if (!selected) {
+        unanswered++;
+      } else if (selected.value === answers[question]) {
+        score++;
+      }
+    });
+
+    const result = document.getElementById("quizResult");
+    result.style.display = "block";
+
+    if (unanswered > 0) {
+      result.innerHTML =
+        `Masih ada ${unanswered} soal yang belum dijawab. Lengkapi dahulu, ya.`;
+      return;
+    }
+
+    result.innerHTML =
+      `<strong>Skor kamu: ${score}/5</strong><br>` +
+      (score >= 4
+        ? "Bagus! Kamu sudah memahami dasar CSS Box Model."
+        : "Belum mencapai target. Pelajari kembali materi dan ulangi quiz.");
+
+    result.style.background = score >= 4 ? "#ecfdf5" : "#fffbeb";
+  }
+
+  const checklist = document.querySelectorAll(
+    "#checklist input[type='checkbox']"
+  );
+
+  function updateProgress() {
+    const checked = [...checklist].filter(item => item.checked).length;
+    const total = checklist.length;
+    const percentage = (checked / total) * 100;
+
+    document.getElementById("progressFill").style.width =
+      percentage + "%";
+
+    document.getElementById("progressText").innerText =
+      `${checked} dari ${total} target selesai`;
+  }
+
+  checklist.forEach(item => {
+    item.addEventListener("change", updateProgress);
+  });
+
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinks = document.querySelectorAll(".sidebar a");
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 130) {
+        current = section.id;
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === "#" + current
+      );
+    });
+  });
+</script>
+
+</body>
+</html>
